@@ -1,5 +1,6 @@
 # BetterF3
 ![Environment: Client](https://img.shields.io/badge/environment-client-1976d2?style=flat-square)
+
 BetterF3 is a mod that replaces Minecraft's original debug HUD with a highly customizable, more human-readable HUD. You can customize colors, position, add spacings, and more. 
 
 ## Dependencies
