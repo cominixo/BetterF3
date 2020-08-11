@@ -1,0 +1,14 @@
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+build
+.gradle
+
+eclipse
+run
+
+Thumbs.db
+*.psd

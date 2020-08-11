@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "package": "me.cominixo.betterf3.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "client": [
+    "DebugMixin",
+    "KeyboardMixin",
+    "chunk.WorldRendererAccessor",
+    "chunk.ChunkBuilderAccessor",
+    "chunk.ClientChunkManagerAccessor",
+    "chunk.ClientChunkMapAccessor",
+    "sound.SoundEngineAccessor",
+    "sound.SoundManagerAccessor",
+    "sound.SoundSystemAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
