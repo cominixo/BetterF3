@@ -34,6 +34,7 @@ dependencies {
     include "me.shedaniel.cloth:config-2:4.5.6"
 
     modImplementation "io.github.prospector:modmenu:1.12.2+build.17"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     shadow "com.electronwill.night-config:json:3.6.3"
     compileOnly "com.google.code.findbugs:jsr305:3.0.2"
