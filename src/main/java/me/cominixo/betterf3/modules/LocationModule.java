@@ -71,7 +71,7 @@ public class LocationModule extends BaseModule{
             ChunkPos chunkPos = new ChunkPos(blockPos);
 
             // Biome
-            lines.get(7).setValue(Registry.BIOME.getId(client.world.getBiome(blockPos)));
+            lines.get(7).setValue(client.world.getRegistryManager().get(Registry.BIOME_KEY).getId(client.world.getBiome(blockPos)));
 
             World serverWorld = integratedServer != null ? integratedServer.getWorld(client.world.getRegistryKey()) : client.world;
             if (client.world.isChunkLoaded(blockPos)) {

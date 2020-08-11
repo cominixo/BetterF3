@@ -23,10 +23,10 @@
   ],
   "depends": {
     "fabricloader": ">=0.8.0",
-    "minecraft": "1.16.1"
+    "minecraft": "1.16.2"
   },
   "recommends": {
-    "modmenu": ">=1.12.2"
+    "modmenu": ">=1.14.6"
   },
   "custom": {
     "modmenu:clientsideOnly": true

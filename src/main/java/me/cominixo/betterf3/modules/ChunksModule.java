@@ -1,5 +1,6 @@
 package me.cominixo.betterf3.modules;
 
+import com.mojang.datafixers.DataFixUtils;
 import it.unimi.dsi.fastutil.longs.LongSet;
 import it.unimi.dsi.fastutil.longs.LongSets;
 import me.cominixo.betterf3.utils.DebugLine;
@@ -21,6 +22,7 @@ import net.minecraft.world.World;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class ChunksModule extends BaseModule{
 
@@ -78,7 +80,7 @@ public class ChunksModule extends BaseModule{
         }
 
 
-        World world = client.world.getWorld();
+        World world = DataFixUtils.orElse(Optional.ofNullable(client.getServer()).flatMap((integratedServer) -> Optional.ofNullable(integratedServer.getWorld(client.world.getRegistryKey()))), client.world);
         LongSet forceLoadedChunks = world instanceof ServerWorld ? ((ServerWorld)world).getForcedChunks() : LongSets.EMPTY_SET;
 
         IntegratedServer integratedServer = client.getServer();
