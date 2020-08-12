@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DebugLineList extends DebugLine {
 
-    private List<String> values;
+    private List<String> values = new ArrayList<>();
 
     public DebugLineList(String id) {
         super(id);
