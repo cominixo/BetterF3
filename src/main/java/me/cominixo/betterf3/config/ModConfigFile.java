@@ -69,6 +69,7 @@ public class ModConfigFile {
             general.set("disable_mod", GeneralOptions.disableMod);
             general.set("space_modules", GeneralOptions.spaceEveryModule);
             general.set("shadow_text", GeneralOptions.shadowText);
+            general.set("animations", GeneralOptions.enableAnimations);
             general.set("background_color", GeneralOptions.backgroundColor);
 
             List<String> modulesLeftString = new ArrayList<>();
@@ -155,6 +156,7 @@ public class ModConfigFile {
             GeneralOptions.disableMod = general.getOrElse("disable_mod", false);
             GeneralOptions.spaceEveryModule = general.getOrElse("space_modules", false);
             GeneralOptions.shadowText = general.getOrElse("shadow_text", true);
+            GeneralOptions.enableAnimations = general.getOrElse("animations", true);
             GeneralOptions.backgroundColor = general.getOrElse("background_color", 0x6F505050);
 
             List<BaseModule> modulesLeft = new ArrayList<>();

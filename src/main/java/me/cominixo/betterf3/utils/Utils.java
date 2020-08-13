@@ -13,10 +13,14 @@ import org.apache.commons.lang3.text.WordUtils;
 import java.util.Arrays;
 import java.util.Map;
 
-import static net.minecraft.util.math.Direction.*;
-
 public class Utils {
 
+
+    // Animation stuff
+    public static final int START_X_POS = 200;
+    public static int xPos = START_X_POS;
+    public static long lastAnimationUpdate = 0;
+    public static boolean closingAnimation = false;
 
     public static TextColor getFpsColor(int currentFps) {
 
