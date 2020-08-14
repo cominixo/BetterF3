@@ -1,10 +1,10 @@
 package me.cominixo.betterf3.mixin;
 
-import jdk.internal.org.objectweb.asm.Opcodes;
 import me.cominixo.betterf3.config.GeneralOptions;
 import me.cominixo.betterf3.config.gui.ModConfigScreen;
 import net.minecraft.client.Keyboard;
 import net.minecraft.client.MinecraftClient;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
