@@ -3,6 +3,7 @@ package me.cominixo.betterf3.config.gui.modules;
 import me.cominixo.betterf3.config.ModConfigFile;
 import me.cominixo.betterf3.modules.BaseModule;
 import me.cominixo.betterf3.modules.CoordsModule;
+import me.cominixo.betterf3.modules.FpsModule;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
@@ -76,6 +77,40 @@ public class EditModulesScreen {
             }
 
         }
+
+        if (module instanceof FpsModule) {
+            FpsModule fpsModule = (FpsModule) module;
+
+            if (fpsModule.colorHigh != null && fpsModule.defaultColorHigh != null) {
+                ColorEntry colorHigh = entryBuilder.startColorField(new TranslatableText("config.betterf3.color.fps.high"), fpsModule.colorHigh.getRgb())
+                        .setDefaultValue(fpsModule.defaultColorHigh.getRgb())
+                        .setTooltip(new TranslatableText("config.betterf3.color.fps.high.tooltip"))
+                        .setSaveConsumer(newValue -> fpsModule.colorHigh = TextColor.fromRgb(newValue))
+                        .build();
+
+                general.addEntry(colorHigh);
+            }
+            if (fpsModule.colorMed != null && fpsModule.defaultColorMed != null) {
+                ColorEntry colorMed = entryBuilder.startColorField(new TranslatableText("config.betterf3.color.fps.medium"), fpsModule.colorMed.getRgb())
+                        .setDefaultValue(fpsModule.defaultColorMed.getRgb())
+                        .setTooltip(new TranslatableText("config.betterf3.color.fps.medium.tooltip"))
+                        .setSaveConsumer(newValue -> fpsModule.colorMed = TextColor.fromRgb(newValue))
+                        .build();
+
+                general.addEntry(colorMed);
+            }
+            if (fpsModule.colorLow != null && fpsModule.defaultColorLow != null) {
+                ColorEntry colorLow = entryBuilder.startColorField(new TranslatableText("config.betterf3.color.fps.low"), fpsModule.colorLow.getRgb())
+                        .setDefaultValue(fpsModule.defaultColorLow.getRgb())
+                        .setTooltip(new TranslatableText("config.betterf3.color.fps.low.tooltip"))
+                        .setSaveConsumer(newValue -> fpsModule.colorLow = TextColor.fromRgb(newValue))
+                        .build();
+
+                general.addEntry(colorLow);
+            }
+
+        }
+
 
         if (module.nameColor != null && module.defaultNameColor != null) {
             ColorEntry nameColor = entryBuilder.startColorField(new TranslatableText("config.betterf3.color.name"), module.nameColor.getRgb())

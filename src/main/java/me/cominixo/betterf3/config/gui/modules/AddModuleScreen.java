@@ -32,7 +32,13 @@ public class AddModuleScreen {
                 DropdownMenuBuilder.TopCellElementBuilder.of(new EmptyModule(true),
                         BaseModule::getModule,
                         (object) -> new LiteralText(object.toString()))).setSelections(BaseModule.allModules)
-                .setSaveConsumer((BaseModule newValue) -> parent.modulesListWidget.addModule(newValue))
+                .setSaveConsumer((BaseModule newValue) -> {
+                    try {
+                        parent.modulesListWidget.addModule(newValue.getClass().newInstance());
+                    } catch (InstantiationException | IllegalAccessException e) {
+                        parent.modulesListWidget.addModule(newValue);
+                    }
+                })
                 .build();
 
         general.addEntry(dropdownEntry);
