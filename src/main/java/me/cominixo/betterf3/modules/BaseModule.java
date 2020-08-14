@@ -32,7 +32,7 @@ public abstract class BaseModule {
 
 
     public BaseModule() {
-        allModules.add(this);
+
     }
 
     public BaseModule(boolean invisible) {
@@ -54,9 +54,12 @@ public abstract class BaseModule {
                 modules.add(this);
                 break;
         }
+        allModules.add(this);
+
     }
     public void init() {
         modules.add(this);
+        allModules.add(this);
     }
 
 
