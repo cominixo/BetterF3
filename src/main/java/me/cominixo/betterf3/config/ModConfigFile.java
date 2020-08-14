@@ -170,6 +170,34 @@ public class ModConfigFile {
         Config general = config.getOrElse("general", () -> null);
 
         if (general != null) {
+
+            if (allModulesConfig != null) {
+                List<BaseModule> modulesLeft = new ArrayList<>();
+                List<BaseModule> modulesRight = new ArrayList<>();
+
+                for (Object s : general.getOrElse("modules_left_order", new ArrayList<>())) {
+                    BaseModule baseModule = BaseModule.getModuleById(s.toString());
+                    if (baseModule != null) {
+                        modulesLeft.add(baseModule);
+                    }
+                }
+
+                if (!modulesLeft.isEmpty()) {
+                    BaseModule.modules = modulesLeft;
+                }
+
+                for (Object s : general.getOrElse("modules_right_order", new ArrayList<>())) {
+                    BaseModule baseModule = BaseModule.getModuleById(s.toString());
+                    if (baseModule != null) {
+                        modulesRight.add(baseModule);
+                    }
+                }
+
+                if (!modulesRight.isEmpty()) {
+                    BaseModule.modulesRight = modulesRight;
+                }
+            }
+
             GeneralOptions.disableMod = general.getOrElse("disable_mod", false);
             GeneralOptions.spaceEveryModule = general.getOrElse("space_modules", false);
             GeneralOptions.shadowText = general.getOrElse("shadow_text", true);
