@@ -3,6 +3,7 @@ package me.cominixo.betterf3.config.gui.modules;
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.cominixo.betterf3.modules.BaseModule;
 import me.cominixo.betterf3.modules.CoordsModule;
+import me.cominixo.betterf3.modules.FpsModule;
 import me.cominixo.betterf3.utils.Utils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -92,6 +93,10 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
                 CoordsModule coordsModule = (CoordsModule) this.module;
                 exampleText =  Utils.getStyledText("X", coordsModule.colorX).append(Utils.getStyledText("Y", coordsModule.colorY)).append(Utils.getStyledText("Z", coordsModule.colorZ)).append(Utils.getStyledText(": ", coordsModule.nameColor))
                                 .append(Utils.getStyledText("100 ", coordsModule.colorX).append(Utils.getStyledText("200 ", coordsModule.colorY)).append(Utils.getStyledText("300", coordsModule.colorZ)));
+
+            } else if (this.module instanceof FpsModule) {
+                FpsModule fpsModule = (FpsModule) this.module;
+                exampleText =  Utils.getStyledText("60 fps  ", fpsModule.colorHigh).append(Utils.getStyledText("40 fps  ", fpsModule.colorMed)).append(Utils.getStyledText("10 fps", fpsModule.colorLow));
             } else if (this.module.nameColor != null && this.module.valueColor != null){
                 exampleText = Utils.getStyledText("Name: ", this.module.nameColor).append(Utils.getStyledText("Value", this.module.valueColor));
             } else {

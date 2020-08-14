@@ -5,6 +5,7 @@ import com.electronwill.nightconfig.core.file.FileConfig;
 import me.cominixo.betterf3.modules.BaseModule;
 import me.cominixo.betterf3.modules.CoordsModule;
 import me.cominixo.betterf3.modules.EmptyModule;
+import me.cominixo.betterf3.modules.FpsModule;
 import me.cominixo.betterf3.utils.DebugLine;
 import net.minecraft.text.TextColor;
 
@@ -219,6 +220,15 @@ public class ModConfigFile {
             coordsModule.colorZ = TextColor.fromRgb(moduleConfig.getOrElse("color_z", coordsModule.defaultColorZ.getRgb()));
         }
 
+        if (baseModule instanceof FpsModule) {
+
+            FpsModule fpsModule = (FpsModule) baseModule;
+
+            fpsModule.colorHigh = TextColor.fromRgb(moduleConfig.getOrElse("color_high", fpsModule.defaultColorHigh.getRgb()));
+            fpsModule.colorMed = TextColor.fromRgb(moduleConfig.getOrElse("color_med", fpsModule.defaultColorMed.getRgb()));
+            fpsModule.colorLow = TextColor.fromRgb(moduleConfig.getOrElse("color_low", fpsModule.defaultColorLow.getRgb()));
+        }
+
         baseModule.enabled = moduleConfig.getOrElse("enabled", true);
         return baseModule;
     }
@@ -254,6 +264,19 @@ public class ModConfigFile {
             }
             if (coordsModule.colorZ != null) {
                 moduleConfig.set("color_z", coordsModule.colorZ.getRgb());
+            }
+        }
+
+        if (module instanceof FpsModule) {
+            FpsModule fpsModule = (FpsModule) module;
+            if (fpsModule.colorHigh != null) {
+                moduleConfig.set("color_high", fpsModule.colorHigh.getRgb());
+            }
+            if (fpsModule.colorMed != null) {
+                moduleConfig.set("color_med", fpsModule.colorMed.getRgb());
+            }
+            if (fpsModule.colorLow != null) {
+                moduleConfig.set("color_low", fpsModule.colorLow.getRgb());
             }
         }
 

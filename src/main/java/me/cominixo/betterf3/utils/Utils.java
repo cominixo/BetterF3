@@ -22,14 +22,14 @@ public class Utils {
     public static long lastAnimationUpdate = 0;
     public static boolean closingAnimation = false;
 
-    public static TextColor getFpsColor(int currentFps) {
+    public static int getFpsColor(int currentFps) {
 
         if (currentFps >= 60) {
-            return TextColor.fromFormatting(Formatting.GREEN);
+            return 0;
         } else if (currentFps >= 20) {
-            return TextColor.fromFormatting(Formatting.YELLOW);
+            return 1;
         } else {
-            return TextColor.fromFormatting(Formatting.RED);
+            return 2;
         }
     }
 

@@ -31,6 +31,12 @@
   "config.betterf3.color.x.tooltip": "Change the color of the X coordinate of every line in this module.",
   "config.betterf3.color.y.tooltip": "Change the color of the Y coordinate of every line in this module.",
   "config.betterf3.color.z.tooltip": "Change the color of the Z coordinate of every line in this module.",
+  "config.betterf3.color.fps.high": "Fps High Color",
+  "config.betterf3.color.fps.medium": "Fps Medium Color",
+  "config.betterf3.color.fps.low": "Fps Low Color",
+  "config.betterf3.color.fps.high.tooltip": "Change the color of the text when the FPS is high.",
+  "config.betterf3.color.fps.medium.tooltip": "Change the color of the text when the FPS is medium.",
+  "config.betterf3.color.fps.low.tooltip": "Change the color of the text when the FPS is low.",
   "config.betterf3.color.background": "Background Color",
   "config.betterf3.color.background.tooltip": "Change the background color of every line (ARGB)",
 
