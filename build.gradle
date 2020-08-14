@@ -30,11 +30,10 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    modImplementation "me.shedaniel.cloth:config-2:4.7.0-unstable"
-    include "me.shedaniel.cloth:config-2:4.7.0-unstable"
+    modImplementation "me.shedaniel.cloth:config-2:4.5.6"
+    include "me.shedaniel.cloth:config-2:4.5.6"
 
     modImplementation "io.github.prospector:modmenu:1.12.2+build.17"
-
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     shadow "com.electronwill.night-config:json:3.6.3"
