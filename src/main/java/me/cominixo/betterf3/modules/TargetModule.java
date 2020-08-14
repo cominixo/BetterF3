@@ -72,7 +72,7 @@ public class TargetModule extends BaseModule{
 
             List<String> blockTags = new ArrayList<>();
 
-            client.getNetworkHandler().getTagManager().getBlocks().getTagsFor(blockState.getBlock())
+            client.getNetworkHandler().getTagManager().blocks().getTagsFor(blockState.getBlock())
                     .forEach((blockTag -> blockTags.add("#" + blockTag)));
 
             ((DebugLineList)lines.get(3)).setValues(blockTags);
@@ -99,7 +99,7 @@ public class TargetModule extends BaseModule{
 
             List<String> fluidTags = new ArrayList<>();
 
-            client.getNetworkHandler().getTagManager().getFluids().getTagsFor(fluidState.getFluid())
+            client.getNetworkHandler().getTagManager().fluids().getTagsFor(fluidState.getFluid())
                     .forEach((fluidTag -> fluidTags.add("#" + fluidTag)));
 
             ((DebugLineList)lines.get(8)).setValues(fluidTags);
