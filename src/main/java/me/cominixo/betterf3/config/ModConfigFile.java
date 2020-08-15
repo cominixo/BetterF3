@@ -25,6 +25,7 @@ public class ModConfigFile {
         general.set("space_modules", GeneralOptions.spaceEveryModule);
         general.set("shadow_text", GeneralOptions.shadowText);
         general.set("animations", GeneralOptions.enableAnimations);
+        general.set("animationSpeed", GeneralOptions.animationSpeed);
         general.set("background_color", GeneralOptions.backgroundColor);
 
         List<Config> configsLeft = new ArrayList<>();
@@ -202,6 +203,7 @@ public class ModConfigFile {
             GeneralOptions.spaceEveryModule = general.getOrElse("space_modules", false);
             GeneralOptions.shadowText = general.getOrElse("shadow_text", true);
             GeneralOptions.enableAnimations = general.getOrElse("animations", true);
+            GeneralOptions.animationSpeed = general.getOrElse("animationSpeed", 10);
             GeneralOptions.backgroundColor = general.getOrElse("background_color", 0x6F505050);
         }
 

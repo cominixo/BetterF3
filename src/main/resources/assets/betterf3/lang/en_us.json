@@ -19,6 +19,8 @@
   "config.betterf3.shadow_text.tooltip": "Make all characters have a shadow effect",
   "config.betterf3.animations": "Enable Animations",
   "config.betterf3.animations.tooltip": "Add an animation when closing and opening the F3 HUD.",
+  "config.betterf3.animationSpeed": "Animation Speed",
+  "config.betterf3.animationSpeed.tooltip": "Set the speed of the animation.",
   "config.betterf3.category.modules": "Modules",
   "config.betterf3.disable_line.tooltip": "Enable line",
   "config.betterf3.color.name": "Name Color",
@@ -39,6 +41,7 @@
   "config.betterf3.color.fps.low.tooltip": "Change the color of the text when the FPS is low.",
   "config.betterf3.color.background": "Background Color",
   "config.betterf3.color.background.tooltip": "Change the background color of every line (ARGB)",
+
 
 
   "config.betterf3.module.enable": "Enable Module",
