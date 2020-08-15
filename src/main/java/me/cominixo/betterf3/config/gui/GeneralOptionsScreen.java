@@ -47,9 +47,9 @@ public class GeneralOptionsScreen {
                 .setSaveConsumer(newValue -> GeneralOptions.enableAnimations = newValue)
                 .build());
 
-        general.addEntry(entryBuilder.startFloatField(new TranslatableText("config.betterf3.animationSpeed"), GeneralOptions.animationSpeed)
+        general.addEntry(entryBuilder.startDoubleField(new TranslatableText("config.betterf3.animationSpeed"), GeneralOptions.animationSpeed)
                 .setDefaultValue(1)
-                .setMin(1F).setMax(3F)
+                .setMin(1).setMax(3)
                 .setTooltip(new TranslatableText("config.betterf3.animationSpeed.tooltip"))
                 .setSaveConsumer(newValue -> GeneralOptions.animationSpeed = newValue)
                 .build());
