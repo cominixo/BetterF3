@@ -174,13 +174,18 @@ public abstract class DebugMixin {
             int i = ((START_X_POS/2 + xPos) / 10)-9;
 
             if (xPos != 0 && !closingAnimation) {
+                xPos /= GeneralOptions.animationSpeed;
                 xPos -= i;
             }
 
+            if (i == 0) {
+                i = 1;
+            }
 
             if (closingAnimation) {
 
                 xPos += i;
+                xPos *= GeneralOptions.animationSpeed;
 
                 if (xPos >= 300) {
                     this.client.options.debugEnabled = false;
@@ -188,7 +193,6 @@ public abstract class DebugMixin {
                 }
 
             }
-
 
             lastAnimationUpdate = time;
         }
