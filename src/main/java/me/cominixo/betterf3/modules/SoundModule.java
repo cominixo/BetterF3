@@ -6,6 +6,7 @@ import me.cominixo.betterf3.mixin.sound.SoundEngineAccessor;
 import me.cominixo.betterf3.mixin.sound.SoundManagerAccessor;
 import me.cominixo.betterf3.mixin.sound.SoundSystemAccessor;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.sound.SoundEngine;
 import net.minecraft.text.*;
 import net.minecraft.util.Formatting;
@@ -38,11 +39,14 @@ public class SoundModule extends BaseModule {
         SoundEngine.SourceSet streamingSources = soundEngineAccessor.getStreamingSources();
         SoundEngine.SourceSet staticSources = soundEngineAccessor.getStaticSources();
 
+        String playing = I18n.translate("text.betterf3.line.playing");
+        String maximum = I18n.translate("text.betterf3.line.maximum");
+
         // Sound
-        lines.get(0).setValue(Arrays.asList(Utils.getStyledText("playing", valueColor), Utils.getStyledText("maximum", totalColor),
+        lines.get(0).setValue(Arrays.asList(Utils.getStyledText(playing, valueColor), Utils.getStyledText(maximum, totalColor),
                 Utils.getStyledText(streamingSources.getSourceCount(), valueColor), Utils.getStyledText(streamingSources.getMaxSourceCount(), totalColor)));
         // Ambient Sound
-        lines.get(1).setValue(Arrays.asList(Utils.getStyledText("playing", valueColor), Utils.getStyledText("maximum", totalColor),
+        lines.get(1).setValue(Arrays.asList(Utils.getStyledText(playing, valueColor), Utils.getStyledText(maximum, totalColor),
                 Utils.getStyledText(staticSources.getSourceCount(), valueColor), Utils.getStyledText(staticSources.getMaxSourceCount(), totalColor)));
 
 

@@ -3,6 +3,7 @@ package me.cominixo.betterf3.modules;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.cominixo.betterf3.utils.Utils;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
 
@@ -30,16 +31,19 @@ public class HelpModule extends BaseModule {
 
     public void update(MinecraftClient client) {
 
+        String visible = I18n.translate("text.betterf3.line.visible");
+        String hidden = I18n.translate("text.betterf3.line.hidden");
+
         // Pie Graph (Shift+F3)
-        lines.get(0).setValue(client.options.debugProfilerEnabled ? Utils.getStyledText("Visible", TextColor.fromFormatting(Formatting.GREEN))
-                :  Utils.getStyledText("Hidden", TextColor.fromFormatting(Formatting.RED)));
+        lines.get(0).setValue(client.options.debugProfilerEnabled ? Utils.getStyledText(visible, TextColor.fromFormatting(Formatting.GREEN))
+                :  Utils.getStyledText(hidden, TextColor.fromFormatting(Formatting.RED)));
 
         // FPS / TPS (Alt+F3)
-        lines.get(1).setValue(client.options.debugTpsEnabled ? Utils.getStyledText("Visible", TextColor.fromFormatting(Formatting.GREEN))
-                :  Utils.getStyledText("Hidden", TextColor.fromFormatting(Formatting.RED)));
+        lines.get(1).setValue(client.options.debugTpsEnabled ? Utils.getStyledText(visible, TextColor.fromFormatting(Formatting.GREEN))
+                :  Utils.getStyledText(hidden, TextColor.fromFormatting(Formatting.RED)));
 
         // For help
-        lines.get(2).setValue("Press F3 + Q");
+        lines.get(2).setValue(I18n.translate("text.betterf3.line.help_press"));
 
     }
 }
