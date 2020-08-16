@@ -3,6 +3,7 @@ package me.cominixo.betterf3.modules;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.cominixo.betterf3.utils.Utils;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.server.world.ServerWorld;
@@ -77,7 +78,7 @@ public class LocationModule extends BaseModule{
             if (client.world.isChunkLoaded(blockPos)) {
                 WorldChunk clientChunk = client.world.getChunk(chunkPos.x, chunkPos.z);
                 if (clientChunk.isEmpty()) {
-                    chunkLightString = "Waiting for chunk...";
+                    chunkLightString = I18n.translate("text.betterf3.line.waiting_chunk");
                 } else if (serverWorld != null) {
 
 
@@ -85,7 +86,7 @@ public class LocationModule extends BaseModule{
                     int totalLight = client.world.getChunkManager().getLightingProvider().getLight(blockPos, 0);
                     int skyLight = client.world.getLightLevel(LightType.SKY, blockPos);
                     int blockLight = client.world.getLightLevel(LightType.BLOCK, blockPos);
-                    chunkLightString = String.format("Total: %s  Sky: %s  Block: %s", totalLight, skyLight, blockLight);
+                    chunkLightString = I18n.translate("format.betterf3.chunklight", totalLight, skyLight, blockLight);
 
 
                     // Server Chunk Lights
@@ -94,7 +95,7 @@ public class LocationModule extends BaseModule{
                     int skyLightServer = lightingProvider.get(LightType.SKY).getLightLevel(blockPos);
                     int blockLightServer = lightingProvider.get(LightType.BLOCK).getLightLevel(blockPos);
 
-                    chunkLightServerString =  String.format("Sky: %s  Block: %s", skyLightServer, blockLightServer);
+                    chunkLightServerString =  I18n.translate("format.betterf3.chunklight_server", skyLightServer, blockLightServer);
 
                     // Heightmap stuff (Find highest block)
                     Heightmap.Type[] heightmapTypes = Heightmap.Type.values();
@@ -157,7 +158,7 @@ public class LocationModule extends BaseModule{
                         }
 
                         LocalDifficulty localDifficulty = new LocalDifficulty(serverWorld.getDifficulty(), serverWorld.getTimeOfDay(), inhabitedTime, moonSize);
-                        localDifficultyString = String.format("%.2f  Clamped: %.2f", localDifficulty.getLocalDifficulty(), localDifficulty.getClampedLocalDifficulty());
+                        localDifficultyString = String.format("%.2f  " + I18n.translate("text.betterf3.line.clamped") + ": %.2f", localDifficulty.getLocalDifficulty(), localDifficulty.getClampedLocalDifficulty());
                     }
 
                 }
@@ -179,7 +180,9 @@ public class LocationModule extends BaseModule{
             // Facing
             lines.get(1).setValue(String.format("%s (%s)", StringUtils.capitalize(facing.toString()), facingString));
             // Rotation
-            lines.get(2).setValue(String.format("Yaw: %.1f  Pitch: %.1f", MathHelper.wrapDegrees(cameraEntity.yaw), MathHelper.wrapDegrees(cameraEntity.pitch)));
+            String yaw = String.format("%.1f", MathHelper.wrapDegrees(cameraEntity.yaw));
+            String pitch = String.format("%.1f", MathHelper.wrapDegrees(cameraEntity.pitch));
+            lines.get(2).setValue(I18n.translate("format.betterf3.rotation", yaw, pitch));
         }
 
 

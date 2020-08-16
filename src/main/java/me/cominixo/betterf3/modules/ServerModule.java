@@ -3,6 +3,7 @@ package me.cominixo.betterf3.modules;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.cominixo.betterf3.utils.Utils;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.text.MutableText;
@@ -40,7 +41,7 @@ public class ServerModule extends BaseModule{
 
         String serverString = "";
         if (integratedServer != null) {
-            serverString = "Integrated Server";
+            serverString = I18n.translate("text.betterf3.line.integrated_server");
         } else if (client.player != null){
             serverString = client.player.getServerBrand();
         }

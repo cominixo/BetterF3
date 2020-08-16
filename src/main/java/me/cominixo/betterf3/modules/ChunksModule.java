@@ -11,6 +11,7 @@ import me.cominixo.betterf3.mixin.chunk.ClientChunkMapAccessor;
 import me.cominixo.betterf3.mixin.chunk.WorldRendererAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.chunk.ChunkBuilder;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.world.ClientChunkManager;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.server.world.ServerWorld;
@@ -92,9 +93,10 @@ public class ChunksModule extends BaseModule{
         }
 
 
-        String chunkCulling = client.chunkCullingEnabled ? Formatting.GREEN + "Enabled" : Formatting.RED + "Disabled";
+        String chunkCulling = client.chunkCullingEnabled ? Formatting.GREEN + I18n.translate("text.betterf3.line.enabled")
+                                                         : Formatting.RED + I18n.translate("text.betterf3.line.disabled");
 
-        List<Text> chunkValues = Arrays.asList(Utils.getStyledText("rendered", valueColor), Utils.getStyledText("total", totalColor),
+        List<Text> chunkValues = Arrays.asList(Utils.getStyledText(I18n.translate("text.betterf3.line.rendered"), valueColor), Utils.getStyledText(I18n.translate("text.betterf3.line.total"), totalColor),
                 Utils.getStyledText(Integer.toString(renderedChunks), valueColor), Utils.getStyledText(Integer.toString(totalChunks), totalColor));
 
         // Chunk Sections

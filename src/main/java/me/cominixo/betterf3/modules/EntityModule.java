@@ -5,6 +5,7 @@ import me.cominixo.betterf3.utils.DebugLine;
 import me.cominixo.betterf3.utils.Utils;
 import me.cominixo.betterf3.mixin.chunk.WorldRendererAccessor;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.server.world.ServerWorld;
@@ -51,7 +52,7 @@ public class EntityModule extends BaseModule {
 
         WorldRendererAccessor worldRendererMixin = (WorldRendererAccessor) client.worldRenderer;
 
-        List<Text> entityValues = Arrays.asList(Utils.getStyledText("rendered", valueColor), Utils.getStyledText("total", totalColor),
+        List<Text> entityValues = Arrays.asList(Utils.getStyledText(I18n.translate("text.betterf3.line.rendered"), valueColor), Utils.getStyledText(I18n.translate("text.betterf3.line.total"), totalColor),
                 Utils.getStyledText(worldRendererMixin.getRegularEntityCount(), valueColor),
                 Utils.getStyledText(worldRendererMixin.getWorld().getRegularEntityCount(), totalColor));
 
