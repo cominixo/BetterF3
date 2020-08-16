@@ -1,5 +1,6 @@
 package me.cominixo.betterf3.utils;
 
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.state.property.Property;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
@@ -49,13 +50,13 @@ public class Utils {
 
         switch(facing) {
             case NORTH:
-                return "Towards negative Z";
+                return I18n.translate("text.betterf3.line.negative_z");
             case SOUTH:
-                return "Towards positive Z";
+                return I18n.translate("text.betterf3.line.positive_z");
             case WEST:
-                return "Towards negative X";
+                return I18n.translate("text.betterf3.line.negative_x");
             case EAST:
-                return "Towards positive X";
+                return I18n.translate("text.betterf3.line.positive_x");
             default:
                 return "";
         }
