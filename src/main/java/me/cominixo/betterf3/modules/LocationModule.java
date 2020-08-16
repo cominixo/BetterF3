@@ -21,7 +21,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkStatus;
 import net.minecraft.world.chunk.WorldChunk;
 import net.minecraft.world.chunk.light.LightingProvider;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.concurrent.CompletableFuture;
@@ -178,7 +177,7 @@ public class LocationModule extends BaseModule{
 
             String facingString = Utils.getFacingString(facing);
             // Facing
-            lines.get(1).setValue(String.format("%s (%s)", StringUtils.capitalize(facing.toString()), facingString));
+            lines.get(1).setValue(String.format("%s (%s)", I18n.translate("text.betterf3.line." + facing.toString().toLowerCase()), facingString));
             // Rotation
             String yaw = String.format("%.1f", MathHelper.wrapDegrees(cameraEntity.yaw));
             String pitch = String.format("%.1f", MathHelper.wrapDegrees(cameraEntity.pitch));
