@@ -38,7 +38,7 @@
   "config.betterf3.color.fps.low": "Fps为低时的颜色",
   "config.betterf3.color.fps.high.tooltip": "Fps为高时更改该模块的颜色",
   "config.betterf3.color.fps.medium.tooltip": "Fps为中时更改该模块的颜色",
-  "config.betterf3.color.fps.low.tooltip": ""Fps为低时更改该模块的颜色",
+  "config.betterf3.color.fps.low.tooltip": "Fps为低时更改该模块的颜色",
   "config.betterf3.color.background": "背景颜色",
   "config.betterf3.color.background.tooltip": "更改背景颜色(ARGB)",
 
