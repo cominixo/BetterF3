@@ -24,7 +24,7 @@
   "depends": {
     "fabricloader": ">=0.8.0",
     "fabric": ">=0.17.2",
-    "minecraft": "1.16.2"
+    "minecraft": ">=1.16.2"
   },
   "recommends": {
     "modmenu": ">=1.14.6"
