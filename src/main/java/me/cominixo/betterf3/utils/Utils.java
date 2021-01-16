@@ -63,6 +63,9 @@ public class Utils {
     }
 
     public static MutableText getStyledText(Object string, TextColor color) {
+        if (string == null) {
+            string = "";
+        }
         return new LiteralText(string.toString()).styled((style) -> style.withColor(color));
     }
 
