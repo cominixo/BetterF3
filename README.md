@@ -6,7 +6,7 @@ BetterF3 is a mod that replaces Minecraft's original debug HUD with a highly cus
 Thanks to [@Nirewen](https://github.com/nirewen) for the icon.
 
 ## Dependencies
-This mod depends only on [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
+No longer depends on Fabric API as of v1.1.2
 
 ## Features
 Each line is part of a Module, you can:
