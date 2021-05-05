@@ -204,6 +204,7 @@ public class ModConfigFile {
             GeneralOptions.shadowText = general.getOrElse("shadow_text", true);
             GeneralOptions.enableAnimations = general.getOrElse("animations", true);
             GeneralOptions.animationSpeed = general.getOrElse("animationSpeed", 1.0);
+            GeneralOptions.fontScale = general.getOrElse("fontScale", 1.0);
             GeneralOptions.backgroundColor = general.getOrElse("background_color", 0x6F505050);
         }
 

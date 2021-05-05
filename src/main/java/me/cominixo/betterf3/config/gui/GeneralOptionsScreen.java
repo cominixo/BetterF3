@@ -54,6 +54,13 @@ public class GeneralOptionsScreen {
                 .setSaveConsumer(newValue -> GeneralOptions.animationSpeed = newValue)
                 .build());
 
+        general.addEntry(entryBuilder.startDoubleField(new TranslatableText("config.betterf3.fontScale"), GeneralOptions.fontScale)
+                .setDefaultValue(1)
+                .setMin(0.1).setMax(2)
+                .setTooltip(new TranslatableText("config.betterf3.fontScale.tooltip"))
+                .setSaveConsumer(newValue -> GeneralOptions.fontScale = newValue)
+                .build());
+
         general.addEntry(entryBuilder.startColorField(new TranslatableText("config.betterf3.color.background"), GeneralOptions.backgroundColor)
                 .setDefaultValue(0x6F505050)
                 .setAlphaMode(true)

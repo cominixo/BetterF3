@@ -24,6 +24,8 @@
     "config.betterf3.animations.tooltip": "Añade una animación cuando se abre y cierre la interfaz del F3.",
     "config.betterf3.animationSpeed": "Velocidad de animación",
     "config.betterf3.animationSpeed.tooltip": "Establecer la velocidad de animación.",
+    "config.betterf3.fontScale": "Escala de fuente",
+    "config.betterf3.fontScale.tooltip": "Establecer la escala de la fuente.",
     "config.betterf3.category.modules": "Módulos",
     "config.betterf3.disable_line.tooltip": "Habilitar línea",
     "config.betterf3.color.name": "Color del Nombre",
