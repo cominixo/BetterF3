@@ -24,6 +24,8 @@
   "config.betterf3.animations.tooltip": "Add an animation when closing and opening the F3 HUD.",
   "config.betterf3.animationSpeed": "Animation Speed",
   "config.betterf3.animationSpeed.tooltip": "Set the speed of the animation.",
+  "config.betterf3.fontScale": "Font Scale",
+  "config.betterf3.fontScale.tooltip": "Set the scale of the font.",
   "config.betterf3.category.modules": "Modules",
   "config.betterf3.disable_line.tooltip": "Enable line",
   "config.betterf3.color.name": "Name Color",

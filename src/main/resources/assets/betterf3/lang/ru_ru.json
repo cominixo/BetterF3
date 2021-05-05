@@ -24,6 +24,8 @@
   "config.betterf3.animations.tooltip": "Добавить анимацию при открытии/закрытии меню отладки.",
   "config.betterf3.animationSpeed": "Скорость анимации",
   "config.betterf3.animationSpeed.tooltip": "Задать скорость анимации.",
+  "config.betterf3.fontScale": "Масштаб шрифта",
+  "config.betterf3.fontScale.tooltip": "Установите масштаб шрифта.",
   "config.betterf3.category.modules": "Модули",
   "config.betterf3.disable_line.tooltip": "Включить линию",
   "config.betterf3.color.name": "Цвет текста",

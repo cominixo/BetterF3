@@ -24,6 +24,8 @@
     "config.betterf3.animations.tooltip": "Dodaj animacje przy otwieraniu i zamykaniu menu spod F3",
     "config.betterf3.animationSpeed": "Prędkość animacji",
     "config.betterf3.animationSpeed.tooltip": "Ustaw prędkość animacji",
+    "config.betterf3.fontScale": "Skala czcionki",
+    "config.betterf3.fontScale.tooltip": "Ustaw skalę czcionki",
     "config.betterf3.category.modules": "Moduły",
     "config.betterf3.disable_line.tooltip": "Włącz tą opcję",
     "config.betterf3.color.name": "Kolor nazwy",

@@ -99,7 +99,7 @@ public abstract class DebugMixin {
             if (!Strings.isNullOrEmpty(list.get(i).getString())) {
                 int height = 9;
                 int width = this.fontRenderer.getWidth(list.get(i).getString());
-                int windowWidth = this.client.getWindow().getScaledWidth() - 2 - width;
+                int windowWidth = (int)(this.client.getWindow().getScaledWidth() / GeneralOptions.fontScale) - 2 - width;
                 if (GeneralOptions.enableAnimations) {
                     windowWidth += xPos;
                 }
@@ -158,6 +158,17 @@ public abstract class DebugMixin {
 
         ci.cancel();
 
+    }
+
+    @Inject(method = "render", at = @At("HEAD"))
+    public void renderFontScaleBefore(MatrixStack matrices, CallbackInfo ci) {
+        matrices.push();
+        matrices.scale((float) GeneralOptions.fontScale, (float) GeneralOptions.fontScale, 1F);
+    }
+
+    @Inject(method = "render", at = @At("TAIL"))
+    public void renderFontScaleAfter(MatrixStack matrices, CallbackInfo ci) {
+        matrices.pop();
     }
 
     @Inject(method = "render", at = @At("HEAD"))
