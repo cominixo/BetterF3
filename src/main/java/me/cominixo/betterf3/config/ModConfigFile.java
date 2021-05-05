@@ -26,6 +26,7 @@ public class ModConfigFile {
         general.set("shadow_text", GeneralOptions.shadowText);
         general.set("animations", GeneralOptions.enableAnimations);
         general.set("animationSpeed", GeneralOptions.animationSpeed);
+        general.set("fontScale", GeneralOptions.fontScale);
         general.set("background_color", GeneralOptions.backgroundColor);
 
         List<Config> configsLeft = new ArrayList<>();
