@@ -19,7 +19,7 @@ public interface WorldRendererAccessor {
     int callGetCompletedChunkCount();
 
     @Accessor
-    int getRenderDistance();
+    int getViewDistance();
 
     @Accessor
     ChunkBuilder getChunkBuilder();

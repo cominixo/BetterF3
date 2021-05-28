@@ -179,8 +179,8 @@ public class LocationModule extends BaseModule{
             // Facing
             lines.get(1).setValue(String.format("%s (%s)", I18n.translate("text.betterf3.line." + facing.toString().toLowerCase()), facingString));
             // Rotation
-            String yaw = String.format("%.1f", MathHelper.wrapDegrees(cameraEntity.yaw));
-            String pitch = String.format("%.1f", MathHelper.wrapDegrees(cameraEntity.pitch));
+            String yaw = String.format("%.1f", MathHelper.wrapDegrees(cameraEntity.getYaw()));
+            String pitch = String.format("%.1f", MathHelper.wrapDegrees(cameraEntity.getPitch()));
             lines.get(2).setValue(I18n.translate("format.betterf3.rotation", yaw, pitch));
         }
 

@@ -26,7 +26,7 @@ public class KeyboardMixin {
         }
     }
 
-    @Inject(method="onKey", at=@At(value = "FIELD", opcode = Opcodes.PUTFIELD, target = "net/minecraft/client/options/GameOptions.debugEnabled : Z"), cancellable = true)
+    @Inject(method="onKey", at=@At(value = "FIELD", opcode = Opcodes.PUTFIELD, target = "net/minecraft/client/option/GameOptions.debugEnabled : Z"), cancellable = true)
     public void onDebugActivate(long window, int key, int scancode, int i, int j, CallbackInfo ci) {
 
         if (GeneralOptions.enableAnimations) {

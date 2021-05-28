@@ -3,7 +3,7 @@ package me.cominixo.betterf3.modules;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.cominixo.betterf3.utils.Utils;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.options.Option;
+import net.minecraft.client.option.Option;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;

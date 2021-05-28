@@ -106,7 +106,7 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
             this.client.textRenderer.draw(matrices, exampleText, (float)(x + 40 + 3), (float)(y + 13), 0xffffff);
 
 
-            RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
             this.client.getTextureManager().bindTexture(DrawableHelper.GUI_ICONS_TEXTURE);
 
 
@@ -172,6 +172,10 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
 
         }
 
+        @Override
+        public Text method_37006() {
+            return null;
+        }
     }
 
 }
