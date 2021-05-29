@@ -42,23 +42,25 @@ public class ModulesScreen extends Screen {
             }
         }
 
-        this.editButton = this.addDrawableChild(new ButtonWidget(this.width / 2 - 50, this.height - 50, 100, 20, new TranslatableText("config.me.cominixo.betterf3.modules.edit_button"), (buttonWidget) -> {
+        this.addDrawableChild(this.modulesListWidget);
+
+        this.editButton = this.addDrawableChild(new ButtonWidget(this.width / 2 - 50, this.height - 50, 100, 20, new TranslatableText("config.betterf3.modules.edit_button"), (buttonWidget) -> {
             Screen screen = (EditModulesScreen.getConfigBuilder(Objects.requireNonNull(this.modulesListWidget.getSelected()).module).build());
             client.openScreen(screen);
         }));
 
-        this.addDrawableChild(new ButtonWidget(this.width / 2 + 4 + 50, this.height - 50, 100, 20, new TranslatableText("config.me.cominixo.betterf3.modules.add_button"), (buttonWidget) -> client.openScreen(AddModuleScreen.getConfigBuilder(this).build())));
+        this.addDrawableChild(new ButtonWidget(this.width / 2 + 4 + 50, this.height - 50, 100, 20, new TranslatableText("config.betterf3.modules.add_button"), (buttonWidget) -> client.openScreen(AddModuleScreen.getConfigBuilder(this).build())));
 
-        this.deleteButton = this.addDrawableChild(new ButtonWidget(this.width / 2 - 154, this.height - 50, 100, 20, new TranslatableText("config.me.cominixo.betterf3.modules.delete_button"), (buttonWidget) -> this.modulesListWidget.removeModule(this.modulesListWidget.moduleEntries.indexOf(Objects.requireNonNull(this.modulesListWidget.getSelected())))));
+        this.deleteButton = this.addDrawableChild(new ButtonWidget(this.width / 2 - 154, this.height - 50, 100, 20, new TranslatableText("config.betterf3.modules.delete_button"), (buttonWidget) -> this.modulesListWidget.removeModule(this.modulesListWidget.moduleEntries.indexOf(Objects.requireNonNull(this.modulesListWidget.getSelected())))));
 
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 154, this.height - 30 + 4, 300 + 8, 20, new TranslatableText("config.me.cominixo.betterf3.modules.done_button"), (buttonWidget) -> {
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 154, this.height - 30 + 4, 300 + 8, 20, new TranslatableText("config.betterf3.modules.done_button"), (buttonWidget) -> {
             this.onClose();
             client.openScreen(parent);
         }));
 
         updateButtons();
 
-        //this.children().add(this.modulesListWidget);
+
 
     }
 

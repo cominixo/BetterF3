@@ -9,7 +9,9 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.screen.multiplayer.MultiplayerServerListWidget;
 import net.minecraft.client.gui.widget.AlwaysSelectedEntryListWidget;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -111,7 +113,10 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
 
 
             if (this.client.options.touchscreen || hovered) {
-                this.client.getTextureManager().bindTexture(new Identifier("textures/gui/server_selection.png"));
+                RenderSystem.setShaderTexture(0, new Identifier("textures/gui/server_selection.png"));
+                DrawableHelper.fill(matrices, x, y, x + 32, y + 32, -1601138544);
+                RenderSystem.setShader(GameRenderer::getPositionTexShader);
+                RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                 int v = mouseX - x;
                 int w = mouseY - y;
 
