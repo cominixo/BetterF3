@@ -62,7 +62,12 @@ public class ChunksModule extends BaseModule{
 
 
         WorldRendererAccessor worldRendererMixin = (WorldRendererAccessor) client.worldRenderer;
-        int totalChunks = worldRendererMixin.getChunks().chunks.length;
+        int totalChunks;
+        if (worldRendererMixin.getChunks() == null) {
+            totalChunks = 0;
+        } else {
+            totalChunks = worldRendererMixin.getChunks().chunks.length;
+        }
         int renderedChunks = worldRendererMixin.callGetCompletedChunkCount();
 
         ChunkBuilder chunkBuilder = worldRendererMixin.getChunkBuilder();
@@ -103,12 +108,18 @@ public class ChunksModule extends BaseModule{
         lines.get(0).setValue(chunkValues);
         // Chunk Culling
         lines.get(1).setValue(chunkCulling);
-        // Pending Chunks
-        lines.get(2).setValue(chunkBuilderAccessor.getQueuedTaskCount());
-        // Pending Uploads to GPU
-        lines.get(3).setValue(chunkBuilderAccessor.getUploadQueue().size());
-        // Available Buffers
-        lines.get(4).setValue(chunkBuilderAccessor.getBufferCount());
+
+        // TODO make this work properly with Canvas (chunkBuilderAccessor is null when using it)
+        if (chunkBuilderAccessor != null) {
+            // Pending Chunks
+            lines.get(2).setValue(chunkBuilderAccessor.getQueuedTaskCount());
+            // Pending Uploads to GPU
+            lines.get(3).setValue(chunkBuilderAccessor.getUploadQueue().size());
+            // Available Buffers
+            lines.get(4).setValue(chunkBuilderAccessor.getBufferCount());
+        }
+
+
 
         // Loaded Chunks (Server)
         if (serverWorld != null) {
