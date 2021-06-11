@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "betterf3",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "name": "BetterF3",
   "description": "Replaces Minecraft's original debug HUD with a highly customizable, more human-readable HUD.",
   "icon": "assets/betterf3/icon.png",
