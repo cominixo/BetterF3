@@ -9,7 +9,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.gui.screen.multiplayer.MultiplayerServerListWidget;
 import net.minecraft.client.gui.widget.AlwaysSelectedEntryListWidget;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -83,6 +82,11 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
             this.screen = screen;
             this.module = module;
             this.client = MinecraftClient.getInstance();
+        }
+
+        @Override
+        public Text method_37006 () {
+            return new LiteralText(this.module.toString());
         }
 
         public void render(MatrixStack matrices, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta) {
@@ -177,10 +181,6 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
 
         }
 
-        @Override
-        public Text method_37006() {
-            return null;
-        }
     }
 
 }
