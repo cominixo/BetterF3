@@ -10,10 +10,11 @@ import net.minecraft.text.TranslatableText;
 
 
 public class ModConfigScreen extends Screen {
+    private final Screen parent;
 
-
-    public ModConfigScreen() {
+    public ModConfigScreen(Screen parent) {
         super(new TranslatableText("config.betterf3.title.config"));
+        this.parent = parent;
     }
     @Override
     public void init() {
@@ -25,7 +26,7 @@ public class ModConfigScreen extends Screen {
         this.addDrawableChild(new ButtonWidget(this.width / 2 + 10, this.height/4, 120, 20, new TranslatableText("config.bettef3.order_right_button"), (buttonWidget) -> client.openScreen(new ModulesScreen(client.currentScreen, PositionEnum.RIGHT))));
         this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height/4 - 24, 260, 20, new TranslatableText("config.bettef3.general_settings"), (buttonWidget) -> client.openScreen(GeneralOptionsScreen.getConfigBuilder().build())));
 
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height - 50, 260, 20, new TranslatableText("config.betterf3.modules.done_button"), (buttonWidget) -> client.openScreen(null)));
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height - 50, 260, 20, new TranslatableText("config.betterf3.modules.done_button"), (buttonWidget) -> client.openScreen(parent)));
 
 
     }
