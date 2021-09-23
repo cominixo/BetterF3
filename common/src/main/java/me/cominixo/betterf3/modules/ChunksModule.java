@@ -3,6 +3,9 @@ package me.cominixo.betterf3.modules;
 import com.mojang.datafixers.DataFixUtils;
 import it.unimi.dsi.fastutil.longs.LongSet;
 import it.unimi.dsi.fastutil.longs.LongSets;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 import me.cominixo.betterf3.mixin.chunk.ChunkBuilderAccessor;
 import me.cominixo.betterf3.mixin.chunk.ClientChunkManagerAccessor;
 import me.cominixo.betterf3.mixin.chunk.ClientChunkMapAccessor;
@@ -21,22 +24,20 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.NaturalSpawner;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
 /**
  * The Chunks module.
  */
 public class ChunksModule extends BaseModule {
 
+    /**
+     * The total color.
+     */
     public final TextColor totalColor = TextColor.fromLegacyFormat(ChatFormatting.GOLD);
 
     /**
      * Instantiates a new Chunks module.
      */
     public ChunksModule() {
-
 
         this.defaultNameColor = TextColor.fromRgb(0x00aaff);
         this.defaultValueColor = TextColor.fromLegacyFormat(ChatFormatting.YELLOW);
@@ -63,73 +64,80 @@ public class ChunksModule extends BaseModule {
 
     }
 
-    public void update(Minecraft client) {
+    /**
+     * Updates the chunk module.
+     *
+     * @param client the Minecraft client
+     */
+    public void update(final Minecraft client) {
 
-        WorldRendererAccessor worldRendererMixin = (WorldRendererAccessor) client.levelRenderer;
-        int totalChunks;
+        final WorldRendererAccessor worldRendererMixin = (WorldRendererAccessor) client.levelRenderer;
+        final int totalChunks;
         if (worldRendererMixin.getViewArea() == null) {
             totalChunks = 0;
         } else {
             totalChunks = worldRendererMixin.getViewArea().chunks.length;
         }
-        int renderedChunks = worldRendererMixin.callCountRenderedChunks();
+        final int renderedChunks = worldRendererMixin.callCountRenderedChunks();
 
-        ChunkRenderDispatcher chunkBuilder = worldRendererMixin.getChunkRenderDispatcher();
-        ChunkBuilderAccessor chunkBuilderAccessor = (ChunkBuilderAccessor) chunkBuilder;
+        final ChunkRenderDispatcher chunkBuilder = worldRendererMixin.getChunkRenderDispatcher();
+        final ChunkBuilderAccessor chunkBuilderAccessor = (ChunkBuilderAccessor) chunkBuilder;
 
         if (client.level != null) {
-            ClientChunkCache clientChunkManager = client.level.getChunkSource();
-            ClientChunkManagerAccessor clientChunkManagerMixin = (ClientChunkManagerAccessor) clientChunkManager;
-            ClientChunkMapAccessor clientChunkMapMixin = (ClientChunkMapAccessor) (Object) clientChunkManagerMixin.getStorage();
+            final ClientChunkCache clientChunkManager = client.level.getChunkSource();
+            final ClientChunkManagerAccessor clientChunkManagerMixin = (ClientChunkManagerAccessor) clientChunkManager;
+            final ClientChunkMapAccessor clientChunkMapMixin = (ClientChunkMapAccessor) (Object) clientChunkManagerMixin.getStorage();
 
             // Client Chunk Cache
-            lines.get(5).setValue(clientChunkMapMixin.getChunks().length());
+            lines.get(5).value(clientChunkMapMixin.getChunks().length());
             // Loaded Chunks
-            lines.get(6).setValue(clientChunkManager.getLoadedChunksCount());
+            lines.get(6).value(clientChunkManager.getLoadedChunksCount());
 
         }
 
-        Level world = DataFixUtils.orElse(Optional.ofNullable(client.getSingleplayerServer()).flatMap((integratedServer) -> Optional.ofNullable(integratedServer.getLevel(client.level.dimension()))), client.level);
-        LongSet forceLoadedChunks = world instanceof ServerLevel ? ((ServerLevel)world).getForcedChunks() : LongSets.EMPTY_SET;
+        final Level world = DataFixUtils.orElse(Optional.ofNullable(client.getSingleplayerServer()).flatMap(integratedServer -> Optional.ofNullable(integratedServer.getLevel(client.level.dimension()))), client.level);
+        final LongSet forceLoadedChunks = world instanceof ServerLevel ? ((ServerLevel) world).getForcedChunks() :
+                LongSets.EMPTY_SET;
 
-        IntegratedServer integratedServer = client.getSingleplayerServer();
-        ServerLevel serverWorld = integratedServer != null ? integratedServer.getLevel(client.level.dimension()) : null;
+        final IntegratedServer integratedServer = client.getSingleplayerServer();
+        final ServerLevel serverWorld = integratedServer != null ? integratedServer.getLevel(client.level.dimension()) : null;
 
         NaturalSpawner.SpawnState info = null;
         if (serverWorld != null) {
             info = serverWorld.getChunkSource().getLastSpawnState();
         }
 
-        String chunkCulling = client.smartCull ? ChatFormatting.GREEN + I18n.get("text.betterf3.line.enabled")
+        final String chunkCulling = client.smartCull ? ChatFormatting.GREEN + I18n.get("text.betterf3.line.enabled")
                 : ChatFormatting.RED + I18n.get("text.betterf3.line.disabled");
 
-        List<Component> chunkValues = Arrays.asList(Utils.getStyledText(I18n.get("text.betterf3.line.rendered"), valueColor), Utils.getStyledText(I18n.get("text.betterf3.line.total"), totalColor),
-                Utils.getStyledText(Integer.toString(renderedChunks), valueColor), Utils.getStyledText(Integer.toString(totalChunks), totalColor));
+        final List<Component> chunkValues = Arrays.asList(Utils.styledText(I18n.get("text.betterf3.line.rendered"), valueColor), Utils.styledText(I18n.get("text.betterf3.line.total"), this.totalColor),
+                Utils.styledText(Integer.toString(renderedChunks), valueColor),
+                Utils.styledText(Integer.toString(totalChunks), this.totalColor));
 
         // Chunk Sections
-        lines.get(0).setValue(chunkValues);
+        lines.get(0).value(chunkValues);
         // Chunk Culling
-        lines.get(1).setValue(chunkCulling);
+        lines.get(1).value(chunkCulling);
 
         // TODO make this work properly with Canvas (chunkBuilderAccessor is null when using it)
         if (chunkBuilderAccessor != null) {
             // Pending Chunks
-            lines.get(2).setValue(chunkBuilderAccessor.getToBatchCount());
+            lines.get(2).value(chunkBuilderAccessor.getToBatchCount());
             // Pending Uploads to GPU
-            lines.get(3).setValue(chunkBuilderAccessor.getToUpload().size());
+            lines.get(3).value(chunkBuilderAccessor.getToUpload().size());
             // Available Buffers
-            lines.get(4).setValue(chunkBuilderAccessor.getFreeBufferCount());
+            lines.get(4).value(chunkBuilderAccessor.getFreeBufferCount());
         }
 
         // Loaded Chunks (Server)
         if (serverWorld != null) {
-            lines.get(7).setValue(serverWorld.getChunkSource().getLoadedChunksCount());
+            lines.get(7).value(serverWorld.getChunkSource().getLoadedChunksCount());
         }
         // Forceloaded Chunks
-        lines.get(8).setValue(forceLoadedChunks.size());
+        lines.get(8).value(forceLoadedChunks.size());
         // Spawn Chunks
         if (info != null) {
-            lines.get(9).setValue(info.getSpawnableChunkCount());
+            lines.get(9).value(info.getSpawnableChunkCount());
         }
     }
 }

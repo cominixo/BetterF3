@@ -1,5 +1,7 @@
 package me.cominixo.betterf3.modules;
 
+import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.cominixo.betterf3.utils.Utils;
 import net.minecraft.ChatFormatting;
@@ -22,10 +24,6 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.lighting.LevelLightEngine;
 import org.apache.commons.lang3.text.WordUtils;
-
-import java.util.Objects;
-import java.util.concurrent.CompletableFuture;
-
 
 /**
  * The Location module.
@@ -54,66 +52,73 @@ public class LocationModule extends BaseModule {
         lines.add(new DebugLine("days_played"));
     }
 
-    public void update(Minecraft client) {
-        Entity cameraEntity = client.getCameraEntity();
+    /**
+     * Updates the Location module.
+     *
+     * @param client the Minecraft client
+     */
+    public void update(final Minecraft client) {
+        final Entity cameraEntity = client.getCameraEntity();
 
-        IntegratedServer integratedServer = client.getSingleplayerServer();
+        final IntegratedServer integratedServer = client.getSingleplayerServer();
 
         String chunkLightString = "";
         String chunkLightServerString = "";
-        String localDifficultyString= "";
-        StringBuilder highestBlock = new StringBuilder();
-        StringBuilder highestBlockServer = new StringBuilder();
+        String localDifficultyString = "";
+        final StringBuilder highestBlock = new StringBuilder();
+        final StringBuilder highestBlockServer = new StringBuilder();
 
         if (client.level != null) {
             assert cameraEntity != null;
-            BlockPos blockPos = cameraEntity.blockPosition();
-            ChunkPos chunkPos = new ChunkPos(blockPos);
+            final BlockPos blockPos = cameraEntity.blockPosition();
+            final ChunkPos chunkPos = new ChunkPos(blockPos);
 
             // Biome
-            lines.get(7).setValue(client.level.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey(client.level.getBiome(blockPos)));
+            lines.get(7).value(client.level.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey(client.level.getBiome(blockPos)));
 
-            Level serverWorld = integratedServer != null ? integratedServer.getLevel(client.level.dimension()) : client.level;
+            final Level serverWorld = integratedServer != null ? integratedServer.getLevel(client.level.dimension()) : client.level;
+            //TODO Fix hasChunkAt deprecation
             if (client.level.hasChunkAt(blockPos)) {
-                LevelChunk clientChunk = client.level.getChunk(chunkPos.x, chunkPos.z);
+                final LevelChunk clientChunk = client.level.getChunk(chunkPos.x, chunkPos.z);
                 if (clientChunk.isEmpty()) {
                     chunkLightString = I18n.get("text.betterf3.line.waiting_chunk");
                 } else if (serverWorld != null) {
 
                     // Client Chunk Lights
-                    int totalLight = client.level.getChunkSource().getLightEngine().getRawBrightness(blockPos, 0);
-                    int skyLight = client.level.getBrightness(LightLayer.SKY, blockPos);
-                    int blockLight = client.level.getBrightness(LightLayer.BLOCK, blockPos);
+                    final int totalLight = client.level.getChunkSource().getLightEngine().getRawBrightness(blockPos, 0);
+                    final int skyLight = client.level.getBrightness(LightLayer.SKY, blockPos);
+                    final int blockLight = client.level.getBrightness(LightLayer.BLOCK, blockPos);
                     chunkLightString = I18n.get("format.betterf3.chunklight", totalLight, skyLight, blockLight);
 
                     // Server Chunk Lights
-                    LevelLightEngine lightingProvider = serverWorld.getChunkSource().getLightEngine();
+                    final LevelLightEngine lightingProvider = serverWorld.getChunkSource().getLightEngine();
 
-                    int skyLightServer = lightingProvider.getLayerListener(LightLayer.SKY).getLightValue(blockPos);
-                    int blockLightServer = lightingProvider.getLayerListener(LightLayer.BLOCK).getLightValue(blockPos);
+                    final int skyLightServer = lightingProvider.getLayerListener(LightLayer.SKY).getLightValue(blockPos);
+                    final int blockLightServer = lightingProvider.getLayerListener(LightLayer.BLOCK).getLightValue(blockPos);
 
-                    chunkLightServerString =  I18n.get("format.betterf3.chunklight_server", skyLightServer, blockLightServer);
+                    chunkLightServerString = I18n.get("format.betterf3.chunklight_server", skyLightServer, blockLightServer);
 
                     // Heightmap stuff (Find highest block)
-                    Heightmap.Types[] heightmapTypes = Heightmap.Types.values();
+                    final Heightmap.Types[] heightmapTypes = Heightmap.Types.values();
 
                     LevelChunk serverChunk;
 
                     if (serverWorld instanceof ServerLevel) {
-                        CompletableFuture<LevelChunk> chunkCompletableFuture = ((ServerLevel)serverWorld).getChunkSource().getChunkFuture(blockPos.getX(), blockPos.getZ(), ChunkStatus.FULL, false)
-                                .thenApply((either) -> either.map((chunk) -> (LevelChunk)chunk, (unloaded) -> null));
+                        final CompletableFuture<LevelChunk> chunkCompletableFuture =
+                                ((ServerLevel) serverWorld).getChunkSource().getChunkFuture(blockPos.getX(), blockPos.getZ(), ChunkStatus.FULL, false)
+                                .thenApply(either -> either.map(chunk -> (LevelChunk) chunk, unloaded -> null));
 
                         serverChunk = chunkCompletableFuture.getNow(null);
                     } else {
                         serverChunk = clientChunk;
                     }
 
-                    for(Heightmap.Types type : heightmapTypes) {
+                    for (final Heightmap.Types type : heightmapTypes) {
 
                         // Client
                         if (type.sendToClient()) {
-                            String typeString = WordUtils.capitalizeFully(type.getSerializationKey().replace("_", " "));
-                            int blockY = clientChunk.getHeight(type, blockPos.getX(), blockPos.getZ());
+                            final String typeString = WordUtils.capitalizeFully(type.getSerializationKey().replace("_", " "));
+                            final int blockY = clientChunk.getHeight(type, blockPos.getX(), blockPos.getZ());
                             if (blockY > -1) {
                                 highestBlock.append("  ").append(typeString).append(": ").append(blockY);
                             }
@@ -125,9 +130,9 @@ public class LocationModule extends BaseModule {
                                 serverChunk = clientChunk;
                             }
 
-                            String typeString = Utils.enumToString(type);
+                            final String typeString = Utils.enumToString(type);
 
-                            int blockY = serverChunk.getHeight(type, blockPos.getX(), blockPos.getZ());
+                            final int blockY = serverChunk.getHeight(type, blockPos.getX(), blockPos.getZ());
                             if (blockY > -1) {
                                 highestBlockServer.append("  ").append(typeString).append(": ").append(blockY);
                             }
@@ -136,14 +141,14 @@ public class LocationModule extends BaseModule {
 
                     // Local Difficulty
                     if (blockPos.getY() >= 0 && blockPos.getY() < 256) {
-                        float moonSize;
-                        long inhabitedTime;
+                        final float moonSize;
+                        final long inhabitedTime;
 
                         moonSize = serverWorld.getMoonBrightness();
 
                         inhabitedTime = Objects.requireNonNullElse(serverChunk, clientChunk).getInhabitedTime();
 
-                        DifficultyInstance localDifficulty = new DifficultyInstance(serverWorld.getDifficulty(), serverWorld.getDayTime(), inhabitedTime, moonSize);
+                        final DifficultyInstance localDifficulty = new DifficultyInstance(serverWorld.getDifficulty(), serverWorld.getDayTime(), inhabitedTime, moonSize);
                         localDifficultyString = String.format("%.2f  " + I18n.get("text.betterf3.line.clamped") + ": %.2f", localDifficulty.getEffectiveDifficulty(), localDifficulty.getSpecialMultiplier());
                     }
                 }
@@ -152,33 +157,33 @@ public class LocationModule extends BaseModule {
 
         // Dimension
         if (client.level != null) {
-            lines.get(0).setValue(client.level.dimension().location());
+            lines.get(0).value(client.level.dimension().location());
         }
 
         if (cameraEntity != null) {
-            Direction facing = cameraEntity.getDirection();
+            final Direction facing = cameraEntity.getDirection();
 
-            String facingString = Utils.getFacingString(facing);
+            final String facingString = Utils.facingString(facing);
             // Facing
-            lines.get(1).setValue(String.format("%s (%s)", I18n.get("text.betterf3.line." + facing.toString().toLowerCase()), facingString));
+            lines.get(1).value(String.format("%s (%s)", I18n.get("text.betterf3.line." + facing.toString().toLowerCase()), facingString));
             // Rotation
-            String yaw = String.format("%.1f", Mth.wrapDegrees(cameraEntity.getYRot()));
-            String pitch = String.format("%.1f", Mth.wrapDegrees(cameraEntity.getXRot()));
-            lines.get(2).setValue(I18n.get("format.betterf3.rotation", yaw, pitch));
+            final String yaw = String.format("%.1f", Mth.wrapDegrees(cameraEntity.getYRot()));
+            final String pitch = String.format("%.1f", Mth.wrapDegrees(cameraEntity.getXRot()));
+            lines.get(2).value(I18n.get("format.betterf3.rotation", yaw, pitch));
         }
 
         // Client Light
-        lines.get(3).setValue(chunkLightString);
+        lines.get(3).value(chunkLightString);
         // Server Light
-        lines.get(4).setValue(chunkLightServerString);
+        lines.get(4).value(chunkLightServerString);
         // Highest Block
-        lines.get(5).setValue(highestBlock.toString().trim());
+        lines.get(5).value(highestBlock.toString().trim());
         // Highest Block (Server)
-        lines.get(6).setValue(highestBlockServer.toString().trim());
+        lines.get(6).value(highestBlockServer.toString().trim());
 
         // Local Difficulty
-        lines.get(8).setValue(localDifficultyString);
+        lines.get(8).value(localDifficultyString);
         // Days played
-        lines.get(9).setValue(client.level.getDayTime() / 24000L);
+        lines.get(9).value(client.level.getDayTime() / 24000L);
     }
 }

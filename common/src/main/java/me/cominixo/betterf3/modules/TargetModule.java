@@ -1,5 +1,8 @@
 package me.cominixo.betterf3.modules;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.cominixo.betterf3.utils.DebugLineList;
 import me.cominixo.betterf3.utils.Utils;
@@ -13,16 +16,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The Target module.
  */
-public class TargetModule extends BaseModule{
+public class TargetModule extends BaseModule {
 
     /**
      * Instantiates a new Target module.
@@ -47,38 +46,42 @@ public class TargetModule extends BaseModule{
         lines.add(new DebugLine("targeted_entity"));
     }
 
-    @Override
-    public void update(Minecraft client) {
-        Entity cameraEntity = client.getCameraEntity();
+    /**
+     * Updates the Target module.
+     *
+     * @param client the Minecraft client
+     */
+    public void update(final @NotNull Minecraft client) {
+        final Entity cameraEntity = client.getCameraEntity();
 
         if (cameraEntity == null) {
             return;
         }
-        HitResult blockHit = cameraEntity.pick(20.0D, 0.0F, false);
-        HitResult fluidHit = cameraEntity.pick(20.0D, 0.0F, true);
+        final HitResult blockHit = cameraEntity.pick(20.0D, 0.0F, false);
+        final HitResult fluidHit = cameraEntity.pick(20.0D, 0.0F, true);
 
         BlockPos blockPos;
 
         if (blockHit.getType() == HitResult.Type.BLOCK) {
             blockPos = ((BlockHitResult) blockHit).getBlockPos();
             assert client.level != null;
-            BlockState blockState = client.level.getBlockState(blockPos);
+            final BlockState blockState = client.level.getBlockState(blockPos);
 
-            lines.get(0).setValue(blockPos.getX() + ", " + blockPos.getY() + ", " + blockPos.getZ());
-            lines.get(1).setValue(String.valueOf(Registry.BLOCK.getKey(blockState.getBlock())));
+            lines.get(0).value(blockPos.getX() + ", " + blockPos.getY() + ", " + blockPos.getZ());
+            lines.get(1).value(String.valueOf(Registry.BLOCK.getKey(blockState.getBlock())));
 
-            List<String> blockStates = new ArrayList<>();
+            final List<String> blockStates = new ArrayList<>();
 
-            blockState.getValues().entrySet().forEach((entry -> blockStates.add(Utils.propertyToString(entry))));
+            blockState.getValues().entrySet().forEach(entry -> blockStates.add(Utils.propertyToString(entry)));
 
-            ((DebugLineList)lines.get(2)).setValues(blockStates);
+            ((DebugLineList) lines.get(2)).values(blockStates);
 
-            List<String> blockTags = new ArrayList<>();
+            final List<String> blockTags = new ArrayList<>();
 
             Objects.requireNonNull(client.getConnection()).getTags().getOrEmpty(Registry.BLOCK_REGISTRY).getMatchingTags(blockState.getBlock())
-                    .forEach((blockTag -> blockTags.add("#" + blockTag)));
+                    .forEach(blockTag -> blockTags.add("#" + blockTag));
 
-            ((DebugLineList)lines.get(3)).setValues(blockTags);
+            ((DebugLineList) lines.get(3)).values(blockTags);
         } else {
             for (int i = 0; i < 5; i++) {
                 lines.get(i).active = false;
@@ -88,31 +91,31 @@ public class TargetModule extends BaseModule{
         if (fluidHit.getType() == net.minecraft.world.phys.HitResult.Type.BLOCK) {
             blockPos = ((BlockHitResult) fluidHit).getBlockPos();
             assert client.level != null;
-            FluidState fluidState = client.level.getFluidState(blockPos);
+            final FluidState fluidState = client.level.getFluidState(blockPos);
 
-            lines.get(5).setValue(blockPos.getX() + ", " + blockPos.getY() + ", " + blockPos.getZ());
-            lines.get(6).setValue(Registry.FLUID.getKey(fluidState.getType()));
+            lines.get(5).value(blockPos.getX() + ", " + blockPos.getY() + ", " + blockPos.getZ());
+            lines.get(6).value(Registry.FLUID.getKey(fluidState.getType()));
 
-            List<String> fluidStates = new ArrayList<>();
+            final List<String> fluidStates = new ArrayList<>();
 
-            fluidState.getValues().entrySet().forEach((entry) -> fluidStates.add(Utils.propertyToString(entry)));
+            fluidState.getValues().entrySet().forEach(entry -> fluidStates.add(Utils.propertyToString(entry)));
 
-            ((DebugLineList)lines.get(7)).setValues(fluidStates);
+            ((DebugLineList) lines.get(7)).values(fluidStates);
 
-            List<String> fluidTags = new ArrayList<>();
+            final List<String> fluidTags = new ArrayList<>();
 
             Objects.requireNonNull(client.getConnection()).getTags().getOrEmpty(Registry.FLUID_REGISTRY).getMatchingTags(fluidState.getType())
-                    .forEach((fluidTag -> fluidTags.add("#" + fluidTag)));
+                    .forEach(fluidTag -> fluidTags.add("#" + fluidTag));
 
-            ((DebugLineList)lines.get(8)).setValues(fluidTags);
+            ((DebugLineList) lines.get(8)).values(fluidTags);
         } else {
             for (int i = 5; i < 10; i++) {
                 lines.get(i).active = false;
             }
         }
-        Entity entity = client.crosshairPickEntity;
+        final Entity entity = client.crosshairPickEntity;
         if (entity != null) {
-            lines.get(10).setValue(Registry.ENTITY_TYPE.getKey(entity.getType()));
+            lines.get(10).value(Registry.ENTITY_TYPE.getKey(entity.getType()));
         } else {
             lines.get(10).active = false;
         }

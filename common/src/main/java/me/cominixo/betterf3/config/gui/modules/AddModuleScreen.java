@@ -1,5 +1,6 @@
 package me.cominixo.betterf3.config.gui.modules;
 
+import java.lang.reflect.InvocationTargetException;
 import me.cominixo.betterf3.config.ModConfigFile;
 import me.cominixo.betterf3.modules.BaseModule;
 import me.cominixo.betterf3.modules.EmptyModule;
@@ -14,7 +15,11 @@ import net.minecraft.network.chat.TranslatableComponent;
 /**
  * The Add Module screen.
  */
-public class AddModuleScreen {
+public final class AddModuleScreen {
+
+    private AddModuleScreen() {
+        // Not called
+    }
 
     /**
      * Gets the config builder.
@@ -22,25 +27,28 @@ public class AddModuleScreen {
      * @param parent The parent screen
      * @return The ConfigBuilder for the add module screen
      */
-    public static ConfigBuilder getConfigBuilder(ModulesScreen parent) {
 
-        ConfigBuilder builder = ConfigBuilder.create()
+    public static ConfigBuilder configBuilder(final ModulesScreen parent) {
+
+        final ConfigBuilder builder = ConfigBuilder.create()
                 .setParentScreen(parent);
 
         builder.setSavingRunnable(ModConfigFile.saveRunnable);
 
-        ConfigEntryBuilder entryBuilder = builder.entryBuilder();
+        final ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
-        ConfigCategory general = builder.getOrCreateCategory(new TranslatableComponent("config.betterf3.category.general"));
+        final ConfigCategory general = builder.getOrCreateCategory(new TranslatableComponent("config.betterf3" +
+                ".category.general"));
 
-        DropdownBoxEntry<BaseModule> dropdownEntry = entryBuilder.startDropdownMenu(new TranslatableComponent("config.betterf3.add_button.module_name"),
+        final DropdownBoxEntry<BaseModule> dropdownEntry = entryBuilder.startDropdownMenu(new TranslatableComponent(
+                "config.betterf3.add_button.module_name"),
                         DropdownMenuBuilder.TopCellElementBuilder.of(new EmptyModule(true),
-                                BaseModule::getModule,
-                                (object) -> new TextComponent(object.toString()))).setSelections(BaseModule.allModules)
+                                BaseModule::module,
+                                object -> new TextComponent(object.toString()))).setSelections(BaseModule.allModules)
                 .setSaveConsumer((BaseModule newValue) -> {
                     try {
-                        parent.modulesListWidget.addModule(newValue.getClass().newInstance());
-                    } catch (InstantiationException | IllegalAccessException e) {
+                        parent.modulesListWidget.addModule(newValue.getClass().getDeclaredConstructor().newInstance());
+                    } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                         parent.modulesListWidget.addModule(newValue);
                     }
                 })

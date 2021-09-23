@@ -19,32 +19,31 @@ public class ModConfigScreen extends Screen {
      *
      * @param parent the parent screen
      */
-    public ModConfigScreen(Screen parent) {
+    public ModConfigScreen(final Screen parent) {
         super(new TranslatableComponent("config.betterf3.title.config"));
         this.parent = parent;
     }
+
     @Override
     public void init() {
+        final Minecraft client = Minecraft.getInstance();
 
-        Minecraft client = Minecraft.getInstance();
-
-
-        this.addRenderableWidget(new Button(this.width / 2 - 130, this.height/4, 120, 20, new TranslatableComponent("config.betterf3.order_left_button"), (buttonWidget) -> client.setScreen(new ModulesScreen(client.screen, PositionEnum.LEFT))));
-        this.addRenderableWidget(new Button(this.width / 2 + 10, this.height/4, 120, 20, new TranslatableComponent("config.betterf3.order_right_button"), (buttonWidget) -> client.setScreen(new ModulesScreen(client.screen, PositionEnum.RIGHT))));
-        this.addRenderableWidget(new Button(this.width / 2 - 130, this.height/4 - 24, 260, 20, new TranslatableComponent("config.betterf3.general_settings"), (buttonWidget) -> client.setScreen(GeneralOptionsScreen.getConfigBuilder().build())));
-
-        this.addRenderableWidget(new Button(this.width / 2 - 130, this.height - 50, 260, 20, new TranslatableComponent("config.betterf3.modules.done_button"), (buttonWidget) -> client.setScreen(parent)));
-
-
+        this.addRenderableWidget(new Button(this.width / 2 - 130, this.height / 4, 120, 20, new TranslatableComponent(
+                "config.betterf3.order_left_button"), buttonWidget -> client.setScreen(new ModulesScreen(client.screen, PositionEnum.LEFT))));
+        this.addRenderableWidget(new Button(this.width / 2 + 10, this.height / 4, 120, 20, new TranslatableComponent(
+                "config.betterf3.order_right_button"), buttonWidget -> client.setScreen(new ModulesScreen(client.screen, PositionEnum.RIGHT))));
+        this.addRenderableWidget(new Button(this.width / 2 - 130, this.height / 4 - 24, 260, 20,
+                new TranslatableComponent("config.betterf3.general_settings"),
+                buttonWidget -> client.setScreen(GeneralOptionsScreen.configBuilder().build())));
+        this.addRenderableWidget(new Button(this.width / 2 - 130, this.height - 50, 260, 20,
+                new TranslatableComponent("config.betterf3.modules.done_button"),
+                buttonWidget -> client.setScreen(this.parent)));
     }
 
     @Override
-    public void render(PoseStack matrices, int mouseX, int mouseY, float delta) {
+    public void render(final PoseStack matrices, final int mouseX, final int mouseY, final float delta) {
         this.renderBackground(matrices);
         drawCenteredString(matrices, this.font, this.title, this.width / 2, 20, 16777215);
         super.render(matrices, mouseX, mouseY, delta);
-
     }
-
-
 }

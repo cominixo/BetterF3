@@ -32,25 +32,30 @@ public class GraphicsModule extends BaseModule {
         lines.add(new DebugLine("shader"));
     }
 
-    public void update(Minecraft client) {
-        WorldRendererAccessor worldRendererMixin = (WorldRendererAccessor) client.levelRenderer;
+    /**
+     * Updates the Graphics module.
+     *
+     * @param client the Minecraft client
+     */
+    public void update(final Minecraft client) {
+        final WorldRendererAccessor worldRendererMixin = (WorldRendererAccessor) client.levelRenderer;
 
-        String cloudString = client.options.renderClouds == CloudStatus.OFF ? I18n.get("text.betterf3.line.off")
+        final String cloudString = client.options.renderClouds == CloudStatus.OFF ? I18n.get("text.betterf3.line.off")
                 : (client.options.renderClouds == CloudStatus.FAST ? I18n.get("text.betterf3.line.fast") : I18n.get("text.betterf3.line.fancy") );
 
         // Render Distance
-        lines.get(0).setValue(worldRendererMixin.getLastViewDistance());
+        lines.get(0).value(worldRendererMixin.getLastViewDistance());
         // Graphics
-        lines.get(1).setValue(StringUtils.capitalize(client.options.graphicsMode.toString()));
+        lines.get(1).value(StringUtils.capitalize(client.options.graphicsMode.toString()));
         // Clouds
-        lines.get(2).setValue(cloudString);
+        lines.get(2).value(cloudString);
         // Biome Blend Radius
-        lines.get(3).setValue(client.options.biomeBlendRadius);
+        lines.get(3).value(client.options.biomeBlendRadius);
 
         // Shader
-        PostChain shaderEffect = client.gameRenderer.currentEffect();
+        final PostChain shaderEffect = client.gameRenderer.currentEffect();
         if (shaderEffect != null) {
-            lines.get(4).setValue(shaderEffect.getName());
+            lines.get(4).value(shaderEffect.getName());
         } else {
             lines.get(4).active = false;
         }

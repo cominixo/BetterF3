@@ -1,5 +1,8 @@
 package me.cominixo.betterf3.modules;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.cominixo.betterf3.utils.Utils;
 import net.minecraft.ChatFormatting;
@@ -10,14 +13,10 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextColor;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * The Server module.
  */
-public class ServerModule extends BaseModule{
+public class ServerModule extends BaseModule {
 
     /**
      * Instantiates a new Server module.
@@ -33,41 +32,46 @@ public class ServerModule extends BaseModule{
         lines.add(new DebugLine("packets_sent"));
         lines.add(new DebugLine("packets_received"));
 
-        for (DebugLine line : lines) {
+        for (final DebugLine line : lines) {
             line.inReducedDebug = true;
         }
     }
 
-    public void update(Minecraft client) {
-        IntegratedServer integratedServer = client.getSingleplayerServer();
+    /**
+     * Updates the Server module.
+     *
+     * @param client the Minecraft client
+     */
+    public void update(final Minecraft client) {
+        final IntegratedServer integratedServer = client.getSingleplayerServer();
 
         String serverString = "";
         if (integratedServer != null) {
             serverString = I18n.get("text.betterf3.line.integrated_server");
-        } else if (client.player != null){
+        } else if (client.player != null) {
             serverString = client.player.getServerBrand();
         }
 
         if (client.getConnection() != null) {
-            Connection clientConnection = client.getConnection().getConnection();
-            float packetsSent = clientConnection.getAverageSentPackets();
-            float packetsReceived = clientConnection.getAverageReceivedPackets();
+            final Connection clientConnection = client.getConnection().getConnection();
+            final float packetsSent = clientConnection.getAverageSentPackets();
+            final float packetsReceived = clientConnection.getAverageReceivedPackets();
 
-            lines.get(1).setValue(Math.round(packetsSent));
-            lines.get(2).setValue(Math.round(packetsReceived));
+            lines.get(1).value(Math.round(packetsSent));
+            lines.get(2).value(Math.round(packetsReceived));
         }
         String tickString = "";
         if (integratedServer != null) {
             tickString = Integer.toString(Math.round(integratedServer.getAverageTickTime()));
         }
 
-        List<MutableComponent> serverStringList = new LinkedList<>(Arrays.asList(Utils.getStyledText(serverString, nameColor), Utils.getStyledText(tickString, nameColor)));
+        final List<MutableComponent> serverStringList = new LinkedList<>(Arrays.asList(Utils.styledText(serverString, nameColor), Utils.styledText(tickString, nameColor)));
 
         if (tickString.isEmpty()) {
-            lines.get(0).setFormat("format.betterf3.no_format");
+            lines.get(0).format("format.betterf3.no_format");
             serverStringList.remove(1);
         }
 
-        lines.get(0).setValue(serverStringList);
+        lines.get(0).value(serverStringList);
     }
 }

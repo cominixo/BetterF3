@@ -1,6 +1,8 @@
 package me.cominixo.betterf3.modules;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import java.util.Arrays;
+import java.util.List;
 import me.cominixo.betterf3.mixin.chunk.WorldRendererAccessor;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.cominixo.betterf3.utils.Utils;
@@ -14,14 +16,14 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.NaturalSpawner;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * The Entity module.
  */
 public class EntityModule extends BaseModule {
 
+    /**
+     * Total color.
+     */
     public final TextColor totalColor = TextColor.fromLegacyFormat(ChatFormatting.GOLD);
 
     /**
@@ -38,8 +40,8 @@ public class EntityModule extends BaseModule {
         lines.add(new DebugLine("entities", "format.betterf3.total", true));
 
         // Monster, Creature, Ambient, Water Creature, Water Ambient, Misc
-        for (MobCategory spawnGroup : MobCategory.values()) {
-            String name = spawnGroup.toString().toLowerCase();
+        for (final MobCategory spawnGroup : MobCategory.values()) {
+            final String name = spawnGroup.toString().toLowerCase();
             lines.add(new DebugLine(name));
         }
 
@@ -47,33 +49,40 @@ public class EntityModule extends BaseModule {
         lines.get(1).inReducedDebug = true;
     }
 
-    public void update(Minecraft client) {
-        WorldRendererAccessor worldRendererMixin = (WorldRendererAccessor) client.levelRenderer;
+    /**
+     * Updates the Entity module.
+     *
+     * @param client the Minecraft client
+     */
+    public void update(final Minecraft client) {
+        final WorldRendererAccessor worldRendererMixin = (WorldRendererAccessor) client.levelRenderer;
 
-        List<Component> entityValues = Arrays.asList(Utils.getStyledText(I18n.get("text.betterf3.line.rendered"), valueColor), Utils.getStyledText(I18n.get("text.betterf3.line.total"), totalColor),
-                Utils.getStyledText(worldRendererMixin.getRenderedEntities(), valueColor),
-                Utils.getStyledText(worldRendererMixin.getLevel().getEntityCount(), totalColor));
+        final List<Component> entityValues =
+                Arrays.asList(Utils.styledText(I18n.get("text.betterf3.line.rendered"), valueColor),
+                        Utils.styledText(I18n.get("text.betterf3.line.total"), this.totalColor),
+                Utils.styledText(worldRendererMixin.getRenderedEntities(), valueColor),
+                Utils.styledText(worldRendererMixin.getLevel().getEntityCount(), this.totalColor));
 
-        IntegratedServer integratedServer = client.getSingleplayerServer();
+        final IntegratedServer integratedServer = client.getSingleplayerServer();
 
         if (client.level != null) {
-            ServerLevel serverWorld = integratedServer != null ? integratedServer.getLevel(client.level.dimension()) : null;
+            final ServerLevel serverWorld = integratedServer != null ? integratedServer.getLevel(client.level.dimension()) : null;
             if (serverWorld != null) {
-                NaturalSpawner.SpawnState info = serverWorld.getChunkSource().getLastSpawnState();
+                final NaturalSpawner.SpawnState info = serverWorld.getChunkSource().getLastSpawnState();
                 if (info != null) {
-                    Object2IntMap<MobCategory> spawnGroupCount = info.getMobCategoryCounts();
+                    final Object2IntMap<MobCategory> spawnGroupCount = info.getMobCategoryCounts();
                     // Entities (separated) (kinda bad)
                     for (int i = 0; i < MobCategory.values().length; i++) {
-                        MobCategory group = MobCategory.values()[i];
-                        lines.get(i+2).setValue(spawnGroupCount.getInt(group));
+                        final MobCategory group = MobCategory.values()[i];
+                        lines.get(i + 2).value(spawnGroupCount.getInt(group));
                     }
                 }
             }
         }
 
         // Particles
-        lines.get(0).setValue(client.particleEngine.countParticles());
+        lines.get(0).value(client.particleEngine.countParticles());
         // Entities
-        lines.get(1).setValue(entityValues);
+        lines.get(1).value(entityValues);
     }
 }

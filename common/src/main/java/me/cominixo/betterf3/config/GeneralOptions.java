@@ -3,7 +3,12 @@ package me.cominixo.betterf3.config;
 /**
  * General Options for the config.
  */
-public class GeneralOptions {
+public final class GeneralOptions {
+
+    private GeneralOptions() {
+        // Do nothing
+    }
+
     /**
      * Disables the mod.
      */

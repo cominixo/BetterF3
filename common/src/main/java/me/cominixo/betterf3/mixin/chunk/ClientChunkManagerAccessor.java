@@ -5,13 +5,18 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 /**
- * The Chunk Cache Accessor
+ * The Chunk Cache Accessor.
  */
+@SuppressWarnings("checkstyle:MethodName")
 @Mixin(ClientChunkCache.class)
 public interface ClientChunkManagerAccessor {
-	/**
-	 * @return The storage.
-	 */
-	@Accessor
+
+
+    /**
+     * Gets the chunk cache storage.
+     *
+     * @return The storage.
+     */
+    @Accessor
     ClientChunkCache.Storage getStorage();
 }

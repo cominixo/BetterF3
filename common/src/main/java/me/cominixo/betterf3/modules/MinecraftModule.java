@@ -16,7 +16,7 @@ public class MinecraftModule extends BaseModule {
      */
     public MinecraftModule() {
         defaultNameColor = TextColor.fromRgb(0xA0522D);
-        defaultValueColor =  TextColor.fromLegacyFormat(ChatFormatting.DARK_GREEN);
+        defaultValueColor = TextColor.fromLegacyFormat(ChatFormatting.DARK_GREEN);
 
         this.nameColor = defaultNameColor;
         this.valueColor = defaultValueColor;
@@ -25,9 +25,14 @@ public class MinecraftModule extends BaseModule {
         lines.get(0).inReducedDebug = true;
     }
 
-    public void update(Minecraft client) {
+    /**
+     * Updates the Minecraft module.
+     *
+     * @param client the Minecraft client
+     */
+    public void update(final Minecraft client) {
         //TODO Fix ClientBrandRetriever.getClientModName() on forge - disabled on both forge and fabric
-        lines.get(0).setValue(SharedConstants.getCurrentVersion().getName() + " (" + client.getLaunchedVersion() +
+        lines.get(0).value(SharedConstants.getCurrentVersion().getName() + " (" + client.getLaunchedVersion() +
                 "/" + /*ClientBrandRetriever.getClientModName() +*/ ("release".equalsIgnoreCase(client.getVersionType()) ? "" : "/" + client.getVersionType()) + ")");
     }
 }

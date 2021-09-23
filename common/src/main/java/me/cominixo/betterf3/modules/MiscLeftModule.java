@@ -1,13 +1,12 @@
 package me.cominixo.betterf3.modules;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import me.cominixo.betterf3.utils.DebugLineList;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.TextColor;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * The Misc left module.
@@ -27,36 +26,41 @@ public class MiscLeftModule extends BaseModule {
         this.nameColor = defaultNameColor;
         this.valueColor = defaultValueColor;
 
-        DebugLineList leftDebugLines = new DebugLineList("misc_left");
+        final DebugLineList leftDebugLines = new DebugLineList("misc_left");
         leftDebugLines.inReducedDebug = true;
 
         lines.add(leftDebugLines);
     }
 
-    public void update(Minecraft client) {
+    /**
+     * Does nothing.
+     *
+     * @param client the Minecraft client
+     */
+    public void update(final Minecraft client) {
         // Do nothing
     }
 
     /**
-     * Updates the lines
+     * Updates the lines.
      *
      * @param lines the lines
      */
-    public void update(List<String> lines) {
+    public void update(final List<String> lines) {
 
         // Parse lines to find non-vanilla lines, it's a mess
-        if (lines.size() != leftSideSize) {
+        if (lines.size() != this.leftSideSize) {
 
             // copy of list for .remove()
-            List<String> listCopy = new ArrayList<>(lines);
+            final List<String> listCopy = new ArrayList<>(lines);
 
-            for (String s : listCopy) {
+            for (final String s : listCopy) {
                 if (s.isEmpty()) {
                     lines.remove(s);
                 }
-                String[] stringSplit = s.split(" ");
+                final String[] stringSplit = s.split(" ");
 
-                for (String vanilla : VANILLA_DEBUG_LEFT) {
+                for (final String vanilla : VANILLA_DEBUG_LEFT) {
 
                     if (s.startsWith(vanilla)) {
                         lines.remove(s);
@@ -72,8 +76,8 @@ public class MiscLeftModule extends BaseModule {
                     }
                 }
             }
-            leftSideSize = lines.size();
+            this.leftSideSize = lines.size();
         }
-        ((DebugLineList) this.lines.get(0)).setValues(lines);
+        ((DebugLineList) this.lines.get(0)).values(lines);
     }
 }

@@ -2,11 +2,14 @@ plugins {
 	id "architectury-plugin" version "3.4-SNAPSHOT" // Uses Architectury plugin https://github.com/architectury/architectury-plugin
 	id "dev.architectury.loom" version "0.10.0-SNAPSHOT" apply false // Uses Architectury Loom (fork of Fabric Loom)
 	// https://github.com/architectury/architectury-loom - does not apply to root project
+	id "net.kyori.indra.git" version "2.0.6" // Uses Indra Git plugin
+	id "net.kyori.indra.checkstyle" version "2.0.6" // Uses Indra Checkstyle plugin
 }
 
 architectury {
 	minecraft = rootProject.minecraft_version // Sets Minecraft version from gradle.properties
 }
+
 
 subprojects {
 	apply plugin: "dev.architectury.loom" // Applies Architectury Loom to subprojects
@@ -24,14 +27,20 @@ subprojects {
 
 allprojects {
 	apply plugin: "java"
-	apply plugin: "architectury-plugin"
+	apply plugin: "architectury-plugin" // Applies architectury plugin to all projects
 	apply plugin: "maven-publish"
+	apply plugin: "net.kyori.indra.git" // Applies Indra Git to all projects
+	apply plugin: "net.kyori.indra.checkstyle" // Applies Indra Checkstyle to all projects
 
 	archivesBaseName = rootProject.archives_base_name // sets the archive name from gradle.properties
 	version = rootProject.mod_version // sets the version from gradle.properties
 	group = rootProject.maven_group // sets the maven group from gradle.properties
 
 	java.toolchain.languageVersion = JavaLanguageVersion.of(16) // Tells Java to use Java 16
+
+	dependencies {
+		checkstyle("ca.stellardrift:stylecheck:0.1")
+	}
 
 	tasks.withType(JavaCompile) {
 		options.encoding = "UTF-8" // Tells Java to use UTF-8

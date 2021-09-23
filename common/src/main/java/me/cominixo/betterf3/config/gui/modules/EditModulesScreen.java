@@ -19,31 +19,38 @@ import org.apache.commons.lang3.text.WordUtils;
 /**
  * The Edit Modules screen.
  */
-public class EditModulesScreen {
+public final class EditModulesScreen {
+
+    private EditModulesScreen() {
+        // Do nothing
+    }
 
     /**
      * Gets the config builder.
      *
-     * @param parent The parent module screen
+     * @param module the module
+     * @param parent the parent module screen
      * @return The ConfigBuilder for the add module screen
      */
-    public static ConfigBuilder getConfigBuilder(BaseModule module, ModulesScreen parent) {
+    public static ConfigBuilder configBuilder(final BaseModule module, final ModulesScreen parent) {
 
-        ConfigBuilder builder = ConfigBuilder.create()
+        final ConfigBuilder builder = ConfigBuilder.create()
                 .setParentScreen(parent);
 
         builder.setSavingRunnable(ModConfigFile.saveRunnable);
 
-        ConfigEntryBuilder entryBuilder = builder.entryBuilder();
+        final ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
-        ConfigCategory general = builder.getOrCreateCategory(new TranslatableComponent("config.betterf3.category.general"));
+        final ConfigCategory general = builder.getOrCreateCategory(new TranslatableComponent("config.betterf3" +
+                ".category.general"));
 
-        BooleanListEntry moduleEnabled = entryBuilder.startBooleanToggle(new TranslatableComponent("config.betterf3.module.enable"), module.enabled)
+        final BooleanListEntry moduleEnabled = entryBuilder.startBooleanToggle(new TranslatableComponent("config" +
+                        ".betterf3.module.enable"), module.enabled)
                 .setDefaultValue(true)
                 .setTooltip(new TranslatableComponent("config.betterf3.module.enable.tooltip"))
                 .setSaveConsumer(newValue -> {
                     module.enabled = newValue;
-                    module.setEnabled(newValue);
+                    module.enabled(newValue);
                 })
                 .build();
 
@@ -52,7 +59,8 @@ public class EditModulesScreen {
         if (module instanceof CoordsModule coordsModule) {
 
             if (coordsModule.colorX != null && coordsModule.defaultColorX != null) {
-                ColorEntry colorX = entryBuilder.startColorField(new TranslatableComponent("config.betterf3.color.x"), coordsModule.colorX.getValue())
+                final ColorEntry colorX =
+                        entryBuilder.startColorField(new TranslatableComponent("config.betterf3.color.x"), coordsModule.colorX.getValue())
                         .setDefaultValue(coordsModule.defaultColorX.getValue())
                         .setTooltip(new TranslatableComponent("config.betterf3.color.x.tooltip"))
                         .setSaveConsumer(newValue -> coordsModule.colorX = TextColor.fromRgb(newValue))
@@ -61,7 +69,8 @@ public class EditModulesScreen {
                 general.addEntry(colorX);
             }
             if (coordsModule.colorY != null && coordsModule.defaultColorY != null) {
-                ColorEntry colorY = entryBuilder.startColorField(new TranslatableComponent("config.betterf3.color.y"), coordsModule.colorY.getValue())
+                final ColorEntry colorY =
+                        entryBuilder.startColorField(new TranslatableComponent("config.betterf3.color.y"), coordsModule.colorY.getValue())
                         .setDefaultValue(coordsModule.defaultColorY.getValue())
                         .setTooltip(new TranslatableComponent("config.betterf3.color.y.tooltip"))
                         .setSaveConsumer(newValue -> coordsModule.colorY = TextColor.fromRgb(newValue))
@@ -70,7 +79,8 @@ public class EditModulesScreen {
                 general.addEntry(colorY);
             }
             if (coordsModule.colorZ != null && coordsModule.defaultColorZ != null) {
-                ColorEntry colorZ = entryBuilder.startColorField(new TranslatableComponent("config.betterf3.color.z"), coordsModule.colorZ.getValue())
+                final ColorEntry colorZ =
+                        entryBuilder.startColorField(new TranslatableComponent("config.betterf3.color.z"), coordsModule.colorZ.getValue())
                         .setDefaultValue(coordsModule.defaultColorZ.getValue())
                         .setTooltip(new TranslatableComponent("config.betterf3.color.z.tooltip"))
                         .setSaveConsumer(newValue -> coordsModule.colorZ = TextColor.fromRgb(newValue))
@@ -84,7 +94,8 @@ public class EditModulesScreen {
         if (module instanceof FpsModule fpsModule) {
 
             if (fpsModule.colorHigh != null && fpsModule.defaultColorHigh != null) {
-                ColorEntry colorHigh = entryBuilder.startColorField(new TranslatableComponent("config.betterf3.color.fps.high"), fpsModule.colorHigh.getValue())
+                final ColorEntry colorHigh = entryBuilder.startColorField(new TranslatableComponent("config.betterf3" +
+                                ".color.fps.high"), fpsModule.colorHigh.getValue())
                         .setDefaultValue(fpsModule.defaultColorHigh.getValue())
                         .setTooltip(new TranslatableComponent("config.betterf3.color.fps.high.tooltip"))
                         .setSaveConsumer(newValue -> fpsModule.colorHigh = TextColor.fromRgb(newValue))
@@ -93,7 +104,8 @@ public class EditModulesScreen {
                 general.addEntry(colorHigh);
             }
             if (fpsModule.colorMed != null && fpsModule.defaultColorMed != null) {
-                ColorEntry colorMed = entryBuilder.startColorField(new TranslatableComponent("config.betterf3.color.fps.medium"), fpsModule.colorMed.getValue())
+                final ColorEntry colorMed = entryBuilder.startColorField(new TranslatableComponent("config.betterf3" +
+                                ".color.fps.medium"), fpsModule.colorMed.getValue())
                         .setDefaultValue(fpsModule.defaultColorMed.getValue())
                         .setTooltip(new TranslatableComponent("config.betterf3.color.fps.medium.tooltip"))
                         .setSaveConsumer(newValue -> fpsModule.colorMed = TextColor.fromRgb(newValue))
@@ -102,7 +114,8 @@ public class EditModulesScreen {
                 general.addEntry(colorMed);
             }
             if (fpsModule.colorLow != null && fpsModule.defaultColorLow != null) {
-                ColorEntry colorLow = entryBuilder.startColorField(new TranslatableComponent("config.betterf3.color.fps.low"), fpsModule.colorLow.getValue())
+                final ColorEntry colorLow = entryBuilder.startColorField(new TranslatableComponent("config.betterf3" +
+                                ".color.fps.low"), fpsModule.colorLow.getValue())
                         .setDefaultValue(fpsModule.defaultColorLow.getValue())
                         .setTooltip(new TranslatableComponent("config.betterf3.color.fps.low.tooltip"))
                         .setSaveConsumer(newValue -> fpsModule.colorLow = TextColor.fromRgb(newValue))
@@ -113,9 +126,9 @@ public class EditModulesScreen {
 
         }
 
-
         if (module.nameColor != null && module.defaultNameColor != null) {
-            ColorEntry nameColor = entryBuilder.startColorField(new TranslatableComponent("config.betterf3.color.name"), module.nameColor.getValue())
+            final ColorEntry nameColor = entryBuilder.startColorField(new TranslatableComponent("config.betterf3" +
+                            ".color.name"), module.nameColor.getValue())
                     .setDefaultValue(module.defaultNameColor.getValue())
                     .setTooltip(new TranslatableComponent("config.betterf3.color.name.tooltip"))
                     .setSaveConsumer(newValue -> module.nameColor = TextColor.fromRgb(newValue))
@@ -125,31 +138,30 @@ public class EditModulesScreen {
         }
 
         if (module.valueColor != null && module.defaultValueColor != null) {
-            ColorEntry valueColor = entryBuilder.startColorField(new TranslatableComponent("config.betterf3.color.value"), module.valueColor.getValue())
+            final ColorEntry valueColor = entryBuilder.startColorField(new TranslatableComponent("config.betterf3" +
+                            ".color.value"), module.valueColor.getValue())
                     .setDefaultValue(module.defaultValueColor.getValue())
                     .setTooltip(new TranslatableComponent("config.betterf3.color.value.tooltip"))
                     .setSaveConsumer(newValue -> module.valueColor = TextColor.fromRgb(newValue))
                     .build();
 
-
             general.addEntry(valueColor);
         }
 
+        if (module.lines().size() > 1) {
+            for (final DebugLine line : module.lines()) {
 
-        if (module.getLines().size() > 1) {
-            for (DebugLine line : module.getLines()) {
-
-                if (line.getId().equals("")) {
+                if (line.id().equals("")) {
                     continue;
                 }
 
-                Component name = new TranslatableComponent("text.betterf3.line." + line.getId());
+                Component name = new TranslatableComponent("text.betterf3.line." + line.id());
 
                 if (name.getString().equals("")) {
-                    name = new TextComponent(WordUtils.capitalizeFully(line.getId().replace("_", " ")));
+                    name = new TextComponent(WordUtils.capitalizeFully(line.id().replace("_", " ")));
                 }
 
-                BooleanListEntry enabled = entryBuilder.startBooleanToggle(name, line.enabled)
+                final BooleanListEntry enabled = entryBuilder.startBooleanToggle(name, line.enabled)
                         .setDefaultValue(true)
                         .setTooltip(new TranslatableComponent("config.betterf3.disable_line.tooltip"))
                         .setSaveConsumer(newValue -> line.enabled = newValue)

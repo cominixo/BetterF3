@@ -1,7 +1,22 @@
 package me.treyruffy.betterf3;
 
 import me.cominixo.betterf3.config.ModConfigFile;
-import me.cominixo.betterf3.modules.*;
+import me.cominixo.betterf3.modules.BaseModule;
+import me.cominixo.betterf3.modules.ChunksModule;
+import me.cominixo.betterf3.modules.CoordsModule;
+import me.cominixo.betterf3.modules.EmptyModule;
+import me.cominixo.betterf3.modules.EntityModule;
+import me.cominixo.betterf3.modules.FpsModule;
+import me.cominixo.betterf3.modules.GraphicsModule;
+import me.cominixo.betterf3.modules.HelpModule;
+import me.cominixo.betterf3.modules.LocationModule;
+import me.cominixo.betterf3.modules.MinecraftModule;
+import me.cominixo.betterf3.modules.MiscLeftModule;
+import me.cominixo.betterf3.modules.MiscRightModule;
+import me.cominixo.betterf3.modules.ServerModule;
+import me.cominixo.betterf3.modules.SoundModule;
+import me.cominixo.betterf3.modules.SystemModule;
+import me.cominixo.betterf3.modules.TargetModule;
 import me.cominixo.betterf3.utils.PositionEnum;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraftforge.api.distmarker.Dist;
@@ -18,7 +33,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * BetterF3 Forge Mod
+ * BetterF3 Forge Mod.
  */
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("betterf3")

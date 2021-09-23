@@ -11,25 +11,28 @@ import net.minecraft.network.chat.TranslatableComponent;
 /**
  * The General Options screen.
  */
-public class GeneralOptionsScreen {
+public final class GeneralOptionsScreen {
+
+    private GeneralOptionsScreen() {
+        // Do nothing
+    }
 
     /**
      * Gets the config builder.
      *
      * @return the config builder
      */
-    public static ConfigBuilder getConfigBuilder() {
+    public static ConfigBuilder configBuilder() {
 
-        ConfigBuilder builder = ConfigBuilder.create()
+        final ConfigBuilder builder = ConfigBuilder.create()
                 .setParentScreen(Minecraft.getInstance().screen)
                 .setTitle(new TranslatableComponent("config.betterf3.title"));
 
         builder.setSavingRunnable(ModConfigFile.saveRunnable);
 
-        ConfigEntryBuilder entryBuilder = builder.entryBuilder();
+        final ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
-
-        ConfigCategory general = builder.getOrCreateCategory(new TranslatableComponent("config.betterf3.title.general"));
+        final ConfigCategory general = builder.getOrCreateCategory(new TranslatableComponent("config.betterf3.title.general"));
 
         general.addEntry(entryBuilder.startBooleanToggle(new TranslatableComponent("config.betterf3.disable"), GeneralOptions.disableMod)
                 .setDefaultValue(false)
@@ -42,7 +45,6 @@ public class GeneralOptionsScreen {
                 .setTooltip(new TranslatableComponent("config.betterf3.space_modules.tooltip"))
                 .setSaveConsumer(newValue -> GeneralOptions.spaceEveryModule = newValue)
                 .build());
-
 
         general.addEntry(entryBuilder.startBooleanToggle(new TranslatableComponent("config.betterf3.shadow_text"), GeneralOptions.shadowText)
                 .setDefaultValue(true)
@@ -77,11 +79,7 @@ public class GeneralOptionsScreen {
                 .setSaveConsumer(newValue -> GeneralOptions.backgroundColor = newValue)
                 .build());
 
-
-
         builder.transparentBackground();
-
         return builder;
-
     }
 }

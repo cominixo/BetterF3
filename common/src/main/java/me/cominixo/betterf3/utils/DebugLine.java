@@ -1,12 +1,11 @@
 package me.cominixo.betterf3.utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.network.chat.TranslatableComponent;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A Debug line.
@@ -17,11 +16,23 @@ public class DebugLine {
     private String format;
     private final String id;
 
-    public boolean active = true;
-    public boolean enabled = true;
-    public boolean isCustom = false;
     /**
-     * Is in reduced debug
+     * If active.
+     */
+    public boolean active = true;
+
+    /**
+     * If enabled.
+     */
+    public boolean enabled = true;
+
+    /**
+     * If custom.
+     */
+    public boolean isCustom = false;
+
+    /**
+     * If enabled in reduced debug.
      */
     public boolean inReducedDebug = false;
 
@@ -30,7 +41,7 @@ public class DebugLine {
      *
      * @param id the id
      */
-    public DebugLine(String id) {
+    public DebugLine(final String id) {
         this.id = id;
         this.format = "format.betterf3.default_format";
         this.value = "";
@@ -43,55 +54,67 @@ public class DebugLine {
      * @param formatString the format string
      * @param isCustom     custom
      */
-    public DebugLine(String id, String formatString, boolean isCustom) {
+    public DebugLine(final String id, final String formatString, final boolean isCustom) {
         this.id = id;
         this.value = "";
         this.format = formatString;
         this.isCustom = isCustom;
     }
 
-    public Component toText(TextColor nameColor, TextColor valueColor) {
-        String name = this.getName();
+    /**
+     * Sets the key and value color.
+     *
+     * @param nameColor the color of the key
+     * @param valueColor the color of the value
+     * @return the styled component
+     */
+    public Component toText(final TextColor nameColor, final TextColor valueColor) {
+        final String name = this.name();
 
-        Component nameStyled = Utils.getStyledText(name, nameColor);
-        Component valueStyled;
+        final Component nameStyled = Utils.styledText(name, nameColor);
+        final Component valueStyled;
 
         if (this.value instanceof Component) {
             valueStyled = (Component) this.value;
         } else {
-            valueStyled = Utils.getStyledText(this.value, valueColor);
+            valueStyled = Utils.styledText(this.value, valueColor);
         }
         if (this.value.toString().equals("")) {
             this.active = false;
         }
-        return new TranslatableComponent(format, nameStyled, valueStyled);
+        return new TranslatableComponent(this.format, nameStyled, valueStyled);
     }
 
-    public Component toTextCustom(TextColor nameColor) {
-        String name = this.getName();
+    /**
+     * Sets key color.
+     *
+     * @param nameColor the key color
+     * @return the stylized component
+     */
+    public Component toTextCustom(final TextColor nameColor) {
+        final String name = this.name();
 
-        if (value instanceof List) {
+        if (this.value instanceof List) {
             // format properly if value is a List (bad)
-            List<Object> values = new ArrayList<>();
-            List<?> value = (List<?>) this.value;
+            final List<Object> values = new ArrayList<>();
+            final List<?> value = (List<?>) this.value;
 
             if (!name.equals("")) {
-                values.add(Utils.getStyledText(name, nameColor));
+                values.add(Utils.styledText(name, nameColor));
             }
             values.addAll(value);
-            return new TranslatableComponent(format, values.toArray()).withStyle((style) -> style.withColor(nameColor));
+            return new TranslatableComponent(this.format, values.toArray()).withStyle(style -> style.withColor(nameColor));
         } else {
-            return new TranslatableComponent(format, name, value);
+            return new TranslatableComponent(this.format, name, this.value);
         }
     }
-
 
     /**
      * Sets value.
      *
      * @param value the value
      */
-    public void setValue(Object value) {
+    public void value(final Object value) {
         this.active = true;
         this.value = value;
     }
@@ -101,7 +124,7 @@ public class DebugLine {
      *
      * @param format the format
      */
-    public void setFormat(String format) {
+    public void format(final String format) {
         this.format = format;
     }
 
@@ -110,13 +133,13 @@ public class DebugLine {
      *
      * @return the name
      */
-    public String getName() {
-        if (id.isEmpty()) {
+    public String name() {
+        if (this.id.isEmpty()) {
             this.format = "%s%s";
             return "";
         }
-        Language language = Language.getInstance();
-        return language.getOrDefault("text.betterf3.line." + id);
+        final Language language = Language.getInstance();
+        return language.getOrDefault("text.betterf3.line." + this.id);
     }
 
     /**
@@ -124,8 +147,8 @@ public class DebugLine {
      *
      * @return the id
      */
-    public String getId() {
-        return id;
+    public String id() {
+        return this.id;
     }
 
 }

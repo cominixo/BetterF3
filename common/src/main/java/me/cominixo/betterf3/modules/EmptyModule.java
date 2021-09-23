@@ -8,6 +8,9 @@ import net.minecraft.client.Minecraft;
  */
 public class EmptyModule extends BaseModule {
 
+    /**
+     * Empty module instance.
+     */
     public static EmptyModule INSTANCE = new EmptyModule(false);
 
     /**
@@ -15,7 +18,7 @@ public class EmptyModule extends BaseModule {
      *
      * @param invisible sets invisibility
      */
-    public EmptyModule(boolean invisible) {
+    public EmptyModule(final boolean invisible) {
         super(invisible);
         lines.add(new DebugLine("", "", false));
 
@@ -23,7 +26,7 @@ public class EmptyModule extends BaseModule {
     }
 
     @Override
-    public void update(Minecraft client) {
-        lines.get(0).setValue("");
+    public void update(final Minecraft client) {
+        lines.get(0).value("");
     }
 }

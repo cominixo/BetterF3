@@ -1,13 +1,12 @@
 package me.cominixo.betterf3.modules;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import me.cominixo.betterf3.utils.DebugLineList;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.TextColor;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * The Misc right module.
@@ -26,34 +25,39 @@ public class MiscRightModule extends BaseModule {
         this.nameColor = defaultNameColor;
         this.valueColor = defaultValueColor;
 
-        DebugLineList rightDebugLines = new DebugLineList("misc_right");
+        final DebugLineList rightDebugLines = new DebugLineList("misc_right");
         rightDebugLines.inReducedDebug = true;
 
         lines.add(rightDebugLines);
     }
 
-    public void update(Minecraft client) {
+    /**
+     * Does nothing.
+     *
+     * @param client the Minecraft client
+     */
+    public void update(final Minecraft client) {
         // Do nothing
     }
 
     /**
-     * Updates the lines
+     * Updates the lines.
      *
      * @param lines the lines
      */
-    public void update(List<String> lines) {
+    public void update(final List<String> lines) {
 
         // Parse lines to find non-vanilla lines, it's a mess
-        int rightSideSize = 0;
+        final int rightSideSize = 0;
         if (lines.size() != rightSideSize) {
 
             // boolean that indicates if we're on the "targeted" section, we have no other way of knowing when it starts/ends
             boolean inTargeted = false;
 
             // copy of list for .remove()
-            List<String> listCopy = new ArrayList<>(lines);
+            final List<String> listCopy = new ArrayList<>(lines);
 
-            for (String s : listCopy) {
+            for (final String s : listCopy) {
                 if (s.isEmpty()) {
                     inTargeted = false;
                     lines.remove(s);
@@ -68,20 +72,21 @@ public class MiscRightModule extends BaseModule {
                     lines.remove(s);
                     continue;
                 }
-                for (String vanilla : VANILLA_DEBUG_RIGHT) {
-                    int index = listCopy.indexOf(s);
+                for (final String vanilla : VANILLA_DEBUG_RIGHT) {
+                    final int index = listCopy.indexOf(s);
 
                     if (s.startsWith(vanilla)) {
                         lines.remove(s);
                     } else if (index > 1) {
                         // pretty bad, this is to include GPU info in the vanilla list
-                        if (listCopy.get(index-1).startsWith("Display:") || listCopy.get(index-2).startsWith("Display:")) {
+                        if (listCopy.get(index - 1).startsWith("Display:") || listCopy.get(index - 2).startsWith(
+                        "Display:")) {
                             lines.remove(s);
                         }
                     }
                 }
             }
         }
-        ((DebugLineList)this.lines.get(0)).setValues(lines);
+        ((DebugLineList) this.lines.get(0)).values(lines);
     }
 }

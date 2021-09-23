@@ -1,7 +1,22 @@
 package me.cominixo.betterf3;
 
 import me.cominixo.betterf3.config.ModConfigFile;
-import me.cominixo.betterf3.modules.*;
+import me.cominixo.betterf3.modules.BaseModule;
+import me.cominixo.betterf3.modules.ChunksModule;
+import me.cominixo.betterf3.modules.CoordsModule;
+import me.cominixo.betterf3.modules.EmptyModule;
+import me.cominixo.betterf3.modules.EntityModule;
+import me.cominixo.betterf3.modules.FpsModule;
+import me.cominixo.betterf3.modules.GraphicsModule;
+import me.cominixo.betterf3.modules.HelpModule;
+import me.cominixo.betterf3.modules.LocationModule;
+import me.cominixo.betterf3.modules.MinecraftModule;
+import me.cominixo.betterf3.modules.MiscLeftModule;
+import me.cominixo.betterf3.modules.MiscRightModule;
+import me.cominixo.betterf3.modules.ServerModule;
+import me.cominixo.betterf3.modules.SoundModule;
+import me.cominixo.betterf3.modules.SystemModule;
+import me.cominixo.betterf3.modules.TargetModule;
 import me.cominixo.betterf3.utils.PositionEnum;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -10,12 +25,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * BetterF3 Fabric Mod
+ * BetterF3 Fabric Mod.
  */
 @Environment(EnvType.CLIENT)
 public class BetterF3Fabric implements ClientModInitializer {
 
-    // Directly references a log4j logger.
+    /**
+     * The Log4J logger.
+     */
     public final Logger logger = LogManager.getLogger("betterf3");
 
     @Override

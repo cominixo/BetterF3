@@ -1,5 +1,8 @@
 package me.cominixo.betterf3.mixin;
 
+import static me.cominixo.betterf3.utils.Utils.START_X_POS;
+import static me.cominixo.betterf3.utils.Utils.closingAnimation;
+import static me.cominixo.betterf3.utils.Utils.xPos;
 import me.cominixo.betterf3.config.GeneralOptions;
 import me.cominixo.betterf3.config.gui.ModConfigScreen;
 import net.minecraft.client.KeyboardHandler;
@@ -13,30 +16,39 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static me.cominixo.betterf3.utils.Utils.*;
-
 /**
- * Modifies the debug keys (f3 / f3 + m)
+ * Modifies the debug keys (f3 / f3 + m).
  */
 @Mixin(KeyboardHandler.class)
 public class KeyboardMixin {
     @Shadow @Final private Minecraft minecraft;
 
     /**
-     * Adds the config menu by pressing f3 + m
+     * Adds the config menu by pressing f3 + m.
+     *
+     * @param key key pressed with f3
+     * @param cir Callback info
      */
     @Inject(method = "handleDebugKeys", at = @At("HEAD"))
-    public void processF3(int key, CallbackInfoReturnable<Boolean> cir) {
+    public void processF3(final int key, final CallbackInfoReturnable<Boolean> cir) {
         if (key == 77) { // Key m
-            minecraft.setScreen(new ModConfigScreen(null));
+            this.minecraft.setScreen(new ModConfigScreen(null));
         }
     }
 
     /**
-     * Plays the animation on f3 keypress
+     * Plays the animation on f3 keypress.
+     *
+     * @param window window
+     * @param key key
+     * @param scancode scancode
+     * @param i i
+     * @param j j
+     * @param ci Callback info
      */
-    @Inject(method="keyPress", at=@At(value = "FIELD", opcode = Opcodes.PUTFIELD, target = "net/minecraft/client/Options.renderDebug : Z"), cancellable = true)
-    public void onDebugActivate(long window, int key, int scancode, int i, int j, CallbackInfo ci) {
+    @Inject(method = "keyPress", at = @At(value = "FIELD", opcode = Opcodes.PUTFIELD, target = "net/minecraft/client" +
+            "/Options.renderDebug : Z"), cancellable = true)
+    public void onDebugActivate(final long window, final int key, final int scancode, final int i, final int j, final CallbackInfo ci) {
 
         if (GeneralOptions.enableAnimations) {
             if (this.minecraft.options.renderDebug) {
