@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "betterf3",
+  "version": "${version}",
+  "name": "BetterF3",
+  "description": "Replaces Minecraft's original debug HUD with a highly customizable, more human-readable HUD.",
+  "icon": "icon.png",
+  "authors": [
+    "cominixo",
+    "TreyRuffy"
+  ],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "me.cominixo.betterf3.BetterF3Fabric"
+    ],
+    "modmenu": [
+      "me.cominixo.betterf3.ModMenuIntegration"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "minecraft": "1.17.*"
+  },
+  "recommends": {
+    "modmenu": "2.0.*"
+  },
+  "accessWidener" : "betterf3.accesswidener",
+  "mixins": ["betterf3.mixins.json"]
+}

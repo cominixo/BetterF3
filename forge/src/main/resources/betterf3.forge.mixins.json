@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "me.treyruffy.betterf3.mixin",
+  "compatibilityLevel": "JAVA_14",
+  "minVersion": "0.8.2",
+  "server": [],
+  "mixins": [],
+  "client": [
+    "ForgeIngameGuiMixin"
+  ]
+}

@@ -1,0 +1,40 @@
+modLoader = "javafml"
+loaderVersion = "[37,)"
+license = "MIT"
+issueTrackerURL="https://github.com/TreyRuffy/BetterF3/issues/"
+
+[[mods]]
+modId = "betterf3"
+version = "1.1.5"
+displayName = "BetterF3"
+updateJSONURL="https://raw.githubusercontent.com/TreyRuffy/BetterF3/1.17.1-Forge/update.json"
+displayURL="https://github.com/TreyRuffy/BetterF3/"
+logoFile="icon.png"
+authors = "TreyRuffy - Forge; cominixo - Fabric"
+description = '''
+Better F3 for Minecraft Forge
+Replaces Minecraft's original debug HUD with a highly customizable, more human-readable HUD.
+
+The creator would like to thank:
+- cominixo for creating the Fabric version of the mod
+- Nirewen for creating the icon
+'''
+
+[[dependencies.betterf3]]
+modId = "forge"
+mandatory = true
+versionRange = "[37,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.betterf3]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.17, 1.18)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.betterf3]]
+modId = "cloth_config"
+versionRange = "[5.0.38,)"
+mandatory = false

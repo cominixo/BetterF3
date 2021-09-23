@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "me.cominixo.betterf3.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "minVersion": "0.8.2",
+  "server": [],
+  "mixins": [],
+  "client": [
+    "DebugMixin",
+    "KeyboardMixin",
+    "chunk.ChunkBuilderAccessor",
+    "chunk.ClientChunkManagerAccessor",
+    "chunk.ClientChunkMapAccessor",
+    "chunk.WorldRendererAccessor"
+  ]
+}

@@ -1,0 +1,82 @@
+plugins {
+	id "com.github.johnrengelman.shadow" version "7.0.0"
+}
+
+configurations {
+	shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
+}
+
+architectury {
+	platformSetupLoomIde()
+	forge()
+}
+
+loom {
+	forge {
+		mixinConfigs = [
+				"betterf3.mixins.json",
+				"betterf3.forge.mixins.json"
+		]
+	}
+	launches {
+		client {
+			property 'mixin.debug', 'true'
+		}
+	}
+}
+
+repositories {
+	maven { url "https://maven.shedaniel.me/" }
+}
+
+dependencies {
+	forge "net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}"
+
+	implementation(project(path: ":common")) {
+		transitive = false
+	}
+	developmentForge(project(path: ":common")) {
+		transitive = false
+	}
+	shadowCommon(project(path: ":common", configuration: "transformProductionForge")) {
+		transitive = false
+	}
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("META-INF/mods.toml") {
+		expand "version": project.version
+	}
+}
+
+shadowJar {
+	exclude "fabric.mod.json"
+	exclude "betterf3.accesswidener"
+
+	configurations = [project.configurations.shadowCommon]
+	classifier "dev-shadow"
+}
+
+remapJar {
+	dependsOn(shadowJar)
+	input.set(shadowJar.archivePath)
+	archiveClassifier = "forge"
+
+	from rootProject.file("LICENSE.md")
+}
+
+jar {
+	classifier "dev"
+}
+
+java {
+	withSourcesJar()
+}
+
+sourcesJar {
+	def commonSources = project(":common").sourcesJar
+	dependsOn commonSources
+	from commonSources.archiveFile.map { zipTree(it) }
+}

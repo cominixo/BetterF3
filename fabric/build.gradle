@@ -1,0 +1,89 @@
+plugins {
+	id "com.github.johnrengelman.shadow" version "7.0.0"
+}
+
+loom {
+	accessWidenerPath = file("src/main/resources/betterf3.accesswidener")
+}
+
+repositories {
+	maven {
+		url "https://maven.terraformersmc.com/"
+	}
+	maven {
+		url "https://maven.shedaniel.me/"
+	}
+}
+
+configurations {
+	shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
+}
+
+architectury {
+	platformSetupLoomIde()
+	fabric()
+}
+
+dependencies {
+	modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+	modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+
+	implementation(project(path: ":common")) {
+		transitive = false
+	}
+	developmentFabric(project(path: ":common")) {
+		transitive = false
+	}
+	shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) {
+		transitive = false
+	}
+
+	modImplementation "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}", {
+		exclude module: 'fabric-api'
+	}
+	include "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}"
+
+	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}", {
+		exclude module: 'fabric-api'
+	}
+	include(modImplementation(fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)))
+
+	implementation 'com.electronwill.night-config:json:3.6.4'
+	shadowCommon 'com.electronwill.night-config:json:3.6.4'
+	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
+}
+
+shadowJar {
+	configurations = [project.configurations.shadowCommon]
+	classifier "dev-shadow"
+}
+
+remapJar {
+	dependsOn(shadowJar)
+	input.set(shadowJar.archivePath)
+	archiveClassifier = "fabric"
+
+	from rootProject.file("LICENSE.md")
+}
+
+jar {
+	classifier "dev"
+}
+
+java {
+	withSourcesJar()
+}
+
+sourcesJar {
+	def commonSources = project(":common").sourcesJar
+	dependsOn commonSources
+	exclude 'betterf3.accessWidener'
+}
