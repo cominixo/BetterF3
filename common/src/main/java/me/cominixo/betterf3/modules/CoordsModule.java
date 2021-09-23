@@ -11,19 +11,41 @@ import net.minecraft.world.entity.Entity;
 
 import java.util.Arrays;
 
-public class CoordsModule extends BaseModule{
+/**
+ * The Coordinates module
+ */
+public class CoordsModule extends BaseModule {
 
-
+    /**
+     * The color for the x position
+     */
     public TextColor colorX;
+    /**
+     * The color for the y position
+     */
     public TextColor colorY;
+    /**
+     * The color for the z position
+     */
     public TextColor colorZ;
 
+    /**
+     * The default color for the x position
+     */
     public TextColor defaultColorX = TextColor.fromLegacyFormat(ChatFormatting.RED);
+    /**
+     * The default color for the y position
+     */
     public TextColor defaultColorY = TextColor.fromLegacyFormat(ChatFormatting.GREEN);
+    /**
+     * The default color for the z position
+     */
     public TextColor defaultColorZ = TextColor.fromLegacyFormat(ChatFormatting.AQUA);
 
+    /**
+     * Instantiates a new Coordinates module.
+     */
     public CoordsModule() {
-
         this.defaultNameColor = TextColor.fromLegacyFormat(ChatFormatting.RED);
 
         this.nameColor = defaultNameColor;
@@ -31,14 +53,12 @@ public class CoordsModule extends BaseModule{
         this.colorY = defaultColorY;
         this.colorZ = defaultColorZ;
 
-
         lines.add(new DebugLine("player_coords", "format.betterf3.coords", true));
         lines.add(new DebugLine("block_coords", "format.betterf3.coords", true));
         lines.add(new DebugLine("chunk_relative_coords", "format.betterf3.coords", true));
         lines.add(new DebugLine("chunk_coords", "format.betterf3.coords", true));
 
         lines.get(2).inReducedDebug = true;
-
     }
 
     public void update(Minecraft client) {
@@ -48,8 +68,6 @@ public class CoordsModule extends BaseModule{
         Component xyz = Utils.getStyledText("X", colorX).append(Utils.getStyledText("Y", colorY)).append(Utils.getStyledText("Z", colorZ));
 
         if (cameraEntity != null) {
-
-
             String cameraX = String.format("%.3f", cameraEntity.getX());
             String cameraY = String.format("%.5f", cameraEntity.getY());
             String cameraZ = String.format("%.3f", cameraEntity.getZ());
@@ -69,9 +87,5 @@ public class CoordsModule extends BaseModule{
             lines.get(3).setValue(Arrays.asList(Utils.getStyledText(blockPos.getX() >> 4, colorX),
                     Utils.getStyledText(blockPos.getY() >> 4, colorY), Utils.getStyledText(blockPos.getZ() >> 4, colorZ)));
         }
-
-
-
     }
-
 }

@@ -1,14 +1,14 @@
 pluginManagement {
 	repositories {
-		maven { url "https://maven.fabricmc.net/" }
-		maven { url "https://maven.architectury.dev/" }
-		maven { url "https://files.minecraftforge.net/maven/" }
-		maven { url "https://jitpack.io" }
-		gradlePluginPortal()
+		maven { url "https://maven.fabricmc.net/" } // Fabric Maven Repository
+		maven { url "https://maven.architectury.dev/" } // Architectury Maven Repository
+		maven { url "https://files.minecraftforge.net/maven/" } // Minecraft Forge Maven Repository
+		maven { url "https://jitpack.io" } // JitPack Repository
+		gradlePluginPortal() // Gradle Plugin Repository
 	}
 }
 
-include("common")
-include("fabric")
-include("forge")
-rootProject.name = 'BetterF3'
+include("common") // Common directory
+include("fabric") // Fabric directory
+include("forge") // Forge directory
+rootProject.name = 'BetterF3' // Sets project name

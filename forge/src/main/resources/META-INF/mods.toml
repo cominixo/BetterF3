@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/TreyRuffy/BetterF3/issues/"
 
 [[mods]]
 modId = "betterf3"
-version = "1.1.5"
+version = "${version}"
 displayName = "BetterF3"
 updateJSONURL="https://raw.githubusercontent.com/TreyRuffy/BetterF3/1.17.1-Forge/update.json"
 displayURL="https://github.com/TreyRuffy/BetterF3/"

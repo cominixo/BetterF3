@@ -17,21 +17,22 @@ import net.minecraft.world.level.NaturalSpawner;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * The Entity module.
+ */
 public class EntityModule extends BaseModule {
 
     public final TextColor totalColor = TextColor.fromLegacyFormat(ChatFormatting.GOLD);
 
+    /**
+     * Instantiates a new Entity module.
+     */
     public EntityModule() {
-
-
-
         this.defaultNameColor = TextColor.fromLegacyFormat(ChatFormatting.RED);
         this.defaultValueColor = TextColor.fromLegacyFormat(ChatFormatting.YELLOW);
 
         this.nameColor = defaultNameColor;
         this.valueColor = defaultValueColor;
-
-
 
         lines.add(new DebugLine("particles"));
         lines.add(new DebugLine("entities", "format.betterf3.total", true));
@@ -42,14 +43,11 @@ public class EntityModule extends BaseModule {
             lines.add(new DebugLine(name));
         }
 
-
         lines.get(0).inReducedDebug = true;
         lines.get(1).inReducedDebug = true;
-
-
     }
-    public void update(Minecraft client) {
 
+    public void update(Minecraft client) {
         WorldRendererAccessor worldRendererMixin = (WorldRendererAccessor) client.levelRenderer;
 
         List<Component> entityValues = Arrays.asList(Utils.getStyledText(I18n.get("text.betterf3.line.rendered"), valueColor), Utils.getStyledText(I18n.get("text.betterf3.line.total"), totalColor),
@@ -77,9 +75,5 @@ public class EntityModule extends BaseModule {
         lines.get(0).setValue(client.particleEngine.countParticles());
         // Entities
         lines.get(1).setValue(entityValues);
-
-
-
     }
-
 }

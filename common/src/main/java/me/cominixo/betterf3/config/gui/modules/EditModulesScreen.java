@@ -10,7 +10,6 @@ import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import me.shedaniel.clothconfig2.gui.entries.BooleanListEntry;
 import me.shedaniel.clothconfig2.gui.entries.ColorEntry;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.network.chat.TextComponent;
@@ -31,16 +30,13 @@ public class EditModulesScreen {
     public static ConfigBuilder getConfigBuilder(BaseModule module, ModulesScreen parent) {
 
         ConfigBuilder builder = ConfigBuilder.create()
-                .setParentScreen(Minecraft.getInstance().screen);
-
-
+                .setParentScreen(parent);
 
         builder.setSavingRunnable(ModConfigFile.saveRunnable);
 
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
         ConfigCategory general = builder.getOrCreateCategory(new TranslatableComponent("config.betterf3.category.general"));
-
 
         BooleanListEntry moduleEnabled = entryBuilder.startBooleanToggle(new TranslatableComponent("config.betterf3.module.enable"), module.enabled)
                 .setDefaultValue(true)
@@ -50,7 +46,6 @@ public class EditModulesScreen {
                     module.setEnabled(newValue);
                 })
                 .build();
-
 
         general.addEntry(moduleEnabled);
 
@@ -165,9 +160,7 @@ public class EditModulesScreen {
             }
         }
 
-
         builder.transparentBackground();
-
         return builder;
 
     }

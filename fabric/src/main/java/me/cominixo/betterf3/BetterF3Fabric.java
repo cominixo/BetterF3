@@ -9,19 +9,20 @@ import net.fabricmc.api.Environment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * BetterF3 Fabric Mod
+ */
 @Environment(EnvType.CLIENT)
 public class BetterF3Fabric implements ClientModInitializer {
 
+    // Directly references a log4j logger.
     public final Logger logger = LogManager.getLogger("betterf3");
 
     @Override
     public void onInitializeClient() {
-
         this.logger.info("[BetterF3] Loading...");
 
-
-        // Init all modules and add spaces (default order)
-
+        // Initializes all modules and add spaces (default order)
         new MinecraftModule().init();
         new FpsModule().init();
         new GraphicsModule().init();
@@ -40,11 +41,9 @@ public class BetterF3Fabric implements ClientModInitializer {
         BaseModule.modulesRight.add(EmptyModule.INSTANCE);
         new TargetModule().init(PositionEnum.RIGHT);
 
-        // Config
+        // Setup config with JSON file type
         ModConfigFile.load(ModConfigFile.FileType.JSON);
 
         this.logger.info("[BetterF3] All done!");
-
-
     }
 }

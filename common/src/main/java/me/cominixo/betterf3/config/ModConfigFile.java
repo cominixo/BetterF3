@@ -14,11 +14,29 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Mod config file.
+ */
 public class ModConfigFile {
 
-	public enum FileType { JSON, TOML }
+	/**
+	 * The enum File type.
+	 */
+	public enum FileType {
+		/**
+		 * Json file type.
+		 */
+		JSON,
+		/**
+		 * Toml file type.
+		 */
+		TOML }
+
 	private static FileType storedFileType;
 
+	/**
+	 * Saves the config
+	 */
 	public static Runnable saveRunnable = () -> {
 
 		FileConfig config = FileConfig.builder(Paths.get(storedFileType == FileType.JSON ? "config/betterf3.json" : "config/betterf3.toml")).concurrent().autosave().build();
@@ -62,6 +80,11 @@ public class ModConfigFile {
 	};
 
 
+	/**
+	 * Loads the config.
+	 *
+	 * @param filetype the filetype (JSON or TOML)
+	 */
 	public static void load(FileType filetype) {
 
 		storedFileType = filetype;

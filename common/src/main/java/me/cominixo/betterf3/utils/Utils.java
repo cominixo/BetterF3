@@ -14,8 +14,10 @@ import org.apache.commons.lang3.text.WordUtils;
 import java.util.Arrays;
 import java.util.Map;
 
+/**
+ * The Utils.
+ */
 public class Utils {
-
 
     // Animation stuff
     public static final int START_X_POS = 200;
@@ -23,19 +25,29 @@ public class Utils {
     public static long lastAnimationUpdate = 0;
     public static boolean closingAnimation = false;
 
-    public static int getFpsColor(int currentFps) {
-
+    /**
+     * Gets fps color.
+     *
+     * @param currentFps the current fps
+     * @return the fps color
+     */
+    public static FpsEnum getFpsColor(int currentFps) {
         if (currentFps >= 60) {
-            return 0;
+            return FpsEnum.HIGH;
         } else if (currentFps >= 20) {
-            return 1;
+            return FpsEnum.MEDIUM;
         } else {
-            return 2;
+            return FpsEnum.LOW;
         }
     }
 
+    /**
+     * Gets percent color.
+     *
+     * @param percent the percent
+     * @return the percent color
+     */
     public static ChatFormatting getPercentColor(int percent) {
-
         if (percent >= 90) {
             return ChatFormatting.RED;
         } else if (percent >= 60) {
@@ -43,9 +55,14 @@ public class Utils {
         } else {
             return ChatFormatting.GREEN;
         }
-
     }
 
+    /**
+     * Gets facing string.
+     *
+     * @param facing the direction
+     * @return the facing string
+     */
     public static String getFacingString(Direction facing) {
 
         return switch (facing) {
@@ -57,6 +74,13 @@ public class Utils {
         };
     }
 
+    /**
+     * Gets styled text.
+     *
+     * @param string the string
+     * @param color  the color
+     * @return the styled text
+     */
     public static MutableComponent getStyledText(Object string, TextColor color) {
         if (string == null) {
             string = "";
@@ -72,7 +96,6 @@ public class Utils {
         String[] split = string.split(":");
 
         if (string.contains(":")) {
-
             MutableComponent name = Utils.getStyledText(split[0], nameColor);
             MutableComponent value = Utils.getStyledText(String.join(":", Arrays.asList(split).subList(1, split.length)), valueColor);
 
@@ -83,7 +106,6 @@ public class Utils {
     }
 
     public static String propertyToString(Map.Entry<Property<?>, Comparable<?>> propEntry) {
-
         Property<?> key = propEntry.getKey();
         Comparable<?> value = propEntry.getValue();
 
@@ -94,9 +116,7 @@ public class Utils {
         } else if (Boolean.FALSE.equals(value)) {
             newValue = ChatFormatting.RED + newValue;
         }
-
         return key.getName() + ": " + newValue;
     }
-
 
 }

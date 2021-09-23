@@ -25,10 +25,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class ChunksModule extends BaseModule{
+/**
+ * The Chunks module.
+ */
+public class ChunksModule extends BaseModule {
 
     public final TextColor totalColor = TextColor.fromLegacyFormat(ChatFormatting.GOLD);
 
+    /**
+     * Instantiates a new Chunks module.
+     */
     public ChunksModule() {
 
 
@@ -59,8 +65,6 @@ public class ChunksModule extends BaseModule{
 
     public void update(Minecraft client) {
 
-
-
         WorldRendererAccessor worldRendererMixin = (WorldRendererAccessor) client.levelRenderer;
         int totalChunks;
         if (worldRendererMixin.getViewArea() == null) {
@@ -85,7 +89,6 @@ public class ChunksModule extends BaseModule{
 
         }
 
-
         Level world = DataFixUtils.orElse(Optional.ofNullable(client.getSingleplayerServer()).flatMap((integratedServer) -> Optional.ofNullable(integratedServer.getLevel(client.level.dimension()))), client.level);
         LongSet forceLoadedChunks = world instanceof ServerLevel ? ((ServerLevel)world).getForcedChunks() : LongSets.EMPTY_SET;
 
@@ -96,7 +99,6 @@ public class ChunksModule extends BaseModule{
         if (serverWorld != null) {
             info = serverWorld.getChunkSource().getLastSpawnState();
         }
-
 
         String chunkCulling = client.smartCull ? ChatFormatting.GREEN + I18n.get("text.betterf3.line.enabled")
                 : ChatFormatting.RED + I18n.get("text.betterf3.line.disabled");
@@ -119,8 +121,6 @@ public class ChunksModule extends BaseModule{
             lines.get(4).setValue(chunkBuilderAccessor.getFreeBufferCount());
         }
 
-
-
         // Loaded Chunks (Server)
         if (serverWorld != null) {
             lines.get(7).setValue(serverWorld.getChunkSource().getLoadedChunksCount());
@@ -131,8 +131,5 @@ public class ChunksModule extends BaseModule{
         if (info != null) {
             lines.get(9).setValue(info.getSpawnableChunkCount());
         }
-
-
-
     }
 }

@@ -8,9 +8,17 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.TranslatableComponent;
 
+/**
+ * The Mod Config screen.
+ */
 public class ModConfigScreen extends Screen {
     private final Screen parent;
 
+    /**
+     * Instantiates a new Mod Config screen.
+     *
+     * @param parent the parent screen
+     */
     public ModConfigScreen(Screen parent) {
         super(new TranslatableComponent("config.betterf3.title.config"));
         this.parent = parent;

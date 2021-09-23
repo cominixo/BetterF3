@@ -9,10 +9,15 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.TextColor;
 import org.apache.commons.lang3.ArrayUtils;
 
+/**
+ * The System module.
+ */
 public class SystemModule extends BaseModule{
 
+    /**
+     * Instantiates a new System module.
+     */
     public SystemModule() {
-
         this.defaultNameColor = TextColor.fromLegacyFormat(ChatFormatting.GOLD);
         this.defaultValueColor = TextColor.fromLegacyFormat(ChatFormatting.AQUA);
 
@@ -31,18 +36,15 @@ public class SystemModule extends BaseModule{
         for (DebugLine line : lines) {
             line.inReducedDebug = true;
         }
-
     }
 
     public void update(Minecraft client) {
-
         long maxMemory = Runtime.getRuntime().maxMemory();
         long totalMemory = Runtime.getRuntime().totalMemory();
         long freeMemory = Runtime.getRuntime().freeMemory();
         long usedMemory = totalMemory - freeMemory;
 
         Window window = client.getWindow();
-
 
         String javaVersion = String.format("%s %dbit", System.getProperty("java.version"), client.is64Bit() ? 64 : 32);
         String memoryUsage = String.format("% 2d%% %03d/%03d MB", usedMemory * 100 / maxMemory, usedMemory / 1024 / 1024, maxMemory / 1024 / 1024);
@@ -62,6 +64,5 @@ public class SystemModule extends BaseModule{
         lines.get(5).setValue(GlUtil.getRenderer());
         lines.get(6).setValue(openGlVersion);
         lines.get(7).setValue(gpuDriverVersion);
-
     }
 }

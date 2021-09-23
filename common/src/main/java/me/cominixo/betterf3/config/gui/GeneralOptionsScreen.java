@@ -8,7 +8,16 @@ import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.TranslatableComponent;
 
+/**
+ * The General Options screen.
+ */
 public class GeneralOptionsScreen {
+
+    /**
+     * Gets the config builder.
+     *
+     * @return the config builder
+     */
     public static ConfigBuilder getConfigBuilder() {
 
         ConfigBuilder builder = ConfigBuilder.create()

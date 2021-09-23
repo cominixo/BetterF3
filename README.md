@@ -95,7 +95,7 @@ Give a ⭐️ if you like this project!
 
 ## 📝 License
 
-Copyright © 2020 - 2021 [TreyRuffy](https://github.com/TreyRuffy/) / [cominixo](https://github.com/cominixo/). <br/>
+Copyright © 2020 - 2021 [cominixo](https://github.com/cominixo/) / [TreyRuffy](https://github.com/TreyRuffy/). <br/>
 BetterF3 is [MIT](https://choosealicense.com/licenses/mit/) licensed.
 
 ***

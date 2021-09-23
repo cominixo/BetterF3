@@ -16,7 +16,6 @@ import net.minecraft.network.chat.TranslatableComponent;
  */
 public class AddModuleScreen {
 
-
     /**
      * Gets the config builder.
      *
@@ -30,12 +29,9 @@ public class AddModuleScreen {
 
         builder.setSavingRunnable(ModConfigFile.saveRunnable);
 
-
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
         ConfigCategory general = builder.getOrCreateCategory(new TranslatableComponent("config.betterf3.category.general"));
-
-
 
         DropdownBoxEntry<BaseModule> dropdownEntry = entryBuilder.startDropdownMenu(new TranslatableComponent("config.betterf3.add_button.module_name"),
                         DropdownMenuBuilder.TopCellElementBuilder.of(new EmptyModule(true),

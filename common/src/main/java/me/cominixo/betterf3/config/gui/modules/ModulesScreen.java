@@ -10,16 +10,34 @@ import net.minecraft.network.chat.TranslatableComponent;
 
 import java.util.Objects;
 
+/**
+ * The Modules screen.
+ */
 public class ModulesScreen extends Screen {
 
+    /**
+     * The parent screen.
+     */
     Screen parent;
+    /**
+     * The Modules list widget.
+     */
     ModuleListWidget modulesListWidget;
     private boolean initialized = false;
 
     private Button editButton, deleteButton;
 
+    /**
+     * The side of the screen (left or right).
+     */
     public PositionEnum side;
 
+    /**
+     * Instantiates a new Modules screen.
+     *
+     * @param parent the parent screen
+     * @param side   the side of the screen
+     */
     public ModulesScreen(Screen parent, PositionEnum side) {
         super(new TranslatableComponent("config.betterf3.title.modules"));
         this.parent = parent;
@@ -96,11 +114,19 @@ public class ModulesScreen extends Screen {
         ModConfigFile.saveRunnable.run();
     }
 
+    /**
+     * Selects a module.
+     *
+     * @param entry the entry
+     */
     public void select(ModuleListWidget.ModuleEntry entry) {
         this.modulesListWidget.setSelected(entry);
         updateButtons();
     }
 
+    /**
+     * Updates the buttons.
+     */
     public void updateButtons() {
         if (this.modulesListWidget.getSelected() != null) {
             editButton.active = true;

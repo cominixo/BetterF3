@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Module list widget.
+ * The Module list widget.
  */
 public class ModuleListWidget extends ObjectSelectionList<ModuleListWidget.ModuleEntry> {
 
@@ -48,6 +48,11 @@ public class ModuleListWidget extends ObjectSelectionList<ModuleListWidget.Modul
         this.parentScreen = parent;
     }
 
+    /**
+     * Gets scrollbar position x.
+     *
+     * @return the scrollbar position x
+     */
     protected int getScrollbarPositionX() {
         return super.getScrollbarPosition() + 30;
     }
@@ -74,11 +79,10 @@ public class ModuleListWidget extends ObjectSelectionList<ModuleListWidget.Modul
         for(BaseModule module : modules) {
            addModule(module);
         }
-
     }
 
     /**
-     * Update modules.
+     * Updates the modules.
      */
     public void updateModules() {
         this.clearEntries();
@@ -87,7 +91,7 @@ public class ModuleListWidget extends ObjectSelectionList<ModuleListWidget.Modul
     }
 
     /**
-     * Add module.
+     * Add a module.
      *
      * @param module the module
      */
@@ -98,7 +102,7 @@ public class ModuleListWidget extends ObjectSelectionList<ModuleListWidget.Modul
     }
 
     /**
-     * Remove module.
+     * Remove a module.
      *
      * @param index the index of the module
      */

@@ -27,16 +27,20 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 
-public class LocationModule extends BaseModule{
+/**
+ * The Location module.
+ */
+public class LocationModule extends BaseModule {
 
+    /**
+     * Instantiates a new Location module.
+     */
     public LocationModule() {
-
         this.defaultNameColor = TextColor.fromLegacyFormat(ChatFormatting.DARK_GREEN);
         this.defaultValueColor = TextColor.fromLegacyFormat(ChatFormatting.AQUA);
 
         this.nameColor = defaultNameColor;
         this.valueColor = defaultValueColor;
-
 
         lines.add(new DebugLine("dimension"));
         lines.add(new DebugLine("facing"));
@@ -51,13 +55,9 @@ public class LocationModule extends BaseModule{
     }
 
     public void update(Minecraft client) {
-
         Entity cameraEntity = client.getCameraEntity();
 
-
         IntegratedServer integratedServer = client.getSingleplayerServer();
-
-
 
         String chunkLightString = "";
         String chunkLightServerString = "";
@@ -65,9 +65,7 @@ public class LocationModule extends BaseModule{
         StringBuilder highestBlock = new StringBuilder();
         StringBuilder highestBlockServer = new StringBuilder();
 
-
         if (client.level != null) {
-
             assert cameraEntity != null;
             BlockPos blockPos = cameraEntity.blockPosition();
             ChunkPos chunkPos = new ChunkPos(blockPos);
@@ -82,13 +80,11 @@ public class LocationModule extends BaseModule{
                     chunkLightString = I18n.get("text.betterf3.line.waiting_chunk");
                 } else if (serverWorld != null) {
 
-
                     // Client Chunk Lights
                     int totalLight = client.level.getChunkSource().getLightEngine().getRawBrightness(blockPos, 0);
                     int skyLight = client.level.getBrightness(LightLayer.SKY, blockPos);
                     int blockLight = client.level.getBrightness(LightLayer.BLOCK, blockPos);
                     chunkLightString = I18n.get("format.betterf3.chunklight", totalLight, skyLight, blockLight);
-
 
                     // Server Chunk Lights
                     LevelLightEngine lightingProvider = serverWorld.getChunkSource().getLightEngine();
@@ -112,8 +108,6 @@ public class LocationModule extends BaseModule{
                         serverChunk = clientChunk;
                     }
 
-
-
                     for(Heightmap.Types type : heightmapTypes) {
 
                         // Client
@@ -125,12 +119,8 @@ public class LocationModule extends BaseModule{
                             }
                         }
 
-
                         // Server
                         if (type.keepAfterWorldgen() && serverWorld instanceof ServerLevel) {
-
-
-
                             if (serverChunk == null) {
                                 serverChunk = clientChunk;
                             }
@@ -142,7 +132,6 @@ public class LocationModule extends BaseModule{
                                 highestBlockServer.append("  ").append(typeString).append(": ").append(blockY);
                             }
                         }
-
                     }
 
                     // Local Difficulty
@@ -157,18 +146,14 @@ public class LocationModule extends BaseModule{
                         DifficultyInstance localDifficulty = new DifficultyInstance(serverWorld.getDifficulty(), serverWorld.getDayTime(), inhabitedTime, moonSize);
                         localDifficultyString = String.format("%.2f  " + I18n.get("text.betterf3.line.clamped") + ": %.2f", localDifficulty.getEffectiveDifficulty(), localDifficulty.getSpecialMultiplier());
                     }
-
                 }
             }
         }
-
-
 
         // Dimension
         if (client.level != null) {
             lines.get(0).setValue(client.level.dimension().location());
         }
-
 
         if (cameraEntity != null) {
             Direction facing = cameraEntity.getDirection();
@@ -181,7 +166,6 @@ public class LocationModule extends BaseModule{
             String pitch = String.format("%.1f", Mth.wrapDegrees(cameraEntity.getXRot()));
             lines.get(2).setValue(I18n.get("format.betterf3.rotation", yaw, pitch));
         }
-
 
         // Client Light
         lines.get(3).setValue(chunkLightString);
@@ -196,8 +180,5 @@ public class LocationModule extends BaseModule{
         lines.get(8).setValue(localDifficultyString);
         // Days played
         lines.get(9).setValue(client.level.getDayTime() / 24000L);
-
-
     }
-
 }

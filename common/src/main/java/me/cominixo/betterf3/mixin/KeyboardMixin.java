@@ -15,17 +15,26 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static me.cominixo.betterf3.utils.Utils.*;
 
+/**
+ * Modifies the debug keys (f3 / f3 + m)
+ */
 @Mixin(KeyboardHandler.class)
 public class KeyboardMixin {
     @Shadow @Final private Minecraft minecraft;
 
+    /**
+     * Adds the config menu by pressing f3 + m
+     */
     @Inject(method = "handleDebugKeys", at = @At("HEAD"))
     public void processF3(int key, CallbackInfoReturnable<Boolean> cir) {
-        if (key == 77) {
+        if (key == 77) { // Key m
             minecraft.setScreen(new ModConfigScreen(null));
         }
     }
 
+    /**
+     * Plays the animation on f3 keypress
+     */
     @Inject(method="keyPress", at=@At(value = "FIELD", opcode = Opcodes.PUTFIELD, target = "net/minecraft/client/Options.renderDebug : Z"), cancellable = true)
     public void onDebugActivate(long window, int key, int scancode, int i, int j, CallbackInfo ci) {
 
@@ -38,8 +47,6 @@ public class KeyboardMixin {
                 xPos = START_X_POS;
             }
         }
-
-
     }
 
 }

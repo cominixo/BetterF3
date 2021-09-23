@@ -6,8 +6,14 @@ import net.minecraft.SharedConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.TextColor;
 
-public class MinecraftModule extends BaseModule{
+/**
+ * The Minecraft module.
+ */
+public class MinecraftModule extends BaseModule {
 
+    /**
+     * Instantiates a new Minecraft module.
+     */
     public MinecraftModule() {
         defaultNameColor = TextColor.fromRgb(0xA0522D);
         defaultValueColor =  TextColor.fromLegacyFormat(ChatFormatting.DARK_GREEN);
@@ -20,9 +26,8 @@ public class MinecraftModule extends BaseModule{
     }
 
     public void update(Minecraft client) {
-        //TODO Fix ClientBrandRetriever.getClientModName() on forge
+        //TODO Fix ClientBrandRetriever.getClientModName() on forge - disabled on both forge and fabric
         lines.get(0).setValue(SharedConstants.getCurrentVersion().getName() + " (" + client.getLaunchedVersion() +
                 "/" + /*ClientBrandRetriever.getClientModName() +*/ ("release".equalsIgnoreCase(client.getVersionType()) ? "" : "/" + client.getVersionType()) + ")");
-
     }
 }

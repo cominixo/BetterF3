@@ -9,14 +9,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MiscLeftModule extends BaseModule{
+/**
+ * The Misc left module.
+ */
+public class MiscLeftModule extends BaseModule {
 
     private static final List<String> VANILLA_DEBUG_LEFT = Arrays.asList("Minecraft", "Integrated", "C:", "E:", "P:", "Client", "ServerChunkCache:", "minecraft:overworld", "XYZ:", "Block:", "Chunk:", "Facing:", "Waiting", "SC:", "Sounds:", "CH", "SH", "Server Light:", "Biome:", "Local Difficulty:", "Chunks[");
     private int leftSideSize = 0;
 
-
+    /**
+     * Instantiates a new Misc left module.
+     */
     public MiscLeftModule() {
-
         this.defaultNameColor = TextColor.fromRgb(0xfdfd96);
         this.defaultValueColor = TextColor.fromLegacyFormat(ChatFormatting.AQUA);
 
@@ -27,13 +31,17 @@ public class MiscLeftModule extends BaseModule{
         leftDebugLines.inReducedDebug = true;
 
         lines.add(leftDebugLines);
-
     }
 
     public void update(Minecraft client) {
         // Do nothing
     }
 
+    /**
+     * Updates the lines
+     *
+     * @param lines the lines
+     */
     public void update(List<String> lines) {
 
         // Parse lines to find non-vanilla lines, it's a mess
@@ -43,7 +51,6 @@ public class MiscLeftModule extends BaseModule{
             List<String> listCopy = new ArrayList<>(lines);
 
             for (String s : listCopy) {
-
                 if (s.isEmpty()) {
                     lines.remove(s);
                 }
@@ -67,10 +74,6 @@ public class MiscLeftModule extends BaseModule{
             }
             leftSideSize = lines.size();
         }
-
         ((DebugLineList) this.lines.get(0)).setValues(lines);
-
     }
-
-
 }

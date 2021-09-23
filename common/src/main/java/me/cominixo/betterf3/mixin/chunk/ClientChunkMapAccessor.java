@@ -7,9 +7,15 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
+/**
+ * The Client Chunk Map Accessor
+ */
 @Mixin(Storage.class)
 public interface ClientChunkMapAccessor {
 
+    /**
+     * @return Gets Chunks
+     */
     @Accessor
     AtomicReferenceArray<LevelChunk> getChunks();
 

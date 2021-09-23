@@ -25,17 +25,35 @@ import java.util.List;
 import static me.cominixo.betterf3.utils.Utils.*;
 import static net.minecraft.client.gui.GuiComponent.fill;
 
+/**
+ * The Debug Screen Overlay
+ */
 @Mixin(DebugScreenOverlay.class)
 public abstract class DebugMixin {
 
     @Shadow @Final private Minecraft minecraft;
     @Shadow @Final private Font font;
 
+    /**
+     * Gets the information on the left side of the screen
+     *
+     * @return the game information
+     */
     @Shadow protected abstract List<String> getGameInformation();
 
+    /**
+     * Gets the information on the right side of the screen
+     *
+     * @return the system information
+     */
     @Shadow protected abstract List<String> getSystemInformation();
 
 
+    /**
+     * Sets up modules on the left side of the screen
+     *
+     * @return the left side modules
+     */
     public List<Component> getNewLeftText() {
 
         List<Component> list = new ArrayList<>();
@@ -60,6 +78,11 @@ public abstract class DebugMixin {
 
     }
 
+    /**
+     * Sets up modules on the right side of the screen
+     *
+     * @return the right side modules
+     */
     public List<Component> getNewRightText() {
 
         List<Component> list = new ArrayList<>();
@@ -84,6 +107,9 @@ public abstract class DebugMixin {
 
     }
 
+    /**
+     * Renders the text on the right side of the screen
+     */
     @Inject(method = "drawSystemInformation", at = @At("HEAD"), cancellable = true)
     public void renderRightText(PoseStack matrixStack, CallbackInfo ci) {
 
@@ -121,6 +147,9 @@ public abstract class DebugMixin {
     }
 
 
+    /**
+     * Renders the text on the left side of the screen
+     */
     @Inject(method = "drawGameInformation", at = @At("HEAD"), cancellable = true)
     public void renderLeftText(PoseStack matrixStack, CallbackInfo ci) {
 
@@ -159,23 +188,32 @@ public abstract class DebugMixin {
 
     }
 
+    /**
+     * Modifies the font scale
+     */
     @Inject(method = "render", at = @At("HEAD"))
     public void renderFontScaleBefore(PoseStack matrices, CallbackInfo ci) {
         matrices.pushPose();
         matrices.scale((float) GeneralOptions.fontScale, (float) GeneralOptions.fontScale, 1F);
     }
 
+    /**
+     * Pops the MatrixStack for render font
+     */
     @Inject(method = "render", at = @At("TAIL"))
     public void renderFontScaleAfter(PoseStack matrices, CallbackInfo ci) {
         matrices.popPose();
     }
 
+    /**
+     * Renders the animation
+     */
     @Inject(method = "render", at = @At("HEAD"))
     public void renderAnimation(PoseStack matrices, CallbackInfo ci) {
 
         if (!GeneralOptions.enableAnimations) {
             return;
-        }
+        } // Only displays the animation if set to true
 
         long time = Util.getMillis();
         if (time - lastAnimationUpdate >= 10 && (xPos != 0 || closingAnimation)) {

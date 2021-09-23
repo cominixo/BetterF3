@@ -8,16 +8,20 @@ import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.TextColor;
 
 
+/**
+ * The Help module.
+ */
 public class HelpModule extends BaseModule {
 
-
+    /**
+     * Instantiates a new Help module.
+     */
     public HelpModule() {
         this.defaultNameColor = TextColor.fromRgb(0xfdfd96);
         this.defaultValueColor = TextColor.fromLegacyFormat(ChatFormatting.AQUA);
 
         this.nameColor = defaultNameColor;
         this.valueColor = defaultValueColor;
-
 
         lines.add(new DebugLine("pie_graph"));
         lines.add(new DebugLine("fps_tps"));
@@ -26,7 +30,6 @@ public class HelpModule extends BaseModule {
         for (DebugLine line : lines) {
             line.inReducedDebug = true;
         }
-
     }
 
     public void update(Minecraft client) {
@@ -44,6 +47,5 @@ public class HelpModule extends BaseModule {
 
         // For help
         lines.get(2).setValue(I18n.get("text.betterf3.line.help_press"));
-
     }
 }

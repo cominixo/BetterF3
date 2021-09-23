@@ -14,16 +14,20 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * The Server module.
+ */
 public class ServerModule extends BaseModule{
 
+    /**
+     * Instantiates a new Server module.
+     */
     public ServerModule() {
-
         this.defaultNameColor = TextColor.fromLegacyFormat(ChatFormatting.GRAY);
         this.defaultValueColor = TextColor.fromLegacyFormat(ChatFormatting.YELLOW);
 
         this.nameColor = defaultNameColor;
         this.valueColor = defaultValueColor;
-
 
         lines.add(new DebugLine("server_tick", "format.betterf3.server_tick", true));
         lines.add(new DebugLine("packets_sent"));
@@ -32,11 +36,9 @@ public class ServerModule extends BaseModule{
         for (DebugLine line : lines) {
             line.inReducedDebug = true;
         }
-
     }
 
     public void update(Minecraft client) {
-
         IntegratedServer integratedServer = client.getSingleplayerServer();
 
         String serverString = "";
@@ -53,7 +55,6 @@ public class ServerModule extends BaseModule{
 
             lines.get(1).setValue(Math.round(packetsSent));
             lines.get(2).setValue(Math.round(packetsReceived));
-
         }
         String tickString = "";
         if (integratedServer != null) {
@@ -65,14 +66,8 @@ public class ServerModule extends BaseModule{
         if (tickString.isEmpty()) {
             lines.get(0).setFormat("format.betterf3.no_format");
             serverStringList.remove(1);
-
         }
 
         lines.get(0).setValue(serverStringList);
-
-
-
     }
-
-
 }

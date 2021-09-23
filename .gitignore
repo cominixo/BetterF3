@@ -29,4 +29,5 @@ run
 **/.gradle
 .gradle
 
+!gradle/wrapper/gradle-wrapper.jar
 **/build

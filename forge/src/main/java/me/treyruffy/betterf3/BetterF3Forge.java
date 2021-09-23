@@ -17,13 +17,19 @@ import net.minecraftforge.fmllegacy.network.FMLNetworkConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * BetterF3 Forge Mod
+ */
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("betterf3")
 public class BetterF3Forge {
 
-    // Directly reference a log4j logger.
+    // Directly references a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     * Instantiates a new Better F3 mod for Forge.
+     */
     public BetterF3Forge() {
         LOGGER.info("[BetterF3] Starting...");
         // Register the setup method for modloading
@@ -37,6 +43,7 @@ public class BetterF3Forge {
         ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class,
                 () -> new IExtensionPoint.DisplayTest(() -> FMLNetworkConstants.IGNORESERVERONLY, (a, b) -> true));
 
+        // Sets up Cloth Config if it is installed
         if (ModList.get().isLoaded("cloth_config"))
             DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ForgeModMenu::registerModsPage);
         else
@@ -47,7 +54,7 @@ public class BetterF3Forge {
     private void setup(final FMLCommonSetupEvent event) {
         LOGGER.info("[BetterF3] Loading...");
 
-        // Init all modules and add spaces (default order)
+        // Initializes all modules and add spaces (default order)
         new MinecraftModule().init();
         new FpsModule().init();
         new GraphicsModule().init();
@@ -66,7 +73,7 @@ public class BetterF3Forge {
         BaseModule.modulesRight.add(EmptyModule.INSTANCE);
         new TargetModule().init(PositionEnum.RIGHT);
 
-        // Config
+        // Setup config with TOML file type
         ModConfigFile.load(ModConfigFile.FileType.TOML);
 
         LOGGER.info("[BetterF3] All done!");

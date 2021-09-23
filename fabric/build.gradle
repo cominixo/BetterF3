@@ -1,18 +1,5 @@
 plugins {
-	id "com.github.johnrengelman.shadow" version "7.0.0"
-}
-
-loom {
-	accessWidenerPath = file("src/main/resources/betterf3.accesswidener")
-}
-
-repositories {
-	maven {
-		url "https://maven.terraformersmc.com/"
-	}
-	maven {
-		url "https://maven.shedaniel.me/"
-	}
+	id "com.github.johnrengelman.shadow" version "7.0.0" // Use Shadow to make a JAR with dependencies
 }
 
 configurations {
@@ -21,39 +8,58 @@ configurations {
 
 architectury {
 	platformSetupLoomIde()
-	fabric()
+	fabric() // Tells Architectury this is a Fabric mod
+}
+
+loom {
+	accessWidenerPath = file("src/main/resources/betterf3.accesswidener") // Tells Loom where our Access Widener is
+}
+
+repositories {
+	maven {	url "https://maven.terraformersmc.com/" }  // Repository for mod menu
+	maven {	url "https://maven.shedaniel.me/" }  // Repository for cloth-config
 }
 
 dependencies {
+	// Fabric API
 	modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
 	modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
 
+	// Tells Gradle to use the common directory
 	implementation(project(path: ":common")) {
 		transitive = false
 	}
 	developmentFabric(project(path: ":common")) {
 		transitive = false
 	}
+
+	// Tells Gradle to include the common directory in the JAR file
 	shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) {
 		transitive = false
 	}
 
+	// Tells Gradle to use cloth config
 	modImplementation "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}", {
 		exclude module: 'fabric-api'
 	}
 	include "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}"
 
+	// Tells Gradle to use mod menu
 	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}", {
 		exclude module: 'fabric-api'
 	}
+
+	// Tells Gradle to use fabric resource loader in order to use language files
 	include(modImplementation(fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)))
 
+	// Tells Gradle to use night config
 	implementation 'com.electronwill.night-config:json:3.6.4'
 	shadowCommon 'com.electronwill.night-config:json:3.6.4'
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 }
 
 processResources {
+	// Replaces the version in mods.toml with the project version
 	inputs.property "version", project.version
 
 	filesMatching("fabric.mod.json") {
