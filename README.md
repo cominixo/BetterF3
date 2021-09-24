@@ -16,7 +16,7 @@ human-readable HUD.<br/>
 You can customize colors, position, add spacings, and more.
 </blockquote>
 
-<h3 style="text-align: center;">
+<h3 align="center">
 <a href="https://www.curseforge.com/minecraft/mc-mods/betterf3/" target="_blank">🏠 CurseForge Homepage</a>
 </h3>
 
@@ -87,7 +87,7 @@ The latest builds can be found [here](https://github.com/TreyRuffy/BetterF3/acti
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!<br/>The best way to help would be to help Translate. Check 
-[CONTRIBUTING.md](CONTRIBUTING.md) for more information
+[CONTRIBUTING.md](./CONTRIBUTING.md) for more information
 
 Thank you [@Nirewen](https://github.com/Nirewen/) for the icon!
 
