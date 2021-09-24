@@ -98,7 +98,7 @@ public class LocationModule extends BaseModule {
 
                     chunkLightServerString = I18n.get("format.betterf3.chunklight_server", skyLightServer, blockLightServer);
 
-                    // Heightmap stuff (Find highest block)
+                    // Heightmap stuff (Find the highest block)
                     final Heightmap.Types[] heightmapTypes = Heightmap.Types.values();
 
                     LevelChunk serverChunk;

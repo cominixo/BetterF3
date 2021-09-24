@@ -32,17 +32,17 @@ public class FpsModule extends BaseModule {
     /**
      * The default color for high fps.
      */
-    public TextColor defaultColorHigh = TextColor.fromLegacyFormat(ChatFormatting.GREEN);
+    public final TextColor defaultColorHigh = TextColor.fromLegacyFormat(ChatFormatting.GREEN);
 
     /**
      * The default color for medium fps.
      */
-    public TextColor defaultColorMed = TextColor.fromLegacyFormat(ChatFormatting.YELLOW);
+    public final TextColor defaultColorMed = TextColor.fromLegacyFormat(ChatFormatting.YELLOW);
 
     /**
      * The default color for low fps.
      */
-    public TextColor defaultColorLow = TextColor.fromLegacyFormat(ChatFormatting.RED);
+    public final TextColor defaultColorLow = TextColor.fromLegacyFormat(ChatFormatting.RED);
 
     /**
      * Instantiates a new FPS module.

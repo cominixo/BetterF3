@@ -17,7 +17,7 @@ public class ModulesScreen extends Screen {
     /**
      * The parent screen.
      */
-    Screen parent;
+    final Screen parent;
     /**
      * The Modules list widget.
      */
@@ -30,7 +30,7 @@ public class ModulesScreen extends Screen {
     /**
      * The side of the screen (left or right).
      */
-    public PositionEnum side;
+    public final PositionEnum side;
 
     /**
      * Instantiates a new Modules screen.

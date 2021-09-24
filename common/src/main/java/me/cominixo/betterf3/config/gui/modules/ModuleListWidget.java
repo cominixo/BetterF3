@@ -24,11 +24,11 @@ public class ModuleListWidget extends ObjectSelectionList<ModuleListWidget.Modul
     /**
      * The parent screen.
      */
-    ModulesScreen parentScreen;
+    final ModulesScreen parentScreen;
     /**
      * The Module entries.
      */
-    List<ModuleEntry> moduleEntries = new ArrayList<>();
+    final List<ModuleEntry> moduleEntries = new ArrayList<>();
 
     /**
      * Instantiates a new Module list widget.

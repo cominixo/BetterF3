@@ -28,7 +28,7 @@ public final class ModConfigFile {
     /**
      * Saves the config.
      */
-    public static Runnable saveRunnable = () -> {
+    public final static Runnable saveRunnable = () -> {
 
         final FileConfig config = FileConfig.builder(Paths.get(storedFileType == FileType.JSON ? "config/betterf3" +
                 ".json" :

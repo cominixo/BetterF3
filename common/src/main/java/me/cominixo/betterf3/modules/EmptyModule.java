@@ -11,7 +11,7 @@ public class EmptyModule extends BaseModule {
     /**
      * Empty module instance.
      */
-    public static EmptyModule INSTANCE = new EmptyModule(false);
+    public final static EmptyModule INSTANCE = new EmptyModule(false);
 
     /**
      * Instantiates a new Empty module.

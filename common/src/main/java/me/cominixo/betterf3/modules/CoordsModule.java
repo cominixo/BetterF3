@@ -31,15 +31,15 @@ public class CoordsModule extends BaseModule {
     /**
      * The default color for the x position.
      */
-    public TextColor defaultColorX = TextColor.fromLegacyFormat(ChatFormatting.RED);
+    public final TextColor defaultColorX = TextColor.fromLegacyFormat(ChatFormatting.RED);
     /**
      * The default color for the y position.
      */
-    public TextColor defaultColorY = TextColor.fromLegacyFormat(ChatFormatting.GREEN);
+    public final TextColor defaultColorY = TextColor.fromLegacyFormat(ChatFormatting.GREEN);
     /**
      * The default color for the z position.
      */
-    public TextColor defaultColorZ = TextColor.fromLegacyFormat(ChatFormatting.AQUA);
+    public final TextColor defaultColorZ = TextColor.fromLegacyFormat(ChatFormatting.AQUA);
 
     /**
      * Instantiates a new Coordinates module.
