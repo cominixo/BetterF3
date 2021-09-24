@@ -1,7 +1,5 @@
 repositories {
-	maven {
-		url "https://maven.shedaniel.me/"
-	}
+	maven { url "https://maven.shedaniel.me/" } // cloth-config repository
 	mavenCentral()
 }
 
@@ -41,4 +39,17 @@ afterEvaluate {
 
 java {
 	withSourcesJar()
+}
+
+publishing {
+	publications {
+		mavenCommon(MavenPublication) {
+			artifactId = rootProject.archives_base_name
+			// add all the jars that should be included when publishing to maven
+			artifact remapJar
+			artifact(sourcesJar) {
+				builtBy remapSourcesJar
+			}
+		}
+	}
 }

@@ -17,31 +17,31 @@ import net.minecraft.network.chat.TextColor;
 public abstract class BaseModule {
 
     /**
-     * The key color.
+     * The color of the tag.
      */
     public TextColor nameColor;
 
     /**
-     * The value color.
+     * The color of the value of the tag.
      */
     public TextColor valueColor;
 
     /**
-     * The default key color.
+     * The default color of the tag.
      */
     public TextColor defaultNameColor;
     /**
-     * The default value color.
+     * The default color of the value of the tag.
      */
     public TextColor defaultValueColor;
 
     /**
-     * Module is enabled.
+     * Is module enabled.
      */
     public boolean enabled = true;
 
     /**
-     * Lines.
+     * The module's lines.
      */
     protected List<DebugLine> lines = new ArrayList<>();
 

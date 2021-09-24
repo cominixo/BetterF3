@@ -93,3 +93,16 @@ sourcesJar {
 	dependsOn commonSources
 	exclude 'betterf3.accessWidener'
 }
+
+publishing {
+	publications {
+		mavenCommon(MavenPublication) {
+			artifactId = rootProject.archives_base_name
+			// add all the jars that should be included when publishing to maven
+			artifact remapJar
+			artifact(sourcesJar) {
+				builtBy remapSourcesJar
+			}
+		}
+	}
+}
