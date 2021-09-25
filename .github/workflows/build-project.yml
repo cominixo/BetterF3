@@ -22,10 +22,9 @@ jobs:
         run: ./gradlew build
 
       - name: "Archives Checkstyle results"
-        if: "${{ always() }}"
         uses: "actions/upload-artifact@v2"
         with:
           name: "test-results"
           path: |
             build/reports/
-            */build/reports/
+            **/build/reports/

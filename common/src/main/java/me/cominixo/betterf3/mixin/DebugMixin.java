@@ -1,10 +1,5 @@
 package me.cominixo.betterf3.mixin;
 
-import static me.cominixo.betterf3.utils.Utils.START_X_POS;
-import static me.cominixo.betterf3.utils.Utils.closingAnimation;
-import static me.cominixo.betterf3.utils.Utils.lastAnimationUpdate;
-import static me.cominixo.betterf3.utils.Utils.xPos;
-import static net.minecraft.client.gui.GuiComponent.fill;
 import com.google.common.base.Strings;
 import com.mojang.blaze3d.vertex.PoseStack;
 import java.util.ArrayList;
@@ -25,6 +20,12 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import static me.cominixo.betterf3.utils.Utils.START_X_POS;
+import static me.cominixo.betterf3.utils.Utils.closingAnimation;
+import static me.cominixo.betterf3.utils.Utils.lastAnimationUpdate;
+import static me.cominixo.betterf3.utils.Utils.xPos;
+import static net.minecraft.client.gui.GuiComponent.fill;
 
 /**
  * The Debug Screen Overlay.

@@ -29,6 +29,7 @@ allprojects {
 	apply plugin: "java"
 	apply plugin: "architectury-plugin" // Applies architectury plugin to all projects
 	apply plugin: "maven-publish"
+	apply plugin: "net.kyori.indra" // Applies Indra to all projects
 	apply plugin: "net.kyori.indra.git" // Applies Indra Git to all projects
 	apply plugin: "net.kyori.indra.checkstyle" // Applies Indra Checkstyle to all projects
 
@@ -36,11 +37,12 @@ allprojects {
 	version = rootProject.mod_version // sets the version from gradle.properties
 	group = rootProject.maven_group // sets the maven group from gradle.properties
 
-	java.toolchain.languageVersion = JavaLanguageVersion.of(16) // Tells Java to use Java 16
-
-	tasks.withType(JavaCompile) {
-		options.encoding = "UTF-8" // Tells Java to use UTF-8
-		options.release = 16 // Tells Java to use Java 16
+	indra {
+		checkstyle("8.41.1")
+		javaVersions {
+			target(16)
+			testWith(16)
+		}
 	}
 
 	java {
