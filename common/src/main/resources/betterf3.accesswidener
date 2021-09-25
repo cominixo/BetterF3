@@ -1,2 +1,2 @@
 accessWidener   v1  named
-accessible  class   net/minecraft/client/multiplayer/ClientChunkCache$Storage
+accessible  class   net/minecraft/client/world/ClientChunkManager$ClientChunkMap

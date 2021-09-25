@@ -1,13 +1,13 @@
 package me.cominixo.betterf3.config.gui.modules;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import java.util.Objects;
 import me.cominixo.betterf3.config.ModConfigFile;
 import me.cominixo.betterf3.modules.BaseModule;
 import me.cominixo.betterf3.utils.PositionEnum;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.TranslatableText;
 
 /**
  * The Modules screen.
@@ -24,8 +24,8 @@ public class ModulesScreen extends Screen {
     ModuleListWidget modulesListWidget;
     private boolean initialized = false;
 
-    private Button editButton;
-    private Button deleteButton;
+    private ButtonWidget editButton;
+    private ButtonWidget deleteButton;
 
     /**
      * The side of the screen (left or right).
@@ -39,7 +39,7 @@ public class ModulesScreen extends Screen {
      * @param side   the side of the screen
      */
     public ModulesScreen(final Screen parent, final PositionEnum side) {
-        super(new TranslatableComponent("config.betterf3.title.modules"));
+        super(new TranslatableText("config.betterf3.title.modules"));
         this.parent = parent;
         this.side = side;
 
@@ -53,7 +53,7 @@ public class ModulesScreen extends Screen {
             this.modulesListWidget.updateSize(this.width, this.height, 32, this.height - 64);
         } else {
             this.initialized = true;
-            this.modulesListWidget = new ModuleListWidget(this, this.minecraft, this.width, this.height, 32, this.height - 64, 36);
+            this.modulesListWidget = new ModuleListWidget(this, this.client, this.width, this.height, 32, this.height - 64, 36);
             if (this.side == PositionEnum.LEFT) {
                 this.modulesListWidget.modules(BaseModule.modules);
             } else if (this.side == PositionEnum.RIGHT) {
@@ -61,28 +61,28 @@ public class ModulesScreen extends Screen {
             }
         }
 
-        this.addRenderableWidget(this.modulesListWidget);
+        this.addDrawableChild(this.modulesListWidget);
 
-        this.editButton = this.addRenderableWidget(new Button(this.width / 2 - 50, this.height - 50, 100, 20, new TranslatableComponent("config.betterf3.modules.edit_button"), buttonWidget -> {
+        this.editButton = this.addDrawableChild(new ButtonWidget(this.width / 2 - 50, this.height - 50, 100, 20, new TranslatableText("config.betterf3.modules.edit_button"), buttonWidget -> {
             final Screen screen =
-                    EditModulesScreen.configBuilder(Objects.requireNonNull(this.modulesListWidget.getSelected()).module, this).build();
-            assert minecraft != null;
-            minecraft.setScreen(screen);
+                    EditModulesScreen.configBuilder(Objects.requireNonNull(this.modulesListWidget.getSelectedOrNull()).module, this).build();
+            assert client != null;
+            client.setScreen(screen);
         }));
 
-        this.addRenderableWidget(new Button(this.width / 2 + 4 + 50, this.height - 50, 100, 20, new TranslatableComponent("config.betterf3.modules.add_button"), buttonWidget -> {
-            assert minecraft != null;
-            minecraft.setScreen(AddModuleScreen.configBuilder(this).build());
+        this.addDrawableChild(new ButtonWidget(this.width / 2 + 4 + 50, this.height - 50, 100, 20, new TranslatableText("config.betterf3.modules.add_button"), buttonWidget -> {
+            assert client != null;
+            client.setScreen(AddModuleScreen.configBuilder(this).build());
         }));
 
-        this.deleteButton = this.addRenderableWidget(new Button(this.width / 2 - 154, this.height - 50, 100, 20,
-                new TranslatableComponent("config.betterf3.modules.delete_button"), buttonWidget -> this.modulesListWidget.removeModule(this.modulesListWidget.moduleEntries.indexOf(Objects.requireNonNull(this.modulesListWidget.getSelected())))));
+        this.deleteButton = this.addDrawableChild(new ButtonWidget(this.width / 2 - 154, this.height - 50, 100, 20,
+                new TranslatableText("config.betterf3.modules.delete_button"), buttonWidget -> this.modulesListWidget.removeModule(this.modulesListWidget.moduleEntries.indexOf(Objects.requireNonNull(this.modulesListWidget.getSelectedOrNull())))));
 
-        this.addRenderableWidget(new Button(this.width / 2 - 154, this.height - 30 + 4, 300 + 8, 20,
-                new TranslatableComponent("config.betterf3.modules.done_button"), buttonWidget -> {
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 154, this.height - 30 + 4, 300 + 8, 20,
+                new TranslatableText("config.betterf3.modules.done_button"), buttonWidget -> {
             this.onClose();
-            assert minecraft != null;
-            minecraft.setScreen(this.parent);
+            assert client != null;
+            client.setScreen(this.parent);
         }));
 
         this.updateButtons();
@@ -90,9 +90,9 @@ public class ModulesScreen extends Screen {
     }
 
     @Override
-    public void render(final PoseStack matrices, final int mouseX, final int mouseY, final float delta) {
+    public void render(final MatrixStack matrices, final int mouseX, final int mouseY, final float delta) {
         this.modulesListWidget.render(matrices, mouseX, mouseY, delta);
-        drawCenteredString(matrices, this.font, this.title, this.width / 2, 20, 0xFFFFFF);
+        drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 20, 0xFFFFFF);
         super.render(matrices, mouseX, mouseY, delta);
 
     }
@@ -110,8 +110,8 @@ public class ModulesScreen extends Screen {
                 BaseModule.modulesRight.add(entry.module);
             }
         }
-        assert this.minecraft != null;
-        this.minecraft.setScreen(this.parent);
+        assert this.client != null;
+        this.client.setScreen(this.parent);
         ModConfigFile.saveRunnable.run();
     }
 
@@ -129,7 +129,7 @@ public class ModulesScreen extends Screen {
      * Updates the buttons.
      */
     public void updateButtons() {
-        if (this.modulesListWidget.getSelected() != null) {
+        if (this.modulesListWidget.getSelectedOrNull() != null) {
             this.editButton.active = true;
             this.deleteButton.active = true;
         } else {

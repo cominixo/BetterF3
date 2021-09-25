@@ -1,8 +1,8 @@
 package me.treyruffy.betterf3.mixin;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.DebugScreenOverlay;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.hud.DebugHud;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraftforge.client.gui.ForgeIngameGui;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,10 +25,10 @@ public abstract class ForgeIngameGuiMixin {
      * @param ci Callback info
      */
     @Inject(remap = false, method = "renderHUDText", at = @At(value = "INVOKE", opcode = Opcodes.PUTFIELD, target =
-            "net/minecraftforge/client/gui/ForgeIngameGui$GuiOverlayDebugForge.update()V"), cancellable = true)
-    public void customDebugMenu(final int width, final int height, final PoseStack mStack, final CallbackInfo ci) {
+    "net/minecraftforge/client/gui/ForgeIngameGui$GuiOverlayDebugForge.update()V"), cancellable = true)
+    public void customDebugMenu(final int width, final int height, final MatrixStack mStack, final CallbackInfo ci) {
         // Sets up BetterF3's debug screen
-        new DebugScreenOverlay(Minecraft.getInstance()).render(mStack);
+        new DebugHud(MinecraftClient.getInstance()).render(mStack);
 
         // Cancels the rest of the code from running which replaces Forge's debug screen
         ci.cancel();

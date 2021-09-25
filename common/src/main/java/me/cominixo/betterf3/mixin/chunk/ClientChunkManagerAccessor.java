@@ -1,6 +1,6 @@
 package me.cominixo.betterf3.mixin.chunk;
 
-import net.minecraft.client.multiplayer.ClientChunkCache;
+import net.minecraft.client.world.ClientChunkManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
  * The Chunk Cache Accessor.
  */
 @SuppressWarnings("checkstyle:MethodName")
-@Mixin(ClientChunkCache.class)
+@Mixin(ClientChunkManager.class)
 public interface ClientChunkManagerAccessor {
 
 
@@ -18,5 +18,5 @@ public interface ClientChunkManagerAccessor {
      * @return The storage.
      */
     @Accessor
-    ClientChunkCache.Storage getStorage();
+    ClientChunkManager.ClientChunkMap getChunks();
 }

@@ -1,7 +1,7 @@
 package me.cominixo.betterf3.mixin.chunk;
 
 import java.util.Queue;
-import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher;
+import net.minecraft.client.render.chunk.ChunkBuilder;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
  * Access the Chunk Builder.
  */
 @SuppressWarnings("checkstyle:MethodName")
-@Mixin(ChunkRenderDispatcher.class)
+@Mixin(ChunkBuilder.class)
 public interface ChunkBuilderAccessor {
 
     /**
@@ -18,7 +18,7 @@ public interface ChunkBuilderAccessor {
      * @return The chunk batch.
      */
     @Accessor
-    int getToBatchCount();
+    int getQueuedTaskCount();
 
     /**
      * Gets the chunks to upload.
@@ -26,7 +26,7 @@ public interface ChunkBuilderAccessor {
      * @return The amount of chunks to upload.
      */
     @Accessor
-    Queue<Runnable> getToUpload();
+    Queue<Runnable> getUploadQueue();
 
     /**
      * Gets the free buffer count.
@@ -34,6 +34,6 @@ public interface ChunkBuilderAccessor {
      * @return The free buffer count.
      */
     @Accessor
-    int getFreeBufferCount();
+    int getBufferCount();
 
 }

@@ -1,25 +1,25 @@
 package me.cominixo.betterf3.config.gui.modules;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import java.util.ArrayList;
 import java.util.List;
 import me.cominixo.betterf3.modules.BaseModule;
 import me.cominixo.betterf3.modules.CoordsModule;
 import me.cominixo.betterf3.modules.FpsModule;
 import me.cominixo.betterf3.utils.Utils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiComponent;
-import net.minecraft.client.gui.components.ObjectSelectionList;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.widget.AlwaysSelectedEntryListWidget;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 
 /**
  * The Module list widget.
  */
-public class ModuleListWidget extends ObjectSelectionList<ModuleListWidget.ModuleEntry> {
+public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWidget.ModuleEntry> {
 
     /**
      * The parent screen.
@@ -41,7 +41,7 @@ public class ModuleListWidget extends ObjectSelectionList<ModuleListWidget.Modul
      * @param bottom      the bottom
      * @param entryHeight the entry height
      */
-    public ModuleListWidget(final ModulesScreen parent, final Minecraft client, final int width, final int height,
+    public ModuleListWidget(final ModulesScreen parent, final MinecraftClient client, final int width, final int height,
                             final int top, final int bottom, final int entryHeight) {
         super(client, width, height, top, bottom, entryHeight);
         this.parentScreen = parent;
@@ -53,7 +53,7 @@ public class ModuleListWidget extends ObjectSelectionList<ModuleListWidget.Modul
      * @return the scrollbar position x
      */
     protected int scrollbarPositionX() {
-        return super.getScrollbarPosition() + 30;
+        return super.getScrollbarPositionX() + 30;
     }
 
     /**
@@ -127,7 +127,7 @@ public class ModuleListWidget extends ObjectSelectionList<ModuleListWidget.Modul
      */
     public class ModuleEntry extends Entry<ModuleEntry> {
         private final ModulesScreen parent;
-        private final Minecraft client;
+        private final MinecraftClient client;
         /**
          * The Module.
          */
@@ -142,25 +142,25 @@ public class ModuleListWidget extends ObjectSelectionList<ModuleListWidget.Modul
         protected ModuleEntry(final ModulesScreen parent, final BaseModule module) {
             this.parent = parent;
             this.module = module;
-            this.client = Minecraft.getInstance();
+            this.client = MinecraftClient.getInstance();
         }
 
         // Fixes 1.17 crash
         @Override
-        public Component getNarration() {
-            return new TextComponent(this.module.toString());
+        public Text getNarration() {
+            return new LiteralText(this.module.toString());
         }
 
         /**
          * Renders the module list widget.
          *
          */
-        public void render(final PoseStack matrices, final int index, final int y, final int x, final int entryWidth, final int entryHeight,
+        public void render(final MatrixStack matrices, final int index, final int y, final int x, final int entryWidth, final int entryHeight,
                            final int mouseX, final int mouseY, final boolean hovered, final float tickDelta) {
 
-            this.client.font.draw(matrices, this.module.toString(), (float) (x + 32 + 3), (float) (y + 1), 0xffffff);
+            this.client.textRenderer.draw(matrices, this.module.toString(), (float) (x + 32 + 3), (float) (y + 1), 0xffffff);
 
-            final Component exampleText;
+            final Text exampleText;
 
             if (this.module instanceof CoordsModule coordsModule) {
                 exampleText = Utils.styledText("X", coordsModule.colorX).append(Utils.styledText("Y", coordsModule.colorY)).append(Utils.styledText("Z", coordsModule.colorZ)).append(Utils.styledText(": ", coordsModule.nameColor))
@@ -171,17 +171,17 @@ public class ModuleListWidget extends ObjectSelectionList<ModuleListWidget.Modul
             } else if (this.module.nameColor != null && this.module.valueColor != null) {
                 exampleText = Utils.styledText("Name: ", this.module.nameColor).append(Utils.styledText("Value", this.module.valueColor));
             } else {
-                exampleText = new TextComponent("");
+                exampleText = new LiteralText("");
             }
 
-            this.client.font.draw(matrices, exampleText, (float) (x + 40 + 3), (float) (y + 13), 0xffffff);
+            this.client.textRenderer.draw(matrices, exampleText, (float) (x + 40 + 3), (float) (y + 13), 0xffffff);
 
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-            this.client.getTextureManager().bindForSetup(GuiComponent.GUI_ICONS_LOCATION);
+            this.client.getTextureManager().bindTexture(DrawableHelper.GUI_ICONS_TEXTURE);
 
             if (this.client.options.touchscreen || hovered) {
-                RenderSystem.setShaderTexture(0, new ResourceLocation("textures/gui/server_selection.png"));
-                GuiComponent.fill(matrices, x, y, x + 32, y + 32, -1601138544);
+                RenderSystem.setShaderTexture(0, new Identifier("textures/gui/server_selection.png"));
+                DrawableHelper.fill(matrices, x, y, x + 32, y + 32, -1601138544);
                 RenderSystem.setShader(GameRenderer::getPositionTexShader);
                 RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                 final int v = mouseX - x;
@@ -189,17 +189,17 @@ public class ModuleListWidget extends ObjectSelectionList<ModuleListWidget.Modul
 
                 if (index > 0) {
                     if (v < 16 && w < 16) {
-                        GuiComponent.blit(matrices, x, y, 96.0F, 32.0F, 32, 32, 256, 256);
+                        DrawableHelper.drawTexture(matrices, x, y, 96.0F, 32.0F, 32, 32, 256, 256);
                     } else {
-                        GuiComponent.blit(matrices, x, y, 96.0F, 0.0F, 32, 32, 256, 256);
+                        DrawableHelper.drawTexture(matrices, x, y, 96.0F, 0.0F, 32, 32, 256, 256);
                     }
                 }
 
                 if (index < ModuleListWidget.this.moduleEntries.size() - 1) {
                     if (v < 16 && w > 16) {
-                        GuiComponent.blit(matrices, x, y, 64.0F, 32.0F, 32, 32, 256, 256);
+                        DrawableHelper.drawTexture(matrices, x, y, 64.0F, 32.0F, 32, 32, 256, 256);
                     } else {
-                        GuiComponent.blit(matrices, x, y, 64.0F, 0.0F, 32, 32, 256, 256);
+                        DrawableHelper.drawTexture(matrices, x, y, 64.0F, 0.0F, 32, 32, 256, 256);
                     }
                 }
             }

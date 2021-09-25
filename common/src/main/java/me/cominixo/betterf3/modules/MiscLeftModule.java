@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import me.cominixo.betterf3.utils.DebugLineList;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.TextColor;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.text.TextColor;
+import net.minecraft.util.Formatting;
 
 /**
  * The Misc left module.
@@ -21,7 +21,7 @@ public class MiscLeftModule extends BaseModule {
      */
     public MiscLeftModule() {
         this.defaultNameColor = TextColor.fromRgb(0xfdfd96);
-        this.defaultValueColor = TextColor.fromLegacyFormat(ChatFormatting.AQUA);
+        this.defaultValueColor = TextColor.fromFormatting(Formatting.AQUA);
 
         this.nameColor = defaultNameColor;
         this.valueColor = defaultValueColor;
@@ -37,7 +37,7 @@ public class MiscLeftModule extends BaseModule {
      *
      * @param client the Minecraft client
      */
-    public void update(final Minecraft client) {
+    public void update(final MinecraftClient client) {
         // Do nothing
     }
 

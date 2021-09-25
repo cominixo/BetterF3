@@ -2,8 +2,8 @@ package me.cominixo.betterf3.mixin;
 
 import me.cominixo.betterf3.config.GeneralOptions;
 import me.cominixo.betterf3.config.gui.ModConfigScreen;
-import net.minecraft.client.KeyboardHandler;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.Keyboard;
+import net.minecraft.client.MinecraftClient;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,9 +20,9 @@ import static me.cominixo.betterf3.utils.Utils.xPos;
 /**
  * Modifies the debug keys (f3 / f3 + m).
  */
-@Mixin(KeyboardHandler.class)
+@Mixin(Keyboard.class)
 public class KeyboardMixin {
-    @Shadow @Final private Minecraft minecraft;
+    @Shadow @Final private MinecraftClient client;
 
     /**
      * Adds the config menu by pressing f3 + m.
@@ -30,10 +30,10 @@ public class KeyboardMixin {
      * @param key key pressed with f3
      * @param cir Callback info
      */
-    @Inject(method = "handleDebugKeys", at = @At("HEAD"))
+    @Inject(method = "processDebugKeys", at = @At("HEAD"))
     public void processF3(final int key, final CallbackInfoReturnable<Boolean> cir) {
         if (key == 77) { // Key m
-            this.minecraft.setScreen(new ModConfigScreen(null));
+            this.client.setScreen(new ModConfigScreen(null));
         }
     }
 
@@ -47,12 +47,12 @@ public class KeyboardMixin {
      * @param j j
      * @param ci Callback info
      */
-    @Inject(method = "keyPress", at = @At(value = "FIELD", opcode = Opcodes.PUTFIELD, target = "net/minecraft/client" +
-            "/Options.renderDebug : Z"), cancellable = true)
+    @Inject(method = "onKey", at = @At(value = "FIELD", opcode = Opcodes.PUTFIELD, target = "net/minecraft/client" +
+            "/option/GameOptions.debugEnabled : Z"), cancellable = true)
     public void onDebugActivate(final long window, final int key, final int scancode, final int i, final int j, final CallbackInfo ci) {
 
         if (GeneralOptions.enableAnimations) {
-            if (this.minecraft.options.renderDebug) {
+            if (this.client.options.debugEnabled) {
                 closingAnimation = true;
                 ci.cancel();
             } else {

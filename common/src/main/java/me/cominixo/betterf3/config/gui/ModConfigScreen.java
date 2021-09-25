@@ -1,12 +1,12 @@
 package me.cominixo.betterf3.config.gui;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import me.cominixo.betterf3.config.gui.modules.ModulesScreen;
 import me.cominixo.betterf3.utils.PositionEnum;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.TranslatableText;
 
 /**
  * The Mod Config screen.
@@ -20,30 +20,30 @@ public class ModConfigScreen extends Screen {
      * @param parent the parent screen
      */
     public ModConfigScreen(final Screen parent) {
-        super(new TranslatableComponent("config.betterf3.title.config"));
+        super(new TranslatableText("config.betterf3.title.config"));
         this.parent = parent;
     }
 
     @Override
     public void init() {
-        final Minecraft client = Minecraft.getInstance();
+        final MinecraftClient client = MinecraftClient.getInstance();
 
-        this.addRenderableWidget(new Button(this.width / 2 - 130, this.height / 4, 120, 20, new TranslatableComponent(
-                "config.betterf3.order_left_button"), buttonWidget -> client.setScreen(new ModulesScreen(client.screen, PositionEnum.LEFT))));
-        this.addRenderableWidget(new Button(this.width / 2 + 10, this.height / 4, 120, 20, new TranslatableComponent(
-                "config.betterf3.order_right_button"), buttonWidget -> client.setScreen(new ModulesScreen(client.screen, PositionEnum.RIGHT))));
-        this.addRenderableWidget(new Button(this.width / 2 - 130, this.height / 4 - 24, 260, 20,
-                new TranslatableComponent("config.betterf3.general_settings"),
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height / 4, 120, 20, new TranslatableText(
+                "config.betterf3.order_left_button"), buttonWidget -> client.setScreen(new ModulesScreen(client.currentScreen, PositionEnum.LEFT))));
+        this.addDrawableChild(new ButtonWidget(this.width / 2 + 10, this.height / 4, 120, 20, new TranslatableText(
+                "config.betterf3.order_right_button"), buttonWidget -> client.setScreen(new ModulesScreen(client.currentScreen, PositionEnum.RIGHT))));
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height / 4 - 24, 260, 20,
+                new TranslatableText("config.betterf3.general_settings"),
                 buttonWidget -> client.setScreen(GeneralOptionsScreen.configBuilder().build())));
-        this.addRenderableWidget(new Button(this.width / 2 - 130, this.height - 50, 260, 20,
-                new TranslatableComponent("config.betterf3.modules.done_button"),
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height - 50, 260, 20,
+                new TranslatableText("config.betterf3.modules.done_button"),
                 buttonWidget -> client.setScreen(this.parent)));
     }
 
     @Override
-    public void render(final PoseStack matrices, final int mouseX, final int mouseY, final float delta) {
+    public void render(final MatrixStack matrices, final int mouseX, final int mouseY, final float delta) {
         this.renderBackground(matrices);
-        drawCenteredString(matrices, this.font, this.title, this.width / 2, 20, 16777215);
+        drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 20, 16777215);
         super.render(matrices, mouseX, mouseY, delta);
     }
 }

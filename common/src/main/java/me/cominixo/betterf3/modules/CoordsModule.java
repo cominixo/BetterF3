@@ -3,12 +3,12 @@ package me.cominixo.betterf3.modules;
 import java.util.Arrays;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.cominixo.betterf3.utils.Utils;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextColor;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.Entity;
+import net.minecraft.text.Text;
+import net.minecraft.text.TextColor;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.math.BlockPos;
 
 /**
  * The Coordinates module.
@@ -31,21 +31,21 @@ public class CoordsModule extends BaseModule {
     /**
      * The default color for the x position.
      */
-    public final TextColor defaultColorX = TextColor.fromLegacyFormat(ChatFormatting.RED);
+    public final TextColor defaultColorX = TextColor.fromFormatting(Formatting.RED);
     /**
      * The default color for the y position.
      */
-    public final TextColor defaultColorY = TextColor.fromLegacyFormat(ChatFormatting.GREEN);
+    public final TextColor defaultColorY = TextColor.fromFormatting(Formatting.GREEN);
     /**
      * The default color for the z position.
      */
-    public final TextColor defaultColorZ = TextColor.fromLegacyFormat(ChatFormatting.AQUA);
+    public final TextColor defaultColorZ = TextColor.fromFormatting(Formatting.AQUA);
 
     /**
      * Instantiates a new Coordinates module.
      */
     public CoordsModule() {
-        this.defaultNameColor = TextColor.fromLegacyFormat(ChatFormatting.RED);
+        this.defaultNameColor = TextColor.fromFormatting(Formatting.RED);
 
         this.nameColor = defaultNameColor;
         this.colorX = this.defaultColorX;
@@ -65,11 +65,11 @@ public class CoordsModule extends BaseModule {
      *
      * @param client the Minecraft client
      */
-    public void update(final Minecraft client) {
+    public void update(final MinecraftClient client) {
 
         final Entity cameraEntity = client.getCameraEntity();
 
-        final Component xyz =
+        final Text xyz =
         Utils.styledText("X", this.colorX).append(Utils.styledText("Y", this.colorY)).append(Utils.styledText("Z",
                 this.colorZ));
 
@@ -82,7 +82,7 @@ public class CoordsModule extends BaseModule {
             lines.get(0).value(Arrays.asList(xyz, Utils.styledText(cameraX, this.colorX),
                     Utils.styledText(cameraY, this.colorY), Utils.styledText(cameraZ, this.colorZ)));
 
-            final BlockPos blockPos = cameraEntity.blockPosition();
+            final BlockPos blockPos = cameraEntity.getBlockPos();
             // Block coords
             lines.get(1).value(Arrays.asList(Utils.styledText(blockPos.getX(), this.colorX),
                     Utils.styledText(blockPos.getY(), this.colorY), Utils.styledText(blockPos.getZ(), this.colorZ)));

@@ -2,10 +2,10 @@ package me.cominixo.betterf3.utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.locale.Language;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextColor;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.text.Text;
+import net.minecraft.text.TextColor;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Language;
 
 /**
  * A Debug line.
@@ -68,21 +68,21 @@ public class DebugLine {
      * @param valueColor the color of the value
      * @return the styled component
      */
-    public Component toText(final TextColor nameColor, final TextColor valueColor) {
+    public Text toText(final TextColor nameColor, final TextColor valueColor) {
         final String name = this.name();
 
-        final Component nameStyled = Utils.styledText(name, nameColor);
-        final Component valueStyled;
+        final Text nameStyled = Utils.styledText(name, nameColor);
+        final Text valueStyled;
 
-        if (this.value instanceof Component) {
-            valueStyled = (Component) this.value;
+        if (this.value instanceof Text) {
+            valueStyled = (Text) this.value;
         } else {
             valueStyled = Utils.styledText(this.value, valueColor);
         }
         if (this.value.toString().equals("")) {
             this.active = false;
         }
-        return new TranslatableComponent(this.format, nameStyled, valueStyled);
+        return new TranslatableText(this.format, nameStyled, valueStyled);
     }
 
     /**
@@ -91,7 +91,7 @@ public class DebugLine {
      * @param nameColor the key color
      * @return the stylized component
      */
-    public Component toTextCustom(final TextColor nameColor) {
+    public Text toTextCustom(final TextColor nameColor) {
         final String name = this.name();
 
         if (this.value instanceof List) {
@@ -103,9 +103,9 @@ public class DebugLine {
                 values.add(Utils.styledText(name, nameColor));
             }
             values.addAll(value);
-            return new TranslatableComponent(this.format, values.toArray()).withStyle(style -> style.withColor(nameColor));
+            return new TranslatableText(this.format, values.toArray()).styled(style -> style.withColor(nameColor));
         } else {
-            return new TranslatableComponent(this.format, name, this.value);
+            return new TranslatableText(this.format, name, this.value);
         }
     }
 
@@ -139,7 +139,7 @@ public class DebugLine {
             return "";
         }
         final Language language = Language.getInstance();
-        return language.getOrDefault("text.betterf3.line." + this.id);
+        return language.get("text.betterf3.line." + this.id);
     }
 
     /**

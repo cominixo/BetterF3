@@ -1,7 +1,7 @@
 package me.cominixo.betterf3.modules;
 
 import me.cominixo.betterf3.utils.DebugLine;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.MinecraftClient;
 
 /**
  * An Empty module.
@@ -26,7 +26,7 @@ public class EmptyModule extends BaseModule {
     }
 
     @Override
-    public void update(final Minecraft client) {
+    public void update(final MinecraftClient client) {
         lines.get(0).value("");
     }
 }

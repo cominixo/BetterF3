@@ -1,9 +1,9 @@
 package me.cominixo.betterf3.mixin.chunk;
 
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.client.renderer.ViewArea;
-import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher;
+import net.minecraft.client.render.BuiltChunkStorage;
+import net.minecraft.client.render.WorldRenderer;
+import net.minecraft.client.render.chunk.ChunkBuilder;
+import net.minecraft.client.world.ClientWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
  * Accesses the World Renderer.
  */
 @SuppressWarnings("checkstyle:MethodName")
-@Mixin(LevelRenderer.class)
+@Mixin(WorldRenderer.class)
 public interface WorldRendererAccessor {
 
 
@@ -22,7 +22,7 @@ public interface WorldRendererAccessor {
      * @return the view area
      */
     @Accessor
-    ViewArea getViewArea();
+    BuiltChunkStorage getChunks();
 
     /**
      * Gets rendered chunk count.
@@ -30,7 +30,7 @@ public interface WorldRendererAccessor {
      * @return Rendered chunks
      */
     @Invoker
-    int callCountRenderedChunks();
+    int callGetCompletedChunkCount();
 
     /**
      * Gets the view distance.
@@ -38,7 +38,7 @@ public interface WorldRendererAccessor {
      * @return the view distance
      */
     @Accessor
-    int getLastViewDistance();
+    int getViewDistance();
 
     /**
      * Gets the chunk render dispatcher.
@@ -46,7 +46,7 @@ public interface WorldRendererAccessor {
      * @return the chunk render dispatcher
      */
     @Accessor
-    ChunkRenderDispatcher getChunkRenderDispatcher();
+    ChunkBuilder getChunkBuilder();
 
     /**
      * Gets the world (level).
@@ -54,7 +54,7 @@ public interface WorldRendererAccessor {
      * @return the world
      */
     @Accessor
-    ClientLevel getLevel();
+    ClientWorld getWorld();
 
     /**
      * Gets the amount of rendered entities.
@@ -62,5 +62,5 @@ public interface WorldRendererAccessor {
      * @return the rendered entities
      */
     @Accessor
-    int getRenderedEntities();
+    int getRegularEntityCount();
 }

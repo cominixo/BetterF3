@@ -3,10 +3,10 @@ package me.cominixo.betterf3.modules;
 import java.util.Arrays;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.cominixo.betterf3.utils.Utils;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.language.I18n;
-import net.minecraft.network.chat.TextColor;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.resource.language.I18n;
+import net.minecraft.text.TextColor;
+import net.minecraft.util.Formatting;
 
 /**
  * The Sound module.
@@ -16,14 +16,14 @@ public class SoundModule extends BaseModule {
     /**
      * Total color.
      */
-    public final TextColor totalColor = TextColor.fromLegacyFormat(ChatFormatting.DARK_AQUA);
+    public final TextColor totalColor = TextColor.fromFormatting(Formatting.DARK_AQUA);
 
     /**
      * Instantiates a new Sound module.
      */
     public SoundModule() {
-        this.defaultNameColor = TextColor.fromLegacyFormat(ChatFormatting.GOLD);
-        this.defaultValueColor = TextColor.fromLegacyFormat(ChatFormatting.AQUA);
+        this.defaultNameColor = TextColor.fromFormatting(Formatting.GOLD);
+        this.defaultValueColor = TextColor.fromFormatting(Formatting.AQUA);
 
         this.nameColor = defaultNameColor;
         this.valueColor = defaultValueColor;
@@ -37,7 +37,7 @@ public class SoundModule extends BaseModule {
      *
      * @param client the Minecraft client
      */
-    public void update(final Minecraft client) {
+    public void update(final MinecraftClient client) {
 
         /* SoundManagerAccessor soundManagerAccessor = (SoundManagerAccessor) client.getSoundManager();
         SoundSystemAccessor soundSystemAccessor = (SoundSystemAccessor) soundManagerAccessor.getSoundSystem();
@@ -51,8 +51,8 @@ public class SoundModule extends BaseModule {
                 debugString.substring(8).substring(0, debugString.indexOf(" ")).replace(" +", "").split("/");
         final String[] streamingHandlerList = debugString.substring(debugString.indexOf("+") + 1).replace(" ", "").split("/");
 
-        final String playing = I18n.get("text.betterf3.line.playing");
-        final String maximum = I18n.get("text.betterf3.line.maximum");
+        final String playing = I18n.translate("text.betterf3.line.playing");
+        final String maximum = I18n.translate("text.betterf3.line.maximum");
 
         /* // Sound
         lines.get(0).value(Arrays.asList(Utils.styledText(playing, valueColor), Utils.styledText(maximum, totalColor),

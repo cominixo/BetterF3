@@ -2,8 +2,8 @@ package me.cominixo.betterf3.utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextColor;
+import net.minecraft.text.Text;
+import net.minecraft.text.TextColor;
 
 /**
  * The Debug line list.
@@ -38,9 +38,9 @@ public class DebugLineList extends DebugLine {
      * @param valueColor the value color
      * @return the list
      */
-    public List<Component> toTexts(final TextColor nameColor, final TextColor valueColor) {
+    public List<Text> toTexts(final TextColor nameColor, final TextColor valueColor) {
 
-        final List<Component> texts = new ArrayList<>();
+        final List<Text> texts = new ArrayList<>();
 
         for (final String v : this.values) {
             texts.add(Utils.formattedFromString(v, nameColor, valueColor));

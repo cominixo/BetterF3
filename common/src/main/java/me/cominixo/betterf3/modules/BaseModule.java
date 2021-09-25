@@ -6,10 +6,10 @@ import java.util.Optional;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.cominixo.betterf3.utils.DebugLineList;
 import me.cominixo.betterf3.utils.PositionEnum;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.language.I18n;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextColor;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.resource.language.I18n;
+import net.minecraft.text.Text;
+import net.minecraft.text.TextColor;
 
 /**
  * The Base module.
@@ -124,8 +124,8 @@ public abstract class BaseModule {
      * @param reducedDebug has reduced debug on
      * @return the lines formatted
      */
-    public List<Component> linesFormatted(final boolean reducedDebug) {
-        final List<Component> linesString = new ArrayList<>();
+    public List<Text> linesFormatted(final boolean reducedDebug) {
+        final List<Text> linesString = new ArrayList<>();
 
         for (final DebugLine line : this.lines) {
             if (reducedDebug && !line.inReducedDebug) {
@@ -186,7 +186,7 @@ public abstract class BaseModule {
      * @return localized module name
      */
     public String toString() {
-        return I18n.get("text.betterf3.module." + this.id);
+        return I18n.translate("text.betterf3.module." + this.id);
     }
 
     /**
@@ -203,5 +203,5 @@ public abstract class BaseModule {
      *
      * @param client the Minecraft client
      */
-    public abstract void update(Minecraft client);
+    public abstract void update(MinecraftClient client);
 }

@@ -9,8 +9,7 @@ import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import me.shedaniel.clothconfig2.gui.entries.DropdownBoxEntry;
 import me.shedaniel.clothconfig2.impl.builders.DropdownMenuBuilder;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.text.TranslatableText;
 
 /**
  * The Add Module screen.
@@ -37,14 +36,14 @@ public final class AddModuleScreen {
 
         final ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
-        final ConfigCategory general = builder.getOrCreateCategory(new TranslatableComponent("config.betterf3" +
+        final ConfigCategory general = builder.getOrCreateCategory(new TranslatableText("config.betterf3" +
                 ".category.general"));
 
-        final DropdownBoxEntry<BaseModule> dropdownEntry = entryBuilder.startDropdownMenu(new TranslatableComponent(
+        final DropdownBoxEntry<BaseModule> dropdownEntry = entryBuilder.startDropdownMenu(new TranslatableText(
                 "config.betterf3.add_button.module_name"),
                         DropdownMenuBuilder.TopCellElementBuilder.of(new EmptyModule(true),
                                 BaseModule::module,
-                                object -> new TextComponent(object.toString()))).setSelections(BaseModule.allModules)
+                                object -> new TranslatableText(object.toString()))).setSelections(BaseModule.allModules)
                 .setSaveConsumer((BaseModule newValue) -> {
                     try {
                         parent.modulesListWidget.addModule(newValue.getClass().getDeclaredConstructor().newInstance());

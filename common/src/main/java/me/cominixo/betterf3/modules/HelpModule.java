@@ -2,10 +2,10 @@ package me.cominixo.betterf3.modules;
 
 import me.cominixo.betterf3.utils.DebugLine;
 import me.cominixo.betterf3.utils.Utils;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.language.I18n;
-import net.minecraft.network.chat.TextColor;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.resource.language.I18n;
+import net.minecraft.text.TextColor;
+import net.minecraft.util.Formatting;
 
 /**
  * The Help module.
@@ -17,7 +17,7 @@ public class HelpModule extends BaseModule {
      */
     public HelpModule() {
         this.defaultNameColor = TextColor.fromRgb(0xfdfd96);
-        this.defaultValueColor = TextColor.fromLegacyFormat(ChatFormatting.AQUA);
+        this.defaultValueColor = TextColor.fromFormatting(Formatting.AQUA);
 
         this.nameColor = defaultNameColor;
         this.valueColor = defaultValueColor;
@@ -36,20 +36,20 @@ public class HelpModule extends BaseModule {
      *
      * @param client the Minecraft client
      */
-    public void update(final Minecraft client) {
+    public void update(final MinecraftClient client) {
 
-        final String visible = I18n.get("text.betterf3.line.visible");
-        final String hidden = I18n.get("text.betterf3.line.hidden");
+        final String visible = I18n.translate("text.betterf3.line.visible");
+        final String hidden = I18n.translate("text.betterf3.line.hidden");
 
         // Pie Graph (Shift+F3)
-        lines.get(0).value(client.options.renderDebugCharts ? Utils.styledText(visible, TextColor.fromLegacyFormat(ChatFormatting.GREEN))
-                : Utils.styledText(hidden, TextColor.fromLegacyFormat(ChatFormatting.RED)));
+        lines.get(0).value(client.options.debugProfilerEnabled ? Utils.styledText(visible, TextColor.fromFormatting(Formatting.GREEN))
+                : Utils.styledText(hidden, TextColor.fromFormatting(Formatting.RED)));
 
         // FPS / TPS (Alt+F3)
-        lines.get(1).value(client.options.renderFpsChart ? Utils.styledText(visible, TextColor.fromLegacyFormat(ChatFormatting.GREEN))
-                : Utils.styledText(hidden, TextColor.fromLegacyFormat(ChatFormatting.RED)));
+        lines.get(1).value(client.options.debugTpsEnabled ? Utils.styledText(visible, TextColor.fromFormatting(Formatting.GREEN))
+                : Utils.styledText(hidden, TextColor.fromFormatting(Formatting.RED)));
 
         // For help
-        lines.get(2).value(I18n.get("text.betterf3.line.help_press"));
+        lines.get(2).value(I18n.translate("text.betterf3.line.help_press"));
     }
 }

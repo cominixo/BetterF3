@@ -2,15 +2,15 @@ package me.cominixo.betterf3.utils;
 
 import java.util.Arrays;
 import java.util.Map;
-import net.minecraft.ChatFormatting;
-import net.minecraft.Util;
-import net.minecraft.client.resources.language.I18n;
-import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TextColor;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.client.resource.language.I18n;
+import net.minecraft.state.property.Property;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
+import net.minecraft.text.TextColor;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Util;
+import net.minecraft.util.math.Direction;
 import org.apache.commons.lang3.text.WordUtils;
 
 /**
@@ -65,13 +65,13 @@ public final class Utils {
      * @param percent the percent
      * @return the percent color
      */
-    public static ChatFormatting percentColor(final int percent) {
+    public static Formatting percentColor(final int percent) {
         if (percent >= 90) {
-            return ChatFormatting.RED;
+            return Formatting.RED;
         } else if (percent >= 60) {
-            return ChatFormatting.YELLOW;
+            return Formatting.YELLOW;
         } else {
-            return ChatFormatting.GREEN;
+            return Formatting.GREEN;
         }
     }
 
@@ -84,10 +84,10 @@ public final class Utils {
     public static String facingString(final Direction facing) {
 
         return switch (facing) {
-            case NORTH -> I18n.get("text.betterf3.line.negative_z");
-            case SOUTH -> I18n.get("text.betterf3.line.positive_z");
-            case WEST -> I18n.get("text.betterf3.line.negative_x");
-            case EAST -> I18n.get("text.betterf3.line.positive_x");
+            case NORTH -> I18n.translate("text.betterf3.line.negative_z");
+            case SOUTH -> I18n.translate("text.betterf3.line.positive_z");
+            case WEST -> I18n.translate("text.betterf3.line.negative_x");
+            case EAST -> I18n.translate("text.betterf3.line.positive_x");
             default -> "";
         };
     }
@@ -99,11 +99,11 @@ public final class Utils {
      * @param color  the color
      * @return the styled text
      */
-    public static MutableComponent styledText(Object string, final TextColor color) {
+    public static MutableText styledText(Object string, final TextColor color) {
         if (string == null) {
             string = "";
         }
-        return new TextComponent(string.toString()).withStyle(style -> style.withColor(color));
+        return new LiteralText(string.toString()).styled(style -> style.withColor(color));
     }
 
     /**
@@ -124,18 +124,18 @@ public final class Utils {
      * @param valueColor the value color
      * @return the formatted string
      */
-    public static Component formattedFromString(final String string, final TextColor nameColor,
+    public static Text formattedFromString(final String string, final TextColor nameColor,
                                                 final TextColor valueColor) {
         final String[] split = string.split(":");
 
         if (string.contains(":")) {
-            final MutableComponent name = Utils.styledText(split[0], nameColor);
-            final MutableComponent value = Utils.styledText(String.join(":", Arrays.asList(split).subList(1,
+            final MutableText name = Utils.styledText(split[0], nameColor);
+            final MutableText value = Utils.styledText(String.join(":", Arrays.asList(split).subList(1,
             split.length)), valueColor);
 
-            return name.append(new TextComponent(":")).append(value);
+            return name.append(new LiteralText(":")).append(value);
         } else {
-            return new TextComponent(string);
+            return new LiteralText(string);
         }
     }
 
@@ -149,12 +149,12 @@ public final class Utils {
         final Property<?> key = propEntry.getKey();
         final Comparable<?> value = propEntry.getValue();
 
-        String newValue = Util.getPropertyName(key, value);
+        String newValue = Util.getValueAsString(key, value);
 
         if (Boolean.TRUE.equals(value)) {
-            newValue = ChatFormatting.GREEN + newValue;
+            newValue = Formatting.GREEN + newValue;
         } else if (Boolean.FALSE.equals(value)) {
-            newValue = ChatFormatting.RED + newValue;
+            newValue = Formatting.RED + newValue;
         }
         return key.getName() + ": " + newValue;
     }
