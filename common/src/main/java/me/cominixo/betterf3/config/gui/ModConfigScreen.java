@@ -34,7 +34,7 @@ public class ModConfigScreen extends Screen {
                 "config.betterf3.order_right_button"), buttonWidget -> client.setScreen(new ModulesScreen(client.currentScreen, PositionEnum.RIGHT))));
         this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height / 4 - 24, 260, 20,
                 new TranslatableText("config.betterf3.general_settings"),
-                buttonWidget -> client.setScreen(GeneralOptionsScreen.configBuilder().build())));
+                buttonWidget -> client.setScreen(GeneralOptionsScreen.configBuilder(client.currentScreen).build())));
         this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height - 50, 260, 20,
                 new TranslatableText("config.betterf3.modules.done_button"),
                 buttonWidget -> client.setScreen(this.parent)));

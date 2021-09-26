@@ -28,7 +28,11 @@ loom {
 }
 
 architectury {
-	common()
+	if (rootProject.forge_enabled.toBoolean()) {
+		common()
+	} else {
+		common(false)
+	}
 }
 
 afterEvaluate {

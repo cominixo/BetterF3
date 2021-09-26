@@ -28,3 +28,5 @@ jobs:
           path: |
             build/reports/
             **/build/reports/
+            build/libs
+            **/build/libs/

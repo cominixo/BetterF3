@@ -5,7 +5,7 @@ import me.cominixo.betterf3.config.ModConfigFile;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.TranslatableText;
 
 /**
@@ -22,10 +22,10 @@ public final class GeneralOptionsScreen {
      *
      * @return the config builder
      */
-    public static ConfigBuilder configBuilder() {
+    public static ConfigBuilder configBuilder(final Screen parent) {
 
         final ConfigBuilder builder = ConfigBuilder.create()
-                .setParentScreen(MinecraftClient.getInstance().currentScreen)
+                .setParentScreen(parent)
                 .setTitle(new TranslatableText("config.betterf3.title"));
 
         builder.setSavingRunnable(ModConfigFile.saveRunnable);

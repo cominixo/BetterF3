@@ -226,7 +226,7 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
                 }
             }
 
-            this.parent.select(this);
+            ModuleListWidget.this.setSelected(this);
             return false;
         }
 
