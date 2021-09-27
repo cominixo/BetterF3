@@ -20,7 +20,7 @@ public class EmptyModule extends BaseModule {
      */
     public EmptyModule(final boolean invisible) {
         super(invisible);
-        lines.add(new DebugLine("", "", false));
+        lines.add(new DebugLine("nothing", "", false));
 
         lines.get(0).inReducedDebug = true;
     }

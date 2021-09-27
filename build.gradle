@@ -1,6 +1,6 @@
 plugins {
 	id "architectury-plugin" version "3.4-SNAPSHOT" // Uses Architectury plugin https://github.com/architectury/architectury-plugin
-	id "dev.architectury.loom" version "0.10.0.176" apply false // Uses Architectury Loom
+	id "dev.architectury.loom" version "0.10.0-SNAPSHOT" apply false // Uses Architectury Loom
 	  // (fork of Fabric Loom) https://github.com/architectury/architectury-loom - does not apply to root project
 	id "net.kyori.indra.git" version "2.0.6" // Uses Indra Git plugin
 	id "net.kyori.indra.checkstyle" version "2.0.6" // Uses Indra Checkstyle plugin

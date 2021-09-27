@@ -1,5 +1,8 @@
 package me.cominixo.betterf3.mixin;
 
+import static me.cominixo.betterf3.utils.Utils.START_X_POS;
+import static me.cominixo.betterf3.utils.Utils.closingAnimation;
+import static me.cominixo.betterf3.utils.Utils.xPos;
 import me.cominixo.betterf3.config.GeneralOptions;
 import me.cominixo.betterf3.config.gui.ModConfigScreen;
 import net.minecraft.client.Keyboard;
@@ -12,10 +15,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import static me.cominixo.betterf3.utils.Utils.START_X_POS;
-import static me.cominixo.betterf3.utils.Utils.closingAnimation;
-import static me.cominixo.betterf3.utils.Utils.xPos;
 
 /**
  * Modifies the debug keys (f3 / f3 + m).
@@ -30,7 +29,7 @@ public class KeyboardMixin {
      * @param key key pressed with f3
      * @param cir Callback info
      */
-    @Inject(method = "processDebugKeys", at = @At("HEAD"))
+    @Inject(method = "processF3", at = @At("HEAD"))
     public void processF3(final int key, final CallbackInfoReturnable<Boolean> cir) {
         if (key == 77) { // Key m
             this.client.setScreen(new ModConfigScreen(null));

@@ -2,6 +2,7 @@ package me.cominixo.betterf3.modules;
 
 import me.cominixo.betterf3.utils.DebugLine;
 import net.minecraft.SharedConstants;
+import net.minecraft.client.ClientBrandRetriever;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
@@ -31,8 +32,7 @@ public class MinecraftModule extends BaseModule {
      * @param client the Minecraft client
      */
     public void update(final MinecraftClient client) {
-        //TODO Fix ClientBrandRetriever.getClientModName() on forge - disabled on both forge and fabric
         lines.get(0).value(SharedConstants.getGameVersion().getName() + " (" + client.getGameVersion() +
-                "/" + /*ClientBrandRetriever.getClientModName() +*/ ("release".equalsIgnoreCase(client.getVersionType()) ? "" : "/" + client.getVersionType()) + ")");
+                "/" + ClientBrandRetriever.getClientModName() + ("release".equalsIgnoreCase(client.getVersionType()) ? "" : "/" + client.getVersionType()) + ")");
     }
 }

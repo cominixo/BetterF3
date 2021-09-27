@@ -183,5 +183,8 @@
   "text.betterf3.line.block_states": "Block States",
   "text.betterf3.line.block_tags": "Block Tags",
   "text.betterf3.line.fluid_states": "Fluid States",
-  "text.betterf3.line.fluid_tags": "Fluid Tags"
+  "text.betterf3.line.fluid_tags": "Fluid Tags",
+
+  "text.betterf3.line.nothing": "Blank Line",
+  "text.betterf3.line.nothing2": "Another Blank Line"
 }
