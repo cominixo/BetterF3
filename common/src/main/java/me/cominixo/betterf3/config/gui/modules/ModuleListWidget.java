@@ -22,9 +22,9 @@ import net.minecraft.util.Identifier;
 public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWidget.ModuleEntry> {
 
     /**
-     * The parent screen.
+     * The modules screen.
      */
-    final ModulesScreen parentScreen;
+    final ModulesScreen modulesScreen;
     /**
      * The Module entries.
      */
@@ -33,18 +33,18 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
     /**
      * Instantiates a new Module list widget.
      *
-     * @param parent      the parent screen
-     * @param client      the Minecraft client
-     * @param width       the width
-     * @param height      the height
-     * @param top         the top
-     * @param bottom      the bottom
-     * @param entryHeight the entry height
+     * @param modulesScreen the module screen
+     * @param client        the Minecraft client
+     * @param width         the width
+     * @param height        the height
+     * @param top           the top
+     * @param bottom        the bottom
+     * @param entryHeight   the entry height
      */
-    public ModuleListWidget(final ModulesScreen parent, final MinecraftClient client, final int width, final int height,
-                            final int top, final int bottom, final int entryHeight) {
+    public ModuleListWidget(final ModulesScreen modulesScreen, final MinecraftClient client, final int width,
+                            final int height, final int top, final int bottom, final int entryHeight) {
         super(client, width, height, top, bottom, entryHeight);
-        this.parentScreen = parent;
+        this.modulesScreen = modulesScreen;
     }
 
     /**
@@ -105,7 +105,7 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
      * @param module the module
      */
     public void addModule(final BaseModule module) {
-        final ModuleEntry entry = new ModuleEntry(this.parentScreen, module);
+        final ModuleEntry entry = new ModuleEntry(this.modulesScreen, module);
         this.moduleEntries.add(entry);
         this.addEntry(entry);
     }
@@ -119,6 +119,7 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
         final ModuleEntry entry = this.moduleEntries.get(index);
         this.moduleEntries.remove(entry);
         this.removeEntry(entry);
+        this.modulesScreen.updateButtons();
         //BaseModule.modules.remove(index);
     }
 
@@ -126,7 +127,7 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
      * A module entry.
      */
     public class ModuleEntry extends Entry<ModuleEntry> {
-        private final ModulesScreen parent;
+        private final ModulesScreen modulesScreen;
         private final MinecraftClient client;
         /**
          * The Module.
@@ -136,11 +137,11 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
         /**
          * Instantiates a new Module entry.
          *
-         * @param parent the parent screen
+         * @param modulesScreen the module screen
          * @param module the module
          */
-        protected ModuleEntry(final ModulesScreen parent, final BaseModule module) {
-            this.parent = parent;
+        protected ModuleEntry(final ModulesScreen modulesScreen, final BaseModule module) {
+            this.modulesScreen = modulesScreen;
             this.module = module;
             this.client = MinecraftClient.getInstance();
         }
@@ -210,11 +211,11 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
          */
 
         public boolean mouseClicked(final double mouseX, final double mouseY, final int button) {
-            final double d = mouseX - (double) this.parent.modulesListWidget.getRowLeft();
+            final double d = mouseX - (double) this.modulesScreen.modulesListWidget.getRowLeft();
             final double e =
                     mouseY - (double) ModuleListWidget.this.getRowTop(ModuleListWidget.this.children().indexOf(this));
             if (d <= 32.0D) {
-                final int i = this.parent.modulesListWidget.children().indexOf(this);
+                final int i = this.modulesScreen.modulesListWidget.children().indexOf(this);
                 if (d < 16.0D && e < 16.0D && i > 0) {
                     this.swapEntries(i, i - 1);
                     return true;
@@ -226,7 +227,7 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
                 }
             }
 
-            ModuleListWidget.this.setSelected(this);
+            this.modulesScreen.select(this);
             return false;
         }
 
@@ -239,9 +240,9 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
 
             /* this.screen.modulesListWidget.setModules(moduleEntries);
             ModuleEntry entry = this.screen.modulesListWidget.children().get(j); */
-            this.parent.modulesListWidget.setSelected(temp);
-            this.parent.updateButtons();
-            this.parent.modulesListWidget.updateModules();
+            this.modulesScreen.modulesListWidget.setSelected(temp);
+            this.modulesScreen.updateButtons();
+            this.modulesScreen.modulesListWidget.updateModules();
 
         }
 
