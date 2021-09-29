@@ -120,6 +120,9 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
         this.moduleEntries.remove(entry);
         this.removeEntry(entry);
         this.modulesScreen.updateButtons();
+        if (this.getScrollAmount() > this.getMaxScroll()) {
+            this.setScrollAmount(this.getMaxScroll());
+        }
         //BaseModule.modules.remove(index);
     }
 

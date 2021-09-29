@@ -77,7 +77,7 @@ public class LocationModule extends BaseModule {
             lines.get(7).value(client.world.getRegistryManager().get(Registry.BIOME_KEY).getId(client.world.getBiome(blockPos)));
 
             final World serverWorld = integratedServer != null ? integratedServer.getWorld(client.world.getRegistryKey()) : client.world;
-            if (client.world.getChunkManager().isChunkLoaded(blockPos.getX(), blockPos.getZ())) {
+            if (client.world.isChunkLoaded(blockPos.getX(), blockPos.getZ())) {
                 final WorldChunk clientChunk = client.world.getChunk(chunkPos.x, chunkPos.z);
                 if (clientChunk.isEmpty()) {
                     chunkLightString = I18n.translate("text.betterf3.line.waiting_chunk");
