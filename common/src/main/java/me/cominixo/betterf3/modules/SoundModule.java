@@ -30,6 +30,7 @@ public class SoundModule extends BaseModule {
 
         lines.add(new DebugLine("sounds", "format.betterf3.total", true));
         lines.add(new DebugLine("ambient_sounds", "format.betterf3.total", true));
+        lines.add(new DebugLine("mood"));
     }
 
     /**
@@ -71,6 +72,10 @@ public class SoundModule extends BaseModule {
         lines.get(1).value(Arrays.asList(Utils.styledText(playing, valueColor), Utils.styledText(maximum,
                 this.totalColor), Utils.styledText(streamingHandlerList[0], valueColor),
                 Utils.styledText(streamingHandlerList[1], this.totalColor)));
+
+        // Mood
+        assert client.player != null;
+        lines.get(2).value(Math.round(client.player.getMoodPercentage() * 100.0F) + "%");
 
     }
 

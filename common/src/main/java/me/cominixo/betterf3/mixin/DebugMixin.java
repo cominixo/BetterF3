@@ -14,6 +14,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Util;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -200,7 +201,22 @@ public abstract class DebugMixin {
     @Inject(method = "render", at = @At("HEAD"))
     public void renderFontScaleBefore(final MatrixStack matrices, final CallbackInfo ci) {
         matrices.push();
-        matrices.scale((float) GeneralOptions.fontScale, (float) GeneralOptions.fontScale, 1F);
+        if (!GeneralOptions.disableMod) {
+            matrices.scale((float) GeneralOptions.fontScale, (float) GeneralOptions.fontScale, 1F);
+        }
+    }
+
+    /**
+     * Fixes the font scale.
+     *
+     * @param matrices matrixStack
+     * @param ci CallbackInfo
+     */
+    @Inject(method = "render", at = @At(value = "FIELD", opcode = Opcodes.PUTFIELD, target = "Lnet/minecraft/client/option/GameOptions;debugTpsEnabled:Z"))
+    public void renderFontScaleRightAfter(final MatrixStack matrices, final CallbackInfo ci) {
+        if (!GeneralOptions.disableMod) {
+            matrices.scale(1F, 1F, 1F);
+        }
     }
 
     /**
