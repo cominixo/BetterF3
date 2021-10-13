@@ -22,7 +22,7 @@ public class KeyboardMixin {
     @Inject(method = "processF3", at = @At("HEAD"))
     public void processF3(int key, CallbackInfoReturnable<Boolean> cir) {
         if (key == 77) {
-            client.openScreen(new ModConfigScreen());
+            client.openScreen(new ModConfigScreen(null));
         }
     }
 
