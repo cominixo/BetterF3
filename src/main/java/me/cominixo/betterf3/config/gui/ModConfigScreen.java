@@ -22,11 +22,11 @@ public class ModConfigScreen extends Screen {
         MinecraftClient client = MinecraftClient.getInstance();
 
 
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height/4, 120, 20, new TranslatableText("config.bettef3.order_left_button"), (buttonWidget) -> client.openScreen(new ModulesScreen(client.currentScreen, PositionEnum.LEFT))));
-        this.addDrawableChild(new ButtonWidget(this.width / 2 + 10, this.height/4, 120, 20, new TranslatableText("config.bettef3.order_right_button"), (buttonWidget) -> client.openScreen(new ModulesScreen(client.currentScreen, PositionEnum.RIGHT))));
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height/4 - 24, 260, 20, new TranslatableText("config.bettef3.general_settings"), (buttonWidget) -> client.openScreen(GeneralOptionsScreen.getConfigBuilder().build())));
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height/4, 120, 20, new TranslatableText("config.bettef3.order_left_button"), (buttonWidget) -> client.setScreen(new ModulesScreen(client.currentScreen, PositionEnum.LEFT))));
+        this.addDrawableChild(new ButtonWidget(this.width / 2 + 10, this.height/4, 120, 20, new TranslatableText("config.bettef3.order_right_button"), (buttonWidget) -> client.setScreen(new ModulesScreen(client.currentScreen, PositionEnum.RIGHT))));
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height/4 - 24, 260, 20, new TranslatableText("config.bettef3.general_settings"), (buttonWidget) -> client.setScreen(GeneralOptionsScreen.getConfigBuilder().build())));
 
-        this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height - 50, 260, 20, new TranslatableText("config.betterf3.modules.done_button"), (buttonWidget) -> client.openScreen(parent)));
+        this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height - 50, 260, 20, new TranslatableText("config.betterf3.modules.done_button"), (buttonWidget) -> client.setScreen(parent)));
 
 
     }

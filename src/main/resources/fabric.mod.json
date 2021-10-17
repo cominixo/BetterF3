@@ -22,7 +22,7 @@
     "betterf3.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.11.3",
+    "fabricloader": ">=0.12.2",
     "minecraft": "1.17.*"
   },
   "recommends": {

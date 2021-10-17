@@ -1,5 +1,6 @@
 package me.cominixo.betterf3.config.gui.modules;
 
+import com.google.common.eventbus.Subscribe;
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.cominixo.betterf3.modules.BaseModule;
 import me.cominixo.betterf3.modules.CoordsModule;
@@ -61,7 +62,12 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
     }
 
     public void addModule(BaseModule module) {
-        ModuleEntry entry = new ModuleEntry(this.screen, module);
+        ModuleEntry entry = new ModuleEntry(this.screen, module) {
+            @Override
+            public Text getNarration() {
+                return null;
+            }
+        };
         this.moduleEntries.add(entry);
         this.addEntry(entry);
     }
@@ -73,7 +79,7 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
         //BaseModule.modules.remove(index);
     }
 
-    public class ModuleEntry extends AlwaysSelectedEntryListWidget.Entry<ModuleEntry> {
+    public abstract class ModuleEntry extends AlwaysSelectedEntryListWidget.Entry<ModuleEntry> {
         private final ModulesScreen screen;
         private final MinecraftClient client;
         public final BaseModule module;
@@ -84,7 +90,7 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
             this.client = MinecraftClient.getInstance();
         }
 
-        @Override
+        @Subscribe
         public Text method_37006 () {
             return new LiteralText(this.module.toString());
         }
