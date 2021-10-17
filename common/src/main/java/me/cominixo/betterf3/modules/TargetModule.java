@@ -37,12 +37,12 @@ public class TargetModule extends BaseModule {
         lines.add(new DebugLine("id_block"));
         lines.add(new DebugLineList("block_states"));
         lines.add(new DebugLineList("block_tags"));
-        lines.add(new DebugLine(""));
+        lines.add(new DebugLine("blank"));
         lines.add(new DebugLine("targeted_fluid"));
         lines.add(new DebugLine("id_fluid"));
         lines.add(new DebugLineList("fluid_states"));
         lines.add(new DebugLineList("fluid_tags"));
-        lines.add(new DebugLine(""));
+        lines.add(new DebugLine("blank2"));
         lines.add(new DebugLine("targeted_entity"));
     }
 

@@ -37,4 +37,4 @@ side = "BOTH"
 [[dependencies.betterf3]]
 modId = "cloth_config"
 versionRange = "[5.0.38,)"
-mandatory = false
+mandatory = true

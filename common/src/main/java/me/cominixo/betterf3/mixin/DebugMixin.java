@@ -1,19 +1,29 @@
 package me.cominixo.betterf3.mixin;
 
 import com.google.common.base.Strings;
+import com.mojang.blaze3d.systems.RenderSystem;
 import java.util.ArrayList;
 import java.util.List;
 import me.cominixo.betterf3.config.GeneralOptions;
 import me.cominixo.betterf3.modules.BaseModule;
 import me.cominixo.betterf3.modules.MiscLeftModule;
 import me.cominixo.betterf3.modules.MiscRightModule;
+import me.cominixo.betterf3.utils.PositionEnum;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.hud.DebugHud;
+import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.BufferRenderer;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Util;
+import net.minecraft.util.math.Matrix4f;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,7 +36,6 @@ import static me.cominixo.betterf3.utils.Utils.START_X_POS;
 import static me.cominixo.betterf3.utils.Utils.closingAnimation;
 import static me.cominixo.betterf3.utils.Utils.lastAnimationUpdate;
 import static me.cominixo.betterf3.utils.Utils.xPos;
-import static net.minecraft.client.gui.DrawableHelper.fill;
 
 /**
  * The Debug Screen Overlay.
@@ -125,6 +134,8 @@ public abstract class DebugMixin {
 
         final List<Text> list = this.newRightText();
 
+        final VertexConsumerProvider.Immediate immediate = this.immediate(PositionEnum.RIGHT, list, matrixStack);
+
         for (int i = 0; i < list.size(); i++) {
 
             if (!Strings.isNullOrEmpty(list.get(i).getString())) {
@@ -137,18 +148,97 @@ public abstract class DebugMixin {
                 }
                 final int y = 2 + height * i;
 
-                fill(matrixStack, windowWidth - 1, y - 1, windowWidth + width + 1, y + height - 1, GeneralOptions.backgroundColor);
-
-                if (GeneralOptions.shadowText) {
-                    this.textRenderer.drawWithShadow(matrixStack, list.get(i), windowWidth, (float) y, 0xE0E0E0);
-                } else {
-                    this.textRenderer.draw(matrixStack, list.get(i), windowWidth, (float) y, 0xE0E0E0);
-                }
+                this.textRenderer.draw(list.get(i), windowWidth, y, 0xE0E0E0, GeneralOptions.shadowText, matrixStack.peek().getModel(), immediate, false, 0, 15728880);
             }
         }
+        immediate.draw();
+
         ci.cancel();
     }
 
+    /**
+     * Lets us draw in batches.
+     *
+     * @param pos The position
+     * @param list The list of Text
+     * @param matrixStack The MatrixStack
+     * @return VertexConsumerProvider
+     */
+    public VertexConsumerProvider.Immediate immediate(final PositionEnum pos, final List<Text> list,
+                                                      final MatrixStack matrixStack) {
+
+        final float f = (float) (GeneralOptions.backgroundColor >> 24 & 255) / 255.0F;
+        final float g = (float) (GeneralOptions.backgroundColor >> 16 & 255) / 255.0F;
+        final float h = (float) (GeneralOptions.backgroundColor >> 8 & 255) / 255.0F;
+        final float k = (float) (GeneralOptions.backgroundColor & 255) / 255.0F;
+        final BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
+        RenderSystem.enableBlend();
+        RenderSystem.disableTexture();
+        RenderSystem.defaultBlendFunc();
+        RenderSystem.setShader(GameRenderer::getPositionColorShader);
+        bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
+
+        for (int i = 0; i < list.size(); i++) {
+            final int height = 9;
+            final int width = this.textRenderer.getWidth(list.get(i).getString());
+            final int y = 2 + height * i;
+
+            int x1;
+            int x2;
+            int y1;
+            int y2;
+            int j;
+
+            if (pos == PositionEnum.RIGHT) {
+                int windowWidth = (int) (this.client.getWindow().getScaledWidth() / GeneralOptions.fontScale) - 2 - width;
+                if (GeneralOptions.enableAnimations) {
+                    windowWidth += xPos;
+                }
+
+                x1 = windowWidth - 1;
+                x2 = windowWidth + width + 1;
+                y1 = y - 1;
+                y2 = y + height - 1;
+            } else {
+                int xPosLeft = 2;
+
+                if (GeneralOptions.enableAnimations) {
+                    xPosLeft -= xPos;
+                }
+                x1 = 1 + xPosLeft;
+                x2 = width + 3 + xPosLeft;
+                y1 = y - 1;
+                y2 = y + height - 1;
+            }
+
+            final Matrix4f matrix = matrixStack.peek().getModel();
+
+            if (x1 < x2) {
+                j = x1;
+                x1 = x2;
+                x2 = j;
+            }
+
+            if (y1 < y2) {
+                j = y1;
+                y1 = y2;
+                y2 = j;
+            }
+
+            bufferBuilder.vertex(matrix, (float) x1, (float) y2, 0.0F).color(g, h, k, f).next();
+            bufferBuilder.vertex(matrix, (float) x2, (float) y2, 0.0F).color(g, h, k, f).next();
+            bufferBuilder.vertex(matrix, (float) x2, (float) y1, 0.0F).color(g, h, k, f).next();
+            bufferBuilder.vertex(matrix, (float) x1, (float) y1, 0.0F).color(g, h, k, f).next();
+
+        }
+        bufferBuilder.end();
+        BufferRenderer.draw(bufferBuilder);
+        RenderSystem.enableTexture();
+        RenderSystem.disableBlend();
+
+        return VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
+
+    }
 
     /**
      * Renders the text on the left side of the screen.
@@ -164,13 +254,13 @@ public abstract class DebugMixin {
         }
 
         final List<Text> list = this.newLeftText();
+        final VertexConsumerProvider.Immediate immediate = this.immediate(PositionEnum.LEFT, list, matrixStack);
 
         for (int i = 0; i < list.size(); i++) {
 
             if (!Strings.isNullOrEmpty(list.get(i).getString())) {
 
                 final int height = 9;
-                final int width = this.textRenderer.getWidth(list.get(i).getString());
                 final int y = 2 + height * i;
                 int xPosLeft = 2;
 
@@ -178,18 +268,12 @@ public abstract class DebugMixin {
                     xPosLeft -= xPos;
                 }
 
-                fill(matrixStack, 1 + xPosLeft, y - 1, width + 3 + xPosLeft, y + height - 1, GeneralOptions.backgroundColor);
-
-                if (GeneralOptions.shadowText) {
-                    this.textRenderer.drawWithShadow(matrixStack, list.get(i), xPosLeft, (float) y, 0xE0E0E0);
-                } else {
-                    this.textRenderer.draw(matrixStack, list.get(i), xPosLeft, (float) y, 0xE0E0E0);
-                }
+                this.textRenderer.draw(list.get(i), xPosLeft, y, 0xE0E0E0, GeneralOptions.shadowText, matrixStack.peek().getModel(), immediate, false, 0, 15728880);
             }
         }
+        immediate.draw();
 
         ci.cancel();
-
     }
 
     /**
