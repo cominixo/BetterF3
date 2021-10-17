@@ -55,19 +55,14 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
 
     }
 
-    public void udpateModules() {
+    public void updateModules() {
         this.clearEntries();
         this.moduleEntries.forEach(this::addEntry);
 
     }
 
     public void addModule(BaseModule module) {
-        ModuleEntry entry = new ModuleEntry(this.screen, module) {
-            @Override
-            public Text getNarration() {
-                return null;
-            }
-        };
+        ModuleEntry entry = new ModuleEntry(this.screen, module);
         this.moduleEntries.add(entry);
         this.addEntry(entry);
     }
@@ -79,7 +74,7 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
         //BaseModule.modules.remove(index);
     }
 
-    public abstract class ModuleEntry extends AlwaysSelectedEntryListWidget.Entry<ModuleEntry> {
+    public class ModuleEntry extends AlwaysSelectedEntryListWidget.Entry<ModuleEntry> {
         private final ModulesScreen screen;
         private final MinecraftClient client;
         public final BaseModule module;
@@ -90,8 +85,8 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
             this.client = MinecraftClient.getInstance();
         }
 
-        @Subscribe
-        public Text method_37006 () {
+        @Override
+        public Text getNarration() {
             return new LiteralText(this.module.toString());
         }
 
@@ -183,7 +178,7 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
             //ModuleEntry entry = this.screen.modulesListWidget.children().get(j);
             this.screen.modulesListWidget.setSelected(temp);
             this.screen.updateButtons();
-            this.screen.modulesListWidget.udpateModules();
+            this.screen.modulesListWidget.updateModules();
 
         }
 
