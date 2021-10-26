@@ -1,5 +1,6 @@
 package me.cominixo.betterf3.config.gui.modules;
 
+import com.google.common.eventbus.Subscribe;
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.cominixo.betterf3.modules.BaseModule;
 import me.cominixo.betterf3.modules.CoordsModule;
@@ -54,7 +55,7 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
 
     }
 
-    public void udpateModules() {
+    public void updateModules() {
         this.clearEntries();
         this.moduleEntries.forEach(this::addEntry);
 
@@ -85,7 +86,7 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
         }
 
         @Override
-        public Text method_37006 () {
+        public Text getNarration() {
             return new LiteralText(this.module.toString());
         }
 
@@ -177,7 +178,7 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
             //ModuleEntry entry = this.screen.modulesListWidget.children().get(j);
             this.screen.modulesListWidget.setSelected(temp);
             this.screen.updateButtons();
-            this.screen.modulesListWidget.udpateModules();
+            this.screen.modulesListWidget.updateModules();
 
         }
 
