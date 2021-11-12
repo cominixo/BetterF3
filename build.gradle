@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.8-SNAPSHOT'
+    id 'fabric-loom' version '0.10-SNAPSHOT'
     id 'java-library'
     id 'java'
 }
@@ -12,8 +12,8 @@ java {
 version = "${project.mod_version}+${project.minecraft_version}"
 group = project.maven_group
 
-minecraft {
-    accessWidener "src/main/resources/betterf3.accesswidener"
+loom {
+    accessWidenerPath.set(file("src/main/resources/betterf3.accesswidener"))
 }
 
 repositories {
