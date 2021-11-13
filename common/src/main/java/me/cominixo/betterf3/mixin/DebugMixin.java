@@ -148,7 +148,7 @@ public abstract class DebugMixin {
                 }
                 final int y = 2 + height * i;
 
-                this.textRenderer.draw(list.get(i), windowWidth, y, 0xE0E0E0, GeneralOptions.shadowText, matrixStack.peek().getModel(), immediate, false, 0, 15728880);
+                this.textRenderer.draw(list.get(i), windowWidth, y, 0xE0E0E0, GeneralOptions.shadowText, matrixStack.peek().getPositionMatrix(), immediate, false, 0, 15728880);
             }
         }
         immediate.draw();
@@ -211,7 +211,7 @@ public abstract class DebugMixin {
                 y2 = y + height - 1;
             }
 
-            final Matrix4f matrix = matrixStack.peek().getModel();
+            final Matrix4f matrix = matrixStack.peek().getPositionMatrix();
 
             if (x1 < x2) {
                 j = x1;
@@ -268,7 +268,7 @@ public abstract class DebugMixin {
                     xPosLeft -= xPos;
                 }
 
-                this.textRenderer.draw(list.get(i), xPosLeft, y, 0xE0E0E0, GeneralOptions.shadowText, matrixStack.peek().getModel(), immediate, false, 0, 15728880);
+                this.textRenderer.draw(list.get(i), xPosLeft, y, 0xE0E0E0, GeneralOptions.shadowText, matrixStack.peek().getPositionMatrix(), immediate, false, 0, 15728880);
             }
         }
         immediate.draw();
