@@ -12,7 +12,7 @@ architectury {
 }
 
 loom {
-	accessWidenerPath = file("src/main/resources/betterf3.accesswidener") // Tells Loom where our Access Widener is
+	accessWidenerPath.set(file("src/main/resources/betterf3.accesswidener")) // Tells Loom where our Access Widener is
 }
 
 repositories {

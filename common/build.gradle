@@ -21,7 +21,7 @@ dependencies {
 }
 
 loom {
-	accessWidenerPath = file("src/main/resources/betterf3.accesswidener")
+	accessWidenerPath.set(file("src/main/resources/betterf3.accesswidener"))
 	/*common {
 		mixinConfig "betterf3.mixins.json"
 	}*/
