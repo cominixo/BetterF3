@@ -59,9 +59,9 @@
   "config.betterf3.modules.delete_button": "モジュール削除",
   "config.betterf3.modules.done_button": "完了",
   "config.betterf3.add_button.module_name": "モジュール名",
-  "config.bettef3.order_left_button": "左モジュール",
-  "config.bettef3.order_right_button": "右モジュール",
-  "config.bettef3.general_settings": "一般設定",
+  "config.betterf3.order_left_button": "左モジュール",
+  "config.betterf3.order_right_button": "右モジュール",
+  "config.betterf3.general_settings": "一般設定",
 
   "text.betterf3.module.minecraft": "Minecraft",
   "text.betterf3.module.fps": "FPS",

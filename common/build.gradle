@@ -1,59 +1,56 @@
 repositories {
-	maven { url "https://maven.shedaniel.me/" } // cloth-config repository
-	mavenCentral()
+    maven { url "https://maven.shedaniel.me/" } // cloth-config repository
+    mavenCentral()
 }
 
 configurations {
-	shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
+    shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
 }
 
 dependencies {
-	// We depend on fabric loader here to use the fabric @Environment annotations and get the mixin dependencies
-	// Do NOT use other classes from fabric loader
-	modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+    // We depend on fabric loader here to use the fabric @Environment annotations and get the mixin dependencies
+    // Do NOT use other classes from fabric loader
+    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
 
-	modImplementation "me.shedaniel.cloth:cloth-config:${project.cloth_version}", {
-		exclude module: 'fabric-api'
-	}
+    modImplementation "me.shedaniel.cloth:cloth-config:${project.cloth_version}", {
+        exclude module: 'fabric-api'
+    }
 
-	implementation 'com.electronwill.night-config:json:3.6.4'
-	shadowCommon "com.electronwill.night-config:json:3.6.4"
+    implementation 'com.electronwill.night-config:json:3.6.4'
+    shadowCommon "com.electronwill.night-config:json:3.6.4"
 }
 
 loom {
-	accessWidenerPath.set(file("src/main/resources/betterf3.accesswidener"))
-	/*common {
-		mixinConfig "betterf3.mixins.json"
-	}*/
+    accessWidenerPath.set(file("src/main/resources/betterf3.accesswidener"))
+    /*common {
+        mixinConfig "betterf3.mixins.json"
+    }*/
 }
 
 architectury {
-	if (rootProject.forge_enabled.toBoolean()) {
-		common()
-	} else {
-		common(false)
-	}
+    if (rootProject.forge_enabled.toBoolean()) {
+        common()
+    } else {
+        common(false)
+    }
 }
 
 afterEvaluate {
-	remapJar {
-		remapAccessWidener = false
-	}
+    remapJar {
+        remapAccessWidener.set(false)
+    }
 }
 
 java {
-	withSourcesJar()
+    withSourcesJar()
 }
 
 publishing {
-	publications {
-		mavenCommon(MavenPublication) {
-			artifactId = rootProject.archives_base_name
-			// add all the jars that should be included when publishing to maven
-			artifact remapJar
-			artifact(sourcesJar) {
-				builtBy remapSourcesJar
-			}
-		}
-	}
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+            }
+        }
+    }
 }

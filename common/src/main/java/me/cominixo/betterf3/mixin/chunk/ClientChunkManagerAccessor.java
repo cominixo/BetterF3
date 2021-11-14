@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(ClientChunkManager.class)
 public interface ClientChunkManagerAccessor {
 
-
     /**
      * Gets the chunk cache storage.
      *
