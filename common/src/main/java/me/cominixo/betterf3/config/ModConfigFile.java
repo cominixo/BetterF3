@@ -53,7 +53,6 @@ public final class ModConfigFile {
 
         }
 
-
         final List<Config> configsRight = new ArrayList<>();
 
         for (final BaseModule module : BaseModule.modulesRight) {

@@ -17,13 +17,13 @@ In order to effectively contribute to our project, you need to follow these requ
 ### Compiling
 You can compile the source code here:
 1. Clone this project to your local machine
-2. This project is split into three parts. 
-   1. `common` holds all the common files between Forge and Fabric
-   2. `fabric` holds all the files for only Fabric
-   3. `forge` holds all the files for only Forge
-3. Type `./gradlew build` in a terminal to build the project. On Windows, leave out `./` at the beginning for all 
+2. This project is split into three parts.
+    1. `common` holds all the common files between Forge and Fabric
+    2. `fabric` holds all the files for only Fabric
+    3. `forge` holds all the files for only Forge
+3. Type `./gradlew build` in a terminal to build the project. On Windows, leave out `./` at the beginning for all
    `gradlew` commands if nothing works.
-4. `cd` into either the `fabric` or `forge` directory, then `cd` to `build/libs` and the compiled mod will be in the 
+4. `cd` into either the `fabric` or `forge` directory, then `cd` to `build/libs` and the compiled mod will be in the
    format `betterf3-{version}-{modloader}.jar` (subject to change).
 
 ### Pull Requests

@@ -1,55 +1,55 @@
 plugins {
-	id "architectury-plugin" version "3.4-SNAPSHOT" // Uses Architectury plugin https://github.com/architectury/architectury-plugin
-	id "dev.architectury.loom" version "0.10.0-SNAPSHOT" apply false // Uses Architectury Loom
-	  // (fork of Fabric Loom) https://github.com/architectury/architectury-loom - does not apply to root project
-	id "net.kyori.indra.git" version "2.0.6" // Uses Indra Git plugin
-	id "net.kyori.indra.checkstyle" version "2.0.6" // Uses Indra Checkstyle plugin
+    id "architectury-plugin" version "3.4-SNAPSHOT" // Uses Architectury plugin https://github.com/architectury/architectury-plugin
+    id "dev.architectury.loom" version "0.10.0-SNAPSHOT" apply false // Uses Architectury Loom
+    // (fork of Fabric Loom) https://github.com/architectury/architectury-loom - does not apply to root project
+    id "net.kyori.indra" version "2.0.6" // Uses Indra plugin
+    id "net.kyori.indra.git" version "2.0.6" // Uses Indra Git plugin
+    id "net.kyori.indra.checkstyle" version "2.0.6" // Uses Indra Checkstyle plugin
 }
 
 architectury {
-	minecraft = rootProject.minecraft_version // Sets Minecraft version from gradle.properties
+    minecraft = rootProject.minecraft_version // Sets Minecraft version from gradle.properties
 }
 
-
 subprojects {
-	apply plugin: "dev.architectury.loom" // Applies Architectury Loom to subprojects
+    apply plugin: "dev.architectury.loom" // Applies Architectury Loom to subprojects
 
-	loom {
-		silentMojangMappingsLicense() // Silences the annoying as hell Mojang License text
-	}
+    loom {
+        silentMojangMappingsLicense() // Silences the annoying as hell Mojang License text
+    }
 
-	dependencies {
-		minecraft "com.mojang:minecraft:${rootProject.minecraft_version}" // Minecraft dependency
-		//mappings loom.officialMojangMappings() // Maps Minecraft so we can tell what classes are what - official mappings
-		mappings "net.fabricmc:yarn:${rootProject.yarn_version}:v2" // Alternative, open, mappings from Fabric
-	}
+    dependencies {
+        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}" // Minecraft dependency
+        //mappings loom.officialMojangMappings() // Maps Minecraft so we can tell what classes are what - official mappings
+        mappings "net.fabricmc:yarn:${rootProject.yarn_version}:v2" // Alternative, open, mappings from Fabric
+    }
 }
 
 allprojects {
-	apply plugin: "java"
-	apply plugin: "architectury-plugin" // Applies architectury plugin to all projects
-	apply plugin: "maven-publish"
-	apply plugin: "net.kyori.indra" // Applies Indra to all projects
-	apply plugin: "net.kyori.indra.git" // Applies Indra Git to all projects
-	apply plugin: "net.kyori.indra.checkstyle" // Applies Indra Checkstyle to all projects
+    apply plugin: "java"
+    apply plugin: "architectury-plugin" // Applies architectury plugin to all projects
+    apply plugin: "maven-publish"
+    apply plugin: "net.kyori.indra" // Applies Indra to all projects
+    apply plugin: "net.kyori.indra.git" // Applies Indra Git to all projects
+    apply plugin: "net.kyori.indra.checkstyle" // Applies Indra Checkstyle to all projects
 
-	archivesBaseName = rootProject.archives_base_name // sets the archive name from gradle.properties
-	version = rootProject.mod_version // sets the version from gradle.properties
-	group = rootProject.maven_group // sets the maven group from gradle.properties
-	indra {
-		checkstyle("8.41.1")
-		javaVersions {
-			target(16)
-			testWith(16)
-		}
-	}
+    archivesBaseName = rootProject.archives_base_name // sets the archive name from gradle.properties
+    version = rootProject.mod_version // sets the version from gradle.properties
+    group = rootProject.maven_group // sets the maven group from gradle.properties
+    indra {
+        checkstyle("8.41.1")
+        javaVersions {
+            target(16)
+            testWith(16)
+        }
+    }
 
-	java {
-		withSourcesJar()
-	}
+    java {
+        withSourcesJar()
+    }
 
-	compileJava {
-		options.compilerArgs +=	"-Xlint:-processing" // Fixes "no processor claimed any of these annotations" warning
-	}
+    compileJava {
+        options.compilerArgs +=	"-Xlint:-processing" // Fixes "no processor claimed any of these annotations" warning
+    }
 
 }

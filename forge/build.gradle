@@ -1,103 +1,98 @@
 plugins {
-	id "com.github.johnrengelman.shadow" version "7.0.0" // Use Shadow to make a JAR with dependencies
+    id "com.github.johnrengelman.shadow" version "7.0.0" // Use Shadow to make a JAR with dependencies
 }
 
 configurations {
-	shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
+    shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
 }
 
 architectury {
-	platformSetupLoomIde()
-	forge() // Tells Architectury this is a Forge mod
+    platformSetupLoomIde()
+    forge() // Tells Architectury this is a Forge mod
 }
 
 loom {
-	forge {
-		mixinConfigs = [
-				"betterf3.mixins.json",
-				"betterf3.forge.mixins.json"
-		] // Mixin files used for this Forge Mod
-		// betterf3.mixins.json is in the common directory
-		// betterf3.forge.mixins.json is in the forge directory
-	}
-	launches {
-		client {
-			property 'mixin.debug', 'true' // Tells forge to have debug on for Mixins
-		}
-	}
+    forge {
+        mixinConfigs = [
+                "betterf3.mixins.json",
+                "betterf3.forge.mixins.json"
+        ] // Mixin files used for this Forge Mod
+        // betterf3.mixins.json is in the common directory
+        // betterf3.forge.mixins.json is in the forge directory
+    }
+    launches {
+        client {
+            property 'mixin.debug', 'true' // Tells forge to have debug on for Mixins
+        }
+    }
 }
 
 repositories {
-	maven { url "https://maven.shedaniel.me/" } // Repository for cloth-config
+    maven { url "https://maven.shedaniel.me/" } // Repository for cloth-config
 }
 
 dependencies {
-	// Minecraft Forge API
-	forge "net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}"
+    // Minecraft Forge API
+    forge "net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}"
 
-	// Tells Gradle to use the common directory
-	implementation(project(path: ":common")) {
-		transitive = false
-	}
-	developmentForge(project(path: ":common")) {
-		transitive = false
-	}
+    // Tells Gradle to use the common directory
+    implementation(project(path: ":common")) {
+        transitive = false
+    }
+    developmentForge(project(path: ":common")) {
+        transitive = false
+    }
 
-	// Tells Gradle to include the common directory in the JAR file
-	shadowCommon(project(path: ":common", configuration: "transformProductionForge")) {
-		transitive = false
-	}
+    // Tells Gradle to include the common directory in the JAR file
+    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) {
+        transitive = false
+    }
 }
 
 processResources {
-	// Replaces the version in mods.toml with the project version
-	inputs.property "version", project.version
+    // Replaces the version in mods.toml with the project version
+    inputs.property "version", project.version
 
-	filesMatching("META-INF/mods.toml") {
-		expand "version": project.version
-	}
+    filesMatching("META-INF/mods.toml") {
+        expand "version": project.version
+    }
 }
 
 shadowJar {
-	// Excludes these files from the JAR file
-	exclude "fabric.mod.json"
-	exclude "betterf3.accesswidener"
+    // Excludes these files from the JAR file
+    exclude "fabric.mod.json"
+    exclude "betterf3.accesswidener"
 
-	configurations = [project.configurations.shadowCommon]
-	classifier "dev-shadow"
+    configurations = [project.configurations.shadowCommon]
+    classifier "dev-shadow"
 }
 
 remapJar {
-	dependsOn(shadowJar)
-	input.set(shadowJar.archivePath)
-	archiveClassifier = "forge"
+    dependsOn(shadowJar)
+    input.set(shadowJar.archivePath)
+    archiveClassifier.set("forge")
 
-	from rootProject.file("LICENSE.md")
+    from rootProject.file("LICENSE.md")
 }
 
 jar {
-	classifier "dev"
+    classifier "dev"
 }
 
 java {
-	withSourcesJar()
+    withSourcesJar()
 }
 
 sourcesJar {
-	def commonSources = project(":common").sourcesJar
-	dependsOn commonSources
-	from commonSources.archiveFile.map { zipTree(it) }
+    def commonSources = project(":common").sourcesJar
+    dependsOn commonSources
+    from commonSources.archiveFile.map { zipTree(it) }
 }
 
 publishing {
-	publications {
-		mavenCommon(MavenPublication) {
-			artifactId = rootProject.archives_base_name
-			// add all the jars that should be included when publishing to maven
-			artifact remapJar
-			artifact(sourcesJar) {
-				builtBy remapSourcesJar
-			}
-		}
-	}
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
 }
