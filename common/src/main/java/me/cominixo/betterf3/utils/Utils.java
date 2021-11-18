@@ -11,7 +11,7 @@ import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.Direction;
-import org.apache.commons.lang3.text.WordUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * The Utils.
@@ -113,7 +113,7 @@ public final class Utils {
      * @return converted string
      */
     public static String enumToString(final Enum<?> enumToConvert) {
-        return WordUtils.capitalizeFully(enumToConvert.toString().replace("_", " "));
+        return StringUtils.capitalize(enumToConvert.toString().replace("_", " "));
     }
 
     /**

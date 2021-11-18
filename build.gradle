@@ -39,8 +39,8 @@ allprojects {
     indra {
         checkstyle("8.41.1")
         javaVersions {
-            target(16)
-            testWith(16)
+            target(17) // 1.18 now uses Java 17
+            testWith(17)
         }
     }
 

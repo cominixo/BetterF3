@@ -14,7 +14,7 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
 import net.minecraft.text.TranslatableText;
-import org.apache.commons.lang3.text.WordUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * The Edit Modules screen.
@@ -158,7 +158,7 @@ public final class EditModulesScreen {
                 Text name = new TranslatableText("text.betterf3.line." + line.id());
 
                 if (name.getString().equals("")) {
-                    name = new LiteralText(WordUtils.capitalizeFully(line.id().replace("_", " ")));
+                    name = new LiteralText(StringUtils.capitalize(line.id().replace("_", " ")));
                 }
 
                 final BooleanListEntry enabled = entryBuilder.startBooleanToggle(name, line.enabled)

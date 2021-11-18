@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkStatus;
 import net.minecraft.world.chunk.WorldChunk;
 import net.minecraft.world.chunk.light.LightingProvider;
-import org.apache.commons.lang3.text.WordUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * The Location module.
@@ -116,7 +116,7 @@ public class LocationModule extends BaseModule {
 
                         // Client
                         if (type.shouldSendToClient()) {
-                            final String typeString = WordUtils.capitalizeFully(type.getName().replace("_", " "));
+                            final String typeString = StringUtils.capitalize(type.getName().replace("_", " "));
                             final int blockY = clientChunk.sampleHeightmap(type, blockPos.getX(), blockPos.getZ());
                             if (blockY > -1) {
                                 highestBlock.append("  ").append(typeString).append(": ").append(blockY);
