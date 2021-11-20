@@ -75,7 +75,7 @@ shadowJar {
 remapJar {
     dependsOn(shadowJar)
     input.set(shadowJar.archivePath)
-    archiveClassifier.set("fabric")
+    archiveClassifier.set("Fabric-${rootProject.minecraft_version}")
 
     from rootProject.file("LICENSE.md")
 }
