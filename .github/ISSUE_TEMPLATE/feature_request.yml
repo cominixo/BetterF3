@@ -1,0 +1,46 @@
+name: Feature Request
+description: Suggest an idea for BetterF3
+title: "[Feature]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Any bug reports should be reported in the bug report issue template.
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the Request
+      description: A description of the feature and why it should be added.
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain your feature.
+    validations:
+      required: false
+  - type: dropdown
+    id: modloader-type
+    attributes:
+      label: Modloader Type
+      description: If applicable, what modloader are you using?
+      options:
+        - Minecraft Forge
+        - Fabric
+    validations:
+      required: false
+  - type: input
+    id: modloader-version
+    attributes:
+      label: Modloader Version
+      description: If applicable, what version of the modloader are you using?
+    validations:
+      required: false
+  - type: textarea
+    id: other
+    attributes:
+      label: Additional Context
+      description: Please add any other context about the problem here.
+    validations:
+      required: false
