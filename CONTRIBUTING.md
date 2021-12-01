@@ -11,7 +11,7 @@ If you would like to improve BetterF3, there are several ways you can help.
 ### Requirements
 In order to effectively contribute to our project, you need to follow these requirements:
 * You need `git` installed. You can download it from [here](https://gitforwindows.org/) on Windows.
-* You need Java 16 or later JDK. Check out [Adoptium](https://adoptium.net/) for most platforms.
+* You need Java 17 or later JDK. Check out [Adoptium](https://adoptium.net/) for most platforms.
 * You need to use either [IntelliJ IDEA](https://www.jetbrains.com/idea/) or [Visual Studio Code](https://code.visualstudio.com/). Other IDEs are unsupported and may or may not work.
 
 ### Compiling
