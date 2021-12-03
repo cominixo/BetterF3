@@ -1,8 +1,8 @@
 package me.treyruffy.betterf3;
 
 import me.cominixo.betterf3.config.gui.ModConfigScreen;
+import net.minecraftforge.client.ConfigGuiHandler;
 import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fmlclient.ConfigGuiHandler;
 
 /**
  * Used to create mod configuration in the Forge mod menu.

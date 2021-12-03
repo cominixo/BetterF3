@@ -1,8 +1,8 @@
 {
   "required": true,
   "package": "me.treyruffy.betterf3.mixin",
-  "compatibilityLevel": "JAVA_14",
-  "minVersion": "0.8.2",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8.5",
   "server": [],
   "mixins": [],
   "client": [

@@ -25,7 +25,7 @@ public abstract class ForgeIngameGuiMixin {
      * @param ci Callback info
      */
     @Inject(remap = false, method = "renderHUDText", at = @At(value = "INVOKE", opcode = Opcodes.PUTFIELD, target =
-    "net/minecraftforge/client/gui/ForgeIngameGui$GuiOverlayDebugForge.update()V"), cancellable = true)
+    "Lnet/minecraftforge/client/gui/ForgeIngameGui$ForgeDebugScreenOverlay;update()V"), cancellable = true)
     public void customDebugMenu(final int width, final int height, final MatrixStack mStack, final CallbackInfo ci) {
         // Sets up BetterF3's debug screen
         new DebugHud(MinecraftClient.getInstance()).render(mStack);
