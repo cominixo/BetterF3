@@ -1,6 +1,7 @@
 {
   "homepage": "https://www.curseforge.com/minecraft/mc-mods/betterf3/",
   "1.18": {
+    "1.2.1": "Fix the Profiler and FPS/TPS Graphs",
     "1.2.0": "1.18 Version Released"
   },
   "1.17.1": {
@@ -26,8 +27,8 @@
     "1.1.2": "Initial release of BetterF3 Forge"
   },
   "promos": {
-    "1.18-latest": "1.2.0",
-    "1.18-recommended": "1.2.0",
+    "1.18-latest": "1.2.1",
+    "1.18-recommended": "1.2.1",
     "1.17.1-latest": "1.1.5",
     "1.17.1-recommended": "1.1.5",
     "1.17-latest": "1.1.5",
