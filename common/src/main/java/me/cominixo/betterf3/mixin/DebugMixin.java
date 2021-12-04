@@ -20,11 +20,12 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.util.MetricsData;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.Matrix4f;
-import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -61,6 +62,9 @@ public abstract class DebugMixin {
      */
     @SuppressWarnings("checkstyle:MethodName")
     @Shadow protected abstract List<String> getRightText();
+
+    @Shadow protected abstract void drawMetricsData(MatrixStack matrices, MetricsData metricsData, int x, int width,
+                                                    boolean showFps);
 
     /**
      * Sets up modules on the left side of the screen.
@@ -282,10 +286,19 @@ public abstract class DebugMixin {
      * @param matrices matrixStack
      * @param ci Callback info
      */
-    @Inject(method = "render", at = @At("HEAD"))
+    @Inject(method = "render", at = @At(value = "HEAD"))
     public void renderFontScaleBefore(final MatrixStack matrices, final CallbackInfo ci) {
         matrices.push();
         if (!GeneralOptions.disableMod) {
+            if (this.client.options.debugTpsEnabled) {
+                final int scaledWidth = this.client.getWindow().getScaledWidth();
+                this.drawMetricsData(matrices, this.client.getMetricsData(), 0, scaledWidth / 2, true);
+                final IntegratedServer integratedServer = this.client.getServer();
+                if (integratedServer != null) {
+                    this.drawMetricsData(matrices, integratedServer.getMetricsData(), scaledWidth - Math.min(scaledWidth / 2, 240), scaledWidth / 2, false);
+                }
+            }
+
             matrices.scale((float) GeneralOptions.fontScale, (float) GeneralOptions.fontScale, 1F);
         }
     }
@@ -296,22 +309,12 @@ public abstract class DebugMixin {
      * @param matrices matrixStack
      * @param ci CallbackInfo
      */
-    @Inject(method = "render", at = @At(value = "FIELD", opcode = Opcodes.PUTFIELD, target = "Lnet/minecraft/client/option/GameOptions;debugTpsEnabled:Z"))
+    @Inject(method = "render", at = @At(value = "FIELD",
+        target = "Lnet/minecraft/client/option/GameOptions;debugTpsEnabled:Z"), cancellable = true)
     public void renderFontScaleRightAfter(final MatrixStack matrices, final CallbackInfo ci) {
-        if (!GeneralOptions.disableMod) {
-            matrices.scale(1F, 1F, 1F);
-        }
-    }
-
-    /**
-     * Pops the MatrixStack for render font.
-     *
-     * @param matrices matrixStack
-     * @param ci Callback info
-     */
-    @Inject(method = "render", at = @At("TAIL"))
-    public void renderFontScaleAfter(final MatrixStack matrices, final CallbackInfo ci) {
         matrices.pop();
+        this.client.getProfiler().pop();
+        ci.cancel();
     }
 
     /**
