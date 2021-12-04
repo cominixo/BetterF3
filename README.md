@@ -1,5 +1,4 @@
 <div style="text-align: center;"><h1 >BetterF3</h1>
-<h>Why wouldn't you use it?</h>
 <br />
 
 [![Version](https://img.shields.io/badge/dynamic/json?color=ed37aa&label=Version&query=%24%5B%27promos%27%5D%5B%271.18-latest%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fcominixo%2FBetterF3%2Farchitectury%2F1.18%2Fupdate.json?cacheSeconds=2592000)](https://www.curseforge.com/minecraft/mc-mods/betterf3/files)
@@ -17,7 +16,7 @@ You can customize colors, position, add spacings, and more.
 </blockquote>
 
 <h3 align="center">
-<a href="https://www.curseforge.com/minecraft/mc-mods/betterf3/" target="_blank">🏠 CurseForge Homepage</a>
+<a href="https://www.curseforge.com/minecraft/mc-mods/betterf3/" target="_blank"CurseForge Homepage</a>
 </h3>
 
 ## Usage
@@ -84,21 +83,14 @@ The latest builds can be found [here](https://github.com/TreyRuffy/BetterF3/acti
 * GitHub: [@cominixo](https://github.com/cominixo/)
 * CurseForge: [@cominixo](https://www.curseforge.com/members/cominixo/)
 
-## 🤝 Contributing
+## Contributing
 
 Contributions, issues and feature requests are welcome!<br/>The best way to help would be to help Translate. Check
 [CONTRIBUTING.md](./CONTRIBUTING.md) for more information
 
 Thank you, [@Nirewen](https://github.com/Nirewen/), for the icon!
 
-## Show your support
-
-Give a ⭐️ if you like this project!
-
 ## 📝 License
 
 Copyright © 2020 - 2021 [cominixo](https://github.com/cominixo/) / [TreyRuffy](https://github.com/TreyRuffy/). <br/>
 BetterF3 is [MIT](https://choosealicense.com/licenses/mit/) licensed.
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator/)_
