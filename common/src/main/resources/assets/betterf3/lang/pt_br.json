@@ -106,8 +106,10 @@
   "text.betterf3.line.monster": "Monstros",
   "text.betterf3.line.creature": "Criaturas",
   "text.betterf3.line.ambient": "Ambiente",
-  "text.betterf3.line.water_creature": "Criaturas Marítimas",
-  "text.betterf3.line.water_ambient": "Criaturas Marítimas (Ambiente)",
+  "text.betterf3.line.axolotls": "Axolotls",
+  "text.betterf3.line.underground_water_creature": "Criaturas da Água Subterrânea",
+  "text.betterf3.line.water_creature": "Criaturas da Água",
+  "text.betterf3.line.water_ambient": "Criaturas da Água (Ambiente)",
   "text.betterf3.line.misc": "Extra",
 
   "text.betterf3.line.fps": "",
