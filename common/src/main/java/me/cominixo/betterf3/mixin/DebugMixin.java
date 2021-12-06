@@ -281,24 +281,34 @@ public abstract class DebugMixin {
     }
 
     /**
-     * Modifies the font scale.
+     * Ensures that the TPS graph works.
      *
      * @param matrices matrixStack
      * @param ci Callback info
      */
     @Inject(method = "render", at = @At(value = "HEAD"))
-    public void renderFontScaleBefore(final MatrixStack matrices, final CallbackInfo ci) {
+    public void renderBefore(final MatrixStack matrices, final CallbackInfo ci) {
         matrices.push();
-        if (!GeneralOptions.disableMod) {
-            if (this.client.options.debugTpsEnabled) {
-                final int scaledWidth = this.client.getWindow().getScaledWidth();
-                this.drawMetricsData(matrices, this.client.getMetricsData(), 0, scaledWidth / 2, true);
-                final IntegratedServer integratedServer = this.client.getServer();
-                if (integratedServer != null) {
-                    this.drawMetricsData(matrices, integratedServer.getMetricsData(), scaledWidth - Math.min(scaledWidth / 2, 240), scaledWidth / 2, false);
-                }
+        if (this.client.options.debugTpsEnabled) {
+            final int scaledWidth = this.client.getWindow().getScaledWidth();
+            this.drawMetricsData(matrices, this.client.getMetricsData(), 0, scaledWidth / 2, true);
+            final IntegratedServer integratedServer = this.client.getServer();
+            if (integratedServer != null) {
+                this.drawMetricsData(matrices, integratedServer.getMetricsData(), scaledWidth - Math.min(scaledWidth / 2, 240), scaledWidth / 2, false);
             }
+        }
+    }
 
+    /**
+     * Modifies the font scale.
+     *
+     * @param matrices matrixStack
+     * @param ci Callback info
+     */
+    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/DebugHud;" +
+        "renderLeftText(Lnet/minecraft/client/util/math/MatrixStack;)V"))
+    public void renderFontScaleBefore(final MatrixStack matrices, final CallbackInfo ci) {
+        if (!GeneralOptions.disableMod) {
             matrices.scale((float) GeneralOptions.fontScale, (float) GeneralOptions.fontScale, 1F);
         }
     }
