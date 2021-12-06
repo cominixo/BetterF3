@@ -9,7 +9,6 @@
   "format.betterf3.chunklight": "Total: %s  Sky: %s  Bloco: %s",
   "format.betterf3.chunklight_server": "Céu: %s  Bloco: %s",
   "format.betterf3.rotation": "Yaw: %s  Pitch: %s",
-
   "config.betterf3.title": "BetterF3",
   "config.betterf3.title.general": "Geral",
   "config.betterf3.title.config": "Config",
@@ -46,9 +45,6 @@
   "config.betterf3.color.fps.low.tooltip": "Muda a cor do texto quando o fps está baixo.",
   "config.betterf3.color.background": "Cor do Fundo",
   "config.betterf3.color.background.tooltip": "Muda a cor do fundo atrás de cada linha (ARGB)",
-
-
-
   "config.betterf3.module.enable": "Habilitar Módulo",
   "config.betterf3.module.enable.tooltip": "Habilita esse módulo.",
   "config.betterf3.left_modules": "Módulos da Esquerda",
@@ -62,7 +58,6 @@
   "config.betterf3.order_left_button": "Módulos da Esquerda",
   "config.betterf3.order_right_button": "Módulos da Direita",
   "config.betterf3.general_settings": "Configurações Gerais",
-
   "text.betterf3.module.minecraft": "Minecraft",
   "text.betterf3.module.fps": "FPS",
   "text.betterf3.module.graphics": "Gráficos",
@@ -78,9 +73,7 @@
   "text.betterf3.module.system": "Sistema",
   "text.betterf3.module.target": "Olhando",
   "text.betterf3.module.empty": "Separador",
-
   "text.betterf3.line.minecraft": "Minecraft",
-
   "text.betterf3.line.chunk_sections": "Seções de Chunk",
   "text.betterf3.line.chunk_culling": "Culling de Chunks",
   "text.betterf3.line.pending_chunks": "Chunks Pendentes",
@@ -95,27 +88,23 @@
   "text.betterf3.line.disabled": "Desabilitado",
   "text.betterf3.line.rendered": "renderizados",
   "text.betterf3.line.total": "total",
-
   "text.betterf3.line.player_coords": "",
   "text.betterf3.line.block_coords": "Bloco",
   "text.betterf3.line.chunk_relative_coords": "No Chunk",
   "text.betterf3.line.chunk_coords": "Coordenadas do Chunk",
-
   "text.betterf3.line.particles": "Partículas",
   "text.betterf3.line.entities": "Entidades",
   "text.betterf3.line.monster": "Monstros",
   "text.betterf3.line.creature": "Criaturas",
   "text.betterf3.line.ambient": "Ambiente",
   "text.betterf3.line.axolotls": "Axolotls",
-  "text.betterf3.line.underground_water_creature": "Criaturas da Água Subterrânea",
   "text.betterf3.line.water_creature": "Criaturas da Água",
+  "text.betterf3.line.underground_water_creature": "Criaturas da Água Subterrânea",
   "text.betterf3.line.water_ambient": "Criaturas da Água (Ambiente)",
   "text.betterf3.line.misc": "Extra",
-
   "text.betterf3.line.fps": "",
   "text.betterf3.line.fps.unlimited": "Ilimitado",
   "text.betterf3.line.fps.vsync": "com V-Sync",
-
   "text.betterf3.line.render_distance": "Alcance Visual",
   "text.betterf3.line.graphics": "Gráficos",
   "text.betterf3.line.clouds": "Nuvens",
@@ -124,14 +113,12 @@
   "text.betterf3.line.off": "Desligado",
   "text.betterf3.line.fast": "Rápidos",
   "text.betterf3.line.fancy": "Detalhados",
-
   "text.betterf3.line.pie_graph": "Gráfico de Pizza (Shift+F3)",
   "text.betterf3.line.fps_tps": "FPS / TPS (Alt+F3)",
   "text.betterf3.line.help": "Para ajuda",
   "text.betterf3.line.visible": "Visível",
   "text.betterf3.line.hidden": "Escondido",
   "text.betterf3.line.help_press": "Pressione F3 + Q",
-
   "text.betterf3.line.dimension": "Dimensão",
   "text.betterf3.line.facing": "Voltado para",
   "text.betterf3.line.north": "Norte",
@@ -152,29 +139,26 @@
   "text.betterf3.line.clamped": "Fixada",
   "text.betterf3.line.days_played": "Dias Jogados",
   "text.betterf3.line.waiting_chunk": "Esperando pelo chunk...",
-
   "text.betterf3.line.server_tick": "",
   "text.betterf3.line.packets_sent": "Pacotes Enviados",
   "text.betterf3.line.packets_received": "Pacotes Recebidos",
   "text.betterf3.line.integrated_server": "Servidor Integrado",
-
   "text.betterf3.line.sounds": "Sons",
   "text.betterf3.line.ambient_sounds": "Sons Ambientes",
   "text.betterf3.line.playing": "tocando",
   "text.betterf3.line.maximum": "máximo",
-
+  "text.betterf3.line.mood": "Mood",
   "text.betterf3.line.java_version": "Versão do Java",
   "text.betterf3.line.memory_usage": "Memória Usada",
   "text.betterf3.line.allocated_memory": "Memória Alocada",
+  "text.betterf3.line.off_heap": "Off-Heap",
   "text.betterf3.line.cpu": "CPU",
   "text.betterf3.line.display": "Monitor",
   "text.betterf3.line.gpu": "GPU",
   "text.betterf3.line.opengl_version": "Versão do OpenGL",
   "text.betterf3.line.gpu_driver": "Driver da GPU",
-
   "text.betterf3.line.misc_left": "Extras da Esquerda",
   "text.betterf3.line.misc_right": "Extras da Direita",
-
   "text.betterf3.line.targeted_block": "Olhando para Bloco",
   "text.betterf3.line.targeted_fluid": "Olhando para Fluído",
   "text.betterf3.line.targeted_entity": "Olhando para Entidade",
@@ -183,5 +167,7 @@
   "text.betterf3.line.block_states": "Estados do Bloco",
   "text.betterf3.line.block_tags": "Tags do Bloco",
   "text.betterf3.line.fluid_states": "Estados do Fluído",
-  "text.betterf3.line.fluid_tags": "Tags do Fluído"
+  "text.betterf3.line.fluid_tags": "Tags do Fluído",
+  "text.betterf3.line.nothing": "Blank Line",
+  "text.betterf3.line.nothing2": "Another Blank Line"
 }

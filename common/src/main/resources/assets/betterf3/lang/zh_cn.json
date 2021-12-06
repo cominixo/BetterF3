@@ -1,15 +1,14 @@
 {
-  "format.betterf3.default_format": "%s：%s",
+  "format.betterf3.default_format": "%s: %s",
   "format.betterf3.default_no_colon": "%s %s",
-  "format.betterf3.total": "%s %s/%s：%s/%s",
-  "format.betterf3.coords": "%s：%s  %s  %s",
+  "format.betterf3.total": "%s %s/%s: %s/%s",
+  "format.betterf3.coords": "%s: %s  %s  %s",
   "format.betterf3.server_tick": "%s：%.0f ms ticks",
   "format.betterf3.no_format": "%s",
   "format.betterf3.fps": "%s fps / %s fps %s",
   "format.betterf3.chunklight": "总光照：%s  天空：%s  方块：%s",
   "format.betterf3.chunklight_server": "天空：%s  方块：%s",
-  "format.betterf3.rotation": "偏航角：%s  俯仰角：%s",											   
-
+  "format.betterf3.rotation": "偏航角：%s  俯仰角：%s",
   "config.betterf3.title": "BetterF3",
   "config.betterf3.title.general": "常规",
   "config.betterf3.title.config": "配置",
@@ -46,9 +45,6 @@
   "config.betterf3.color.fps.low.tooltip": "Fps为低时更改该模块的颜色",
   "config.betterf3.color.background": "背景颜色",
   "config.betterf3.color.background.tooltip": "更改背景颜色(ARGB)",
-
-
-
   "config.betterf3.module.enable": "启用模块",
   "config.betterf3.module.enable.tooltip": "启用该模块。",
   "config.betterf3.left_modules": "左侧模块",
@@ -62,7 +58,6 @@
   "config.betterf3.order_left_button": "左侧模块",
   "config.betterf3.order_right_button": "右侧模块",
   "config.betterf3.general_settings": "常规设置",
-
   "text.betterf3.module.minecraft": "Minecraft",
   "text.betterf3.module.fps": "帧数",
   "text.betterf3.module.graphics": "图像品质",
@@ -78,9 +73,7 @@
   "text.betterf3.module.system": "系统",
   "text.betterf3.module.target": "有目标",
   "text.betterf3.module.empty": "分隔符",
-
   "text.betterf3.line.minecraft": "Minecraft",
-
   "text.betterf3.line.chunk_sections": "区块部分",
   "text.betterf3.line.chunk_culling": "剔除区块",
   "text.betterf3.line.pending_chunks": "待加载区块",
@@ -95,25 +88,23 @@
   "text.betterf3.line.disabled": "已禁用",
   "text.betterf3.line.rendered": "已渲染",
   "text.betterf3.line.total": "总数",
-
   "text.betterf3.line.player_coords": "",
   "text.betterf3.line.block_coords": "方块",
   "text.betterf3.line.chunk_relative_coords": "区块相对坐标",
   "text.betterf3.line.chunk_coords": "区块坐标",
-
   "text.betterf3.line.particles": "粒子效果",
   "text.betterf3.line.entities": "实体",
   "text.betterf3.line.monster": "怪物",
   "text.betterf3.line.creature": "生物",
   "text.betterf3.line.ambient": "环境",
+  "text.betterf3.line.axolotls": "Axolotls",
   "text.betterf3.line.water_creature": "水生生物",
+  "text.betterf3.line.underground_water_creature": "Underground Water Creatures",
   "text.betterf3.line.water_ambient": "水下环境",
   "text.betterf3.line.misc": "其它",
-
   "text.betterf3.line.fps": "",
   "text.betterf3.line.fps.unlimited": "无限制",
   "text.betterf3.line.fps.vsync": "垂直同步",
-
   "text.betterf3.line.render_distance": "渲染距离",
   "text.betterf3.line.graphics": "图像品质",
   "text.betterf3.line.clouds": "云",
@@ -122,14 +113,12 @@
   "text.betterf3.line.off": "关闭",
   "text.betterf3.line.fast": "流畅",
   "text.betterf3.line.fancy": "高品质",
-
   "text.betterf3.line.pie_graph": "饼图 (Shift+F3)",
   "text.betterf3.line.fps_tps": "FPS / TPS (Alt+F3)",
   "text.betterf3.line.help": "寻求帮助",
   "text.betterf3.line.visible": "可见",
   "text.betterf3.line.hidden": "隐藏",
   "text.betterf3.line.help_press": "按 F3 + Q",
-
   "text.betterf3.line.dimension": "维度",
   "text.betterf3.line.facing": "朝向",
   "text.betterf3.line.north": "北",
@@ -150,17 +139,15 @@
   "text.betterf3.line.clamped": "副区域难度",
   "text.betterf3.line.days_played": "游玩天数",
   "text.betterf3.line.waiting_chunk": "等待区块中……",
-
   "text.betterf3.line.server_tick": "",
   "text.betterf3.line.packets_sent": "发包",
   "text.betterf3.line.packets_received": "收包",
-  "text.betterf3.line.integrated_server": "已关联的服务器",															  
-
+  "text.betterf3.line.integrated_server": "已关联的服务器",
   "text.betterf3.line.sounds": "声音",
   "text.betterf3.line.ambient_sounds": "音效",
   "text.betterf3.line.playing": "播放中",
   "text.betterf3.line.maximum": "最大音量",
-
+  "text.betterf3.line.mood": "Mood",
   "text.betterf3.line.java_version": "Java版本",
   "text.betterf3.line.memory_usage": "内存占用",
   "text.betterf3.line.allocated_memory": "已分配内存",
@@ -170,10 +157,8 @@
   "text.betterf3.line.gpu": "GPU",
   "text.betterf3.line.opengl_version": "OpenGL版本",
   "text.betterf3.line.gpu_driver": "显卡驱动程序",
-
   "text.betterf3.line.misc_left": "其它左侧",
   "text.betterf3.line.misc_right": "其它右侧",
-
   "text.betterf3.line.targeted_block": "目标方块",
   "text.betterf3.line.targeted_fluid": "目标液体",
   "text.betterf3.line.targeted_entity": "目标实体",
@@ -182,5 +167,7 @@
   "text.betterf3.line.block_states": "方块状态",
   "text.betterf3.line.block_tags": "方块标签",
   "text.betterf3.line.fluid_states": "液体状态",
-  "text.betterf3.line.fluid_tags": "液体标签"
+  "text.betterf3.line.fluid_tags": "液体标签",
+  "text.betterf3.line.nothing": "Blank Line",
+  "text.betterf3.line.nothing2": "Another Blank Line"
 }

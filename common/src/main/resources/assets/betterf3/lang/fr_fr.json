@@ -1,7 +1,7 @@
 {
-  "format.betterf3.default_format": "%s : %s",
+  "format.betterf3.default_format": "%s: %s",
   "format.betterf3.default_no_colon": "%s %s",
-  "format.betterf3.total": "%s %s/%s : %s/%s",
+  "format.betterf3.total": "%s %s/%s: %s/%s",
   "format.betterf3.coords": "%s: %s  %s  %s",
   "format.betterf3.server_tick": "%s à %.0f ms ticks",
   "format.betterf3.no_format": "%s",
@@ -9,7 +9,6 @@
   "format.betterf3.chunklight": "Total : %s  Ciel : %s  Bloc : %s",
   "format.betterf3.chunklight_server": "Ciel : %s  Bloc : %s",
   "format.betterf3.rotation": "Yaw : %s  Pitch : %s",
-
   "config.betterf3.title": "BetterF3",
   "config.betterf3.title.general": "Général",
   "config.betterf3.title.config": "Configuration",
@@ -17,15 +16,17 @@
   "config.betterf3.disable": "Désactiver le mod",
   "config.betterf3.disable.tooltip": "Désactive le mod, ce qui fera apparaître de nouveau l'interface F3 par défaut.",
   "config.betterf3.space_modules": "Espace de modules",
-  "config.betterf3.space_modules.tooltip": "Ajoute un espace après chaque module.",
+  "config.betterf3.space_modules.tooltip": "Ajoute un espace après chaque module",
   "config.betterf3.shadow_text": "Texte ombré",
-  "config.betterf3.shadow_text.tooltip": "Applique un effet d'ombre à tous les caractères.",
+  "config.betterf3.shadow_text.tooltip": "Applique un effet d'ombre à tous les caractères",
   "config.betterf3.animations": "Activer les animations",
   "config.betterf3.animations.tooltip": "Ajoute une animation à la fermeture et à l'ouverture de l'interface F3.",
   "config.betterf3.animationSpeed": "Vitesse d'animation",
   "config.betterf3.animationSpeed.tooltip": "Définit la vitesse de l'animation.",
+  "config.betterf3.fontScale": "Font Scale",
+  "config.betterf3.fontScale.tooltip": "Set the scale of the font.",
   "config.betterf3.category.modules": "Modules",
-  "config.betterf3.disable_line.tooltip": "Active la ligne.",
+  "config.betterf3.disable_line.tooltip": "Active la ligne",
   "config.betterf3.color.name": "Couleur du nom",
   "config.betterf3.color.value": "Couleur de la valeur",
   "config.betterf3.color.name.tooltip": "Change la couleur du nom de chaque ligne dans ce module.",
@@ -44,9 +45,6 @@
   "config.betterf3.color.fps.low.tooltip": "Change la couleur du texte quand le nombre de FPS est faible.",
   "config.betterf3.color.background": "Couleur du fond",
   "config.betterf3.color.background.tooltip": "Change la couleur du fond de toutes les lignes (ARGB)",
-
-
-
   "config.betterf3.module.enable": "Activer le module",
   "config.betterf3.module.enable.tooltip": "Active ce module.",
   "config.betterf3.left_modules": "Modules à gauche",
@@ -60,7 +58,6 @@
   "config.betterf3.order_left_button": "Modules à gauche",
   "config.betterf3.order_right_button": "Modules à droite",
   "config.betterf3.general_settings": "Paramètres généraux",
-
   "text.betterf3.module.minecraft": "Minecraft",
   "text.betterf3.module.fps": "FPS",
   "text.betterf3.module.graphics": "Graphismes",
@@ -76,9 +73,7 @@
   "text.betterf3.module.system": "Système",
   "text.betterf3.module.target": "Éléments visés",
   "text.betterf3.module.empty": "Séparateur",
-
   "text.betterf3.line.minecraft": "Minecraft",
-
   "text.betterf3.line.chunk_sections": "Sections de tronçons",
   "text.betterf3.line.chunk_culling": "Élimination des tronçons",
   "text.betterf3.line.pending_chunks": "Tronçons en attente",
@@ -93,25 +88,23 @@
   "text.betterf3.line.disabled": "Désactivé",
   "text.betterf3.line.rendered": "rendu(e)s",
   "text.betterf3.line.total": "total",
-
   "text.betterf3.line.player_coords": "",
   "text.betterf3.line.block_coords": "Bloc",
   "text.betterf3.line.chunk_relative_coords": "Relatives au tronçon",
   "text.betterf3.line.chunk_coords": "Coordonnées du tronçon",
-
   "text.betterf3.line.particles": "Particules",
   "text.betterf3.line.entities": "Entités",
   "text.betterf3.line.monster": "Monstres",
   "text.betterf3.line.creature": "Créatures",
   "text.betterf3.line.ambient": "Ambiance",
+  "text.betterf3.line.axolotls": "Axolotls",
   "text.betterf3.line.water_creature": "Créatures aquatiques",
+  "text.betterf3.line.underground_water_creature": "Underground Water Creatures",
   "text.betterf3.line.water_ambient": "Ambiance aquatique",
   "text.betterf3.line.misc": "Divers",
-
   "text.betterf3.line.fps": "",
   "text.betterf3.line.fps.unlimited": "Illimité",
   "text.betterf3.line.fps.vsync": "avec syncro verticale",
-
   "text.betterf3.line.render_distance": "Distance d'affichage",
   "text.betterf3.line.graphics": "Graphismes",
   "text.betterf3.line.clouds": "Nuages",
@@ -120,24 +113,22 @@
   "text.betterf3.line.off": "Non",
   "text.betterf3.line.fast": "Rapides",
   "text.betterf3.line.fancy": "Détaillés",
-
   "text.betterf3.line.pie_graph": "Diagramme circulaire (Maj. + F3)",
   "text.betterf3.line.fps_tps": "FPS / TPS (Alt + F3)",
   "text.betterf3.line.help": "Obtenir de l'aide",
   "text.betterf3.line.visible": "Visible",
   "text.betterf3.line.hidden": "Masqué",
   "text.betterf3.line.help_press": "Maintenez F3 + Q",
-
   "text.betterf3.line.dimension": "Dimension",
   "text.betterf3.line.facing": "Orientation",
   "text.betterf3.line.north": "Nord",
   "text.betterf3.line.south": "Sud",
   "text.betterf3.line.west": "Ouest",
   "text.betterf3.line.east": "Est",
-  "text.betterf3.line.negative_z": "vers un Z négatif",
-  "text.betterf3.line.positive_z": "vers un Z positif",
-  "text.betterf3.line.negative_x": "vers un X négatif",
-  "text.betterf3.line.positive_x": "vers un X positif",
+  "text.betterf3.line.negative_z": "Vers un Z négatif",
+  "text.betterf3.line.positive_z": "Vers un Z positif",
+  "text.betterf3.line.negative_x": "Vers un X négatif",
+  "text.betterf3.line.positive_x": "Vers un X positif",
   "text.betterf3.line.rotation": "Rotation",
   "text.betterf3.line.light": "Luminosité",
   "text.betterf3.line.light_server": "Luminosité (serveur)",
@@ -148,17 +139,15 @@
   "text.betterf3.line.clamped": "Clamped",
   "text.betterf3.line.days_played": "Jours passés",
   "text.betterf3.line.waiting_chunk": "En attente du tronçon...",
-
   "text.betterf3.line.server_tick": "",
   "text.betterf3.line.packets_sent": "Paquets envoyés",
   "text.betterf3.line.packets_received": "Paquets reçus",
   "text.betterf3.line.integrated_server": "Serveur intégré",
-
   "text.betterf3.line.sounds": "Sons",
   "text.betterf3.line.ambient_sounds": "Bruits ambiants",
   "text.betterf3.line.playing": "joués",
   "text.betterf3.line.maximum": "maximum",
-
+  "text.betterf3.line.mood": "Mood",
   "text.betterf3.line.java_version": "Version Java",
   "text.betterf3.line.memory_usage": "Mémoire utilisée",
   "text.betterf3.line.allocated_memory": "Mémoire allouée",
@@ -168,10 +157,8 @@
   "text.betterf3.line.gpu": "GPU",
   "text.betterf3.line.opengl_version": "Version OpenGL",
   "text.betterf3.line.gpu_driver": "Pilote GPU",
-
   "text.betterf3.line.misc_left": "Divers à gauche",
   "text.betterf3.line.misc_right": "Divers à droite",
-
   "text.betterf3.line.targeted_block": "Bloc visé",
   "text.betterf3.line.targeted_fluid": "Fluide visé",
   "text.betterf3.line.targeted_entity": "Entité visée",
@@ -180,5 +167,7 @@
   "text.betterf3.line.block_states": "États du bloc",
   "text.betterf3.line.block_tags": "Tags du bloc",
   "text.betterf3.line.fluid_states": "États du fluide",
-  "text.betterf3.line.fluid_tags": "Tags du fluide"
+  "text.betterf3.line.fluid_tags": "Tags du fluide",
+  "text.betterf3.line.nothing": "Blank Line",
+  "text.betterf3.line.nothing2": "Another Blank Line"
 }

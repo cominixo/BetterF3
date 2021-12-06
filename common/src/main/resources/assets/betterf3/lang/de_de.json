@@ -9,7 +9,6 @@
   "format.betterf3.chunklight": "Insgesamt: %s  Himmel: %s  Block: %s",
   "format.betterf3.chunklight_server": "Himmel: %s  Block: %s",
   "format.betterf3.rotation": "Gieren: %s  Neigung: %s",
-  
   "config.betterf3.title": "BetterF3",
   "config.betterf3.title.general": "Allgemein",
   "config.betterf3.title.config": "Konfiguration",
@@ -41,14 +40,11 @@
   "config.betterf3.color.fps.high": "Farbe für hohes FPS",
   "config.betterf3.color.fps.medium": "Farbe für mittleres FPS",
   "config.betterf3.color.fps.low": "Farbe für niedriges FPS",
-  "config.betterf3.color.fps.high.tooltip": "Legt die Farbe des Textes für hohes FPS fest",
-  "config.betterf3.color.fps.medium.tooltip": "Legt die Farbe des Textes für mittleres FPS fest",
-  "config.betterf3.color.fps.low.tooltip": "Legt die Farbe des Textes für niedriges FPS fest",
+  "config.betterf3.color.fps.high.tooltip": "Legt die Farbe des Textes für hohes FPS fest.",
+  "config.betterf3.color.fps.medium.tooltip": "Legt die Farbe des Textes für mittleres FPS fest.",
+  "config.betterf3.color.fps.low.tooltip": "Legt die Farbe des Textes für niedriges FPS fest.",
   "config.betterf3.color.background": "Hintergrundfarbe",
-  "config.betterf3.color.background.tooltip": "Ändert die Hintergrundfarbe jeder Zeile (ARGB).",
-
-
-
+  "config.betterf3.color.background.tooltip": "Ändert die Hintergrundfarbe jeder Zeile (ARGB)",
   "config.betterf3.module.enable": "Modul aktivieren",
   "config.betterf3.module.enable.tooltip": "Aktiviert dieses Modul.",
   "config.betterf3.left_modules": "Linke Module",
@@ -62,7 +58,6 @@
   "config.betterf3.order_left_button": "Linke Module",
   "config.betterf3.order_right_button": "Rechte Module",
   "config.betterf3.general_settings": "Allgemeine Einstellungen",
-
   "text.betterf3.module.minecraft": "Minecraft",
   "text.betterf3.module.fps": "FPS",
   "text.betterf3.module.graphics": "Grafik",
@@ -78,9 +73,7 @@
   "text.betterf3.module.system": "System",
   "text.betterf3.module.target": "Angepeilt",
   "text.betterf3.module.empty": "Trenner",
-
   "text.betterf3.line.minecraft": "Minecraft",
-
   "text.betterf3.line.chunk_sections": "Chunk-Abschnitte",
   "text.betterf3.line.chunk_culling": "Chunk Culling",
   "text.betterf3.line.pending_chunks": "Ausstehende Chunks",
@@ -95,25 +88,23 @@
   "text.betterf3.line.disabled": "Deaktiviert",
   "text.betterf3.line.rendered": "angezeigt",
   "text.betterf3.line.total": "gesamt",
-
   "text.betterf3.line.player_coords": "",
   "text.betterf3.line.block_coords": "Block",
   "text.betterf3.line.chunk_relative_coords": "Chunk Relativ",
   "text.betterf3.line.chunk_coords": "Chunk-Koordinaten",
-
   "text.betterf3.line.particles": "Partikel",
   "text.betterf3.line.entities": "Entitäten",
   "text.betterf3.line.monster": "Monster",
   "text.betterf3.line.creature": "Kreaturen",
   "text.betterf3.line.ambient": "Umgebung",
+  "text.betterf3.line.axolotls": "Axolotls",
   "text.betterf3.line.water_creature": "Wasserkreaturen",
+  "text.betterf3.line.underground_water_creature": "Underground Water Creatures",
   "text.betterf3.line.water_ambient": "Wasser Ambient",
   "text.betterf3.line.misc": "Sonstiges",
-
   "text.betterf3.line.fps": "",
   "text.betterf3.line.fps.unlimited": "Unbegrenzt",
   "text.betterf3.line.fps.vsync": "mit V-Sync",
-
   "text.betterf3.line.render_distance": "Anzeigedistanz",
   "text.betterf3.line.graphics": "Grafik",
   "text.betterf3.line.clouds": "Wolken",
@@ -122,14 +113,12 @@
   "text.betterf3.line.off": "Aus",
   "text.betterf3.line.fast": "Schnell",
   "text.betterf3.line.fancy": "Fancy",
-
   "text.betterf3.line.pie_graph": "Kreisdiagramm (Umschalt+F3)",
   "text.betterf3.line.fps_tps": "FPS / TPS (Alt+F3)",
   "text.betterf3.line.help": "Für Hilfe",
   "text.betterf3.line.visible": "Sichtbar",
   "text.betterf3.line.hidden": "Versteckt",
   "text.betterf3.line.help_press": "F3 + Q drücken",
-
   "text.betterf3.line.dimension": "Dimension",
   "text.betterf3.line.facing": "Blickrichtung",
   "text.betterf3.line.north": "Norden",
@@ -150,17 +139,15 @@
   "text.betterf3.line.clamped": "Gedeckelt",
   "text.betterf3.line.days_played": "Tage Gespielt",
   "text.betterf3.line.waiting_chunk": "Auf einen Chunk warten...",
-
   "text.betterf3.line.server_tick": "",
   "text.betterf3.line.packets_sent": "Gesendete Pakete",
   "text.betterf3.line.packets_received": "Empfangene Pakete",
   "text.betterf3.line.integrated_server": "Integrierter Server",
-
   "text.betterf3.line.sounds": "Geräusche",
   "text.betterf3.line.ambient_sounds": "Umgebungsgeräusche",
   "text.betterf3.line.playing": "spielend",
-  "text.betterf3.line.maximum": "Maximum",
-
+  "text.betterf3.line.maximum": "maximum",
+  "text.betterf3.line.mood": "Mood",
   "text.betterf3.line.java_version": "Java-Version",
   "text.betterf3.line.memory_usage": "Speicherverbrauch",
   "text.betterf3.line.allocated_memory": "Zugewiesener Speicher",
@@ -170,10 +157,8 @@
   "text.betterf3.line.gpu": "GPU",
   "text.betterf3.line.opengl_version": "OpenGL-Version",
   "text.betterf3.line.gpu_driver": "GPU-Treiber",
-
   "text.betterf3.line.misc_left": "Sonstiges Links",
   "text.betterf3.line.misc_right": "Sonstiges Rechts",
-  
   "text.betterf3.line.targeted_block": "Angepeilter Block",
   "text.betterf3.line.targeted_fluid": "Angepeilte Flüssigkeit",
   "text.betterf3.line.targeted_entity": "Angepeilte Entität",
@@ -182,5 +167,7 @@
   "text.betterf3.line.block_states": "Blockzustände",
   "text.betterf3.line.block_tags": "Block-Tags",
   "text.betterf3.line.fluid_states": "Flüssigkeitszustände",
-  "text.betterf3.line.fluid_tags": "Flüssigkeits-Tags"
+  "text.betterf3.line.fluid_tags": "Flüssigkeits-Tags",
+  "text.betterf3.line.nothing": "Blank Line",
+  "text.betterf3.line.nothing2": "Another Blank Line"
 }

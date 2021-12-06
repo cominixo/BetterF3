@@ -9,7 +9,6 @@
   "format.betterf3.chunklight": "Total: %s  Sky: %s  Block: %s",
   "format.betterf3.chunklight_server": "Sky: %s  Block: %s",
   "format.betterf3.rotation": "Yaw: %s  Pitch: %s",
-
   "config.betterf3.title": "BetterF3",
   "config.betterf3.title.general": "일반",
   "config.betterf3.title.config": "설정",
@@ -46,9 +45,6 @@
   "config.betterf3.color.fps.low.tooltip": "FPS가 낮을 때 텍스트의 색을 바꿉니다.",
   "config.betterf3.color.background": "배경색",
   "config.betterf3.color.background.tooltip": "모든 줄의 배경색을 바꿉니다(ARGB).",
-
-
-
   "config.betterf3.module.enable": "모듈 활성화",
   "config.betterf3.module.enable.tooltip": "이 모듈을 활성화합니다.",
   "config.betterf3.left_modules": "왼쪽 모듈",
@@ -62,7 +58,6 @@
   "config.betterf3.order_left_button": "왼쪽 모듈",
   "config.betterf3.order_right_button": "오른쪽 모듈",
   "config.betterf3.general_settings": "일반정설정",
-
   "text.betterf3.module.minecraft": "Minecraft",
   "text.betterf3.module.fps": "FPS",
   "text.betterf3.module.graphics": "그래픽",
@@ -78,9 +73,7 @@
   "text.betterf3.module.system": "시스템",
   "text.betterf3.module.target": "타깃",
   "text.betterf3.module.empty": "분리자",
-
   "text.betterf3.line.minecraft": "Minecraft",
-
   "text.betterf3.line.chunk_sections": "청크 섹션",
   "text.betterf3.line.chunk_culling": "제외된 청크",
   "text.betterf3.line.pending_chunks": "보류 중인 청크",
@@ -95,26 +88,23 @@
   "text.betterf3.line.disabled": "비활성화됨",
   "text.betterf3.line.rendered": "렌더됨",
   "text.betterf3.line.total": "총합",
-
   "text.betterf3.line.player_coords": "",
   "text.betterf3.line.block_coords": "블록",
   "text.betterf3.line.chunk_relative_coords": "상대적인 청크",
   "text.betterf3.line.chunk_coords": "청크 좌표",
-
   "text.betterf3.line.particles": "입자",
   "text.betterf3.line.entities": "개체",
   "text.betterf3.line.monster": "몬스터",
   "text.betterf3.line.creature": "생물",
   "text.betterf3.line.ambient": "분위기",
+  "text.betterf3.line.axolotls": "Axolotls",
   "text.betterf3.line.water_creature": "수생생물",
   "text.betterf3.line.underground_water_creature": "지하 수생생물",
   "text.betterf3.line.water_ambient": "물 분위기 생물",
   "text.betterf3.line.misc": "기타",
-
   "text.betterf3.line.fps": "",
   "text.betterf3.line.fps.unlimited": "무제한",
   "text.betterf3.line.fps.vsync": "V-Sync 사용",
-
   "text.betterf3.line.render_distance": "렌더 거리",
   "text.betterf3.line.graphics": "그래픽",
   "text.betterf3.line.clouds": "구름",
@@ -123,14 +113,12 @@
   "text.betterf3.line.off": "꺼짐",
   "text.betterf3.line.fast": "빠름",
   "text.betterf3.line.fancy": "화려함",
-
   "text.betterf3.line.pie_graph": "파이 그래프 (Shift+F3)",
   "text.betterf3.line.fps_tps": "FPS / TPS (Alt+F3)",
   "text.betterf3.line.help": "도움을 위해서는",
   "text.betterf3.line.visible": "보임",
   "text.betterf3.line.hidden": "숨겨짐",
   "text.betterf3.line.help_press": "F3 + Q를 요누르세요",
-
   "text.betterf3.line.dimension": "차원",
   "text.betterf3.line.facing": "Facing",
   "text.betterf3.line.north": "North",
@@ -151,17 +139,15 @@
   "text.betterf3.line.clamped": "Clamped",
   "text.betterf3.line.days_played": "플레이한 일수",
   "text.betterf3.line.waiting_chunk": "청크를 기다리는 중...",
-
   "text.betterf3.line.server_tick": "",
   "text.betterf3.line.packets_sent": "보내진 패킷",
   "text.betterf3.line.packets_received": "받은 패킷",
   "text.betterf3.line.integrated_server": "통합 서버",
-
   "text.betterf3.line.sounds": "소리",
   "text.betterf3.line.ambient_sounds": "분위기 소리",
   "text.betterf3.line.playing": "재생 중",
   "text.betterf3.line.maximum": "최대",
-
+  "text.betterf3.line.mood": "Mood",
   "text.betterf3.line.java_version": "Java  버전",
   "text.betterf3.line.memory_usage": "메모리 사용량",
   "text.betterf3.line.allocated_memory": "할당된 메모리",
@@ -171,10 +157,8 @@
   "text.betterf3.line.gpu": "GPU",
   "text.betterf3.line.opengl_version": "OpenGL 버전",
   "text.betterf3.line.gpu_driver": "GPU 드라이버",
-
   "text.betterf3.line.misc_left": "기타 왼쪽",
   "text.betterf3.line.misc_right": "기타 오른쪽",
-
   "text.betterf3.line.targeted_block": "바라보고 있는 블록",
   "text.betterf3.line.targeted_fluid": "바라보고 있는 유체",
   "text.betterf3.line.targeted_entity": "바라보고 있는 개체",
@@ -183,5 +167,7 @@
   "text.betterf3.line.block_states": "블록 상태",
   "text.betterf3.line.block_tags": "블록 태그",
   "text.betterf3.line.fluid_states": "유체 상태",
-  "text.betterf3.line.fluid_tags": "유체 태그"
+  "text.betterf3.line.fluid_tags": "유체 태그",
+  "text.betterf3.line.nothing": "Blank Line",
+  "text.betterf3.line.nothing2": "Another Blank Line"
 }

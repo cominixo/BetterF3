@@ -9,7 +9,6 @@
   "format.betterf3.chunklight": "明るさ: %s  空: %s  ブロック: %s",
   "format.betterf3.chunklight_server": "空: %s  ブロック: %s",
   "format.betterf3.rotation": "Yaw: %s  Pitch: %s",
-
   "config.betterf3.title": "BetterF3",
   "config.betterf3.title.general": "一般",
   "config.betterf3.title.config": "構成",
@@ -46,9 +45,6 @@
   "config.betterf3.color.fps.low.tooltip": "FPSが低いときにテキストの色を変更",
   "config.betterf3.color.background": "背景の色",
   "config.betterf3.color.background.tooltip": "背景の色を変える(ARGB)",
-
-
-
   "config.betterf3.module.enable": "モジュールの有効",
   "config.betterf3.module.enable.tooltip": "モジュールを有効化",
   "config.betterf3.left_modules": "左モジュール",
@@ -62,7 +58,6 @@
   "config.betterf3.order_left_button": "左モジュール",
   "config.betterf3.order_right_button": "右モジュール",
   "config.betterf3.general_settings": "一般設定",
-
   "text.betterf3.module.minecraft": "Minecraft",
   "text.betterf3.module.fps": "FPS",
   "text.betterf3.module.graphics": "画質",
@@ -78,9 +73,7 @@
   "text.betterf3.module.system": "システム",
   "text.betterf3.module.target": "ターゲット",
   "text.betterf3.module.empty": "Separator",
-
   "text.betterf3.line.minecraft": "Minecraft",
-
   "text.betterf3.line.chunk_sections": "Chunk Sections",
   "text.betterf3.line.chunk_culling": "Chunk Culling",
   "text.betterf3.line.pending_chunks": "Pending Chunks",
@@ -95,25 +88,23 @@
   "text.betterf3.line.disabled": "無効",
   "text.betterf3.line.rendered": "描画済み",
   "text.betterf3.line.total": "合計",
-
   "text.betterf3.line.player_coords": "",
   "text.betterf3.line.block_coords": "ブロック",
   "text.betterf3.line.chunk_relative_coords": "チャンク内の相対座標",
   "text.betterf3.line.chunk_coords": "チャンクの座標",
-
   "text.betterf3.line.particles": "粒子",
   "text.betterf3.line.entities": "モブ",
   "text.betterf3.line.monster": "敵対モブ",
   "text.betterf3.line.creature": "有効モブ",
   "text.betterf3.line.ambient": "Ambient",
+  "text.betterf3.line.axolotls": "Axolotls",
   "text.betterf3.line.water_creature": "水生モブ",
+  "text.betterf3.line.underground_water_creature": "Underground Water Creatures",
   "text.betterf3.line.water_ambient": "水中モブ",
   "text.betterf3.line.misc": "他",
-
   "text.betterf3.line.fps": "",
   "text.betterf3.line.fps.unlimited": "無制限",
   "text.betterf3.line.fps.vsync": "with V-Sync",
-
   "text.betterf3.line.render_distance": "描画距離",
   "text.betterf3.line.graphics": "画質",
   "text.betterf3.line.clouds": "雲",
@@ -122,14 +113,12 @@
   "text.betterf3.line.off": "Off",
   "text.betterf3.line.fast": "Fast",
   "text.betterf3.line.fancy": "Fancy",
-
   "text.betterf3.line.pie_graph": "Pie Graph (Shift+F3)",
   "text.betterf3.line.fps_tps": "FPS / TPS (Alt+F3)",
   "text.betterf3.line.help": "ヘルプ",
   "text.betterf3.line.visible": "可視",
   "text.betterf3.line.hidden": "不可視",
   "text.betterf3.line.help_press": "Press F3 + Q",
-
   "text.betterf3.line.dimension": "次元",
   "text.betterf3.line.facing": "向き",
   "text.betterf3.line.north": "北",
@@ -150,17 +139,15 @@
   "text.betterf3.line.clamped": "Clamped",
   "text.betterf3.line.days_played": "ゲーム時間",
   "text.betterf3.line.waiting_chunk": "Waiting for chunk...",
-
   "text.betterf3.line.server_tick": "",
   "text.betterf3.line.packets_sent": "Packets Sent",
   "text.betterf3.line.packets_received": "Packets Received",
   "text.betterf3.line.integrated_server": "Integrated Server",
-
   "text.betterf3.line.sounds": "音",
   "text.betterf3.line.ambient_sounds": "環境音",
   "text.betterf3.line.playing": "再生中",
   "text.betterf3.line.maximum": "最大音量",
-
+  "text.betterf3.line.mood": "Mood",
   "text.betterf3.line.java_version": "JAVAのバージョン",
   "text.betterf3.line.memory_usage": "メモリ使用量",
   "text.betterf3.line.allocated_memory": "Allocated Memory",
@@ -170,10 +157,8 @@
   "text.betterf3.line.gpu": "GPU",
   "text.betterf3.line.opengl_version": "OpenGLのバージョン",
   "text.betterf3.line.gpu_driver": "GPU Driver",
-
   "text.betterf3.line.misc_left": "Misc Left",
   "text.betterf3.line.misc_right": "Misc Right",
-
   "text.betterf3.line.targeted_block": "目標ブロック",
   "text.betterf3.line.targeted_fluid": "目標液体",
   "text.betterf3.line.targeted_entity": "目標モブ",
@@ -182,5 +167,7 @@
   "text.betterf3.line.block_states": "ブロックの状態",
   "text.betterf3.line.block_tags": "ブロックのタグ",
   "text.betterf3.line.fluid_states": "液体の状態",
-  "text.betterf3.line.fluid_tags": "液体のタグ"
+  "text.betterf3.line.fluid_tags": "液体のタグ",
+  "text.betterf3.line.nothing": "Blank Line",
+  "text.betterf3.line.nothing2": "Another Blank Line"
 }
