@@ -3,7 +3,6 @@ package me.cominixo.betterf3.modules;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import java.util.Arrays;
 import java.util.List;
-import me.cominixo.betterf3.mixin.chunk.WorldRendererAccessor;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.cominixo.betterf3.utils.Utils;
 import net.minecraft.client.MinecraftClient;
@@ -55,13 +54,13 @@ public class EntityModule extends BaseModule {
      * @param client the Minecraft client
      */
     public void update(final MinecraftClient client) {
-        final WorldRendererAccessor worldRendererMixin = (WorldRendererAccessor) client.worldRenderer;
 
+        assert client.worldRenderer.world != null;
         final List<Text> entityValues =
                 Arrays.asList(Utils.styledText(I18n.translate("text.betterf3.line.rendered"), valueColor),
                         Utils.styledText(I18n.translate("text.betterf3.line.total"), this.totalColor),
-                Utils.styledText(worldRendererMixin.getRegularEntityCount(), valueColor),
-                Utils.styledText(worldRendererMixin.getWorld().getRegularEntityCount(), this.totalColor));
+                Utils.styledText(client.worldRenderer.regularEntityCount, valueColor),
+                Utils.styledText(client.worldRenderer.world.getRegularEntityCount(), this.totalColor));
 
         final IntegratedServer integratedServer = client.getServer();
 

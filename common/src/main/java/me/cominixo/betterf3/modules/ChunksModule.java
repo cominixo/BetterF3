@@ -9,7 +9,6 @@ import java.util.Optional;
 import me.cominixo.betterf3.mixin.chunk.ChunkBuilderAccessor;
 import me.cominixo.betterf3.mixin.chunk.ClientChunkManagerAccessor;
 import me.cominixo.betterf3.mixin.chunk.ClientChunkMapAccessor;
-import me.cominixo.betterf3.mixin.chunk.WorldRendererAccessor;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.cominixo.betterf3.utils.Utils;
 import net.minecraft.client.MinecraftClient;
@@ -71,16 +70,15 @@ public class ChunksModule extends BaseModule {
      */
     public void update(final MinecraftClient client) {
 
-        final WorldRendererAccessor worldRendererMixin = (WorldRendererAccessor) client.worldRenderer;
         final int totalChunks;
-        if (worldRendererMixin.getChunks() == null) {
+        if (client.worldRenderer.chunks == null) {
             totalChunks = 0;
         } else {
-            totalChunks = worldRendererMixin.getChunks().chunks.length;
+            totalChunks = client.worldRenderer.chunks.chunks.length;
         }
-        final int renderedChunks = worldRendererMixin.callGetCompletedChunkCount();
+        final int renderedChunks = client.worldRenderer.getCompletedChunkCount();
 
-        final ChunkBuilder chunkBuilder = worldRendererMixin.getChunkBuilder();
+        final ChunkBuilder chunkBuilder = client.worldRenderer.chunkBuilder;
         final ChunkBuilderAccessor chunkBuilderAccessor = (ChunkBuilderAccessor) chunkBuilder;
 
         if (client.world != null) {

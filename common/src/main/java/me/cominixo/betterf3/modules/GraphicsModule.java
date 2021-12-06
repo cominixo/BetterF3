@@ -1,6 +1,5 @@
 package me.cominixo.betterf3.modules;
 
-import me.cominixo.betterf3.mixin.chunk.WorldRendererAccessor;
 import me.cominixo.betterf3.utils.DebugLine;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderEffect;
@@ -38,13 +37,12 @@ public class GraphicsModule extends BaseModule {
      * @param client the Minecraft client
      */
     public void update(final MinecraftClient client) {
-        final WorldRendererAccessor worldRendererMixin = (WorldRendererAccessor) client.worldRenderer;
 
         final String cloudString = client.options.cloudRenderMode == CloudRenderMode.OFF ? I18n.translate("text.betterf3.line.off")
                 : (client.options.cloudRenderMode == CloudRenderMode.FAST ? I18n.translate("text.betterf3.line.fast") : I18n.translate("text.betterf3.line.fancy") );
 
         // Render Distance
-        lines.get(0).value(worldRendererMixin.getViewDistance());
+        lines.get(0).value(client.worldRenderer.viewDistance);
         // Graphics
         lines.get(1).value(StringUtils.capitalize(client.options.graphicsMode.toString()));
         // Clouds

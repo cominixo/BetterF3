@@ -10,7 +10,6 @@
     "KeyboardMixin",
     "chunk.ChunkBuilderAccessor",
     "chunk.ClientChunkManagerAccessor",
-    "chunk.ClientChunkMapAccessor",
-    "chunk.WorldRendererAccessor"
+    "chunk.ClientChunkMapAccessor"
   ]
 }
