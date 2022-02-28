@@ -6,9 +6,9 @@ import it.unimi.dsi.fastutil.longs.LongSets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import me.cominixo.betterf3.mixin.chunk.ChunkBuilderAccessor;
-import me.cominixo.betterf3.mixin.chunk.ClientChunkManagerAccessor;
-import me.cominixo.betterf3.mixin.chunk.ClientChunkMapAccessor;
+import me.cominixo.betterf3.ducks.ChunkBuilderAccess;
+import me.cominixo.betterf3.ducks.ClientChunkManagerAccess;
+import me.cominixo.betterf3.ducks.ClientChunkMapAccess;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.cominixo.betterf3.utils.Utils;
 import net.minecraft.client.MinecraftClient;
@@ -79,12 +79,12 @@ public class ChunksModule extends BaseModule {
         final int renderedChunks = client.worldRenderer.getCompletedChunkCount();
 
         final ChunkBuilder chunkBuilder = client.worldRenderer.chunkBuilder;
-        final ChunkBuilderAccessor chunkBuilderAccessor = (ChunkBuilderAccessor) chunkBuilder;
+        final ChunkBuilderAccess chunkBuilderDuck = (ChunkBuilderAccess) chunkBuilder;
 
         if (client.world != null) {
             final ClientChunkManager clientChunkManager = client.world.getChunkManager();
-            final ClientChunkManagerAccessor clientChunkManagerMixin = (ClientChunkManagerAccessor) clientChunkManager;
-            final ClientChunkMapAccessor clientChunkMapMixin = (ClientChunkMapAccessor) (Object) clientChunkManagerMixin.getChunks();
+            final ClientChunkManagerAccess clientChunkManagerMixin = (ClientChunkManagerAccess) clientChunkManager;
+            final ClientChunkMapAccess clientChunkMapMixin = (ClientChunkMapAccess) (Object) clientChunkManagerMixin.getChunks();
 
             // Client Chunk Cache
             lines.get(5).value(clientChunkMapMixin.getChunks().length());
@@ -118,13 +118,13 @@ public class ChunksModule extends BaseModule {
         lines.get(1).value(chunkCulling);
 
         // TODO make this work properly with Canvas (chunkBuilderAccessor is null when using it)
-        if (chunkBuilderAccessor != null) {
+        if (chunkBuilderDuck != null) {
             // Pending Chunks
-            lines.get(2).value(chunkBuilderAccessor.getQueuedTaskCount());
+            lines.get(2).value(chunkBuilderDuck.getQueuedTaskCount());
             // Pending Uploads to GPU
-            lines.get(3).value(chunkBuilderAccessor.getUploadQueue().size());
+            lines.get(3).value(chunkBuilderDuck.getUploadQueue().size());
             // Available Buffers
-            lines.get(4).value(chunkBuilderAccessor.getBufferCount());
+            lines.get(4).value(chunkBuilderDuck.getBufferCount());
         }
 
         // Loaded Chunks (Server)

@@ -1,23 +1,17 @@
-package me.cominixo.betterf3.mixin.chunk;
+package me.cominixo.betterf3.ducks;
 
 import java.util.Queue;
-import net.minecraft.client.render.chunk.ChunkBuilder;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Accessor;
 
 /**
  * Access the Chunk Builder.
  */
 @SuppressWarnings("checkstyle:MethodName")
-@Mixin(ChunkBuilder.class)
-public interface ChunkBuilderAccessor {
-
+public interface ChunkBuilderAccess {
     /**
      * Gets the chunk batch count.
      *
      * @return The chunk batch.
      */
-    @Accessor
     int getQueuedTaskCount();
 
     /**
@@ -25,7 +19,6 @@ public interface ChunkBuilderAccessor {
      *
      * @return The amount of chunks to upload.
      */
-    @Accessor
     Queue<Runnable> getUploadQueue();
 
     /**
@@ -33,7 +26,6 @@ public interface ChunkBuilderAccessor {
      *
      * @return The free buffer count.
      */
-    @Accessor
     int getBufferCount();
 
 }

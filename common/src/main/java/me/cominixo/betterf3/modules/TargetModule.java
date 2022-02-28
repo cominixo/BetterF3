@@ -2,7 +2,6 @@ package me.cominixo.betterf3.modules;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.cominixo.betterf3.utils.DebugLineList;
 import me.cominixo.betterf3.utils.Utils;
@@ -77,9 +76,7 @@ public class TargetModule extends BaseModule {
             ((DebugLineList) lines.get(2)).values(blockStates);
 
             final List<String> blockTags = new ArrayList<>();
-
-            Objects.requireNonNull(client.getNetworkHandler()).getTagManager().getOrCreateTagGroup(Registry.BLOCK_KEY).getTagsFor(blockState.getBlock())
-                    .forEach(blockTag -> blockTags.add("#" + blockTag));
+            blockState.streamTags().map(arg -> "#" + arg.id()).forEach(blockTags::add);
 
             ((DebugLineList) lines.get(3)).values(blockTags);
         } else {
@@ -104,8 +101,7 @@ public class TargetModule extends BaseModule {
 
             final List<String> fluidTags = new ArrayList<>();
 
-            Objects.requireNonNull(client.getNetworkHandler()).getTagManager().getOrCreateTagGroup(Registry.FLUID_KEY).getTagsFor(fluidState.getFluid())
-                    .forEach(fluidTag -> fluidTags.add("#" + fluidTag));
+            fluidState.streamTags().map(arg -> "#" + arg.id()).forEach(fluidTags::add);
 
             ((DebugLineList) lines.get(8)).values(fluidTags);
         } else {

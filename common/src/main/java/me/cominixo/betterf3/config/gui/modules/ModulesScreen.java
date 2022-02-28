@@ -80,7 +80,7 @@ public class ModulesScreen extends Screen {
 
         this.addDrawableChild(new ButtonWidget(this.width / 2 - 154, this.height - 30 + 4, 300 + 8, 20,
                 new TranslatableText("config.betterf3.modules.done_button"), buttonWidget -> {
-            this.onClose();
+            this.close();
             assert client != null;
             client.setScreen(this.parent);
         }));
@@ -98,7 +98,7 @@ public class ModulesScreen extends Screen {
     }
 
     @Override
-    public void onClose() {
+    public void close() {
         if (this.side == PositionEnum.LEFT) {
             BaseModule.modules.clear();
             for (final ModuleListWidget.ModuleEntry entry : this.modulesListWidget.moduleEntries) {

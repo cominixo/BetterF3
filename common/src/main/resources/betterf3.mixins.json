@@ -3,13 +3,11 @@
   "package": "me.cominixo.betterf3.mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8.4",
-  "server": [],
-  "mixins": [],
   "client": [
     "DebugMixin",
     "KeyboardMixin",
-    "chunk.ChunkBuilderAccessor",
-    "chunk.ClientChunkManagerAccessor",
-    "chunk.ClientChunkMapAccessor"
+    "chunk.ChunkBuilderMixin",
+    "chunk.ClientChunkMapMixin",
+    "chunk.ClientChunkManagerMixin"
   ]
 }
