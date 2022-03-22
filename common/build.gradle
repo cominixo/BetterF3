@@ -16,8 +16,8 @@ dependencies {
         exclude module: 'fabric-api'
     }
 
-    implementation 'com.electronwill.night-config:json:3.6.4'
-    shadowCommon "com.electronwill.night-config:json:3.6.4"
+    implementation 'com.electronwill.night-config:json:3.6.5'
+    shadowCommon "com.electronwill.night-config:json:3.6.5"
 }
 
 loom {
@@ -32,12 +32,6 @@ architectury {
         common()
     } else {
         common(false)
-    }
-}
-
-afterEvaluate {
-    remapJar {
-        remapAccessWidener.set(false)
     }
 }
 

@@ -23,8 +23,8 @@
   "config.betterf3.animations.tooltip": "Ajoute une animation à la fermeture et à l'ouverture de l'interface F3.",
   "config.betterf3.animationSpeed": "Vitesse d'animation",
   "config.betterf3.animationSpeed.tooltip": "Définit la vitesse de l'animation.",
-  "config.betterf3.fontScale": "Font Scale",
-  "config.betterf3.fontScale.tooltip": "Set the scale of the font.",
+  "config.betterf3.fontScale": "Échelle de la police",
+  "config.betterf3.fontScale.tooltip": "Définir l'échelle de la police.",
   "config.betterf3.category.modules": "Modules",
   "config.betterf3.disable_line.tooltip": "Active la ligne",
   "config.betterf3.color.name": "Couleur du nom",
@@ -99,7 +99,7 @@
   "text.betterf3.line.ambient": "Ambiance",
   "text.betterf3.line.axolotls": "Axolotls",
   "text.betterf3.line.water_creature": "Créatures aquatiques",
-  "text.betterf3.line.underground_water_creature": "Underground Water Creatures",
+  "text.betterf3.line.underground_water_creature": "Créatures d'eau souterraine",
   "text.betterf3.line.water_ambient": "Ambiance aquatique",
   "text.betterf3.line.misc": "Divers",
   "text.betterf3.line.fps": "",
@@ -147,7 +147,7 @@
   "text.betterf3.line.ambient_sounds": "Bruits ambiants",
   "text.betterf3.line.playing": "joués",
   "text.betterf3.line.maximum": "maximum",
-  "text.betterf3.line.mood": "Mood",
+  "text.betterf3.line.mood": "Ambiance",
   "text.betterf3.line.java_version": "Version Java",
   "text.betterf3.line.memory_usage": "Mémoire utilisée",
   "text.betterf3.line.allocated_memory": "Mémoire allouée",
@@ -168,6 +168,6 @@
   "text.betterf3.line.block_tags": "Tags du bloc",
   "text.betterf3.line.fluid_states": "États du fluide",
   "text.betterf3.line.fluid_tags": "Tags du fluide",
-  "text.betterf3.line.nothing": "Blank Line",
-  "text.betterf3.line.nothing2": "Another Blank Line"
+  "text.betterf3.line.nothing": "Ligne vierge",
+  "text.betterf3.line.nothing2": "Une autre ligne vierge"
 }

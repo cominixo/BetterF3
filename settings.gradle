@@ -8,7 +8,7 @@ pluginManagement {
     }
 }
 
-boolean forge_enabled = false // Confirm settings in gradle.properties
+boolean forge_enabled = true // Confirm settings in gradle.properties
 
 include("common") // Common directory
 include("fabric") // Fabric directory

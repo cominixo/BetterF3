@@ -1,8 +1,8 @@
 <div style="text-align: center;"><h1 >BetterF3</h1>
 <br />
 
-[![Version](https://img.shields.io/badge/dynamic/json?color=ed37aa&label=Version&query=%24%5B%27promos%27%5D%5B%271.18-latest%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fcominixo%2FBetterF3%2Farchitectury%2F1.18%2Fupdate.json?cacheSeconds=2592000)](https://www.curseforge.com/minecraft/mc-mods/betterf3/files)
-[![Minecraft Versions](https://img.shields.io/badge/Minecraft-1.16.2--1.18+-9450cc)](http://files.minecraftforge.net/)
+[![Version](https://img.shields.io/badge/dynamic/json?color=ed37aa&label=Version&query=%24%5B%27promos%27%5D%5B%271.18.2-latest%27%5D&url=https%3A%2F%2Fraw.githubusercontent.com%2Fcominixo%2FBetterF3%2Farchitectury%2F1.18%2Fupdate.json?cacheSeconds=2592000)](https://www.curseforge.com/minecraft/mc-mods/betterf3/files)
+[![Minecraft Versions](https://img.shields.io/badge/Minecraft-1.16.2--1.18.2+-9450cc)](http://files.minecraftforge.net/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-2230f2.svg)](https://github.com/cominixo/BetterF3/blob/architectury/1.18/LICENSE.txt)
 <br/>
 [![Twitter: TreyRuffy](https://img.shields.io/twitter/follow/TreyRuffy.svg?style=social)](https://twitter.com/TreyRuffy)
@@ -16,7 +16,7 @@ You can customize colors, position, add spacings, and more.
 </blockquote>
 
 <h3 align="center">
-<a href="https://www.curseforge.com/minecraft/mc-mods/betterf3/" target="_blank"CurseForge Homepage</a>
+<a href="https://www.curseforge.com/minecraft/mc-mods/betterf3/" target="_blank">CurseForge Homepage</a>
 </h3>
 
 ## Usage

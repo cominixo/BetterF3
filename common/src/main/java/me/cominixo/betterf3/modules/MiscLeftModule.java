@@ -55,24 +55,26 @@ public class MiscLeftModule extends BaseModule {
             final List<String> listCopy = new ArrayList<>(lines);
 
             for (final String s : listCopy) {
-                if (s.isEmpty()) {
-                    lines.remove(s);
-                }
-                final String[] stringSplit = s.split(" ");
-
-                for (final String vanilla : VANILLA_DEBUG_LEFT) {
-
-                    if (s.startsWith(vanilla)) {
+                if (s != null) {
+                    if (s.isEmpty()) {
                         lines.remove(s);
-                    } else if (stringSplit.length > 1) {
+                    }
+                    final String[] stringSplit = s.split(" ");
 
-                        if (stringSplit[1].equals("fps")) {
+                    for (final String vanilla : VANILLA_DEBUG_LEFT) {
+
+                        if (s.startsWith(vanilla)) {
+                            lines.remove(s);
+                        } else if (stringSplit.length > 1) {
+
+                            if (stringSplit[1].equals("fps")) {
+                                lines.remove(s);
+                            }
+                        }
+                        if (s.contains("tx") && s.contains("rx")) {
+                            // Have to do this to check if it's a vanilla server info line
                             lines.remove(s);
                         }
-                    }
-                    if (s.contains("tx") && s.contains("rx")) {
-                        // Have to do this to check if it's a vanilla server info line
-                        lines.remove(s);
                     }
                 }
             }

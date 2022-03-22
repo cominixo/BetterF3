@@ -47,23 +47,26 @@ public class BetterF3Forge {
      */
     public BetterF3Forge() {
         LOGGER.info("[BetterF3] Starting...");
-        // Register the setup method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
+        DistExecutor.safeRunWhenOn(Dist.DEDICATED_SERVER, () -> () ->
+            LOGGER.warn("[BetterF3] Not supported on dedicated server!"));
 
-        // Make sure the mod being absent on the other network side does not cause the client to display the server
-        // as incompatible
-        ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class,
-                () -> new IExtensionPoint.DisplayTest(() -> NetworkConstants.IGNORESERVERONLY, (a, b) -> true));
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> () -> {
+            // Register the setup method for modloading
+            FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 
-        // Sets up Cloth Config if it is installed
-        if (ModList.get().isLoaded("cloth_config"))
-            DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ForgeModMenu::registerModsPage);
-        else
-            LOGGER.info(I18n.translate("config.betterf3.need_cloth_config"));
+            // Register ourselves for server and other game events we are interested in
+            MinecraftForge.EVENT_BUS.register(this);
 
+            // Make sure the mod being absent on the other network side does not cause the client to display the server
+            // as incompatible
+            ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> NetworkConstants.IGNORESERVERONLY, (a, b) -> true));
+
+            // Sets up Cloth Config if it is installed
+            if (ModList.get().isLoaded("cloth_config"))
+                ForgeModMenu.registerModsPage();
+            else LOGGER.info(I18n.translate("config.betterf3.need_cloth_config"));
+        });
     }
 
     private void setup(final FMLCommonSetupEvent event) {

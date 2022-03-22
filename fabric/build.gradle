@@ -53,8 +53,8 @@ dependencies {
     include(modImplementation(fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)))
 
     // Tells Gradle to use night config
-    implementation 'com.electronwill.night-config:json:3.6.4'
-    shadowCommon 'com.electronwill.night-config:json:3.6.4'
+    implementation 'com.electronwill.night-config:json:3.6.5'
+    shadowCommon 'com.electronwill.night-config:json:3.6.5'
     compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 }
 
@@ -73,8 +73,8 @@ shadowJar {
 }
 
 remapJar {
+    input.set(shadowJar.archiveFile)
     dependsOn(shadowJar)
-    input.set(shadowJar.archivePath)
     archiveClassifier.set("Fabric-${rootProject.minecraft_version}")
 
     from rootProject.file("LICENSE.md")

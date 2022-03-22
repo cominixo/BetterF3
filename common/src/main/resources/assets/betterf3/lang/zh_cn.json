@@ -97,9 +97,9 @@
   "text.betterf3.line.monster": "怪物",
   "text.betterf3.line.creature": "生物",
   "text.betterf3.line.ambient": "环境",
-  "text.betterf3.line.axolotls": "Axolotls",
+  "text.betterf3.line.axolotls": "蝾螈",
   "text.betterf3.line.water_creature": "水生生物",
-  "text.betterf3.line.underground_water_creature": "Underground Water Creatures",
+  "text.betterf3.line.underground_water_creature": "地底水生生物",
   "text.betterf3.line.water_ambient": "水下环境",
   "text.betterf3.line.misc": "其它",
   "text.betterf3.line.fps": "",
@@ -152,9 +152,9 @@
   "text.betterf3.line.memory_usage": "内存占用",
   "text.betterf3.line.allocated_memory": "已分配内存",
   "text.betterf3.line.off_heap": "堆外内存",
-  "text.betterf3.line.cpu": "CPU",
+  "text.betterf3.line.cpu": "处理器",
   "text.betterf3.line.display": "显示",
-  "text.betterf3.line.gpu": "GPU",
+  "text.betterf3.line.gpu": "显示卡",
   "text.betterf3.line.opengl_version": "OpenGL版本",
   "text.betterf3.line.gpu_driver": "显卡驱动程序",
   "text.betterf3.line.misc_left": "其它左侧",
@@ -168,6 +168,6 @@
   "text.betterf3.line.block_tags": "方块标签",
   "text.betterf3.line.fluid_states": "液体状态",
   "text.betterf3.line.fluid_tags": "液体标签",
-  "text.betterf3.line.nothing": "Blank Line",
-  "text.betterf3.line.nothing2": "Another Blank Line"
+  "text.betterf3.line.nothing": "空行",
+  "text.betterf3.line.nothing2": "其他空行"
 }
