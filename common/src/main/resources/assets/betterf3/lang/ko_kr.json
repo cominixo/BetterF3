@@ -169,5 +169,7 @@
   "text.betterf3.line.fluid_states": "유체 상태",
   "text.betterf3.line.fluid_tags": "유체 태그",
   "text.betterf3.line.nothing": "Blank Line",
-  "text.betterf3.line.nothing2": "Another Blank Line"
+  "text.betterf3.line.nothing2": "Another Blank Line",
+  "config.betterf3.empty_lines": "Empty Lines Count",
+  "config.betterf3.empty_lines.tooltip": "The number of empty lines to display"
 }

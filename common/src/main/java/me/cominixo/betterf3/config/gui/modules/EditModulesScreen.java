@@ -3,6 +3,7 @@ package me.cominixo.betterf3.config.gui.modules;
 import me.cominixo.betterf3.config.ModConfigFile;
 import me.cominixo.betterf3.modules.BaseModule;
 import me.cominixo.betterf3.modules.CoordsModule;
+import me.cominixo.betterf3.modules.EmptyModule;
 import me.cominixo.betterf3.modules.FpsModule;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
@@ -10,6 +11,7 @@ import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import me.shedaniel.clothconfig2.gui.entries.BooleanListEntry;
 import me.shedaniel.clothconfig2.gui.entries.ColorEntry;
+import me.shedaniel.clothconfig2.gui.entries.IntegerListEntry;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
@@ -126,6 +128,26 @@ public final class EditModulesScreen {
 
         }
 
+        if (module instanceof EmptyModule emptyModule) {
+
+            final IntegerListEntry emptyLines = entryBuilder.startIntField(new TranslatableText("config.betterf3" +
+                ".empty_lines"), emptyModule.emptyLines)
+                .setDefaultValue(emptyModule.defaultEmptyLines)
+                .setTooltip(new TranslatableText("config.betterf3.empty_lines.tooltip"))
+                .setSaveConsumer(newValue -> {
+                    if (newValue > 20) {
+                        newValue = 20;
+                    } else if (newValue < 1) {
+                        newValue = 1;
+                    }
+                    emptyModule.emptyLines = newValue;
+                })
+                .build();
+
+            general.addEntry(emptyLines);
+
+        }
+
         if (module.nameColor != null && module.defaultNameColor != null) {
             final ColorEntry nameColor = entryBuilder.startColorField(new TranslatableText("config.betterf3" +
                             ".color.name"), module.nameColor.getRgb())
@@ -151,7 +173,7 @@ public final class EditModulesScreen {
         if (module.lines().size() > 1) {
             for (final DebugLine line : module.lines()) {
 
-                if (line.id().equals("")) {
+                if (line.id().equals("") || line.id().equals("nothing")) {
                     continue;
                 }
 

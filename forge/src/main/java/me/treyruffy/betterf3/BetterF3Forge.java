@@ -83,12 +83,12 @@ public class BetterF3Forge {
         new EntityModule().init();
         new SoundModule().init();
         new HelpModule().init();
-        BaseModule.modules.add(EmptyModule.INSTANCE);
+        BaseModule.modules.add(new EmptyModule(false));
         new MiscLeftModule().init();
 
         new SystemModule().init(PositionEnum.RIGHT);
         new MiscRightModule().init(PositionEnum.RIGHT);
-        BaseModule.modulesRight.add(EmptyModule.INSTANCE);
+        BaseModule.modulesRight.add(new EmptyModule(false));
         new TargetModule().init(PositionEnum.RIGHT);
 
         // Setup config with TOML file type

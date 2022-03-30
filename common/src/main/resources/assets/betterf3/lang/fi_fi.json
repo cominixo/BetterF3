@@ -169,5 +169,7 @@
   "text.betterf3.line.fluid_states": "Fluid States",
   "text.betterf3.line.fluid_tags": "Fluid Tagit",
   "text.betterf3.line.nothing": "Blank Line",
-  "text.betterf3.line.nothing2": "Another Blank Line"
+  "text.betterf3.line.nothing2": "Another Blank Line",
+  "config.betterf3.empty_lines": "Empty Lines Count",
+  "config.betterf3.empty_lines.tooltip": "The number of empty lines to display"
 }

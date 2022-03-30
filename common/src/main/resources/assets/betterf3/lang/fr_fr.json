@@ -169,5 +169,7 @@
   "text.betterf3.line.fluid_states": "États du fluide",
   "text.betterf3.line.fluid_tags": "Tags du fluide",
   "text.betterf3.line.nothing": "Ligne vierge",
-  "text.betterf3.line.nothing2": "Une autre ligne vierge"
+  "text.betterf3.line.nothing2": "Une autre ligne vierge",
+  "config.betterf3.empty_lines": "Empty Lines Count",
+  "config.betterf3.empty_lines.tooltip": "The number of empty lines to display"
 }

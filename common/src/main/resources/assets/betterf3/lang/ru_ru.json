@@ -169,5 +169,7 @@
   "text.betterf3.line.fluid_states": "Состояние жидкости",
   "text.betterf3.line.fluid_tags": "Теги жидкости",
   "text.betterf3.line.nothing": "Пустая строка",
-  "text.betterf3.line.nothing2": "Другая пустая линия"
+  "text.betterf3.line.nothing2": "Другая пустая линия",
+  "config.betterf3.empty_lines": "Empty Lines Count",
+  "config.betterf3.empty_lines.tooltip": "The number of empty lines to display"
 }

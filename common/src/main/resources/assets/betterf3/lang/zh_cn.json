@@ -169,5 +169,7 @@
   "text.betterf3.line.fluid_states": "液体状态",
   "text.betterf3.line.fluid_tags": "液体标签",
   "text.betterf3.line.nothing": "空行",
-  "text.betterf3.line.nothing2": "其他空行"
+  "text.betterf3.line.nothing2": "其他空行",
+  "config.betterf3.empty_lines": "Empty Lines Count",
+  "config.betterf3.empty_lines.tooltip": "The number of empty lines to display"
 }

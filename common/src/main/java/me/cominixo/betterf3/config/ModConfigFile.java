@@ -240,7 +240,7 @@ public final class ModConfigFile {
         try {
             baseModule = BaseModule.moduleById(moduleName).getClass().getDeclaredConstructor().newInstance();
         } catch (InstantiationException | IllegalAccessException | NullPointerException | NoSuchMethodException | InvocationTargetException e) {
-            baseModule = EmptyModule.INSTANCE;
+            baseModule = new EmptyModule(false);
         }
 
         final Config lines = moduleConfig.getOrElse("lines", () -> null);
@@ -283,6 +283,10 @@ public final class ModConfigFile {
                     fpsModule.defaultColorMed.getRgb()));
             fpsModule.colorLow = TextColor.fromRgb(moduleConfig.getOrElse("color_low",
                     fpsModule.defaultColorLow.getRgb()));
+        }
+
+        if (baseModule instanceof EmptyModule emptyModule) {
+            emptyModule.emptyLines = moduleConfig.getOrElse("empty_lines", 1);
         }
 
         baseModule.enabled = moduleConfig.getOrElse("enabled", true);
@@ -331,6 +335,10 @@ public final class ModConfigFile {
             if (fpsModule.colorLow != null) {
                 moduleConfig.set("color_low", fpsModule.colorLow.getRgb());
             }
+        }
+
+        if (module instanceof EmptyModule emptyModule) {
+            moduleConfig.set("empty_lines", emptyModule.emptyLines);
         }
 
         moduleConfig.set("enabled", module.enabled);

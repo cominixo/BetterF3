@@ -169,5 +169,7 @@
   "text.betterf3.line.fluid_states": "Stany płynu",
   "text.betterf3.line.fluid_tags": "Znaczniki płynu",
   "text.betterf3.line.nothing": "Pusta linia",
-  "text.betterf3.line.nothing2": "Kolejna pusta linia"
+  "text.betterf3.line.nothing2": "Kolejna pusta linia",
+  "config.betterf3.empty_lines": "Empty Lines Count",
+  "config.betterf3.empty_lines.tooltip": "The number of empty lines to display"
 }
