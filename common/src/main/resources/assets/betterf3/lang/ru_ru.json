@@ -10,7 +10,7 @@
   "format.betterf3.chunklight_server": "Небо: %s  Блок: %s",
   "format.betterf3.rotation": "Поворот: %s  Наклон: %s",
   "config.betterf3.title": "BetterF3",
-  "config.betterf3.title.general": "Осноные",
+  "config.betterf3.title.general": "Основные",
   "config.betterf3.title.config": "Настройки",
   "config.betterf3.title.modules": "Изменить модули",
   "config.betterf3.disable": "Отключить мод",
