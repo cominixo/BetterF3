@@ -29,9 +29,9 @@ loom {
 
 architectury {
     if (rootProject.forge_enabled.toBoolean()) {
-        common()
+        common("fabric","forge")
     } else {
-        common(false)
+        common("fabric")
     }
 }
 

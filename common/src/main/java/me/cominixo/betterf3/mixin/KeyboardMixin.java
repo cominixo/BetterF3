@@ -22,44 +22,44 @@ import static me.cominixo.betterf3.utils.Utils.xPos;
  */
 @Mixin(Keyboard.class)
 public class KeyboardMixin {
-    @Shadow @Final private MinecraftClient client;
+  @Shadow @Final private MinecraftClient client;
 
-    /**
-     * Adds the config menu by pressing f3 + m.
-     *
-     * @param key key pressed with f3
-     * @param cir Callback info
-     */
-    @Inject(method = "processF3", at = @At("HEAD"))
-    public void processF3(final int key, final CallbackInfoReturnable<Boolean> cir) {
-        if (key == 77) { // Key m
-            this.client.setScreen(new ModConfigScreen(null));
-        }
+  /**
+   * Adds the config menu by pressing f3 + m.
+   *
+   * @param key key pressed with f3
+   * @param cir Callback info
+   */
+  @Inject(method = "processF3", at = @At("HEAD"))
+  public void processF3(final int key, final CallbackInfoReturnable<Boolean> cir) {
+    if (key == 77) { // Key m
+      this.client.setScreen(new ModConfigScreen(null));
     }
+  }
 
-    /**
-     * Plays the animation on f3 keypress.
-     *
-     * @param window window
-     * @param key key
-     * @param scancode scancode
-     * @param i i
-     * @param j j
-     * @param ci Callback info
-     */
-    @Inject(method = "onKey", at = @At(value = "FIELD", opcode = Opcodes.PUTFIELD, target = "net/minecraft/client" +
-            "/option/GameOptions.debugEnabled : Z"), cancellable = true)
-    public void onDebugActivate(final long window, final int key, final int scancode, final int i, final int j, final CallbackInfo ci) {
+  /**
+   * Plays the animation on f3 keypress.
+   *
+   * @param window window
+   * @param key key
+   * @param scancode scancode
+   * @param i i
+   * @param j j
+   * @param ci Callback info
+   */
+  @Inject(method = "onKey", at = @At(value = "FIELD", opcode = Opcodes.PUTFIELD, target = "net/minecraft/client" +
+  "/option/GameOptions.debugEnabled : Z"), cancellable = true)
+  public void onDebugActivate(final long window, final int key, final int scancode, final int i, final int j, final CallbackInfo ci) {
 
-        if (GeneralOptions.enableAnimations) {
-            if (this.client.options.debugEnabled) {
-                closingAnimation = true;
-                ci.cancel();
-            } else {
-                closingAnimation = false;
-                xPos = START_X_POS;
-            }
-        }
+    if (GeneralOptions.enableAnimations) {
+      if (this.client.options.debugEnabled) {
+        closingAnimation = true;
+        ci.cancel();
+      } else {
+        closingAnimation = false;
+        xPos = START_X_POS;
+      }
     }
+  }
 
 }

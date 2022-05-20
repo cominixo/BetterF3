@@ -37,9 +37,9 @@
   "config.betterf3.color.x.tooltip": "이 모듈의 모든 줄에서 X 좌표의 색을 바꿉니다.",
   "config.betterf3.color.y.tooltip": "이 모듈의 모든 줄에서 Y 좌표의 색을 바꿉니다.",
   "config.betterf3.color.z.tooltip": "이 모듈의 모든 줄에서 Z 좌표의 색을 바꿉니다.",
-  "config.betterf3.color.fps.high": "높은 Fps 색",
-  "config.betterf3.color.fps.medium": "중간 Fps 색",
-  "config.betterf3.color.fps.low": "낮은 Fps 색",
+  "config.betterf3.color.fps.high": "FPS High Color",
+  "config.betterf3.color.fps.medium": "FPS Medium Color",
+  "config.betterf3.color.fps.low": "FPS Low Color",
   "config.betterf3.color.fps.high.tooltip": "FPS가 높을 때 텍스트의 색을 바꿉니다.",
   "config.betterf3.color.fps.medium.tooltip": "FPS가 중간일 때 텍스트의 색을 바꿉니다.",
   "config.betterf3.color.fps.low.tooltip": "FPS가 낮을 때 텍스트의 색을 바꿉니다.",
@@ -54,6 +54,8 @@
   "config.betterf3.modules.add_button": "모듈 추가",
   "config.betterf3.modules.delete_button": "모듈 삭제",
   "config.betterf3.modules.done_button": "완료",
+  "config.betterf3.empty_lines": "Empty Lines Count",
+  "config.betterf3.empty_lines.tooltip": "The number of empty lines to display",
   "config.betterf3.add_button.module_name": "모듈 이름",
   "config.betterf3.order_left_button": "왼쪽 모듈",
   "config.betterf3.order_right_button": "오른쪽 모듈",
@@ -84,6 +86,7 @@
   "text.betterf3.line.loaded_chunks_server": "로드된 청크 (서버)",
   "text.betterf3.line.forceloaded_chunks": "강제 로드된 청크",
   "text.betterf3.line.spawn_chunks": "스폰 청크",
+  "text.betterf3.line.chunk_file": "Region File",
   "text.betterf3.line.enabled": "활성화됨",
   "text.betterf3.line.disabled": "비활성화됨",
   "text.betterf3.line.rendered": "렌더됨",
@@ -169,7 +172,5 @@
   "text.betterf3.line.fluid_states": "유체 상태",
   "text.betterf3.line.fluid_tags": "유체 태그",
   "text.betterf3.line.nothing": "Blank Line",
-  "text.betterf3.line.nothing2": "Another Blank Line",
-  "config.betterf3.empty_lines": "Empty Lines Count",
-  "config.betterf3.empty_lines.tooltip": "The number of empty lines to display"
+  "text.betterf3.line.nothing2": "Another Blank Line"
 }

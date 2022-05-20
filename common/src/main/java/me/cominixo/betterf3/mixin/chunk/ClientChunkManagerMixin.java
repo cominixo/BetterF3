@@ -10,10 +10,10 @@ import org.spongepowered.asm.mixin.Shadow;
  */
 @Mixin(ClientChunkManager.class)
 public class ClientChunkManagerMixin implements ClientChunkManagerAccess {
-    @Shadow private volatile ClientChunkManager.ClientChunkMap chunks;
+  @Shadow volatile ClientChunkManager.ClientChunkMap chunks;
 
-    @Override
-    public ClientChunkManager.ClientChunkMap getChunks() {
-        return this.chunks;
-    }
+  @Override
+  public ClientChunkManager.ClientChunkMap getChunks() {
+    return this.chunks;
+  }
 }

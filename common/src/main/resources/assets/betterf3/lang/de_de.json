@@ -37,9 +37,9 @@
   "config.betterf3.color.x.tooltip": "Legt die Farbe der X-Koordinate in den Zeilen dieses Moduls fest.",
   "config.betterf3.color.y.tooltip": "Legt die Farbe der Y-Koordinate in den Zeilen dieses Moduls fest.",
   "config.betterf3.color.z.tooltip": "Legt die Farbe der Z-Koordinate in den Zeilen dieses Moduls fest.",
-  "config.betterf3.color.fps.high": "Farbe für hohes FPS",
-  "config.betterf3.color.fps.medium": "Farbe für mittleres FPS",
-  "config.betterf3.color.fps.low": "Farbe für niedriges FPS",
+  "config.betterf3.color.fps.high": "FPS High Color",
+  "config.betterf3.color.fps.medium": "FPS Medium Color",
+  "config.betterf3.color.fps.low": "FPS Low Color",
   "config.betterf3.color.fps.high.tooltip": "Legt die Farbe des Textes für hohes FPS fest.",
   "config.betterf3.color.fps.medium.tooltip": "Legt die Farbe des Textes für mittleres FPS fest.",
   "config.betterf3.color.fps.low.tooltip": "Legt die Farbe des Textes für niedriges FPS fest.",
@@ -54,6 +54,8 @@
   "config.betterf3.modules.add_button": "Modul hinzufügen",
   "config.betterf3.modules.delete_button": "Modul löschen",
   "config.betterf3.modules.done_button": "Fertig",
+  "config.betterf3.empty_lines": "Empty Lines Count",
+  "config.betterf3.empty_lines.tooltip": "The number of empty lines to display",
   "config.betterf3.add_button.module_name": "Modulname",
   "config.betterf3.order_left_button": "Linke Module",
   "config.betterf3.order_right_button": "Rechte Module",
@@ -84,6 +86,7 @@
   "text.betterf3.line.loaded_chunks_server": "Geladene Chunks (Server)",
   "text.betterf3.line.forceloaded_chunks": "Zwangsgeladene Chunks",
   "text.betterf3.line.spawn_chunks": "Spawn Chunks",
+  "text.betterf3.line.chunk_file": "Region File",
   "text.betterf3.line.enabled": "Aktiviert",
   "text.betterf3.line.disabled": "Deaktiviert",
   "text.betterf3.line.rendered": "angezeigt",
@@ -169,7 +172,5 @@
   "text.betterf3.line.fluid_states": "Flüssigkeitszustände",
   "text.betterf3.line.fluid_tags": "Flüssigkeits-Tags",
   "text.betterf3.line.nothing": "Blank Line",
-  "text.betterf3.line.nothing2": "Another Blank Line",
-  "config.betterf3.empty_lines": "Empty Lines Count",
-  "config.betterf3.empty_lines.tooltip": "The number of empty lines to display"
+  "text.betterf3.line.nothing2": "Another Blank Line"
 }

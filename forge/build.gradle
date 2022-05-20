@@ -1,9 +1,13 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "7.0.0" // Use Shadow to make a JAR with dependencies
+    id "com.github.johnrengelman.shadow" version "7.1.2" // Use Shadow to make a JAR with dependencies
 }
 
 configurations {
+    common
     shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentForge.extendsFrom common
 }
 
 architectury {
@@ -35,18 +39,8 @@ dependencies {
     // Minecraft Forge API
     forge "net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}"
 
-    // Tells Gradle to use the common directory
-    implementation(project(path: ":common")) {
-        transitive = false
-    }
-    developmentForge(project(path: ":common")) {
-        transitive = false
-    }
-
-    // Tells Gradle to include the common directory in the JAR file
-    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) {
-        transitive = false
-    }
+    common(project(path: ":common", configuration: "namedElements")) { transitive false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 }
 
 processResources {
@@ -68,7 +62,7 @@ shadowJar {
 }
 
 remapJar {
-    input.set(shadowJar.archiveFile)
+    inputFile.set(shadowJar.archiveFile)
     dependsOn(shadowJar)
     archiveClassifier.set("Forge-${rootProject.minecraft_version}")
 

@@ -37,9 +37,9 @@
   "config.betterf3.color.x.tooltip": "Change la couleur de la coordonnée X de toutes les lignes dans ce module.",
   "config.betterf3.color.y.tooltip": "Change la couleur de la coordonnée Y de toutes les lignes dans ce module.",
   "config.betterf3.color.z.tooltip": "Change la couleur de la coordonnée Z de toutes les lignes dans ce module.",
-  "config.betterf3.color.fps.high": "Couleur avec fps élevés",
-  "config.betterf3.color.fps.medium": "Couleur avec fps moyens",
-  "config.betterf3.color.fps.low": "Couleur avec fps faibles",
+  "config.betterf3.color.fps.high": "FPS High Color",
+  "config.betterf3.color.fps.medium": "FPS Medium Color",
+  "config.betterf3.color.fps.low": "FPS Low Color",
   "config.betterf3.color.fps.high.tooltip": "Change la couleur du texte quand le nombre de FPS est élevé.",
   "config.betterf3.color.fps.medium.tooltip": "Change la couleur du texte quand le nombre de FPS est moyen.",
   "config.betterf3.color.fps.low.tooltip": "Change la couleur du texte quand le nombre de FPS est faible.",
@@ -54,6 +54,8 @@
   "config.betterf3.modules.add_button": "Ajouter un module",
   "config.betterf3.modules.delete_button": "Supprimer le module",
   "config.betterf3.modules.done_button": "Terminé",
+  "config.betterf3.empty_lines": "Empty Lines Count",
+  "config.betterf3.empty_lines.tooltip": "The number of empty lines to display",
   "config.betterf3.add_button.module_name": "Nom du module",
   "config.betterf3.order_left_button": "Modules à gauche",
   "config.betterf3.order_right_button": "Modules à droite",
@@ -84,6 +86,7 @@
   "text.betterf3.line.loaded_chunks_server": "Tronçons chargés (serveur)",
   "text.betterf3.line.forceloaded_chunks": "Tronçons chargés de force",
   "text.betterf3.line.spawn_chunks": "Tronçons d'apparition",
+  "text.betterf3.line.chunk_file": "Region File",
   "text.betterf3.line.enabled": "Activé",
   "text.betterf3.line.disabled": "Désactivé",
   "text.betterf3.line.rendered": "rendu(e)s",
@@ -169,7 +172,5 @@
   "text.betterf3.line.fluid_states": "États du fluide",
   "text.betterf3.line.fluid_tags": "Tags du fluide",
   "text.betterf3.line.nothing": "Ligne vierge",
-  "text.betterf3.line.nothing2": "Une autre ligne vierge",
-  "config.betterf3.empty_lines": "Empty Lines Count",
-  "config.betterf3.empty_lines.tooltip": "The number of empty lines to display"
+  "text.betterf3.line.nothing2": "Une autre ligne vierge"
 }

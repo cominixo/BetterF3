@@ -10,41 +10,41 @@ import net.minecraft.text.TextColor;
  */
 public class DebugLineList extends DebugLine {
 
-    private List<String> values = new ArrayList<>();
+  private List<String> values = new ArrayList<>();
 
-    /**
-     * Instantiates a new Debug line list from id.
-     *
-     * @param id the id
-     */
-    public DebugLineList(final String id) {
-        super(id);
+  /**
+   * Instantiates a new Debug line list from id.
+   *
+   * @param id the id
+   */
+  public DebugLineList(final String id) {
+    super(id);
+  }
+
+  /**
+   * Sets values.
+   *
+   * @param values the values
+   */
+  public void values(final List<String> values) {
+    this.values = values;
+    this.active = true;
+  }
+
+  /**
+   * To texts list.
+   *
+   * @param nameColor  the key color
+   * @param valueColor the value color
+   * @return the list
+   */
+  public List<Text> toTexts(final TextColor nameColor, final TextColor valueColor) {
+
+    final List<Text> texts = new ArrayList<>();
+
+    for (final String v : this.values) {
+      texts.add(Utils.formattedFromString(v, nameColor, valueColor));
     }
-
-    /**
-     * Sets values.
-     *
-     * @param values the values
-     */
-    public void values(final List<String> values) {
-        this.values = values;
-        this.active = true;
-    }
-
-    /**
-     * To texts list.
-     *
-     * @param nameColor  the key color
-     * @param valueColor the value color
-     * @return the list
-     */
-    public List<Text> toTexts(final TextColor nameColor, final TextColor valueColor) {
-
-        final List<Text> texts = new ArrayList<>();
-
-        for (final String v : this.values) {
-            texts.add(Utils.formattedFromString(v, nameColor, valueColor));
-        }
-        return texts;
-    }
+    return texts;
+  }
 }

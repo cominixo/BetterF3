@@ -7,25 +7,25 @@ import java.util.Queue;
  */
 @SuppressWarnings("checkstyle:MethodName")
 public interface ChunkBuilderAccess {
-    /**
-     * Gets the chunk batch count.
-     *
-     * @return The chunk batch.
-     */
-    int getQueuedTaskCount();
+  /**
+   * Gets the chunk batch count.
+   *
+   * @return The chunk batch.
+   */
+  int getQueuedTaskCount();
 
-    /**
-     * Gets the chunks to upload.
-     *
-     * @return The amount of chunks to upload.
-     */
-    Queue<Runnable> getUploadQueue();
+  /**
+   * Gets the chunks to upload.
+   *
+   * @return The amount of chunks to upload.
+   */
+  Queue<Runnable> getUploadQueue();
 
-    /**
-     * Gets the free buffer count.
-     *
-     * @return The free buffer count.
-     */
-    int getBufferCount();
+  /**
+   * Gets the free buffer count.
+   *
+   * @return The free buffer count.
+   */
+  int getBufferCount();
 
 }

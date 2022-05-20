@@ -1,9 +1,13 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "7.0.0" // Use Shadow to make a JAR with dependencies
+    id "com.github.johnrengelman.shadow" version "7.1.2" // Use Shadow to make a JAR with dependencies
 }
 
 configurations {
+    common
     shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentFabric.extendsFrom common
 }
 
 architectury {
@@ -25,18 +29,8 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
     modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
 
-    // Tells Gradle to use the common directory
-    implementation(project(path: ":common")) {
-        transitive = false
-    }
-    developmentFabric(project(path: ":common")) {
-        transitive = false
-    }
-
-    // Tells Gradle to include the common directory in the JAR file
-    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) {
-        transitive = false
-    }
+    common(project(path: ":common", configuration: "namedElements")) { transitive false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
     // Tells Gradle to use cloth config
     modImplementation "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_version}", {
@@ -73,7 +67,7 @@ shadowJar {
 }
 
 remapJar {
-    input.set(shadowJar.archiveFile)
+    inputFile.set(shadowJar.archiveFile)
     dependsOn(shadowJar)
     archiveClassifier.set("Fabric-${rootProject.minecraft_version}")
 

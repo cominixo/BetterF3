@@ -14,24 +14,24 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(ChunkBuilder.class)
 public class ChunkBuilderMixin implements ChunkBuilderAccess {
 
-    @Shadow private volatile int queuedTaskCount;
+  @Shadow private volatile int queuedTaskCount;
 
-    @Shadow @Final private Queue<Runnable> uploadQueue;
+  @Shadow @Final private Queue<Runnable> uploadQueue;
 
-    @Shadow private volatile int bufferCount;
+  @Shadow private volatile int bufferCount;
 
-    @Override
-    public int getQueuedTaskCount() {
-        return this.queuedTaskCount;
-    }
+  @Override
+  public int getQueuedTaskCount() {
+    return this.queuedTaskCount;
+  }
 
-    @Override
-    public Queue<Runnable> getUploadQueue() {
-        return this.uploadQueue;
-    }
+  @Override
+  public Queue<Runnable> getUploadQueue() {
+    return this.uploadQueue;
+  }
 
-    @Override
-    public int getBufferCount() {
-        return this.bufferCount;
-    }
+  @Override
+  public int getBufferCount() {
+    return this.bufferCount;
+  }
 }

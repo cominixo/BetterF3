@@ -9,11 +9,11 @@ import net.minecraft.world.chunk.WorldChunk;
 @SuppressWarnings("checkstyle:MethodName")
 public interface ClientChunkMapAccess {
 
-    /**
-     * Gets the chunk array.
-     *
-     * @return Gets Chunks
-     */
-    AtomicReferenceArray<WorldChunk> getChunks();
+  /**
+   * Gets the chunk array.
+   *
+   * @return Gets Chunks
+   */
+  AtomicReferenceArray<WorldChunk> getChunks();
 
 }

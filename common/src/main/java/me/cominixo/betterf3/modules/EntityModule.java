@@ -20,68 +20,68 @@ import net.minecraft.world.SpawnHelper;
  */
 public class EntityModule extends BaseModule {
 
-    /**
-     * Total color.
-     */
-    public final TextColor totalColor = TextColor.fromFormatting(Formatting.GOLD);
+  /**
+   * Total color.
+   */
+  public final TextColor totalColor = TextColor.fromFormatting(Formatting.GOLD);
 
-    /**
-     * Instantiates a new Entity module.
-     */
-    public EntityModule() {
-        this.defaultNameColor = TextColor.fromFormatting(Formatting.RED);
-        this.defaultValueColor = TextColor.fromFormatting(Formatting.YELLOW);
+  /**
+   * Instantiates a new Entity module.
+   */
+  public EntityModule() {
+    this.defaultNameColor = TextColor.fromFormatting(Formatting.RED);
+    this.defaultValueColor = TextColor.fromFormatting(Formatting.YELLOW);
 
-        this.nameColor = defaultNameColor;
-        this.valueColor = defaultValueColor;
+    this.nameColor = defaultNameColor;
+    this.valueColor = defaultValueColor;
 
-        lines.add(new DebugLine("particles"));
-        lines.add(new DebugLine("entities", "format.betterf3.total", true));
+    lines.add(new DebugLine("particles"));
+    lines.add(new DebugLine("entities", "format.betterf3.total", true));
 
-        // Monster, Creature, Ambient, Water Creature, Water Ambient, Misc
-        for (final SpawnGroup spawnGroup : SpawnGroup.values()) {
-            final String name = spawnGroup.toString().toLowerCase();
-            lines.add(new DebugLine(name));
-        }
-
-        lines.get(0).inReducedDebug = true;
-        lines.get(1).inReducedDebug = true;
+    // Monster, Creature, Ambient, Water Creature, Water Ambient, Misc
+    for (final SpawnGroup spawnGroup : SpawnGroup.values()) {
+      final String name = spawnGroup.toString().toLowerCase();
+      lines.add(new DebugLine(name));
     }
 
-    /**
-     * Updates the Entity module.
-     *
-     * @param client the Minecraft client
-     */
-    public void update(final MinecraftClient client) {
+    lines.get(0).inReducedDebug = true;
+    lines.get(1).inReducedDebug = true;
+  }
 
-        assert client.worldRenderer.world != null;
-        final List<Text> entityValues =
-                Arrays.asList(Utils.styledText(I18n.translate("text.betterf3.line.rendered"), valueColor),
-                        Utils.styledText(I18n.translate("text.betterf3.line.total"), this.totalColor),
-                Utils.styledText(client.worldRenderer.regularEntityCount, valueColor),
-                Utils.styledText(client.worldRenderer.world.getRegularEntityCount(), this.totalColor));
+  /**
+   * Updates the Entity module.
+   *
+   * @param client the Minecraft client
+   */
+  public void update(final MinecraftClient client) {
 
-        final IntegratedServer integratedServer = client.getServer();
+    assert client.worldRenderer.world != null;
+    final List<Text> entityValues =
+    Arrays.asList(Utils.styledText(I18n.translate("text.betterf3.line.rendered"), valueColor),
+    Utils.styledText(I18n.translate("text.betterf3.line.total"), this.totalColor),
+    Utils.styledText(client.worldRenderer.regularEntityCount, valueColor),
+    Utils.styledText(client.worldRenderer.world.getRegularEntityCount(), this.totalColor));
 
-        if (client.world != null) {
-            final ServerWorld serverWorld = integratedServer != null ? integratedServer.getWorld(client.world.getRegistryKey()) : null;
-            if (serverWorld != null) {
-                final SpawnHelper.Info info = serverWorld.getChunkManager().getSpawnInfo();
-                if (info != null) {
-                    final Object2IntMap<SpawnGroup> spawnGroupCount = info.getGroupToCount();
-                    // Entities (separated) (kinda bad)
-                    for (int i = 0; i < SpawnGroup.values().length; i++) {
-                        final SpawnGroup group = SpawnGroup.values()[i];
-                        lines.get(i + 2).value(spawnGroupCount.getInt(group));
-                    }
-                }
-            }
+    final IntegratedServer integratedServer = client.getServer();
+
+    if (client.world != null) {
+      final ServerWorld serverWorld = integratedServer != null ? integratedServer.getWorld(client.world.getRegistryKey()) : null;
+      if (serverWorld != null) {
+        final SpawnHelper.Info info = serverWorld.getChunkManager().getSpawnInfo();
+        if (info != null) {
+          final Object2IntMap<SpawnGroup> spawnGroupCount = info.getGroupToCount();
+          // Entities (separated) (kinda bad)
+          for (int i = 0; i < SpawnGroup.values().length; i++) {
+            final SpawnGroup group = SpawnGroup.values()[i];
+            lines.get(i + 2).value(spawnGroupCount.getInt(group));
+          }
         }
-
-        // Particles
-        lines.get(0).value(client.particleManager.getDebugString());
-        // Entities
-        lines.get(1).value(entityValues);
+      }
     }
+
+    // Particles
+    lines.get(0).value(client.particleManager.getDebugString());
+    // Entities
+    lines.get(1).value(entityValues);
+  }
 }

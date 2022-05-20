@@ -37,9 +37,9 @@
   "config.betterf3.color.x.tooltip": "Vaihda X koordinaatin väriä jokaisella rivillä tässä moduulissa.",
   "config.betterf3.color.y.tooltip": "Vaihda Y koordinaatin väriä jokaisella rivillä tässä moduulissa.",
   "config.betterf3.color.z.tooltip": "Vaihda Z koordinaatin väriä jokaisella rivillä tässä moduulissa.",
-  "config.betterf3.color.fps.high": "Korkea Fps Väri",
-  "config.betterf3.color.fps.medium": "Medium Fps Väri",
-  "config.betterf3.color.fps.low": "Heikko Fps Väri",
+  "config.betterf3.color.fps.high": "FPS High Color",
+  "config.betterf3.color.fps.medium": "FPS Medium Color",
+  "config.betterf3.color.fps.low": "FPS Low Color",
   "config.betterf3.color.fps.high.tooltip": "Vaihda tekstin väriä kun FPS on korkea.",
   "config.betterf3.color.fps.medium.tooltip": "Vaihda tekstin väriä kun FPS on mediumi.",
   "config.betterf3.color.fps.low.tooltip": "Vaihda tekstin väriä kun FPS on heikko.",
@@ -54,6 +54,8 @@
   "config.betterf3.modules.add_button": "Lisää Moduuli",
   "config.betterf3.modules.delete_button": "Poista Moduuli",
   "config.betterf3.modules.done_button": "Valmis",
+  "config.betterf3.empty_lines": "Empty Lines Count",
+  "config.betterf3.empty_lines.tooltip": "The number of empty lines to display",
   "config.betterf3.add_button.module_name": "Moduulin Nimi",
   "config.betterf3.order_left_button": "Vasemmat Moduulit",
   "config.betterf3.order_right_button": "Oikeat Moduulit",
@@ -84,6 +86,7 @@
   "text.betterf3.line.loaded_chunks_server": "Ladatut Chunkit (Server)",
   "text.betterf3.line.forceloaded_chunks": "Pakotetut Chunks",
   "text.betterf3.line.spawn_chunks": "Spawn Chunkit",
+  "text.betterf3.line.chunk_file": "Region File",
   "text.betterf3.line.enabled": "Aktivoidut",
   "text.betterf3.line.disabled": "Sammutetut",
   "text.betterf3.line.rendered": "renderöidyt",
@@ -169,7 +172,5 @@
   "text.betterf3.line.fluid_states": "Fluid States",
   "text.betterf3.line.fluid_tags": "Fluid Tagit",
   "text.betterf3.line.nothing": "Blank Line",
-  "text.betterf3.line.nothing2": "Another Blank Line",
-  "config.betterf3.empty_lines": "Empty Lines Count",
-  "config.betterf3.empty_lines.tooltip": "The number of empty lines to display"
+  "text.betterf3.line.nothing2": "Another Blank Line"
 }
