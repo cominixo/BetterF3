@@ -80,6 +80,12 @@ public final class GeneralOptionsScreen {
     .setSaveConsumer(newValue -> GeneralOptions.backgroundColor = newValue)
     .build());
 
+    general.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.betterf3.sidebar"), GeneralOptions.hideSidebar)
+    .setDefaultValue(true)
+    .setTooltip(new TranslatableText("config.betterf3.sidebar.tooltip"))
+    .setSaveConsumer(newValue -> GeneralOptions.hideSidebar = newValue)
+    .build());
+
     builder.transparentBackground();
     return builder;
   }

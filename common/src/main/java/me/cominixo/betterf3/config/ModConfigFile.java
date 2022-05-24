@@ -42,6 +42,7 @@ public final class ModConfigFile {
     general.set("animationSpeed", GeneralOptions.animationSpeed);
     general.set("fontScale", GeneralOptions.fontScale);
     general.set("background_color", GeneralOptions.backgroundColor);
+    general.set("hide_sidebar", GeneralOptions.hideSidebar);
 
     final List<Config> configsLeft = new ArrayList<>();
 
@@ -230,6 +231,7 @@ public final class ModConfigFile {
       GeneralOptions.animationSpeed = general.getOrElse("animationSpeed", 1.0);
       GeneralOptions.fontScale = general.getOrElse("fontScale", 1.0);
       GeneralOptions.backgroundColor = general.getOrElse("background_color", 0x6F505050);
+      GeneralOptions.hideSidebar = general.getOrElse("hide_sidebar", true);
     }
 
     config.close();
