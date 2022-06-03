@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Language;
 
 /**
@@ -82,7 +81,7 @@ public class DebugLine {
     if (this.value.toString().equals("")) {
       this.active = false;
     }
-    return new TranslatableText(this.format, nameStyled, valueStyled);
+    return Text.translatable(this.format, nameStyled, valueStyled);
   }
 
   /**
@@ -102,9 +101,9 @@ public class DebugLine {
         values.add(Utils.styledText(name, nameColor));
       }
       values.addAll(listValue);
-      return new TranslatableText(this.format, values.toArray()).styled(style -> style.withColor(nameColor));
+      return Text.translatable(this.format, values.toArray()).styled(style -> style.withColor(nameColor));
     } else {
-      return new TranslatableText(this.format, name, this.value);
+      return Text.translatable(this.format, name, this.value);
     }
   }
 

@@ -21,7 +21,6 @@ import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.server.integrated.IntegratedServer;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.MetricsData;
 import net.minecraft.util.Util;
@@ -87,7 +86,7 @@ public abstract class DebugMixin {
 
       list.addAll(module.linesFormatted(this.client.hasReducedDebugInfo()));
       if (GeneralOptions.spaceEveryModule) {
-        list.add(new LiteralText(""));
+        list.add(Text.of(""));
       }
     }
 
@@ -116,7 +115,7 @@ public abstract class DebugMixin {
 
       list.addAll(module.linesFormatted(this.client.hasReducedDebugInfo()));
       if (GeneralOptions.spaceEveryModule) {
-        list.add(new LiteralText(""));
+        list.add(Text.of(""));
       }
     }
 
@@ -234,8 +233,7 @@ public abstract class DebugMixin {
       bufferBuilder.vertex(matrix, (float) x1, (float) y1, 0.0F).color(g, h, k, f).next();
 
     }
-    bufferBuilder.end();
-    BufferRenderer.draw(bufferBuilder);
+    BufferRenderer.drawWithShader(bufferBuilder.end());
     RenderSystem.enableTexture();
     RenderSystem.disableBlend();
 

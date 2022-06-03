@@ -7,7 +7,7 @@ import me.cominixo.betterf3.utils.PositionEnum;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 
 /**
  * The Modules screen.
@@ -39,7 +39,7 @@ public class ModulesScreen extends Screen {
    * @param side   the side of the screen
    */
   public ModulesScreen(final Screen parent, final PositionEnum side) {
-    super(new TranslatableText("config.betterf3.title.modules"));
+    super(Text.translatable("config.betterf3.title.modules"));
     this.parent = parent;
     this.side = side;
 
@@ -63,23 +63,23 @@ public class ModulesScreen extends Screen {
 
     this.addDrawableChild(this.modulesListWidget);
 
-    this.editButton = this.addDrawableChild(new ButtonWidget(this.width / 2 - 50, this.height - 50, 100, 20, new TranslatableText("config.betterf3.modules.edit_button"), buttonWidget -> {
+    this.editButton = this.addDrawableChild(new ButtonWidget(this.width / 2 - 50, this.height - 50, 100, 20, Text.translatable("config.betterf3.modules.edit_button"), buttonWidget -> {
       final Screen screen =
       EditModulesScreen.configBuilder(Objects.requireNonNull(this.modulesListWidget.getSelectedOrNull()).module, this).build();
       assert client != null;
       client.setScreen(screen);
     }));
 
-    this.addDrawableChild(new ButtonWidget(this.width / 2 + 4 + 50, this.height - 50, 100, 20, new TranslatableText("config.betterf3.modules.add_button"), buttonWidget -> {
+    this.addDrawableChild(new ButtonWidget(this.width / 2 + 4 + 50, this.height - 50, 100, 20, Text.translatable("config.betterf3.modules.add_button"), buttonWidget -> {
       assert client != null;
       client.setScreen(AddModuleScreen.configBuilder(this).build());
     }));
 
     this.deleteButton = this.addDrawableChild(new ButtonWidget(this.width / 2 - 154, this.height - 50, 100, 20,
-    new TranslatableText("config.betterf3.modules.delete_button"), buttonWidget -> this.modulesListWidget.removeModule(this.modulesListWidget.moduleEntries.indexOf(Objects.requireNonNull(this.modulesListWidget.getSelectedOrNull())))));
+    Text.translatable("config.betterf3.modules.delete_button"), buttonWidget -> this.modulesListWidget.removeModule(this.modulesListWidget.moduleEntries.indexOf(Objects.requireNonNull(this.modulesListWidget.getSelectedOrNull())))));
 
     this.addDrawableChild(new ButtonWidget(this.width / 2 - 154, this.height - 30 + 4, 300 + 8, 20,
-    new TranslatableText("config.betterf3.modules.done_button"), buttonWidget -> {
+    Text.translatable("config.betterf3.modules.done_button"), buttonWidget -> {
       this.close();
       assert client != null;
       client.setScreen(this.parent);

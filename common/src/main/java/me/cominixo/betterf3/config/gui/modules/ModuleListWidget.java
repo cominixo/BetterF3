@@ -12,7 +12,6 @@ import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.widget.AlwaysSelectedEntryListWidget;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -152,7 +151,7 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
     // Fixes 1.17 crash
     @Override
     public Text getNarration() {
-      return new LiteralText(this.module.toString());
+      return Text.of(this.module.toString());
     }
 
     /**
@@ -185,7 +184,7 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
       } else if (this.module.nameColor != null && this.module.valueColor != null) {
         exampleText = Utils.styledText("Name: ", this.module.nameColor).append(Utils.styledText("Value", this.module.valueColor));
       } else {
-        exampleText = new LiteralText("");
+        exampleText = Text.of("");
       }
 
       this.client.textRenderer.draw(matrices, exampleText, (float) (x + 40 + 3), (float) (y + 13), 0xffffff);
@@ -193,7 +192,7 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
       RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
       this.client.getTextureManager().bindTexture(DrawableHelper.GUI_ICONS_TEXTURE);
 
-      if (this.client.options.touchscreen || hovered) {
+      if (this.client.options.getTouchscreen().getValue() || hovered) {
         RenderSystem.setShaderTexture(0, new Identifier("textures/gui/server_selection.png"));
         DrawableHelper.fill(matrices, x, y, x + 32, y + 32, -1601138544);
         RenderSystem.setShader(GameRenderer::getPositionTexShader);

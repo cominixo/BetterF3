@@ -4,7 +4,7 @@ import java.util.Collections;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.cominixo.betterf3.utils.Utils;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.Option;
+import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
@@ -65,8 +65,10 @@ public class FpsModule extends BaseModule {
     final int currentFps = Integer.parseInt(client.fpsDebugString.split(" ")[0].split("/")[0]);
 
     final String fpsString = I18n.translate("format.betterf3.fps", currentFps,
-    (double) client.options.maxFps == Option.FRAMERATE_LIMIT.getMax() ? I18n.translate("text.betterf3.line.fps.unlimited") : client.options.maxFps,
-    client.options.enableVsync ? I18n.translate("text.betterf3.line.fps.vsync") : "").trim();
+    (double) client.options.getMaxFps().getValue() == GameOptions.MAX_FRAMERATE ? I18n.translate("text.betterf3.line" +
+    ".fps" +
+    ".unlimited") : client.options.getMaxFps(),
+    client.options.getEnableVsync().getValue() ? I18n.translate("text.betterf3.line.fps.vsync") : "").trim();
 
     final TextColor color = switch (Utils.fpsColor(currentFps)) {
       case HIGH -> this.colorHigh;

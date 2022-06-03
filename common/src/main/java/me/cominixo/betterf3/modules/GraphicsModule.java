@@ -38,17 +38,18 @@ public class GraphicsModule extends BaseModule {
    */
   public void update(final MinecraftClient client) {
 
-    final String cloudString = client.options.cloudRenderMode == CloudRenderMode.OFF ? I18n.translate("text.betterf3.line.off")
-    : (client.options.cloudRenderMode == CloudRenderMode.FAST ? I18n.translate("text.betterf3.line.fast") : I18n.translate("text.betterf3.line.fancy") );
+    final String cloudString = client.options.getCloudRenderMode() == CloudRenderMode.OFF ? I18n.translate("text.betterf3.line.off")
+    : (client.options.getCloudRenderMode() == CloudRenderMode.FAST ? I18n.translate("text.betterf3.line.fast") : I18n.translate("text" +
+    ".betterf3.line.fancy") );
 
     // Render Distance
     lines.get(0).value(client.worldRenderer.viewDistance);
     // Graphics
-    lines.get(1).value(StringUtils.capitalize(client.options.graphicsMode.toString()));
+    lines.get(1).value(StringUtils.capitalize(client.options.getGraphicsMode().toString()));
     // Clouds
     lines.get(2).value(cloudString);
     // Biome Blend Radius
-    lines.get(3).value(client.options.biomeBlendRadius);
+    lines.get(3).value(client.options.getBiomeBlendRadius());
 
     // Shader
     final ShaderEffect shaderEffect = client.gameRenderer.getShader();

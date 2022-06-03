@@ -6,7 +6,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 
 /**
  * The Mod Config screen.
@@ -20,7 +20,7 @@ public class ModConfigScreen extends Screen {
    * @param parent the parent screen
    */
   public ModConfigScreen(final Screen parent) {
-    super(new TranslatableText("config.betterf3.title.config"));
+    super(Text.translatable("config.betterf3.title.config"));
     this.parent = parent;
   }
 
@@ -28,15 +28,15 @@ public class ModConfigScreen extends Screen {
   public void init() {
     final MinecraftClient client = MinecraftClient.getInstance();
 
-    this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height / 4, 120, 20, new TranslatableText(
+    this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height / 4, 120, 20, Text.translatable(
     "config.betterf3.order_left_button"), buttonWidget -> client.setScreen(new ModulesScreen(client.currentScreen, PositionEnum.LEFT))));
-    this.addDrawableChild(new ButtonWidget(this.width / 2 + 10, this.height / 4, 120, 20, new TranslatableText(
+    this.addDrawableChild(new ButtonWidget(this.width / 2 + 10, this.height / 4, 120, 20, Text.translatable(
     "config.betterf3.order_right_button"), buttonWidget -> client.setScreen(new ModulesScreen(client.currentScreen, PositionEnum.RIGHT))));
     this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height / 4 - 24, 260, 20,
-    new TranslatableText("config.betterf3.general_settings"),
+    Text.translatable("config.betterf3.general_settings"),
     buttonWidget -> client.setScreen(GeneralOptionsScreen.configBuilder(client.currentScreen).build())));
     this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height - 50, 260, 20,
-    new TranslatableText("config.betterf3.modules.done_button"),
+    Text.translatable("config.betterf3.modules.done_button"),
     buttonWidget -> client.setScreen(this.parent)));
   }
 

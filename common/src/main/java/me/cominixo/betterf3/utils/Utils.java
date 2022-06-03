@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Map;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.state.property.Property;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
@@ -103,7 +102,7 @@ public final class Utils {
     if (string == null) {
       string = "";
     }
-    return new LiteralText(string.toString()).styled(style -> style.withColor(color));
+    return Text.literal(string.toString()).styled(style -> style.withColor(color));
   }
 
   /**
@@ -133,9 +132,9 @@ public final class Utils {
       final MutableText value = Utils.styledText(String.join(":", Arrays.asList(split).subList(1,
       split.length)), valueColor);
 
-      return name.append(new LiteralText(":")).append(value);
+      return name.append(Text.of(":")).append(value);
     } else {
-      return new LiteralText(string);
+      return Text.of(string);
     }
   }
 
