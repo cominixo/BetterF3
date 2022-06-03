@@ -37,4 +37,8 @@ public final class GeneralOptions {
    * Sets the background color.
    */
   public static int backgroundColor = 0x6F505050;
+  /**
+   * Hides the sidebar while looking at F3.
+   */
+  public static boolean hideSidebar = true;
 }

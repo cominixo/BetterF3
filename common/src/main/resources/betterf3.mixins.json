@@ -8,6 +8,7 @@
     "KeyboardMixin",
     "chunk.ChunkBuilderMixin",
     "chunk.ClientChunkMapMixin",
-    "chunk.ClientChunkManagerMixin"
+    "chunk.ClientChunkManagerMixin",
+    "scoreboard.ScoreboardMixin"
   ]
 }
