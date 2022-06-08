@@ -26,7 +26,7 @@
   },
   "depends": {
     "fabricloader": ">=0.14.6",
-    "minecraft": "~1.19-rc.1"
+    "minecraft": "~1.19"
   },
   "recommends": {
     "modmenu": ">=3.0.0"
