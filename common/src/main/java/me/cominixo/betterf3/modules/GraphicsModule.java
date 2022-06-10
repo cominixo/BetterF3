@@ -45,11 +45,11 @@ public class GraphicsModule extends BaseModule {
     // Render Distance
     lines.get(0).value(client.worldRenderer.viewDistance);
     // Graphics
-    lines.get(1).value(StringUtils.capitalize(client.options.getGraphicsMode().toString()));
+    lines.get(1).value(StringUtils.capitalize(client.options.getGraphicsMode().getValue().toString()));
     // Clouds
     lines.get(2).value(cloudString);
     // Biome Blend Radius
-    lines.get(3).value(client.options.getBiomeBlendRadius());
+    lines.get(3).value(client.options.getBiomeBlendRadius().getValue());
 
     // Shader
     final ShaderEffect shaderEffect = client.gameRenderer.getShader();

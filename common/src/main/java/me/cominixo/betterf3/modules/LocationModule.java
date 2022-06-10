@@ -15,10 +15,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.random.ChunkRandom;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.LightType;
 import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkStatus;
 import net.minecraft.world.chunk.WorldChunk;
@@ -50,6 +53,7 @@ public class LocationModule extends BaseModule {
     lines.add(new DebugLine("biome"));
     lines.add(new DebugLine("local_difficulty"));
     lines.add(new DebugLine("days_played"));
+    lines.add(new DebugLine("slime_chunk"));
   }
 
   /**
@@ -65,9 +69,11 @@ public class LocationModule extends BaseModule {
     String chunkLightString = "";
     String chunkLightServerString = "";
     String localDifficultyString = "";
+    String slimeChunkString = "";
     final StringBuilder highestBlock = new StringBuilder();
     final StringBuilder highestBlockServer = new StringBuilder();
 
+    final World serverWorld;
     if (client.world != null) {
       assert cameraEntity != null;
       final BlockPos blockPos = cameraEntity.getBlockPos();
@@ -76,7 +82,7 @@ public class LocationModule extends BaseModule {
       // Biome
       lines.get(7).value(client.world.getRegistryManager().get(Registry.BIOME_KEY).getId(client.world.getBiome(blockPos).value()));
 
-      final World serverWorld = integratedServer != null ? integratedServer.getWorld(client.world.getRegistryKey()) : client.world;
+      serverWorld = integratedServer != null ? integratedServer.getWorld(client.world.getRegistryKey()) : client.world;
       if (client.world.isChunkLoaded(blockPos.getX(), blockPos.getZ())) {
         final WorldChunk clientChunk = client.world.getChunk(chunkPos.x, chunkPos.z);
         if (clientChunk.isEmpty()) {
@@ -103,9 +109,7 @@ public class LocationModule extends BaseModule {
           WorldChunk serverChunk;
 
           if (serverWorld instanceof ServerWorld) {
-            final CompletableFuture<WorldChunk> chunkCompletableFuture =
-            ((ServerWorld) serverWorld).getChunkManager().getChunkFutureSyncOnMainThread(blockPos.getX(), blockPos.getZ(), ChunkStatus.FULL, false)
-            .thenApply(either -> either.map(chunk -> (WorldChunk) chunk, unloaded -> null));
+            final CompletableFuture<WorldChunk> chunkCompletableFuture = ((ServerWorld) serverWorld).getChunkManager().getChunkFutureSyncOnMainThread(blockPos.getX(), blockPos.getZ(), ChunkStatus.FULL, false).thenApply(either -> either.map(chunk -> (WorldChunk) chunk, unloaded -> null));
 
             serverChunk = chunkCompletableFuture.getNow(null);
           } else {
@@ -150,6 +154,13 @@ public class LocationModule extends BaseModule {
             final LocalDifficulty localDifficulty = new LocalDifficulty(serverWorld.getDifficulty(), serverWorld.getTimeOfDay(), inhabitedTime, moonSize);
             localDifficultyString = String.format("%.2f  " + I18n.translate("text.betterf3.line.clamped") + ": %.2f", localDifficulty.getLocalDifficulty(), localDifficulty.getClampedLocalDifficulty());
           }
+
+          if (integratedServer != null) {
+            final Random slimeChunk = ChunkRandom.getSlimeRandom(chunkPos.x, chunkPos.z, ((StructureWorldAccess) serverWorld).getSeed(), 0x3ad8025fL);
+            slimeChunkString = String.format("%s", I18n.translate((slimeChunk.nextInt(10) == 0 ) ? "text.betterf3.line.slime_chunk.true" : "text.betterf3.line.slime_chunk.false"));
+          } else {
+            slimeChunkString = String.format("%s", I18n.translate("text.betterf3.line.slime_chunk.unknown"));
+          }
         }
       }
     }
@@ -184,5 +195,8 @@ public class LocationModule extends BaseModule {
     lines.get(8).value(localDifficultyString);
     // Days played
     lines.get(9).value(client.world.getTimeOfDay() / 24000L);
+
+    // Slime chunk
+    lines.get(10).value(slimeChunkString.trim());
   }
 }

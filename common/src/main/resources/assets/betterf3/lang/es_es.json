@@ -23,6 +23,8 @@
   "config.betterf3.animations.tooltip": "Añade una animación cuando se abre y cierre la interfaz del F3.",
   "config.betterf3.animationSpeed": "Velocidad de animación",
   "config.betterf3.animationSpeed.tooltip": "Establecer la velocidad de animación.",
+  "config.betterf3.sidebar": "Hide Sidebar",
+  "config.betterf3.sidebar.tooltip": "Hide the sidebar when the F3 menu is active.",
   "config.betterf3.fontScale": "Escala de fuente",
   "config.betterf3.fontScale.tooltip": "Establecer la escala de la fuente.",
   "config.betterf3.category.modules": "Módulos",
@@ -60,6 +62,11 @@
   "config.betterf3.order_left_button": "Módulos Izquierdos",
   "config.betterf3.order_right_button": "Módulos Derechos",
   "config.betterf3.general_settings": "Ajustes Generales",
+  "debug.betterf3.cycle_renderdistance.message": "Render Distance: %s",
+  "debug.betterf3.cycle_simulationdistance.message": "Simulation Distance: %s",
+  "debug.betterf3.cycle_renderdistance.help": "F3 + F = Cycle render distance (shift to invert)",
+  "debug.betterf3.cycle_simulationdistance.help": "F3 + F + Ctrl = Cycle simulation distance (shift to invert)",
+  "debug.betterf3.modmenu.help": "F3 + M = BetterF3 Options",
   "text.betterf3.module.minecraft": "Minecraft",
   "text.betterf3.module.fps": "FPS",
   "text.betterf3.module.graphics": "Gráficos",
@@ -172,5 +179,9 @@
   "text.betterf3.line.fluid_states": "Estados del Fluido",
   "text.betterf3.line.fluid_tags": "Etiquetas del Fluido",
   "text.betterf3.line.nothing": "Línea en blanco",
-  "text.betterf3.line.nothing2": "Otra línea en blanco"
+  "text.betterf3.line.nothing2": "Otra línea en blanco",
+  "text.betterf3.line.slime_chunk": "Slime Chunk",
+  "text.betterf3.line.slime_chunk.true": "true",
+  "text.betterf3.line.slime_chunk.false": "false",
+  "text.betterf3.line.slime_chunk.unknown": "unknown"
 }

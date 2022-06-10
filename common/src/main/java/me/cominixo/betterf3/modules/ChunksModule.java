@@ -121,15 +121,12 @@ public class ChunksModule extends BaseModule {
     // Chunk Culling
     lines.get(1).value(chunkCulling);
 
-    // TODO make this work properly with Canvas (chunkBuilderAccessor is null when using it)
-    if (chunkBuilderDuck != null) {
-      // Pending Chunks
-      lines.get(2).value(chunkBuilderDuck.getQueuedTaskCount());
-      // Pending Uploads to GPU
-      lines.get(3).value(chunkBuilderDuck.getUploadQueue().size());
-      // Available Buffers
-      lines.get(4).value(chunkBuilderDuck.getBufferCount());
-    }
+    // Pending chunk uploads
+    lines.get(2).value(client.worldRenderer.getChunkBuilder().getToBatchCount());
+
+    lines.get(3).value(client.worldRenderer.getChunkBuilder().getChunksToUpload());
+
+    lines.get(4).value(client.worldRenderer.getChunkBuilder().getFreeBufferCount());
 
     // Loaded Chunks (Server)
     if (serverWorld != null) {

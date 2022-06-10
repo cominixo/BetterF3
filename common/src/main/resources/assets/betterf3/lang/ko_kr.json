@@ -23,6 +23,8 @@
   "config.betterf3.animations.tooltip": "F3 HUD를 열고 닫을 때 애니메이션을 추가합니다.",
   "config.betterf3.animationSpeed": "애니메이션 속도",
   "config.betterf3.animationSpeed.tooltip": "애니메이션의 속도를 설정합니다.",
+  "config.betterf3.sidebar": "Hide Sidebar",
+  "config.betterf3.sidebar.tooltip": "Hide the sidebar when the F3 menu is active.",
   "config.betterf3.fontScale": "폰트 크기",
   "config.betterf3.fontScale.tooltip": "폰트의 크기를 설정합니다.",
   "config.betterf3.category.modules": "모듈",
@@ -60,6 +62,11 @@
   "config.betterf3.order_left_button": "왼쪽 모듈",
   "config.betterf3.order_right_button": "오른쪽 모듈",
   "config.betterf3.general_settings": "일반정설정",
+  "debug.betterf3.cycle_renderdistance.message": "Render Distance: %s",
+  "debug.betterf3.cycle_simulationdistance.message": "Simulation Distance: %s",
+  "debug.betterf3.cycle_renderdistance.help": "F3 + F = Cycle render distance (shift to invert)",
+  "debug.betterf3.cycle_simulationdistance.help": "F3 + F + Ctrl = Cycle simulation distance (shift to invert)",
+  "debug.betterf3.modmenu.help": "F3 + M = BetterF3 Options",
   "text.betterf3.module.minecraft": "Minecraft",
   "text.betterf3.module.fps": "FPS",
   "text.betterf3.module.graphics": "그래픽",
@@ -172,5 +179,9 @@
   "text.betterf3.line.fluid_states": "유체 상태",
   "text.betterf3.line.fluid_tags": "유체 태그",
   "text.betterf3.line.nothing": "Blank Line",
-  "text.betterf3.line.nothing2": "Another Blank Line"
+  "text.betterf3.line.nothing2": "Another Blank Line",
+  "text.betterf3.line.slime_chunk": "Slime Chunk",
+  "text.betterf3.line.slime_chunk.true": "true",
+  "text.betterf3.line.slime_chunk.false": "false",
+  "text.betterf3.line.slime_chunk.unknown": "unknown"
 }
