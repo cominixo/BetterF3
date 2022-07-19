@@ -6,6 +6,6 @@
   "server": [],
   "mixins": [],
   "client": [
-    "ForgeIngameGuiMixin"
+    "ForgeGuiMixin"
   ]
 }

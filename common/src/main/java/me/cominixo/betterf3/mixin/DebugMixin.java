@@ -184,6 +184,9 @@ public abstract class DebugMixin {
     for (int i = 0; i < list.size(); i++) {
       final int height = 9;
       final int width = this.textRenderer.getWidth(list.get(i).getString());
+      if (width == 0) {
+        continue;
+      }
       final int y = 2 + height * i;
 
       int x1;
@@ -200,7 +203,7 @@ public abstract class DebugMixin {
         }
 
         x1 = windowWidth - 1;
-        x2 = windowWidth + width + 1;
+        x2 = windowWidth + width;
       } else {
         windowWidth = 2;
 

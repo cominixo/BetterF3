@@ -1,7 +1,7 @@
 package me.treyruffy.betterf3;
 
 import me.cominixo.betterf3.config.gui.ModConfigScreen;
-import net.minecraftforge.client.ConfigGuiHandler;
+import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.fml.ModLoadingContext;
 
 /**
@@ -17,7 +17,7 @@ public final class ForgeModMenu {
    * Registers BetterF3 in the mod menu.
    */
   public static void registerModsPage() {
-    ModLoadingContext.get().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class,
-    () -> new ConfigGuiHandler.ConfigGuiFactory((client, parent) -> new ModConfigScreen(parent)));
+    ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
+    () -> new ConfigScreenHandler.ConfigScreenFactory((client, parent) -> new ModConfigScreen(parent)));
   }
 }
