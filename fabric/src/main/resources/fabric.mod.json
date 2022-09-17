@@ -10,8 +10,8 @@
     "TreyRuffy"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/betterf3/",
-    "sources": "https://github.com/cominixo/BetterF3/",
+    "homepage": "https://modrinth.com/mod/betterf3",
+    "sources": "https://github.com/cominixo/BetterF3.git",
     "issues": "https://github.com/cominixo/BetterF3/issues/"
   },
   "license": "MIT",

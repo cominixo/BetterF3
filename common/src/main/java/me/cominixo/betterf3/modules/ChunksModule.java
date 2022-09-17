@@ -34,7 +34,32 @@ public class ChunksModule extends BaseModule {
   /**
    * The total color.
    */
-  public final TextColor totalColor = TextColor.fromFormatting(Formatting.GOLD);
+  public TextColor totalColor;
+
+  /**
+   * The default total color.
+   */
+  public final TextColor defaultTotalColor = TextColor.fromFormatting(Formatting.GOLD);
+
+  /**
+   * Default enabled color.
+   */
+  public final TextColor defaultEnabledColor = TextColor.fromFormatting(Formatting.GREEN);
+
+  /**
+   * Default disabled color.
+   */
+  public final TextColor defaultDisabledColor = TextColor.fromFormatting(Formatting.RED);
+
+  /**
+   * Enabled color.
+   */
+  public TextColor enabledColor;
+
+  /**
+   * Disabled color.
+   */
+  public TextColor disabledColor;
 
   /**
    * Instantiates a new Chunks module.
@@ -46,6 +71,9 @@ public class ChunksModule extends BaseModule {
 
     this.nameColor = defaultNameColor;
     this.valueColor = defaultValueColor;
+    this.totalColor = this.defaultTotalColor;
+    this.enabledColor = this.defaultEnabledColor;
+    this.disabledColor = this.defaultDisabledColor;
 
     lines.add(new DebugLine("chunk_sections", "format.betterf3.total", true));
     lines.add(new DebugLine("chunk_culling"));
@@ -109,8 +137,8 @@ public class ChunksModule extends BaseModule {
       info = serverWorld.getChunkManager().getSpawnInfo();
     }
 
-    final String chunkCulling = client.chunkCullingEnabled ? Formatting.GREEN + I18n.translate("text.betterf3.line.enabled")
-      : Formatting.RED + I18n.translate("text.betterf3.line.disabled");
+    final String chunkCulling = client.chunkCullingEnabled ? I18n.translate("text.betterf3.line.enabled")
+      : I18n.translate("text.betterf3.line.disabled");
 
     final List<Text> chunkValues = Arrays.asList(Utils.styledText(I18n.translate("text.betterf3.line.rendered"), valueColor), Utils.styledText(I18n.translate("text.betterf3.line.total"), this.totalColor),
     Utils.styledText(Integer.toString(renderedChunks), valueColor),
@@ -119,7 +147,8 @@ public class ChunksModule extends BaseModule {
     // Chunk Sections
     lines.get(0).value(chunkValues);
     // Chunk Culling
-    lines.get(1).value(chunkCulling);
+    lines.get(1).value(Utils.styledText(chunkCulling, client.chunkCullingEnabled ? this.enabledColor :
+    this.disabledColor));
 
     // TODO make this work properly with Canvas (chunkBuilderAccessor is null when using it)
     if (chunkBuilderDuck != null) {

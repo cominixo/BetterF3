@@ -1,35 +1,90 @@
-name: "Build the project" # Builds the project and archives the checkstyle results
-on: [pull_request, push]
+name: Build BetterF3
+# Builds the project and archives the checkstyle results
+
+on:
+  pull_request:
+  push:
+    paths-ignore:
+      - 'docs/**'
+      - 'README.md'
+      - 'LICENSE.txt'
+      - 'CONTRIBUTING.md'
+  workflow_dispatch:
+    inputs:
+      release:
+        description: Publish a Release
+        required: true
+        default: false
+        type: boolean
 
 jobs:
   build:
-    name: "Build"
+    name: Build the Project
     runs-on: ubuntu-latest
     steps:
-      - name: "Checkout this repository"
+      - name: Checkout this repository
         uses: actions/checkout@v2
 
-      - name: "Setup Java 17"
+      - name: Setup Java 17
         uses: actions/setup-java@v2
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: "Check gradle validation"
+      - name: Check gradle validation
         uses: gradle/wrapper-validation-action@v1
 
-      - name: "Make Gradle Wrapper executable"
+      - name: Make Gradle Wrapper executable
         run: chmod +x ./gradlew
 
-      - name: "Build with Gradle"
-        run: ./gradlew build
-
-      - name: "Archives Checkstyle results"
-        uses: "actions/upload-artifact@v2"
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v2
         with:
-          name: "test-results"
+          arguments: build --stacktrace
+
+      - name: Setup Environment Variables
+        run: |
+          cat $GITHUB_WORKSPACE/gradle.properties | grep ^supported_minecraft_versions >> $GITHUB_ENV
+          cat $GITHUB_WORKSPACE/gradle.properties | grep ^minecraft_version >> $GITHUB_ENV
+          cat $GITHUB_WORKSPACE/gradle.properties | grep ^mod_version >> $GITHUB_ENV
+
+      - name: Archives Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: BetterF3-${{ env.mod_version }}-mc${{ env.minecraft_version }}
           path: |
             build/reports/
             **/build/reports/
             build/libs
             **/build/libs/
+
+      - name: Release Version to GitHub
+        uses: softprops/action-gh-release@v1
+        if: ${{ github.event.inputs.release }}
+        with:
+          body_path: ${{ github.workspace }}/build/CHANGELOG.md
+          tag_name: v${{ env.mod_version }}
+          name: BetterF3 v${{ env.mod_version }}
+          target_commitish: ${{ github.sha }}
+          files: |
+            **/build/libs/BetterF3-*-Fabric-*.jar
+            **/build/libs/BetterF3-*-Forge-*.jar
+
+      - name: Release Version to 3rd Parties
+        uses: gradle/gradle-build-action@v2
+        if: ${{ github.event.inputs.release && github.triggering_actor == 'TreyRuffy' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CURSE_API_KEY: ${{ secrets.TREY_CURSE_API_KEY }}
+          MODRINTH_API_KEY: ${{ secrets.TREY_MODRINTH_API_KEY }}
+        with:
+            arguments: publish publishUnified --stacktrace
+      - name: Release Version to 3rd Parties
+        uses: gradle/gradle-build-action@v2
+        if: ${{ github.event.inputs.release && github.triggering_actor == 'cominixo' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CURSE_API_KEY: ${{ secrets.CURSE_API_KEY }}
+          MODRINTH_API_KEY: ${{ secrets.MODRINTH_API_KEY }}
+        with:
+          arguments: publish publishUnified --stacktrace

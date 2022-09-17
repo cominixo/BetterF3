@@ -8,9 +8,14 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import me.cominixo.betterf3.modules.BaseModule;
+import me.cominixo.betterf3.modules.ChunksModule;
 import me.cominixo.betterf3.modules.CoordsModule;
 import me.cominixo.betterf3.modules.EmptyModule;
+import me.cominixo.betterf3.modules.EntityModule;
 import me.cominixo.betterf3.modules.FpsModule;
+import me.cominixo.betterf3.modules.HelpModule;
+import me.cominixo.betterf3.modules.SoundModule;
+import me.cominixo.betterf3.modules.SystemModule;
 import me.cominixo.betterf3.utils.DebugLine;
 import net.minecraft.text.TextColor;
 
@@ -36,13 +41,18 @@ public final class ModConfigFile {
 
     final Config general = Config.inMemory();
     general.set("disable_mod", GeneralOptions.disableMod);
+    general.set("auto_start", GeneralOptions.autoF3);
     general.set("space_modules", GeneralOptions.spaceEveryModule);
     general.set("shadow_text", GeneralOptions.shadowText);
     general.set("animations", GeneralOptions.enableAnimations);
     general.set("animationSpeed", GeneralOptions.animationSpeed);
     general.set("fontScale", GeneralOptions.fontScale);
     general.set("background_color", GeneralOptions.backgroundColor);
+    general.set("hide_debug_crosshair", GeneralOptions.hideDebugCrosshair);
     general.set("hide_sidebar", GeneralOptions.hideSidebar);
+    general.set("hide_bossbar", GeneralOptions.hideBossbar);
+    general.set("always_show_profiler", GeneralOptions.alwaysEnableProfiler);
+    general.set("always_show_tps", GeneralOptions.alwaysEnableTPS);
 
     final List<Config> configsLeft = new ArrayList<>();
 
@@ -141,6 +151,48 @@ public final class ModConfigFile {
             coordsModule.defaultColorZ.getRgb()));
         }
 
+        if (module instanceof SoundModule soundModule) {
+          if (soundModule.defaultMaximumColor != null)
+            soundModule.maximumColor = TextColor.fromRgb(moduleConfig.getOrElse("maximum_color",
+            soundModule.defaultMaximumColor.getRgb()));
+        }
+
+        if (module instanceof EntityModule entityModule) {
+          if (entityModule.defaultTotalColor != null)
+            entityModule.totalColor = TextColor.fromRgb(moduleConfig.getOrElse("total_entities_color",
+            entityModule.defaultTotalColor.getRgb()));
+        }
+
+        if (module instanceof HelpModule helpModule) {
+          if (helpModule.defaultEnabledColor != null)
+            helpModule.enabledColor = TextColor.fromRgb(moduleConfig.getOrElse("enabled_color",
+            helpModule.defaultEnabledColor.getRgb()));
+          if (helpModule.defaultDisabledColor != null)
+            helpModule.disabledColor = TextColor.fromRgb(moduleConfig.getOrElse("disabled_color",
+            helpModule.defaultDisabledColor.getRgb()));
+        }
+
+        if (module instanceof ChunksModule chunkModule) {
+          if (chunkModule.defaultEnabledColor != null)
+            chunkModule.enabledColor = TextColor.fromRgb(moduleConfig.getOrElse("chunks_enabled_color",
+            chunkModule.defaultEnabledColor.getRgb()));
+          if (chunkModule.defaultDisabledColor != null)
+            chunkModule.disabledColor = TextColor.fromRgb(moduleConfig.getOrElse("chunks_disabled_color",
+            chunkModule.defaultDisabledColor.getRgb()));
+          if (chunkModule.defaultTotalColor != null)
+            chunkModule.totalColor = TextColor.fromRgb(moduleConfig.getOrElse("total_chunks_color",
+            chunkModule.defaultTotalColor.getRgb()));
+        }
+
+        if (module instanceof SystemModule systemModule) {
+          if (systemModule.memoryColorToggle == null) {
+            systemModule.memoryColorToggle = moduleConfig.getOrElse("memory_color_toggle", systemModule.defaultMemoryColorToggle);
+          }
+          if (systemModule.timeFormat == null) {
+            systemModule.timeFormat = moduleConfig.getOrElse("time_format", systemModule.defaultTimeFormat);
+          }
+        }
+
         module.enabled = moduleConfig.getOrElse("enabled", true);
 
       }
@@ -166,10 +218,6 @@ public final class ModConfigFile {
         }
       }
 
-      if (!modulesLeft.isEmpty()) {
-        BaseModule.modules = modulesLeft;
-      }
-
       final List<Config> modulesRightConfig = config.getOrElse("modules_right", () -> null);
 
       if (modulesRightConfig != null) {
@@ -187,7 +235,8 @@ public final class ModConfigFile {
         }
       }
 
-      if (!modulesRight.isEmpty()) {
+      if (!modulesLeft.isEmpty() || !modulesRight.isEmpty()) {
+        BaseModule.modules = modulesLeft;
         BaseModule.modulesRight = modulesRight;
       }
 
@@ -225,13 +274,18 @@ public final class ModConfigFile {
       }
 
       GeneralOptions.disableMod = general.getOrElse("disable_mod", false);
+      GeneralOptions.autoF3 = general.getOrElse("auto_start", false);
       GeneralOptions.spaceEveryModule = general.getOrElse("space_modules", false);
       GeneralOptions.shadowText = general.getOrElse("shadow_text", true);
       GeneralOptions.enableAnimations = general.getOrElse("animations", true);
       GeneralOptions.animationSpeed = general.getOrElse("animationSpeed", 1.0);
       GeneralOptions.fontScale = general.getOrElse("fontScale", 1.0);
       GeneralOptions.backgroundColor = general.getOrElse("background_color", 0x6F505050);
+      GeneralOptions.hideDebugCrosshair = general.getOrElse("hide_debug_crosshair", false);
       GeneralOptions.hideSidebar = general.getOrElse("hide_sidebar", true);
+      GeneralOptions.hideBossbar = general.getOrElse("hide_bossbar", true);
+      GeneralOptions.alwaysEnableProfiler = general.getOrElse("always_show_profiler", false);
+      GeneralOptions.alwaysEnableTPS = general.getOrElse("always_show_tps", false);
     }
 
     config.close();
@@ -300,6 +354,48 @@ public final class ModConfigFile {
       emptyModule.emptyLines = moduleConfig.getOrElse("empty_lines", 1);
     }
 
+    if (baseModule instanceof SoundModule soundModule) {
+      if (soundModule.defaultMaximumColor != null)
+        soundModule.maximumColor = TextColor.fromRgb(moduleConfig.getOrElse("maximum_color",
+        soundModule.defaultMaximumColor.getRgb()));
+    }
+
+    if (baseModule instanceof EntityModule entityModule) {
+      if (entityModule.defaultTotalColor != null)
+        entityModule.totalColor = TextColor.fromRgb(moduleConfig.getOrElse("total_entities_color",
+        entityModule.defaultTotalColor.getRgb()));
+    }
+
+    if (baseModule instanceof HelpModule helpModule) {
+      if (helpModule.defaultEnabledColor != null)
+        helpModule.enabledColor = TextColor.fromRgb(moduleConfig.getOrElse("enabled_color",
+        helpModule.defaultEnabledColor.getRgb()));
+      if (helpModule.defaultDisabledColor != null)
+        helpModule.disabledColor = TextColor.fromRgb(moduleConfig.getOrElse("disabled_color",
+        helpModule.defaultDisabledColor.getRgb()));
+    }
+
+    if (baseModule instanceof ChunksModule chunkModule) {
+      if (chunkModule.defaultEnabledColor != null)
+        chunkModule.enabledColor = TextColor.fromRgb(moduleConfig.getOrElse("chunks_enabled_color",
+        chunkModule.defaultEnabledColor.getRgb()));
+      if (chunkModule.defaultDisabledColor != null)
+        chunkModule.disabledColor = TextColor.fromRgb(moduleConfig.getOrElse("chunks_disabled_color",
+        chunkModule.defaultDisabledColor.getRgb()));
+      if (chunkModule.defaultTotalColor != null)
+        chunkModule.totalColor = TextColor.fromRgb(moduleConfig.getOrElse("total_chunks_color",
+        chunkModule.defaultTotalColor.getRgb()));
+    }
+
+    if (baseModule instanceof SystemModule systemModule) {
+      if (systemModule.memoryColorToggle == null) {
+        systemModule.memoryColorToggle = moduleConfig.getOrElse("memory_color_toggle", systemModule.defaultMemoryColorToggle);
+      }
+      if (systemModule.timeFormat == null) {
+        systemModule.timeFormat = moduleConfig.getOrElse("time_format", systemModule.defaultTimeFormat);
+      }
+    }
+
     baseModule.enabled = moduleConfig.getOrElse("enabled", true);
     return baseModule;
   }
@@ -350,6 +446,32 @@ public final class ModConfigFile {
 
     if (module instanceof EmptyModule emptyModule) {
       moduleConfig.set("empty_lines", emptyModule.emptyLines);
+    }
+
+    if (module instanceof SoundModule soundModule) {
+      if (soundModule.maximumColor != null)
+        moduleConfig.set("maximum_color", soundModule.maximumColor.getRgb());
+    }
+
+    if (module instanceof EntityModule entityModule) {
+      if (entityModule.totalColor != null)
+        moduleConfig.set("total_entities_color", entityModule.totalColor.getRgb());
+    }
+
+    if (module instanceof HelpModule helpModule) {
+      if (helpModule.enabledColor != null)
+        moduleConfig.set("enabled_color", helpModule.enabledColor.getRgb());
+      if (helpModule.disabledColor != null)
+        moduleConfig.set("disabled_color", helpModule.disabledColor.getRgb());
+    }
+
+    if (module instanceof ChunksModule chunkModule) {
+      if (chunkModule.enabledColor != null)
+        moduleConfig.set("chunks_enabled_color", chunkModule.enabledColor.getRgb());
+      if (chunkModule.disabledColor != null)
+        moduleConfig.set("chunks_disabled_color", chunkModule.disabledColor.getRgb());
+      if (chunkModule.totalColor != null)
+        moduleConfig.set("total_chunks_color", chunkModule.totalColor.getRgb());
     }
 
     moduleConfig.set("enabled", module.enabled);

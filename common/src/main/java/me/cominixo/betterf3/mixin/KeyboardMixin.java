@@ -5,6 +5,7 @@ import me.cominixo.betterf3.config.gui.ModConfigScreen;
 import net.minecraft.client.Keyboard;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.option.GameOptions;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
 import org.objectweb.asm.Opcodes;
@@ -13,6 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -68,6 +70,29 @@ public abstract class KeyboardMixin {
     }
   }
 
+  @Redirect(method = "onKey", at = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;" +
+  "debugProfilerEnabled:Z", opcode = Opcodes.PUTFIELD, ordinal = 0))
+  private void alwaysEnableProfiler(final GameOptions options, final boolean value) {
+    if (!GeneralOptions.disableMod) {
+      if (GeneralOptions.alwaysEnableProfiler) {
+        options.debugProfilerEnabled = this.client.options.debugEnabled;
+        return;
+      }
+    }
+    options.debugProfilerEnabled = this.client.options.debugEnabled && Screen.hasShiftDown();
+  }
+
+  @Redirect(method = "onKey", at = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;debugTpsEnabled:Z", opcode = Opcodes.PUTFIELD, ordinal = 0))
+  private void alwaysEnableTPS(final GameOptions options, final boolean value) {
+    if (!GeneralOptions.disableMod) {
+      if (GeneralOptions.alwaysEnableTPS) {
+        options.debugTpsEnabled = this.client.options.debugEnabled;
+        return;
+      }
+    }
+    options.debugTpsEnabled = this.client.options.debugEnabled && Screen.hasAltDown();
+  }
+
   /**
    * Plays the animation on f3 keypress.
    *
@@ -82,7 +107,7 @@ public abstract class KeyboardMixin {
   "/option/GameOptions.debugEnabled : Z"), cancellable = true)
   public void onDebugActivate(final long window, final int key, final int scancode, final int i, final int j, final CallbackInfo ci) {
 
-    if (GeneralOptions.enableAnimations) {
+    if (GeneralOptions.enableAnimations && !GeneralOptions.disableMod) {
       if (this.client.options.debugEnabled) {
         closingAnimation = true;
         ci.cancel();

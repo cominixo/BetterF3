@@ -52,6 +52,7 @@ public class LocationModule extends BaseModule {
     lines.add(new DebugLine("highest_block_server"));
     lines.add(new DebugLine("biome"));
     lines.add(new DebugLine("local_difficulty"));
+    lines.add(new DebugLine("day_ticks"));
     lines.add(new DebugLine("days_played"));
     lines.add(new DebugLine("slime_chunk"));
   }
@@ -193,10 +194,12 @@ public class LocationModule extends BaseModule {
 
     // Local Difficulty
     lines.get(8).value(localDifficultyString);
+    // Ticks in the day
+    lines.get(9).value(Long.valueOf(client.world.getTimeOfDay() % 24000L).intValue());
     // Days played
-    lines.get(9).value(client.world.getTimeOfDay() / 24000L);
+    lines.get(10).value(client.world.getTimeOfDay() / 24000L);
 
     // Slime chunk
-    lines.get(10).value(slimeChunkString.trim());
+    lines.get(11).value(slimeChunkString.trim());
   }
 }

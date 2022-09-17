@@ -16,7 +16,12 @@ public class SoundModule extends BaseModule {
   /**
    * Total color.
    */
-  public final TextColor totalColor = TextColor.fromFormatting(Formatting.DARK_AQUA);
+  public TextColor maximumColor;
+
+  /**
+   * Default total color.
+   */
+  public final TextColor defaultMaximumColor = TextColor.fromFormatting(Formatting.DARK_AQUA);
 
   /**
    * Instantiates a new Sound module.
@@ -27,6 +32,7 @@ public class SoundModule extends BaseModule {
 
     this.nameColor = defaultNameColor;
     this.valueColor = defaultValueColor;
+    this.maximumColor = this.defaultMaximumColor;
 
     lines.add(new DebugLine("sounds", "format.betterf3.total", true));
     lines.add(new DebugLine("ambient_sounds", "format.betterf3.total", true));
@@ -50,13 +56,13 @@ public class SoundModule extends BaseModule {
 
     // Sound
     lines.get(0).value(Arrays.asList(Utils.styledText(playing, valueColor), Utils.styledText(maximum,
-    this.totalColor), Utils.styledText(staticHandlerList[0], valueColor),
-    Utils.styledText(staticHandlerList[1], this.totalColor)));
+    this.maximumColor), Utils.styledText(staticHandlerList[0], valueColor),
+    Utils.styledText(staticHandlerList[1], this.maximumColor)));
 
     // Ambient Sound
     lines.get(1).value(Arrays.asList(Utils.styledText(playing, valueColor), Utils.styledText(maximum,
-    this.totalColor), Utils.styledText(streamingHandlerList[0], valueColor),
-    Utils.styledText(streamingHandlerList[1], this.totalColor)));
+    this.maximumColor), Utils.styledText(streamingHandlerList[0], valueColor),
+    Utils.styledText(streamingHandlerList[1], this.maximumColor)));
 
     // Mood
     assert client.player != null;

@@ -14,6 +14,10 @@ public final class GeneralOptions {
    */
   public static boolean disableMod = false;
   /**
+   * Automatically starts the F3 menu.
+   */
+  public static boolean autoF3 = false;
+  /**
    * Places a space between every module.
    */
   public static boolean spaceEveryModule = false;
@@ -38,7 +42,27 @@ public final class GeneralOptions {
    */
   public static int backgroundColor = 0x6F505050;
   /**
-   * Hides the sidebar while looking at F3.
+   * Hides the debug crosshair.
+   */
+  public static boolean hideDebugCrosshair = false;
+
+  /**
+   * Hides the sidebar while looking at the F3 menu.
    */
   public static boolean hideSidebar = true;
+
+  /**
+   * Hides the bossbar while looking at the F3 menu.
+   */
+  public static boolean hideBossbar = true;
+
+  /**
+   * Always shows the profiler when using F3.
+   */
+  public static boolean alwaysEnableProfiler = false;
+
+  /**
+   * Always shows the TPS graph when using F3.
+   */
+  public static boolean alwaysEnableTPS = false;
 }
