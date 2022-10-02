@@ -80,6 +80,8 @@ public abstract class DebugMixin {
       }
       if (module instanceof MiscLeftModule) {
         ((MiscLeftModule) module).update(this.getLeftText());
+      } else if (module instanceof MiscRightModule) {
+        ((MiscRightModule) module).update(this.getRightText());
       } else {
         module.update(this.client);
       }
@@ -109,6 +111,8 @@ public abstract class DebugMixin {
       }
       if (module instanceof MiscRightModule) {
         ((MiscRightModule) module).update(this.getRightText());
+      } else if (module instanceof MiscLeftModule) {
+        ((MiscLeftModule) module).update(this.getLeftText());
       } else {
         module.update(this.client);
       }
@@ -202,7 +206,7 @@ public abstract class DebugMixin {
           windowWidth += xPos;
         }
 
-        x1 = windowWidth - 1;
+        x1 = 1 + windowWidth;
         x2 = windowWidth + width;
       } else {
         windowWidth = 2;
@@ -210,7 +214,7 @@ public abstract class DebugMixin {
         if (GeneralOptions.enableAnimations) {
           windowWidth -= xPos;
         }
-        x1 = 1 + windowWidth;
+        x1 = windowWidth - 1;
         x2 = width + 3 + windowWidth;
       }
       y1 = y - 1;
@@ -322,6 +326,9 @@ public abstract class DebugMixin {
   @Inject(method = "render", at = @At(value = "FIELD",
   target = "Lnet/minecraft/client/option/GameOptions;debugTpsEnabled:Z"), cancellable = true)
   public void renderFontScaleRightAfter(final MatrixStack matrices, final CallbackInfo ci) {
+    if (GeneralOptions.disableMod) {
+      return;
+    }
     matrices.pop();
     this.client.getProfiler().pop();
     ci.cancel();
@@ -336,6 +343,9 @@ public abstract class DebugMixin {
   @Inject(method = "render", at = @At("HEAD"))
   public void renderAnimation(final MatrixStack matrices, final CallbackInfo ci) {
 
+    if (GeneralOptions.disableMod) {
+      return;
+    }
     if (!GeneralOptions.enableAnimations) {
       return;
     } // Only displays the animation if set to true

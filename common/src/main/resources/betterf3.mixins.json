@@ -6,9 +6,13 @@
   "client": [
     "DebugMixin",
     "KeyboardMixin",
+    "autof3.AutomaticDebugMixin",
+    "autof3.DebugOptionMixin",
+    "bossbar.BossbarMixin",
     "chunk.ChunkBuilderMixin",
-    "chunk.ClientChunkMapMixin",
     "chunk.ClientChunkManagerMixin",
+    "chunk.ClientChunkMapMixin",
+    "debugcrosshair.DebugCrosshairMixin",
     "scoreboard.ScoreboardMixin"
   ]
 }

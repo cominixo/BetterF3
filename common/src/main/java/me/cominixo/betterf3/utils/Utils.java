@@ -125,6 +125,9 @@ public final class Utils {
    */
   public static Text formattedFromString(final String string, final TextColor nameColor,
                                          final TextColor valueColor) {
+    if (string == null) {
+      return Text.of("");
+    }
     final String[] split = string.split(":");
 
     if (string.contains(":")) {

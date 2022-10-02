@@ -7,10 +7,10 @@ issueTrackerURL="https://github.com/TreyRuffy/BetterF3/issues/"
 modId = "betterf3"
 version = "${version}"
 displayName = "BetterF3"
-updateJSONURL="https://raw.githubusercontent.com/cominixo/BetterF3/architectury/1.19/update.json"
-displayURL="https://github.com/TreyRuffy/BetterF3/"
+updateJSONURL="https://api.modrinth.com/updates/betterf3/forge_updates.json"
+displayURL="https://modrinth.com/mod/betterf3"
 logoFile="icon.png"
-authors = "TreyRuffy - Forge; cominixo - Fabric"
+authors = "TreyRuffy and cominixo"
 description = '''
 Better F3 for Minecraft Forge
 Replaces Minecraft's original debug HUD with a highly customizable, more human-readable HUD.
@@ -30,7 +30,7 @@ side = "CLIENT"
 [[dependencies.betterf3]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.19, 1.20)"
+versionRange = "[1.19,)"
 ordering = "NONE"
 side = "BOTH"
 

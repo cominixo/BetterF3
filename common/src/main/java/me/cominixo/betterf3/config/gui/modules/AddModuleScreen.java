@@ -56,8 +56,6 @@ public final class AddModuleScreen {
     general.addEntry(dropdownEntry);
     builder.transparentBackground();
 
-    builder.transparentBackground();
-
     return builder;
   }
 }

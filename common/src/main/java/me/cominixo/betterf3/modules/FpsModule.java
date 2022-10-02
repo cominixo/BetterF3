@@ -62,13 +62,16 @@ public class FpsModule extends BaseModule {
    * @param client the Minecraft client
    */
   public void update(final MinecraftClient client) {
-    final int currentFps = Integer.parseInt(client.fpsDebugString.split(" ")[0].split("/")[0]);
+    final int currentFps = Integer.parseInt(client.fpsDebugString.split(" ")[0].split("/")[0].trim());
 
-    final String fpsString = I18n.translate("format.betterf3.fps", currentFps,
-    (double) client.options.getMaxFps().getValue() == GameOptions.MAX_FRAMERATE ? I18n.translate("text.betterf3.line" +
-    ".fps" +
-    ".unlimited") : client.options.getMaxFps(),
-    client.options.getEnableVsync().getValue() ? I18n.translate("text.betterf3.line.fps.vsync") : "").trim();
+    final String fpsString = I18n
+      .translate("format.betterf3.fps", currentFps,
+        (double) client.options.getMaxFps().getValue() == GameOptions.MAX_FRAMERATE ?
+          I18n.translate("text.betterf3.line.fps.unlimited") :
+          client.options.getMaxFps().getValue(),
+        client.options.getEnableVsync().getValue() ?
+          I18n.translate("text.betterf3.line.fps.vsync") : "")
+      .trim();
 
     final TextColor color = switch (Utils.fpsColor(currentFps)) {
       case HIGH -> this.colorHigh;

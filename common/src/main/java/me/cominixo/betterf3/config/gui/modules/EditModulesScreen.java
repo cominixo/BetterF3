@@ -2,9 +2,14 @@ package me.cominixo.betterf3.config.gui.modules;
 
 import me.cominixo.betterf3.config.ModConfigFile;
 import me.cominixo.betterf3.modules.BaseModule;
+import me.cominixo.betterf3.modules.ChunksModule;
 import me.cominixo.betterf3.modules.CoordsModule;
 import me.cominixo.betterf3.modules.EmptyModule;
+import me.cominixo.betterf3.modules.EntityModule;
 import me.cominixo.betterf3.modules.FpsModule;
+import me.cominixo.betterf3.modules.HelpModule;
+import me.cominixo.betterf3.modules.SoundModule;
+import me.cominixo.betterf3.modules.SystemModule;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
@@ -12,6 +17,7 @@ import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import me.shedaniel.clothconfig2.gui.entries.BooleanListEntry;
 import me.shedaniel.clothconfig2.gui.entries.ColorEntry;
 import me.shedaniel.clothconfig2.gui.entries.IntegerListEntry;
+import me.shedaniel.clothconfig2.gui.entries.StringListEntry;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
 import org.apache.commons.lang3.StringUtils;
@@ -144,6 +150,115 @@ public final class EditModulesScreen {
 
       general.addEntry(emptyLines);
 
+    }
+
+    if (module instanceof ChunksModule chunksModule) {
+
+      if (chunksModule.enabledColor != null && chunksModule.defaultEnabledColor != null) {
+        final ColorEntry enabledColor = entryBuilder
+          .startColorField(Text.translatable("config.betterf3.color.chunks.enabled"),
+            chunksModule.enabledColor.getRgb())
+          .setDefaultValue(chunksModule.defaultEnabledColor.getRgb())
+          .setTooltip(Text.translatable("config.betterf3.color.chunks.enabled.tooltip"))
+          .setSaveConsumer(newValue -> chunksModule.enabledColor = TextColor.fromRgb(newValue))
+          .build();
+
+        general.addEntry(enabledColor);
+      }
+
+      if (chunksModule.disabledColor != null && chunksModule.defaultDisabledColor != null) {
+        final ColorEntry disabledColor = entryBuilder
+          .startColorField(Text.translatable("config.betterf3.color.chunks.disabled"),
+            chunksModule.disabledColor.getRgb())
+          .setDefaultValue(chunksModule.defaultDisabledColor.getRgb())
+          .setTooltip(Text.translatable("config.betterf3.color.chunks.disabled.tooltip"))
+          .setSaveConsumer(newValue -> chunksModule.disabledColor = TextColor.fromRgb(newValue))
+          .build();
+
+        general.addEntry(disabledColor);
+      }
+
+      if (chunksModule.totalColor != null && chunksModule.defaultTotalColor != null) {
+        final ColorEntry totalColor = entryBuilder
+          .startColorField(Text.translatable("config.betterf3.color.chunks.total"), chunksModule.totalColor.getRgb())
+          .setDefaultValue(chunksModule.defaultTotalColor.getRgb())
+          .setTooltip(Text.translatable("config.betterf3.color.chunks.total.tooltip"))
+          .setSaveConsumer(newValue -> chunksModule.totalColor = TextColor.fromRgb(newValue))
+          .build();
+
+        general.addEntry(totalColor);
+      }
+    }
+
+    if (module instanceof EntityModule entityModule) {
+      if (entityModule.totalColor != null && entityModule.defaultTotalColor != null) {
+        final ColorEntry totalColor = entryBuilder
+          .startColorField(Text.translatable("config.betterf3.color.entities.total"), entityModule.totalColor.getRgb())
+          .setDefaultValue(entityModule.defaultTotalColor.getRgb())
+          .setTooltip(Text.translatable("config.betterf3.color.entities.total.tooltip"))
+          .setSaveConsumer(newValue -> entityModule.totalColor = TextColor.fromRgb(newValue))
+          .build();
+
+        general.addEntry(totalColor);
+      }
+    }
+
+    if (module instanceof HelpModule helpModule) {
+
+      if (helpModule.enabledColor != null && helpModule.defaultEnabledColor != null) {
+        final ColorEntry enabledColor = entryBuilder
+          .startColorField(Text.translatable("config.betterf3.color.help.enabled"), helpModule.enabledColor.getRgb())
+          .setDefaultValue(helpModule.defaultEnabledColor.getRgb())
+          .setTooltip(Text.translatable("config.betterf3.color.help.enabled.tooltip"))
+          .setSaveConsumer(newValue -> helpModule.enabledColor = TextColor.fromRgb(newValue))
+          .build();
+
+        general.addEntry(enabledColor);
+      }
+
+      if (helpModule.disabledColor != null && helpModule.defaultDisabledColor != null) {
+        final ColorEntry disabledColor = entryBuilder
+          .startColorField(Text.translatable("config.betterf3.color.help.disabled"), helpModule.disabledColor.getRgb())
+          .setDefaultValue(helpModule.defaultDisabledColor.getRgb())
+          .setTooltip(Text.translatable("config.betterf3.color.help.disabled.tooltip"))
+          .setSaveConsumer(newValue -> helpModule.disabledColor = TextColor.fromRgb(newValue))
+          .build();
+
+        general.addEntry(disabledColor);
+      }
+    }
+
+    if (module instanceof SoundModule soundModule) {
+      if (soundModule.maximumColor != null && soundModule.defaultMaximumColor != null) {
+        final ColorEntry maximumColor = entryBuilder
+          .startColorField(Text.translatable("config.betterf3.color.sound.maximum"), soundModule.maximumColor.getRgb())
+          .setDefaultValue(soundModule.defaultMaximumColor.getRgb())
+          .setTooltip(Text.translatable("config.betterf3.color.sound.maximum.tooltip"))
+          .setSaveConsumer(newValue -> soundModule.maximumColor = TextColor.fromRgb(newValue))
+          .build();
+
+        general.addEntry(maximumColor);
+      }
+    }
+
+    if (module instanceof SystemModule systemModule) {
+      final BooleanListEntry memoryColorToggle = entryBuilder
+        .startBooleanToggle(Text.translatable("config.betterf3.memory_color_toggle"), systemModule.memoryColorToggle)
+        .setDefaultValue(systemModule.defaultMemoryColorToggle)
+        .setTooltip(Text.translatable("config.betterf3.memory_color_toggle.tooltip"))
+        .setSaveConsumer(newValue -> systemModule.memoryColorToggle = newValue)
+        .build();
+
+      general.addEntry(memoryColorToggle);
+
+      final StringListEntry timeFormat = entryBuilder
+        .startStrField(Text.translatable("config.betterf3.time_format"), systemModule.timeFormat)
+        .setDefaultValue(systemModule.defaultTimeFormat)
+        .setTooltip(Text.translatable("config.betterf3.time_format.tooltip"))
+        .setSaveConsumer(newValue -> systemModule.timeFormat = newValue)
+        .build();
+
+      general.addEntry(timeFormat);
     }
 
     if (module.nameColor != null && module.defaultNameColor != null) {
