@@ -96,7 +96,7 @@ unifiedPublishing {
         displayName = "BetterF3 Forge v${project.version} (${project.supported_minecraft_versions})"
         version = project.version
         changelog = releaseChangelog()
-        releaseType = project.release_type
+        releaseType = "beta"
         List<String> mcVersions = project.supported_minecraft_versions_list.split(",")
         gameVersions = mcVersions
         gameLoaders = ["forge"]

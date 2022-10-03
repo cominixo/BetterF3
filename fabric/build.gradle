@@ -102,7 +102,7 @@ unifiedPublishing {
         displayName = "BetterF3 Fabric v${project.version} (${project.supported_minecraft_versions})"
         version = project.version
         changelog = releaseChangelog()
-        releaseType = project.release_type
+        releaseType = "release"
         List<String> mcVersions = project.supported_minecraft_versions_list.split(",")
         gameVersions = mcVersions
         gameLoaders = ["fabric","quilt"]
