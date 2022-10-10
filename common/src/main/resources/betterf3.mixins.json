@@ -3,14 +3,16 @@
   "package": "me.cominixo.betterf3.mixin",
   "compatibilityLevel": "JAVA_16",
   "minVersion": "0.8.2",
-  "server": [],
-  "mixins": [],
   "client": [
     "DebugMixin",
     "KeyboardMixin",
-    "chunk.ChunkBuilderAccessor",
-    "chunk.ClientChunkManagerAccessor",
-    "chunk.ClientChunkMapAccessor",
-    "chunk.WorldRendererAccessor"
+    "autof3.AutomaticDebugMixin",
+    "autof3.DebugOptionMixin",
+    "bossbar.BossbarMixin",
+    "chunk.ChunkBuilderMixin",
+    "chunk.ClientChunkManagerMixin",
+    "chunk.ClientChunkMapMixin",
+    "debugcrosshair.DebugCrosshairMixin",
+    "scoreboard.ScoreboardMixin"
   ]
 }

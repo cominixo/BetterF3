@@ -9,9 +9,9 @@ import me.cominixo.betterf3.config.gui.ModConfigScreen;
  */
 public class ModMenuIntegration implements ModMenuApi {
 
-    // Method which sets up our Mod Menu entry
-    @Override
-    public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return ModConfigScreen::new;
-    }
+  // Method which sets up our Mod Menu entry
+  @Override
+  public ConfigScreenFactory<?> getModConfigScreenFactory() {
+    return ModConfigScreen::new;
+  }
 }

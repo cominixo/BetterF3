@@ -30,37 +30,37 @@ import org.apache.logging.log4j.Logger;
 @Environment(EnvType.CLIENT)
 public class BetterF3Fabric implements ClientModInitializer {
 
-    /**
-     * The Log4J logger.
-     */
-    public final Logger logger = LogManager.getLogger("betterf3");
+  /**
+   * The Log4J logger.
+   */
+  public final Logger logger = LogManager.getLogger("betterf3");
 
-    @Override
-    public void onInitializeClient() {
-        this.logger.info("[BetterF3] Loading...");
+  @Override
+  public void onInitializeClient() {
+    this.logger.info("[BetterF3] Loading...");
 
-        // Initializes all modules and add spaces (default order)
-        new MinecraftModule().init();
-        new FpsModule().init();
-        new GraphicsModule().init();
-        new ServerModule().init();
-        new CoordsModule().init();
-        new ChunksModule().init();
-        new LocationModule().init();
-        new EntityModule().init();
-        new SoundModule().init();
-        new HelpModule().init();
-        BaseModule.modules.add(EmptyModule.INSTANCE);
-        new MiscLeftModule().init();
+    // Initializes all modules and add spaces (default order)
+    new MinecraftModule().init();
+    new FpsModule().init();
+    new GraphicsModule().init();
+    new ServerModule().init();
+    new CoordsModule().init();
+    new ChunksModule().init();
+    new LocationModule().init();
+    new EntityModule().init();
+    new SoundModule().init();
+    new HelpModule().init();
+    BaseModule.modules.add(new EmptyModule(false));
+    new MiscLeftModule().init();
 
-        new SystemModule().init(PositionEnum.RIGHT);
-        new MiscRightModule().init(PositionEnum.RIGHT);
-        BaseModule.modulesRight.add(EmptyModule.INSTANCE);
-        new TargetModule().init(PositionEnum.RIGHT);
+    new SystemModule().init(PositionEnum.RIGHT);
+    new MiscRightModule().init(PositionEnum.RIGHT);
+    BaseModule.modulesRight.add(new EmptyModule(false));
+    new TargetModule().init(PositionEnum.RIGHT);
 
-        // Setup config with JSON file type
-        ModConfigFile.load(ModConfigFile.FileType.JSON);
+    // Setup config with JSON file type
+    ModConfigFile.load(ModConfigFile.FileType.JSON);
 
-        this.logger.info("[BetterF3] All done!");
-    }
+    this.logger.info("[BetterF3] All done!");
+  }
 }

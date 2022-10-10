@@ -9,15 +9,15 @@ import net.minecraftforge.fmlclient.ConfigGuiHandler;
  */
 public final class ForgeModMenu {
 
-    private ForgeModMenu() {
-        // Do nothing
-    }
+  private ForgeModMenu() {
+    // Do nothing
+  }
 
-    /**
-     * Registers BetterF3 in the mod menu.
-     */
-    public static void registerModsPage() {
-        ModLoadingContext.get().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class,
-                () -> new ConfigGuiHandler.ConfigGuiFactory((client, parent) -> new ModConfigScreen(parent)));
-    }
+  /**
+   * Registers BetterF3 in the mod menu.
+   */
+  public static void registerModsPage() {
+    ModLoadingContext.get().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class,
+    () -> new ConfigGuiHandler.ConfigGuiFactory((client, parent) -> new ModConfigScreen(parent)));
+  }
 }

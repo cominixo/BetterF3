@@ -1,9 +1,13 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "7.0.0" // Use Shadow to make a JAR with dependencies
+    id "com.github.johnrengelman.shadow" version "7.1.2" // Use Shadow to make a JAR with dependencies
 }
 
 configurations {
+    common
     shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentForge.extendsFrom common
 }
 
 architectury {
@@ -35,18 +39,8 @@ dependencies {
     // Minecraft Forge API
     forge "net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}"
 
-    // Tells Gradle to use the common directory
-    implementation(project(path: ":common")) {
-        transitive = false
-    }
-    developmentForge(project(path: ":common")) {
-        transitive = false
-    }
-
-    // Tells Gradle to include the common directory in the JAR file
-    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) {
-        transitive = false
-    }
+    common(project(path: ":common", configuration: "namedElements")) { transitive false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 }
 
 processResources {
@@ -68,8 +62,8 @@ shadowJar {
 }
 
 remapJar {
+    inputFile.set(shadowJar.archiveFile)
     dependsOn(shadowJar)
-    input.set(shadowJar.archivePath)
     archiveClassifier.set("Forge-${rootProject.minecraft_version}")
 
     from rootProject.file("LICENSE.md")
@@ -93,6 +87,45 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
+        }
+    }
+}
+
+unifiedPublishing {
+    project {
+        displayName = "BetterF3 Forge v${project.version} (${project.supported_minecraft_versions})"
+        version = project.version
+        changelog = releaseChangelog()
+        List<String> mcVersions = project.supported_minecraft_versions_list.split(",")
+        gameVersions = mcVersions
+        gameLoaders = ["forge"]
+
+        mainPublication tasks.remapJar
+
+        relations {
+            depends {
+                curseforge = "cloth-config"
+                modrinth = "cloth-config"
+            }
+        }
+
+        var CURSE_API_KEY = project.findProperty("CURSE_API_KEY") ?: System.getenv("CURSE_API_KEY")
+        if (CURSE_API_KEY != null) {
+            curseforge {
+                token = CURSE_API_KEY
+                id = rootProject.curseforge_id
+                gameVersions.addAll ("Java 18","Java 17", "Java 16")
+                releaseType = "beta"
+            }
+        }
+
+        var MODRINTH_TOKEN = project.findProperty("MODRINTH_TOKEN") ?: System.getenv("MODRINTH_TOKEN")
+        if (MODRINTH_TOKEN != null) {
+            modrinth {
+                token = MODRINTH_TOKEN
+                id = rootProject.modrinth_id
+                releaseType = "release"
+            }
         }
     }
 }

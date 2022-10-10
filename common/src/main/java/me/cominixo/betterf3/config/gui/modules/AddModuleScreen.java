@@ -16,48 +16,46 @@ import net.minecraft.text.TranslatableText;
  */
 public final class AddModuleScreen {
 
-    private AddModuleScreen() {
-        // Not called
-    }
+  private AddModuleScreen() {
+    // Not called
+  }
 
-    /**
-     * Gets the config builder.
-     *
-     * @param parent The parent screen
-     * @return The ConfigBuilder for the add module screen
-     */
+  /**
+   * Gets the config builder.
+   *
+   * @param parent The parent screen
+   * @return The ConfigBuilder for the add module screen
+   */
 
-    public static ConfigBuilder configBuilder(final ModulesScreen parent) {
+  public static ConfigBuilder configBuilder(final ModulesScreen parent) {
 
-        final ConfigBuilder builder = ConfigBuilder.create()
-                .setParentScreen(parent);
+    final ConfigBuilder builder = ConfigBuilder.create()
+      .setParentScreen(parent);
 
-        builder.setSavingRunnable(ModConfigFile.saveRunnable);
+    builder.setSavingRunnable(ModConfigFile.saveRunnable);
 
-        final ConfigEntryBuilder entryBuilder = builder.entryBuilder();
+    final ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
-        final ConfigCategory general = builder.getOrCreateCategory(new TranslatableText("config.betterf3" +
-                ".category.general"));
+    final ConfigCategory general = builder.getOrCreateCategory(new TranslatableText("config.betterf3" +
+      ".category.general"));
 
-        final DropdownBoxEntry<BaseModule> dropdownEntry = entryBuilder.startDropdownMenu(new TranslatableText(
-                "config.betterf3.add_button.module_name"),
-                        DropdownMenuBuilder.TopCellElementBuilder.of(new EmptyModule(true),
-                                BaseModule::module,
-                                object -> new TranslatableText(object.toString()))).setSelections(BaseModule.allModules)
-                .setSaveConsumer((BaseModule newValue) -> {
-                    try {
-                        parent.modulesListWidget.addModule(newValue.getClass().getDeclaredConstructor().newInstance());
-                    } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-                        parent.modulesListWidget.addModule(newValue);
-                    }
-                })
-                .build();
+    final DropdownBoxEntry<BaseModule> dropdownEntry = entryBuilder.startDropdownMenu(new TranslatableText(
+      "config.betterf3.add_button.module_name"),
+        DropdownMenuBuilder.TopCellElementBuilder.of(new EmptyModule(true),
+          BaseModule::module,
+          object -> new TranslatableText(object.toString()))).setSelections(BaseModule.allModules)
+        .setSaveConsumer((BaseModule newValue) -> {
+          try {
+            parent.modulesListWidget.addModule(newValue.getClass().getDeclaredConstructor().newInstance());
+          } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            parent.modulesListWidget.addModule(newValue);
+          }
+        })
+    .build();
 
-        general.addEntry(dropdownEntry);
-        builder.transparentBackground();
+    general.addEntry(dropdownEntry);
+    builder.transparentBackground();
 
-        builder.transparentBackground();
-
-        return builder;
-    }
+    return builder;
+  }
 }

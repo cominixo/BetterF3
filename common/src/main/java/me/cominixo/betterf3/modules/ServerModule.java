@@ -18,60 +18,60 @@ import net.minecraft.util.Formatting;
  */
 public class ServerModule extends BaseModule {
 
-    /**
-     * Instantiates a new Server module.
-     */
-    public ServerModule() {
-        this.defaultNameColor = TextColor.fromFormatting(Formatting.GRAY);
-        this.defaultValueColor = TextColor.fromFormatting(Formatting.YELLOW);
+  /**
+   * Instantiates a new Server module.
+   */
+  public ServerModule() {
+    this.defaultNameColor = TextColor.fromFormatting(Formatting.GRAY);
+    this.defaultValueColor = TextColor.fromFormatting(Formatting.YELLOW);
 
-        this.nameColor = defaultNameColor;
-        this.valueColor = defaultValueColor;
+    this.nameColor = defaultNameColor;
+    this.valueColor = defaultValueColor;
 
-        lines.add(new DebugLine("server_tick", "format.betterf3.server_tick", true));
-        lines.add(new DebugLine("packets_sent"));
-        lines.add(new DebugLine("packets_received"));
+    lines.add(new DebugLine("server_tick", "format.betterf3.server_tick", true));
+    lines.add(new DebugLine("packets_sent"));
+    lines.add(new DebugLine("packets_received"));
 
-        for (final DebugLine line : lines) {
-            line.inReducedDebug = true;
-        }
+    for (final DebugLine line : lines) {
+      line.inReducedDebug = true;
+    }
+  }
+
+  /**
+   * Updates the Server module.
+   *
+   * @param client the Minecraft client
+   */
+  public void update(final MinecraftClient client) {
+    final IntegratedServer integratedServer = client.getServer();
+
+    String serverString = "";
+    if (integratedServer != null) {
+      serverString = I18n.translate("text.betterf3.line.integrated_server");
+    } else if (client.player != null) {
+      serverString = client.player.getServerBrand();
     }
 
-    /**
-     * Updates the Server module.
-     *
-     * @param client the Minecraft client
-     */
-    public void update(final MinecraftClient client) {
-        final IntegratedServer integratedServer = client.getServer();
+    if (client.getNetworkHandler() != null) {
+      final ClientConnection clientConnection = client.getNetworkHandler().getConnection();
+      final float packetsSent = clientConnection.getAveragePacketsSent();
+      final float packetsReceived = clientConnection.getAveragePacketsReceived();
 
-        String serverString = "";
-        if (integratedServer != null) {
-            serverString = I18n.translate("text.betterf3.line.integrated_server");
-        } else if (client.player != null) {
-            serverString = client.player.getServerBrand();
-        }
-
-        if (client.getNetworkHandler() != null) {
-            final ClientConnection clientConnection = client.getNetworkHandler().getConnection();
-            final float packetsSent = clientConnection.getAveragePacketsSent();
-            final float packetsReceived = clientConnection.getAveragePacketsReceived();
-
-            lines.get(1).value(Math.round(packetsSent));
-            lines.get(2).value(Math.round(packetsReceived));
-        }
-        String tickString = "";
-        if (integratedServer != null) {
-            tickString = Integer.toString(Math.round(integratedServer.getTickTime()));
-        }
-
-        final List<MutableText> serverStringList = new LinkedList<>(Arrays.asList(Utils.styledText(serverString, nameColor), Utils.styledText(tickString, nameColor)));
-
-        if (tickString.isEmpty()) {
-            lines.get(0).format("format.betterf3.no_format");
-            serverStringList.remove(1);
-        }
-
-        lines.get(0).value(serverStringList);
+      lines.get(1).value(Math.round(packetsSent));
+      lines.get(2).value(Math.round(packetsReceived));
     }
+    String tickString = "";
+    if (integratedServer != null) {
+      tickString = Integer.toString(Math.round(integratedServer.getTickTime()));
+    }
+
+    final List<MutableText> serverStringList = new LinkedList<>(Arrays.asList(Utils.styledText(serverString, nameColor), Utils.styledText(tickString, nameColor)));
+
+    if (tickString.isEmpty()) {
+      lines.get(0).format("format.betterf3.no_format");
+      serverStringList.remove(1);
+    }
+
+    lines.get(0).value(serverStringList);
+  }
 }
