@@ -8,11 +8,7 @@ pluginManagement {
     }
 }
 
-boolean forge_enabled = true // Confirm settings in gradle.properties
-
 include("common") // Common directory
 include("fabric") // Fabric directory
-if (forge_enabled) {
-    include("forge") // Forge directory
-}
+include("forge") // Forge directory
 rootProject.name = 'BetterF3' // Sets project name

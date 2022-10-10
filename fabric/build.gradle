@@ -21,7 +21,8 @@ loom {
 
 repositories {
     maven {	url "https://maven.terraformersmc.com/" }  // Repository for mod menu
-    maven {	url "https://maven.shedaniel.me/" }  // Repository for cloth-config
+    maven {	url "https://maven.shedaniel.me/" }
+    mavenCentral()  // Repository for cloth-config
 }
 
 dependencies {
@@ -47,8 +48,8 @@ dependencies {
     include(modImplementation(fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)))
 
     // Tells Gradle to use night config
-    implementation 'com.electronwill.night-config:json:3.6.5'
-    shadowCommon 'com.electronwill.night-config:json:3.6.5'
+    implementation 'com.electronwill.night-config:json:3.6.6'
+    shadowCommon 'com.electronwill.night-config:json:3.6.6'
     compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 }
 
@@ -92,6 +93,48 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
+        }
+    }
+}
+
+unifiedPublishing {
+    project {
+        displayName = "BetterF3 Fabric v${project.version} (${project.supported_minecraft_versions})"
+        version = project.version
+        changelog = releaseChangelog()
+        releaseType = "release"
+        List<String> mcVersions = project.supported_minecraft_versions_list.split(",")
+        gameVersions = mcVersions
+        gameLoaders = ["fabric","quilt"]
+
+        mainPublication tasks.remapJar
+
+        relations {
+            depends {
+                curseforge = "cloth-config"
+                modrinth = "cloth-config"
+            }
+            optional {
+                curseforge = "modmenu"
+                modrinth = "modmenu"
+            }
+        }
+
+        var CURSE_API_KEY = project.findProperty("CURSE_API_KEY") ?: System.getenv("CURSE_API_KEY")
+        if (CURSE_API_KEY != null) {
+            curseforge {
+                token = CURSE_API_KEY
+                id = rootProject.curseforge_id
+                gameVersions.addAll ("Java 18","Java 17")
+            }
+        }
+
+        var MODRINTH_TOKEN = project.findProperty("MODRINTH_TOKEN") ?: System.getenv("MODRINTH_TOKEN")
+        if (MODRINTH_TOKEN != null) {
+            modrinth {
+                token = MODRINTH_TOKEN
+                id = rootProject.modrinth_id
+            }
         }
     }
 }

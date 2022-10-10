@@ -38,8 +38,11 @@ public class GraphicsModule extends BaseModule {
    */
   public void update(final MinecraftClient client) {
 
-    final String cloudString = client.options.cloudRenderMode == CloudRenderMode.OFF ? I18n.translate("text.betterf3.line.off")
-    : (client.options.cloudRenderMode == CloudRenderMode.FAST ? I18n.translate("text.betterf3.line.fast") : I18n.translate("text.betterf3.line.fancy") );
+    final String cloudString = client.options.cloudRenderMode == CloudRenderMode.OFF ? I18n.translate("text" +
+    ".betterf3.line.off")
+    : (client.options.cloudRenderMode == CloudRenderMode.FAST ? I18n.translate("text.betterf3.line.fast") :
+    I18n.translate("text" +
+    ".betterf3.line.fancy") );
 
     // Render Distance
     lines.get(0).value(client.worldRenderer.viewDistance);

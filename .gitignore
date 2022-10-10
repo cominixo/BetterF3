@@ -32,3 +32,5 @@ build
 
 !gradle/wrapper/gradle-wrapper.jar
 **/build
+bin
+**/bin

@@ -1,6 +1,8 @@
 package me.cominixo.betterf3.modules;
 
 import com.mojang.blaze3d.platform.GlDebugInfo;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.cominixo.betterf3.utils.Utils;
 import net.minecraft.client.MinecraftClient;
@@ -15,6 +17,26 @@ import org.apache.commons.lang3.ArrayUtils;
 public class SystemModule extends BaseModule {
 
   /**
+   * Default enable memory usage color.
+   */
+  public final boolean defaultMemoryColorToggle = true;
+
+  /**
+   * Enable memory usage color.
+   */
+  public Boolean memoryColorToggle;
+
+  /**
+   * Default time format.
+   */
+  public final String defaultTimeFormat = "HH:mm:ss";
+
+  /**
+   * Time format.
+   */
+  public String timeFormat;
+
+  /**
    * Instantiates a new System module.
    */
   public SystemModule() {
@@ -23,7 +45,10 @@ public class SystemModule extends BaseModule {
 
     this.nameColor = defaultNameColor;
     this.valueColor = defaultValueColor;
+    this.memoryColorToggle = this.defaultMemoryColorToggle;
+    this.timeFormat = this.defaultTimeFormat;
 
+    lines.add(new DebugLine("time"));
     lines.add(new DebugLine("java_version"));
     lines.add(new DebugLine("memory_usage"));
     lines.add(new DebugLine("allocated_memory"));
@@ -44,6 +69,17 @@ public class SystemModule extends BaseModule {
    * @param client the Minecraft client
    */
   public void update(final MinecraftClient client) {
+    final LocalDateTime currentTime = LocalDateTime.now();
+    DateTimeFormatter timeFormatter;
+    try {
+      timeFormatter = DateTimeFormatter.ofPattern(this.timeFormat);
+    } catch (final IllegalArgumentException e) {
+      this.timeFormat = this.defaultTimeFormat;
+      timeFormatter = DateTimeFormatter.ofPattern(this.timeFormat);
+    }
+
+    final String time = currentTime.format(timeFormatter);
+
     final long maxMemory = Runtime.getRuntime().maxMemory();
     final long totalMemory = Runtime.getRuntime().totalMemory();
     final long freeMemory = Runtime.getRuntime().freeMemory();
@@ -61,13 +97,14 @@ public class SystemModule extends BaseModule {
     final String openGlVersion = versionSplit[0];
     final String gpuDriverVersion = String.join(" ", ArrayUtils.remove(versionSplit, 0));
 
-    lines.get(0).value(javaVersion);
-    lines.get(1).value(Utils.percentColor((int) (usedMemory * 100 / maxMemory)) + memoryUsage);
-    lines.get(2).value(allocatedMemory);
-    lines.get(3).value(GlDebugInfo.getCpuInfo());
-    lines.get(4).value(displayInfo);
-    lines.get(5).value(GlDebugInfo.getRenderer());
-    lines.get(6).value(openGlVersion);
-    lines.get(7).value(gpuDriverVersion);
+    lines.get(0).value(time);
+    lines.get(1).value(javaVersion);
+    lines.get(2).value(this.memoryColorToggle ? Utils.percentColor((int) (usedMemory * 100 / maxMemory)) + memoryUsage : memoryUsage);
+    lines.get(3).value(allocatedMemory);
+    lines.get(4).value(GlDebugInfo.getCpuInfo());
+    lines.get(5).value(displayInfo);
+    lines.get(6).value(GlDebugInfo.getRenderer());
+    lines.get(7).value(openGlVersion);
+    lines.get(8).value(gpuDriverVersion);
   }
 }
