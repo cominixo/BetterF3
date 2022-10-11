@@ -35,6 +35,6 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.betterf3]]
-modId = "cloth_config"
+modId = "cloth-config"
 versionRange = "[4.15.79,)"
 mandatory = true
