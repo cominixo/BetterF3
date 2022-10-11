@@ -36,7 +36,7 @@ public class KeyboardMixin {
   @Inject(method = "processF3", at = @At("HEAD"))
   public void processF3(final int key, final CallbackInfoReturnable<Boolean> cir) {
     if (key == 77) { // Key m
-      this.client.setScreen(new ModConfigScreen(null));
+      this.client.openScreen(new ModConfigScreen(null));
     }
   }
 

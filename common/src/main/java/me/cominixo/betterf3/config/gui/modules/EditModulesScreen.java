@@ -64,8 +64,9 @@ public final class EditModulesScreen {
 
     general.addEntry(moduleEnabled);
 
-    if (module instanceof CoordsModule coordsModule) {
+    if (module instanceof CoordsModule) {
 
+      final CoordsModule coordsModule = (CoordsModule) module;
       if (coordsModule.colorX != null && coordsModule.defaultColorX != null) {
         final ColorEntry colorX =
         entryBuilder.startColorField(new TranslatableText("config.betterf3.color.x"), coordsModule.colorX.getRgb())
@@ -99,7 +100,8 @@ public final class EditModulesScreen {
 
     }
 
-    if (module instanceof FpsModule fpsModule) {
+    if (module instanceof FpsModule) {
+      final FpsModule fpsModule = (FpsModule) module;
 
       if (fpsModule.colorHigh != null && fpsModule.defaultColorHigh != null) {
         final ColorEntry colorHigh = entryBuilder.startColorField(new TranslatableText("config.betterf3" +
@@ -134,7 +136,8 @@ public final class EditModulesScreen {
 
     }
 
-    if (module instanceof EmptyModule emptyModule) {
+    if (module instanceof EmptyModule) {
+      final EmptyModule emptyModule = (EmptyModule) module;
 
       final IntegerListEntry emptyLines = entryBuilder.startIntField(new TranslatableText("config.betterf3" +
       ".empty_lines"), emptyModule.emptyLines)
@@ -154,7 +157,8 @@ public final class EditModulesScreen {
 
     }
 
-    if (module instanceof ChunksModule chunksModule) {
+    if (module instanceof ChunksModule) {
+      final ChunksModule chunksModule = (ChunksModule) module;
 
       if (chunksModule.enabledColor != null && chunksModule.defaultEnabledColor != null) {
         final ColorEntry enabledColor = entryBuilder
@@ -192,7 +196,9 @@ public final class EditModulesScreen {
       }
     }
 
-    if (module instanceof EntityModule entityModule) {
+    if (module instanceof EntityModule) {
+      final EntityModule entityModule = (EntityModule) module;
+
       if (entityModule.totalColor != null && entityModule.defaultTotalColor != null) {
         final ColorEntry totalColor = entryBuilder
           .startColorField(new TranslatableText("config.betterf3.color.entities.total"), entityModule.totalColor.getRgb())
@@ -205,7 +211,8 @@ public final class EditModulesScreen {
       }
     }
 
-    if (module instanceof HelpModule helpModule) {
+    if (module instanceof HelpModule) {
+      final HelpModule helpModule = (HelpModule) module;
 
       if (helpModule.enabledColor != null && helpModule.defaultEnabledColor != null) {
         final ColorEntry enabledColor = entryBuilder
@@ -230,7 +237,9 @@ public final class EditModulesScreen {
       }
     }
 
-    if (module instanceof SoundModule soundModule) {
+    if (module instanceof SoundModule) {
+      final SoundModule soundModule = (SoundModule) module;
+
       if (soundModule.maximumColor != null && soundModule.defaultMaximumColor != null) {
         final ColorEntry maximumColor = entryBuilder
           .startColorField(new TranslatableText("config.betterf3.color.sound.maximum"), soundModule.maximumColor.getRgb())
@@ -243,7 +252,9 @@ public final class EditModulesScreen {
       }
     }
 
-    if (module instanceof SystemModule systemModule) {
+    if (module instanceof SystemModule) {
+      final SystemModule systemModule = (SystemModule) module;
+
       final BooleanListEntry memoryColorToggle = entryBuilder
         .startBooleanToggle(new TranslatableText("config.betterf3.memory_color_toggle"), systemModule.memoryColorToggle)
         .setDefaultValue(systemModule.defaultMemoryColorToggle)

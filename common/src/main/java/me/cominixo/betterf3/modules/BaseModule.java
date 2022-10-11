@@ -90,12 +90,16 @@ public abstract class BaseModule {
    */
   public void init(final PositionEnum positionEnum) {
     switch (positionEnum) {
-      case RIGHT -> modulesRight.add(this);
-      case LEFT -> modules.add(this);
-      case BOTH -> {
+      case RIGHT:
+        modulesRight.add(this);
+        break;
+      case LEFT:
+        modules.add(this);
+        break;
+      case BOTH:
         modulesRight.add(this);
         modules.add(this);
-      }
+        break;
     }
     allModules.add(this);
 
@@ -134,7 +138,9 @@ public abstract class BaseModule {
       if (!line.active || !line.enabled) {
         continue;
       }
-      if (line instanceof DebugLineList lineList) {
+      if (line instanceof DebugLineList) {
+        final DebugLineList lineList = (DebugLineList) line;
+
         linesString.addAll(lineList.toTexts(this.nameColor, this.valueColor));
         continue;
       }

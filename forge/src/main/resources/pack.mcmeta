@@ -1,7 +1,7 @@
 {
   "pack": {
     "description": "BetterF3 resources",
-    "pack_format": 7,
-    "_comment": "A pack_format of 7"
+    "pack_format": 6,
+    "_comment": "A pack_format of 6"
   }
 }

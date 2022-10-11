@@ -1,5 +1,6 @@
 # Contributing to BetterF3
-[![Crowdin](https://badges.crowdin.net/betterf3/localized.svg)](https://crowdin.com/project/betterf3) [![License: MIT](https://img.shields.io/badge/License-MIT-2230f2.svg)](https://github.com/cominixo/BetterF3/blob/architectury/1.17.1/LICENSE.txt)
+[![Crowdin](https://badges.crowdin.net/betterf3/localized.svg)](https://crowdin.com/project/betterf3) [![License: 
+MIT](https://img.shields.io/badge/License-MIT-2230f2.svg)](https://github.com/cominixo/BetterF3/blob/architectury/1.16.5/LICENSE.txt)
 
 If you would like to improve BetterF3, there are several ways you can help.
 * You can make a financial donation by checking the "Sponsor this project" sidebar on the root GitHub page.

@@ -73,11 +73,18 @@ public class FpsModule extends BaseModule {
         I18n.translate("text.betterf3.line.fps.vsync") : "")
       .trim();
 
-    final TextColor color = switch (Utils.fpsColor(currentFps)) {
-      case HIGH -> this.colorHigh;
-      case MEDIUM -> this.colorMed;
-      case LOW -> this.colorLow;
-    };
+    final TextColor color;
+    switch (Utils.fpsColor(currentFps)) {
+      case HIGH:
+        color = this.colorHigh;
+        break;
+      case MEDIUM:
+        color = this.colorMed;
+        break;
+      default:
+        color = this.colorLow;
+        break;
+    }
 
     lines.get(0).value(Collections.singletonList(Utils.styledText(fpsString, color)));
   }

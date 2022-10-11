@@ -94,7 +94,9 @@ public class DebugLine {
   public Text toTextCustom(final TextColor nameColor) {
     final String name = this.name();
 
-    if (this.value instanceof final List<?> listValue) {
+    if (this.value instanceof List<?>) {
+      final List<?> listValue = (List<?>) this.value;
+
       // format properly if value is a List (bad)
       final List<Object> values = new ArrayList<>();
 

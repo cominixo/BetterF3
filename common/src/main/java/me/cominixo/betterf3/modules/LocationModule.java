@@ -1,6 +1,5 @@
 package me.cominixo.betterf3.modules;
 
-import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import me.cominixo.betterf3.utils.DebugLine;
@@ -150,7 +149,11 @@ public class LocationModule extends BaseModule {
 
             moonSize = serverWorld.getMoonSize();
 
-            inhabitedTime = Objects.requireNonNullElse(serverChunk, clientChunk).getInhabitedTime();
+            if (serverChunk == null) {
+              inhabitedTime = clientChunk.getInhabitedTime();
+            } else {
+              inhabitedTime = serverChunk.getInhabitedTime();
+            }
 
             final LocalDifficulty localDifficulty = new LocalDifficulty(serverWorld.getDifficulty(), serverWorld.getTimeOfDay(), inhabitedTime, moonSize);
             localDifficultyString = String.format("%.2f  " + I18n.translate("text.betterf3.line.clamped") + ": %.2f", localDifficulty.getLocalDifficulty(), localDifficulty.getClampedLocalDifficulty());
@@ -178,8 +181,8 @@ public class LocationModule extends BaseModule {
       // Facing
       lines.get(1).value(String.format("%s (%s)", I18n.translate("text.betterf3.line." + facing.toString().toLowerCase()), facingString));
       // Rotation
-      final String yaw = String.format("%.1f", MathHelper.wrapDegrees(cameraEntity.getYaw()));
-      final String pitch = String.format("%.1f", MathHelper.wrapDegrees(cameraEntity.getPitch()));
+      final String yaw = String.format("%.1f", MathHelper.wrapDegrees(cameraEntity.yaw));
+      final String pitch = String.format("%.1f", MathHelper.wrapDegrees(cameraEntity.pitch));
       lines.get(2).value(I18n.translate("format.betterf3.rotation", yaw, pitch));
     }
 

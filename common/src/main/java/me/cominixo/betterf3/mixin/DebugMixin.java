@@ -14,10 +14,8 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.hud.DebugHud;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.BufferRenderer;
-import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.server.integrated.IntegratedServer;
@@ -45,7 +43,7 @@ import static me.cominixo.betterf3.utils.Utils.xPos;
 public abstract class DebugMixin {
 
   @Shadow @Final private MinecraftClient client;
-  @Shadow @Final private TextRenderer textRenderer;
+  @Shadow @Final private TextRenderer fontRenderer;
 
   /**
    * Gets the information on the left side of the screen.
@@ -148,7 +146,7 @@ public abstract class DebugMixin {
 
       if (!Strings.isNullOrEmpty(list.get(i).getString())) {
         final int height = 9;
-        final int width = this.textRenderer.getWidth(list.get(i).getString());
+        final int width = this.fontRenderer.getWidth(list.get(i).getString());
         int windowWidth =
         (int) (this.client.getWindow().getScaledWidth() / GeneralOptions.fontScale) - 2 - width;
         if (GeneralOptions.enableAnimations) {
@@ -156,7 +154,7 @@ public abstract class DebugMixin {
         }
         final int y = 2 + height * i;
 
-        this.textRenderer.draw(list.get(i), windowWidth, y, 0xE0E0E0, GeneralOptions.shadowText, matrixStack.peek().getModel(), immediate, false, 0, 15728880);
+        this.fontRenderer.draw(list.get(i), windowWidth, y, 0xE0E0E0, GeneralOptions.shadowText, matrixStack.peek().getModel(), immediate, false, 0, 15728880);
       }
     }
     immediate.draw();
@@ -183,12 +181,12 @@ public abstract class DebugMixin {
     RenderSystem.enableBlend();
     RenderSystem.disableTexture();
     RenderSystem.defaultBlendFunc();
-    RenderSystem.setShader(GameRenderer::getPositionColorShader);
-    bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
+    //RenderSystem.setShader(GameRenderer::getPositionColorShader);
+    bufferBuilder.begin(7, VertexFormats.POSITION_COLOR);
 
     for (int i = 0; i < list.size(); i++) {
       final int height = 9;
-      final int width = this.textRenderer.getWidth(list.get(i).getString());
+      final int width = this.fontRenderer.getWidth(list.get(i).getString());
       if (width == 0) {
         continue;
       }
@@ -278,7 +276,7 @@ public abstract class DebugMixin {
           xPosLeft -= xPos;
         }
 
-        this.textRenderer.draw(list.get(i), xPosLeft, y, 0xE0E0E0, GeneralOptions.shadowText, matrixStack.peek().getModel(), immediate, false, 0, 15728880);
+        this.fontRenderer.draw(list.get(i), xPosLeft, y, 0xE0E0E0, GeneralOptions.shadowText, matrixStack.peek().getModel(), immediate, false, 0, 15728880);
       }
     }
     immediate.draw();

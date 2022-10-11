@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "me.cominixo.betterf3.mixin",
-  "compatibilityLevel": "JAVA_16",
+  "compatibilityLevel": "JAVA_8",
   "minVersion": "0.8.2",
   "client": [
     "DebugMixin",

@@ -28,16 +28,16 @@ public class ModConfigScreen extends Screen {
   public void init() {
     final MinecraftClient client = MinecraftClient.getInstance();
 
-    this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height / 4, 120, 20, new TranslatableText(
-    "config.betterf3.order_left_button"), buttonWidget -> client.setScreen(new ModulesScreen(client.currentScreen, PositionEnum.LEFT))));
-    this.addDrawableChild(new ButtonWidget(this.width / 2 + 10, this.height / 4, 120, 20, new TranslatableText(
-    "config.betterf3.order_right_button"), buttonWidget -> client.setScreen(new ModulesScreen(client.currentScreen, PositionEnum.RIGHT))));
-    this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height / 4 - 24, 260, 20,
+    this.addButton(new ButtonWidget(this.width / 2 - 130, this.height / 4, 120, 20, new TranslatableText(
+    "config.betterf3.order_left_button"), buttonWidget -> client.openScreen(new ModulesScreen(client.currentScreen, PositionEnum.LEFT))));
+    this.addButton(new ButtonWidget(this.width / 2 + 10, this.height / 4, 120, 20, new TranslatableText(
+    "config.betterf3.order_right_button"), buttonWidget -> client.openScreen(new ModulesScreen(client.currentScreen, PositionEnum.RIGHT))));
+    this.addButton(new ButtonWidget(this.width / 2 - 130, this.height / 4 - 24, 260, 20,
     new TranslatableText("config.betterf3.general_settings"),
-    buttonWidget -> client.setScreen(GeneralOptionsScreen.configBuilder(client.currentScreen).build())));
-    this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height - 50, 260, 20,
+    buttonWidget -> client.openScreen(GeneralOptionsScreen.configBuilder(client.currentScreen).build())));
+    this.addButton(new ButtonWidget(this.width / 2 - 130, this.height - 50, 260, 20,
     new TranslatableText("config.betterf3.modules.done_button"),
-    buttonWidget -> client.setScreen(this.parent)));
+    buttonWidget -> client.openScreen(this.parent)));
   }
 
   @Override

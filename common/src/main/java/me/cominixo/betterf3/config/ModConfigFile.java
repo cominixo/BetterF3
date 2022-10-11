@@ -138,7 +138,8 @@ public final class ModConfigFile {
           module.defaultValueColor.getRgb()));
         }
 
-        if (module instanceof CoordsModule coordsModule) {
+        if (module instanceof CoordsModule) {
+          final CoordsModule coordsModule = (CoordsModule) module;
 
           if (coordsModule.defaultColorX != null)
             coordsModule.colorX = TextColor.fromRgb(moduleConfig.getOrElse("color_x",
@@ -151,19 +152,24 @@ public final class ModConfigFile {
             coordsModule.defaultColorZ.getRgb()));
         }
 
-        if (module instanceof SoundModule soundModule) {
+        if (module instanceof SoundModule) {
+          final SoundModule soundModule = (SoundModule) module;
           if (soundModule.defaultMaximumColor != null)
             soundModule.maximumColor = TextColor.fromRgb(moduleConfig.getOrElse("maximum_color",
             soundModule.defaultMaximumColor.getRgb()));
         }
 
-        if (module instanceof EntityModule entityModule) {
+        if (module instanceof EntityModule) {
+          final EntityModule entityModule = (EntityModule) module;
+
           if (entityModule.defaultTotalColor != null)
             entityModule.totalColor = TextColor.fromRgb(moduleConfig.getOrElse("total_entities_color",
             entityModule.defaultTotalColor.getRgb()));
         }
 
-        if (module instanceof HelpModule helpModule) {
+        if (module instanceof HelpModule) {
+          final HelpModule helpModule = (HelpModule) module;
+
           if (helpModule.defaultEnabledColor != null)
             helpModule.enabledColor = TextColor.fromRgb(moduleConfig.getOrElse("enabled_color",
             helpModule.defaultEnabledColor.getRgb()));
@@ -172,7 +178,9 @@ public final class ModConfigFile {
             helpModule.defaultDisabledColor.getRgb()));
         }
 
-        if (module instanceof ChunksModule chunkModule) {
+        if (module instanceof ChunksModule) {
+          final ChunksModule chunkModule = (ChunksModule) module;
+
           if (chunkModule.defaultEnabledColor != null)
             chunkModule.enabledColor = TextColor.fromRgb(moduleConfig.getOrElse("chunks_enabled_color",
             chunkModule.defaultEnabledColor.getRgb()));
@@ -184,7 +192,9 @@ public final class ModConfigFile {
             chunkModule.defaultTotalColor.getRgb()));
         }
 
-        if (module instanceof SystemModule systemModule) {
+        if (module instanceof SystemModule) {
+          final SystemModule systemModule = (SystemModule) module;
+
           if (systemModule.memoryColorToggle == null) {
             systemModule.memoryColorToggle = moduleConfig.getOrElse("memory_color_toggle", systemModule.defaultMemoryColorToggle);
           }
@@ -324,7 +334,8 @@ public final class ModConfigFile {
       baseModule.defaultValueColor.getRgb()));
     }
 
-    if (baseModule instanceof CoordsModule coordsModule) {
+    if (baseModule instanceof CoordsModule) {
+      final CoordsModule coordsModule = (CoordsModule) baseModule;
 
       if (coordsModule.defaultColorX != null)
         coordsModule.colorX = TextColor.fromRgb(moduleConfig.getOrElse("color_x",
@@ -337,7 +348,8 @@ public final class ModConfigFile {
         coordsModule.defaultColorZ.getRgb()));
     }
 
-    if (baseModule instanceof FpsModule fpsModule) {
+    if (baseModule instanceof FpsModule) {
+      final FpsModule fpsModule = (FpsModule) baseModule;
 
       if (fpsModule.defaultColorHigh != null)
         fpsModule.colorHigh = TextColor.fromRgb(moduleConfig.getOrElse("color_high",
@@ -350,23 +362,30 @@ public final class ModConfigFile {
         fpsModule.defaultColorLow.getRgb()));
     }
 
-    if (baseModule instanceof EmptyModule emptyModule) {
+    if (baseModule instanceof EmptyModule) {
+      final EmptyModule emptyModule = (EmptyModule) baseModule;
+
       emptyModule.emptyLines = moduleConfig.getOrElse("empty_lines", 1);
     }
 
-    if (baseModule instanceof SoundModule soundModule) {
+    if (baseModule instanceof SoundModule) {
+      final SoundModule soundModule = (SoundModule) baseModule;
+
       if (soundModule.defaultMaximumColor != null)
         soundModule.maximumColor = TextColor.fromRgb(moduleConfig.getOrElse("maximum_color",
         soundModule.defaultMaximumColor.getRgb()));
     }
 
-    if (baseModule instanceof EntityModule entityModule) {
+    if (baseModule instanceof EntityModule) {
+      final EntityModule entityModule = (EntityModule) baseModule;
       if (entityModule.defaultTotalColor != null)
         entityModule.totalColor = TextColor.fromRgb(moduleConfig.getOrElse("total_entities_color",
         entityModule.defaultTotalColor.getRgb()));
     }
 
-    if (baseModule instanceof HelpModule helpModule) {
+    if (baseModule instanceof HelpModule) {
+      final HelpModule helpModule = (HelpModule) baseModule;
+
       if (helpModule.defaultEnabledColor != null)
         helpModule.enabledColor = TextColor.fromRgb(moduleConfig.getOrElse("enabled_color",
         helpModule.defaultEnabledColor.getRgb()));
@@ -375,7 +394,9 @@ public final class ModConfigFile {
         helpModule.defaultDisabledColor.getRgb()));
     }
 
-    if (baseModule instanceof ChunksModule chunkModule) {
+    if (baseModule instanceof ChunksModule) {
+      final ChunksModule chunkModule = (ChunksModule) baseModule;
+
       if (chunkModule.defaultEnabledColor != null)
         chunkModule.enabledColor = TextColor.fromRgb(moduleConfig.getOrElse("chunks_enabled_color",
         chunkModule.defaultEnabledColor.getRgb()));
@@ -387,7 +408,9 @@ public final class ModConfigFile {
         chunkModule.defaultTotalColor.getRgb()));
     }
 
-    if (baseModule instanceof SystemModule systemModule) {
+    if (baseModule instanceof SystemModule) {
+      final SystemModule systemModule = (SystemModule) baseModule;
+
       if (systemModule.memoryColorToggle == null) {
         systemModule.memoryColorToggle = moduleConfig.getOrElse("memory_color_toggle", systemModule.defaultMemoryColorToggle);
       }
@@ -420,7 +443,9 @@ public final class ModConfigFile {
       moduleConfig.set("value_color", module.valueColor.getRgb());
     }
 
-    if (module instanceof CoordsModule coordsModule) {
+    if (module instanceof CoordsModule) {
+      final CoordsModule coordsModule = (CoordsModule) module;
+
       if (coordsModule.colorX != null) {
         moduleConfig.set("color_x", coordsModule.colorX.getRgb());
       }
@@ -432,7 +457,9 @@ public final class ModConfigFile {
       }
     }
 
-    if (module instanceof FpsModule fpsModule) {
+    if (module instanceof FpsModule) {
+      final FpsModule fpsModule = (FpsModule) module;
+
       if (fpsModule.colorHigh != null) {
         moduleConfig.set("color_high", fpsModule.colorHigh.getRgb());
       }
@@ -444,28 +471,38 @@ public final class ModConfigFile {
       }
     }
 
-    if (module instanceof EmptyModule emptyModule) {
+    if (module instanceof EmptyModule) {
+      final EmptyModule emptyModule = (EmptyModule) module;
+
       moduleConfig.set("empty_lines", emptyModule.emptyLines);
     }
 
-    if (module instanceof SoundModule soundModule) {
+    if (module instanceof SoundModule) {
+      final SoundModule soundModule = (SoundModule) module;
+
       if (soundModule.maximumColor != null)
         moduleConfig.set("maximum_color", soundModule.maximumColor.getRgb());
     }
 
-    if (module instanceof EntityModule entityModule) {
+    if (module instanceof EntityModule) {
+      final EntityModule entityModule = (EntityModule) module;
+
       if (entityModule.totalColor != null)
         moduleConfig.set("total_entities_color", entityModule.totalColor.getRgb());
     }
 
-    if (module instanceof HelpModule helpModule) {
+    if (module instanceof HelpModule) {
+      final HelpModule helpModule = (HelpModule) module;
+
       if (helpModule.enabledColor != null)
         moduleConfig.set("enabled_color", helpModule.enabledColor.getRgb());
       if (helpModule.disabledColor != null)
         moduleConfig.set("disabled_color", helpModule.disabledColor.getRgb());
     }
 
-    if (module instanceof ChunksModule chunkModule) {
+    if (module instanceof ChunksModule) {
+      final ChunksModule chunkModule = (ChunksModule) module;
+
       if (chunkModule.enabledColor != null)
         moduleConfig.set("chunks_enabled_color", chunkModule.enabledColor.getRgb());
       if (chunkModule.disabledColor != null)

@@ -69,8 +69,8 @@ allprojects {
         mitLicense()
         checkstyle("9.3")
         javaVersions {
-            target(16)
-            testWith(16)
+            target(8)
+            testWith(8)
         }
     }
 

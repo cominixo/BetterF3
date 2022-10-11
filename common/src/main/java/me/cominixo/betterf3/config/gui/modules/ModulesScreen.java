@@ -61,28 +61,28 @@ public class ModulesScreen extends Screen {
       }
     }
 
-    this.addDrawableChild(this.modulesListWidget);
+    this.children.add(this.modulesListWidget);
 
-    this.editButton = this.addDrawableChild(new ButtonWidget(this.width / 2 - 50, this.height - 50, 100, 20, new TranslatableText("config.betterf3.modules.edit_button"), buttonWidget -> {
+    this.editButton = this.addButton(new ButtonWidget(this.width / 2 - 50, this.height - 50, 100, 20, new TranslatableText("config.betterf3.modules.edit_button"), buttonWidget -> {
       final Screen screen =
-      EditModulesScreen.configBuilder(Objects.requireNonNull(this.modulesListWidget.getSelectedOrNull()).module, this).build();
+      EditModulesScreen.configBuilder(Objects.requireNonNull(this.modulesListWidget.getSelected()).module, this).build();
       assert client != null;
-      client.setScreen(screen);
+      client.openScreen(screen);
     }));
 
-    this.addDrawableChild(new ButtonWidget(this.width / 2 + 4 + 50, this.height - 50, 100, 20, new TranslatableText("config.betterf3.modules.add_button"), buttonWidget -> {
+    this.addButton(new ButtonWidget(this.width / 2 + 4 + 50, this.height - 50, 100, 20, new TranslatableText("config.betterf3.modules.add_button"), buttonWidget -> {
       assert client != null;
-      client.setScreen(AddModuleScreen.configBuilder(this).build());
+      client.openScreen(AddModuleScreen.configBuilder(this).build());
     }));
 
-    this.deleteButton = this.addDrawableChild(new ButtonWidget(this.width / 2 - 154, this.height - 50, 100, 20,
-    new TranslatableText("config.betterf3.modules.delete_button"), buttonWidget -> this.modulesListWidget.removeModule(this.modulesListWidget.moduleEntries.indexOf(Objects.requireNonNull(this.modulesListWidget.getSelectedOrNull())))));
+    this.deleteButton = this.addButton(new ButtonWidget(this.width / 2 - 154, this.height - 50, 100, 20,
+    new TranslatableText("config.betterf3.modules.delete_button"), buttonWidget -> this.modulesListWidget.removeModule(this.modulesListWidget.moduleEntries.indexOf(Objects.requireNonNull(this.modulesListWidget.getSelected())))));
 
-    this.addDrawableChild(new ButtonWidget(this.width / 2 - 154, this.height - 30 + 4, 300 + 8, 20,
+    this.addButton(new ButtonWidget(this.width / 2 - 154, this.height - 30 + 4, 300 + 8, 20,
     new TranslatableText("config.betterf3.modules.done_button"), buttonWidget -> {
       this.onClose();
       assert client != null;
-      client.setScreen(this.parent);
+      client.openScreen(this.parent);
     }));
 
     this.updateButtons();
@@ -111,7 +111,7 @@ public class ModulesScreen extends Screen {
       }
     }
     assert this.client != null;
-    this.client.setScreen(this.parent);
+    this.client.openScreen(this.parent);
     ModConfigFile.saveRunnable.run();
   }
 
@@ -129,7 +129,7 @@ public class ModulesScreen extends Screen {
    * Updates the buttons.
    */
   public void updateButtons() {
-    if (this.modulesListWidget.getSelectedOrNull() != null) {
+    if (this.modulesListWidget.getSelected() != null) {
       this.editButton.active = true;
       this.deleteButton.active = true;
     } else {

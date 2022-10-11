@@ -83,13 +83,26 @@ public final class Utils {
    */
   public static String facingString(final Direction facing) {
 
-    return switch (facing) {
-      case NORTH -> I18n.translate("text.betterf3.line.negative_z");
-      case SOUTH -> I18n.translate("text.betterf3.line.positive_z");
-      case WEST -> I18n.translate("text.betterf3.line.negative_x");
-      case EAST -> I18n.translate("text.betterf3.line.positive_x");
-      default -> "";
-    };
+    final String facingString;
+    switch (facing) {
+      case NORTH:
+        facingString = I18n.translate("text.betterf3.line.negative_z");
+        break;
+      case SOUTH:
+        facingString = I18n.translate("text.betterf3.line.positive_z");
+        break;
+      case WEST:
+        facingString = I18n.translate("text.betterf3.line.negative_x");
+        break;
+      case EAST:
+        facingString = I18n.translate("text.betterf3.line.positive_x");
+        break;
+      default:
+        facingString = "";
+        break;
+    }
+
+    return facingString;
   }
 
   /**

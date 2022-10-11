@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[37,)"
+loaderVersion = "[32,36)"
 license = "MIT"
 issueTrackerURL="https://github.com/TreyRuffy/BetterF3/issues/"
 
@@ -23,18 +23,18 @@ The creator would like to thank:
 [[dependencies.betterf3]]
 modId = "forge"
 mandatory = true
-versionRange = "[37,)"
+versionRange = "[32,36)"
 ordering = "NONE"
 side = "CLIENT"
 
 [[dependencies.betterf3]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.17,)"
+versionRange = "[1.16,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.betterf3]]
 modId = "cloth_config"
-versionRange = "[5.0.38,)"
+versionRange = "[4.15.79,)"
 mandatory = true

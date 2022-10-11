@@ -10,7 +10,6 @@ import me.cominixo.betterf3.utils.Utils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.widget.AlwaysSelectedEntryListWidget;
-import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -129,7 +128,7 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
   /**
    * A module entry.
    */
-  public class ModuleEntry extends Entry<ModuleEntry> {
+  public class ModuleEntry extends AlwaysSelectedEntryListWidget.Entry<ModuleEntry> {
     private final ModulesScreen modulesScreen;
     private final MinecraftClient client;
     /**
@@ -147,12 +146,6 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
       this.modulesScreen = modulesScreen;
       this.module = module;
       this.client = MinecraftClient.getInstance();
-    }
-
-    // Fixes 1.17 crash
-    @Override
-    public Text getNarration() {
-      return new LiteralText(this.module.toString());
     }
 
     /**
@@ -176,11 +169,13 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
 
       final Text exampleText;
 
-      if (this.module instanceof CoordsModule coordsModule) {
+      if (this.module instanceof CoordsModule) {
+        final CoordsModule coordsModule = (CoordsModule) this.module;
         exampleText = Utils.styledText("X", coordsModule.colorX).append(Utils.styledText("Y", coordsModule.colorY)).append(Utils.styledText("Z", coordsModule.colorZ)).append(Utils.styledText(": ", coordsModule.nameColor))
         .append(Utils.styledText("100 ", coordsModule.colorX).append(Utils.styledText("200 ", coordsModule.colorY)).append(Utils.styledText("300", coordsModule.colorZ)));
 
-      } else if (this.module instanceof FpsModule fpsModule) {
+      } else if (this.module instanceof FpsModule) {
+        final FpsModule fpsModule = (FpsModule) this.module;
         exampleText = Utils.styledText("60 fps  ", fpsModule.colorHigh).append(Utils.styledText("40 fps  ", fpsModule.colorMed)).append(Utils.styledText("10 fps", fpsModule.colorLow));
       } else if (this.module.nameColor != null && this.module.valueColor != null) {
         exampleText = Utils.styledText("Name: ", this.module.nameColor).append(Utils.styledText("Value", this.module.valueColor));
@@ -190,14 +185,11 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
 
       this.client.textRenderer.draw(matrices, exampleText, (float) (x + 40 + 3), (float) (y + 13), 0xffffff);
 
-      RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+      RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
       this.client.getTextureManager().bindTexture(DrawableHelper.GUI_ICONS_TEXTURE);
 
       if (this.client.options.touchscreen || hovered) {
-        RenderSystem.setShaderTexture(0, new Identifier("textures/gui/server_selection.png"));
-        DrawableHelper.fill(matrices, x, y, x + 32, y + 32, -1601138544);
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        this.client.getTextureManager().bindTexture(new Identifier("textures/gui/server_selection.png"));
         final int v = mouseX - x;
         final int w = mouseY - y;
 

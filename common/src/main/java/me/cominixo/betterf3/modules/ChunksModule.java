@@ -4,6 +4,7 @@ import com.mojang.datafixers.DataFixUtils;
 import it.unimi.dsi.fastutil.longs.LongSet;
 import it.unimi.dsi.fastutil.longs.LongSets;
 import java.util.Arrays;
+import java.util.Formatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -172,8 +173,9 @@ public class ChunksModule extends BaseModule {
     }
     final BlockPos blockPos = Objects.requireNonNull(client.getCameraEntity()).getBlockPos();
     final ChunkPos chunkPos = new ChunkPos(blockPos);
-    final String regionFile = "r.%d.%d.mca (%d, %d)".formatted(chunkPos.getRegionX(), chunkPos.getRegionZ(),
-      chunkPos.getRegionRelativeX(), chunkPos.getRegionRelativeZ());
+    final String regionFile = String.valueOf(new Formatter().format("r.%d.%d.mca (%d, %d)", chunkPos.getRegionX(),
+    chunkPos.getRegionZ(),
+      chunkPos.getRegionRelativeX(), chunkPos.getRegionRelativeZ()));
     lines.get(10).value(regionFile);
   }
 }
