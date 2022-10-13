@@ -5,3 +5,4 @@ accessible field net/minecraft/client/render/WorldRenderer chunkBuilder Lnet/min
 accessible field net/minecraft/client/render/WorldRenderer world Lnet/minecraft/client/world/ClientWorld;
 accessible field net/minecraft/client/render/WorldRenderer chunks Lnet/minecraft/client/render/BuiltChunkStorage;
 accessible field net/minecraft/client/render/WorldRenderer regularEntityCount I
+accessible field net/minecraft/client/gui/hud/DebugHud HEIGHT_MAP_TYPES Ljava/util/Map;

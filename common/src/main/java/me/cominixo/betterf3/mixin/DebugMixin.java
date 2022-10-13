@@ -207,8 +207,8 @@ public abstract class DebugMixin {
           windowWidth += xPos;
         }
 
-        x1 = 1 + windowWidth;
-        x2 = windowWidth + width;
+        x1 = windowWidth - 1;
+        x2 = windowWidth + width + 1;
       } else {
         windowWidth = 2;
 
@@ -216,7 +216,7 @@ public abstract class DebugMixin {
           windowWidth -= xPos;
         }
         x1 = windowWidth - 1;
-        x2 = width + 3 + windowWidth;
+        x2 = width + 1 + windowWidth;
       }
       y1 = y - 1;
       y2 = y + height - 1;
