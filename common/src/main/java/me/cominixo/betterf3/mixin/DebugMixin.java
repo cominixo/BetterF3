@@ -30,6 +30,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static me.cominixo.betterf3.utils.Utils.START_X_POS;
@@ -282,6 +283,18 @@ public abstract class DebugMixin {
     immediate.draw();
 
     ci.cancel();
+  }
+
+  /**
+   * Disables the unneeded math for allocation rate.
+   *
+   * @param instance the allocation rate calculator
+   * @param allocatedBytes the allocated bytes
+   * @return nothing
+   */
+  @Redirect(method = "getRightText", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/DebugHud$AllocationRateCalculator;get(J)J"))
+  public long allocationRateCalculatorGet(final DebugHud.AllocationRateCalculator instance, final long allocatedBytes) {
+    return 0;
   }
 
   /**
