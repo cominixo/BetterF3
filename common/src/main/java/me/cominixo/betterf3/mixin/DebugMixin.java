@@ -207,8 +207,8 @@ public abstract class DebugMixin {
           windowWidth += xPos;
         }
 
-        x1 = 1 + windowWidth;
-        x2 = windowWidth + width;
+        x1 = windowWidth - 1;
+        x2 = windowWidth + width + 1;
       } else {
         windowWidth = 2;
 
@@ -216,7 +216,7 @@ public abstract class DebugMixin {
           windowWidth -= xPos;
         }
         x1 = windowWidth - 1;
-        x2 = width + 3 + windowWidth;
+        x2 = width + 1 + windowWidth;
       }
       y1 = y - 1;
       y2 = y + height - 1;
@@ -294,8 +294,11 @@ public abstract class DebugMixin {
    */
   @Inject(method = "render", at = @At(value = "HEAD"))
   public void renderBefore(final MatrixStack matrices, final CallbackInfo ci) {
+    if (GeneralOptions.disableMod) {
+      return;
+    }
     matrices.push();
-    if (this.client.options.debugTpsEnabled) {
+    if (this.client.options.debugTpsEnabled && this.client.world != null) {
       final int scaledWidth = this.client.getWindow().getScaledWidth();
       this.drawMetricsData(matrices, this.client.getMetricsData(), 0, scaledWidth / 2, true);
       final IntegratedServer integratedServer = this.client.getServer();

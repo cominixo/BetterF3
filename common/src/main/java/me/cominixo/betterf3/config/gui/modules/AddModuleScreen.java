@@ -43,7 +43,7 @@ public final class AddModuleScreen {
       "config.betterf3.add_button.module_name"),
         DropdownMenuBuilder.TopCellElementBuilder.of(new EmptyModule(true),
           BaseModule::module,
-          object -> new TranslatableText(object.toString()))).setSelections(BaseModule.allModules)
+          object -> new TranslatableText(object.toString()))).setSelections(BaseModule.distinctModules())
         .setSaveConsumer((BaseModule newValue) -> {
           try {
             parent.modulesListWidget.addModule(newValue.getClass().getDeclaredConstructor().newInstance());

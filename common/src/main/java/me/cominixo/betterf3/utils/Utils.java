@@ -11,7 +11,6 @@ import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.Direction;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * The Utils.
@@ -107,16 +106,6 @@ public final class Utils {
   }
 
   /**
-   * Converts Enum to string.
-   *
-   * @param enumToConvert the enum to convert
-   * @return converted string
-   */
-  public static String enumToString(final Enum<?> enumToConvert) {
-    return StringUtils.capitalize(enumToConvert.toString().replace("_", " "));
-  }
-
-  /**
    * Formats from string.
    *
    * @param string the string to format
@@ -160,6 +149,26 @@ public final class Utils {
       newValue = Formatting.RED + newValue;
     }
     return key.getName() + ": " + newValue;
+  }
+
+  private static String modVersion;
+
+  /**
+   * Gets the mod version.
+   *
+   * @return the mod version
+   */
+  public static String modVersion() {
+    return modVersion;
+  }
+
+  /**
+   * Sets the mod name.
+   *
+   * @param version the mod version
+   */
+  public static void modVersion(final String version) {
+    modVersion = version;
   }
 
 }
