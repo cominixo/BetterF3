@@ -294,8 +294,11 @@ public abstract class DebugMixin {
    */
   @Inject(method = "render", at = @At(value = "HEAD"))
   public void renderBefore(final MatrixStack matrices, final CallbackInfo ci) {
+    if (GeneralOptions.disableMod) {
+      return;
+    }
     matrices.push();
-    if (this.client.options.debugTpsEnabled) {
+    if (this.client.options.debugTpsEnabled && this.client.world != null) {
       final int scaledWidth = this.client.getWindow().getScaledWidth();
       this.drawMetricsData(matrices, this.client.getMetricsData(), 0, scaledWidth / 2, true);
       final IntegratedServer integratedServer = this.client.getServer();
