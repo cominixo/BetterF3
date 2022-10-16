@@ -190,6 +190,7 @@
   "text.betterf3.line.time": "Current Time",
   "text.betterf3.line.java_version": "Java 版本",
   "text.betterf3.line.memory_usage": "記憶體使用量",
+  "text.betterf3.line.allocation_rate": "Allocation Rate",
   "text.betterf3.line.allocated_memory": "分配記憶體",
   "text.betterf3.line.off_heap": "堆外記憶體",
   "text.betterf3.line.cpu": "CPU",
