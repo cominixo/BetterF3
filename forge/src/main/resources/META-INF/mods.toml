@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[32,36)"
+loaderVersion = "[32,37)"
 license = "MIT"
 issueTrackerURL="https://github.com/TreyRuffy/BetterF3/issues/"
 
@@ -23,7 +23,7 @@ The creator would like to thank:
 [[dependencies.betterf3]]
 modId = "forge"
 mandatory = true
-versionRange = "[32,36)"
+versionRange = "[32,37)"
 ordering = "NONE"
 side = "CLIENT"
 

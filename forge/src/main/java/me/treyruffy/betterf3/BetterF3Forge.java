@@ -18,6 +18,7 @@ import me.cominixo.betterf3.modules.SoundModule;
 import me.cominixo.betterf3.modules.SystemModule;
 import me.cominixo.betterf3.modules.TargetModule;
 import me.cominixo.betterf3.utils.PositionEnum;
+import me.cominixo.betterf3.utils.Utils;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -74,6 +75,8 @@ public class BetterF3Forge {
     private static void setupModules() {
       LOGGER.info("[BetterF3] Loading...");
 
+      Utils.modVersion(modVersion());
+
       // Initializes all modules and add spaces (default order)
       new MinecraftModule().init();
       new FpsModule().init();
@@ -97,6 +100,10 @@ public class BetterF3Forge {
       ModConfigFile.load(ModConfigFile.FileType.TOML);
 
       LOGGER.info("[BetterF3] All done!");
+    }
+
+    private static String modVersion() {
+      return ModList.get().getModContainerById("betterf3").orElseThrow(NullPointerException::new).getModInfo().getVersion().toString();
     }
   }
 }

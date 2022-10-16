@@ -1,8 +1,11 @@
 package me.cominixo.betterf3.modules;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 import me.cominixo.betterf3.utils.DebugLine;
 import me.cominixo.betterf3.utils.DebugLineList;
 import me.cominixo.betterf3.utils.PositionEnum;
@@ -14,7 +17,7 @@ import net.minecraft.text.TextColor;
 /**
  * The Base module.
  */
-public abstract class BaseModule {
+public abstract class BaseModule implements Comparable<BaseModule> {
 
   /**
    * The color of the tag.
@@ -210,4 +213,26 @@ public abstract class BaseModule {
    * @param client the Minecraft client
    */
   public abstract void update(MinecraftClient client);
+
+  /**
+   * Gets a set of the modules.
+   *
+   * @return distinct modules
+   */
+  public static TreeSet<BaseModule> distinctModules() {
+    final HashSet<String> distinctModules = allModules.stream().map(BaseModule::toString).collect(Collectors.toCollection(HashSet::new));
+    final TreeSet<BaseModule> distinctModulesObjects = new TreeSet<>();
+    for (final BaseModule module : allModules) {
+      if (distinctModules.contains(module.toString())) {
+        distinctModulesObjects.add(module);
+        distinctModules.remove(module.toString());
+      }
+    }
+    return distinctModulesObjects;
+  }
+
+  @Override
+  public int compareTo(final BaseModule o) {
+    return this.toString().compareTo(o.toString());
+  }
 }

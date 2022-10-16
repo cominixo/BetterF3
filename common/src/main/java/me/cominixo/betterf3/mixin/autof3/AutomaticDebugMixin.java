@@ -16,10 +16,12 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class AutomaticDebugMixin {
 
   @Redirect(method = "openScreen", at = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;debugEnabled:Z", opcode = Opcodes.PUTFIELD))
-  private void removeDebugCrosshair(final GameOptions instance, final boolean value) {
+  private void automaticF3(final GameOptions instance, final boolean value) {
     if (!GeneralOptions.disableMod) {
       if (GeneralOptions.autoF3) {
         instance.debugEnabled = true;
+        instance.debugProfilerEnabled = false;
+        instance.debugTpsEnabled = false;
         return;
       }
     }
