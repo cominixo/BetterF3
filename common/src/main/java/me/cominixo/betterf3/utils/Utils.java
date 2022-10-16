@@ -161,4 +161,24 @@ public final class Utils {
     return key.getName() + ": " + newValue;
   }
 
+  private static String modVersion;
+
+  /**
+   * Gets the mod version.
+   *
+   * @return the mod version
+   */
+  public static String modVersion() {
+    return modVersion;
+  }
+
+  /**
+   * Sets the mod name.
+   *
+   * @param version the mod version
+   */
+  public static void modVersion(final String version) {
+    modVersion = version;
+  }
+
 }
