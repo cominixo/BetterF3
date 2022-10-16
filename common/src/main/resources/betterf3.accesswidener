@@ -1,2 +1,9 @@
 accessWidener   v1  named
 accessible  class   net/minecraft/client/world/ClientChunkManager$ClientChunkMap
+accessible field net/minecraft/client/render/WorldRenderer viewDistance I
+accessible field net/minecraft/client/render/WorldRenderer chunkBuilder Lnet/minecraft/client/render/chunk/ChunkBuilder;
+accessible field net/minecraft/client/render/WorldRenderer world Lnet/minecraft/client/world/ClientWorld;
+accessible field net/minecraft/client/render/WorldRenderer chunks Lnet/minecraft/client/render/BuiltChunkStorage;
+accessible field net/minecraft/client/render/WorldRenderer regularEntityCount I
+accessible field net/minecraft/client/gui/hud/DebugHud HEIGHT_MAP_TYPES Ljava/util/Map;
+

@@ -1,10 +1,13 @@
+import java.text.SimpleDateFormat
+
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT" // Uses Architectury plugin https://github.com/architectury/architectury-plugin
-    id "dev.architectury.loom" version "0.10.0-SNAPSHOT" apply false // Uses Architectury Loom
+    id "dev.architectury.loom" version "0.12.0-SNAPSHOT" apply false // Uses Architectury Loom
     // (fork of Fabric Loom) https://github.com/architectury/architectury-loom - does not apply to root project
-    id "net.kyori.indra" version "2.0.6" // Uses Indra plugin
-    id "net.kyori.indra.git" version "2.0.6" // Uses Indra Git plugin
-    id "net.kyori.indra.checkstyle" version "2.0.6" // Uses Indra Checkstyle plugin
+    id "net.kyori.indra" version "2.1.1" // Uses Indra plugin
+    id "net.kyori.indra.git" version "2.1.1" // Uses Indra Git plugin
+    id "net.kyori.indra.checkstyle" version "2.1.1" // Uses Indra Checkstyle plugin
+    id "me.shedaniel.unified-publishing" version "0.1.+" apply false // Uses Unified Publishing plugin
 }
 
 architectury {
@@ -13,6 +16,7 @@ architectury {
 
 subprojects {
     apply plugin: "dev.architectury.loom" // Applies Architectury Loom to subprojects
+    apply plugin: "me.shedaniel.unified-publishing" // Applies Unified Publishing to subprojects
 
     loom {
         silentMojangMappingsLicense() // Silences the annoying as hell Mojang License text
@@ -22,6 +26,31 @@ subprojects {
         minecraft "com.mojang:minecraft:${rootProject.minecraft_version}" // Minecraft dependency
         //mappings loom.officialMojangMappings() // Maps Minecraft so we can tell what classes are what - official mappings
         mappings "net.fabricmc:yarn:${rootProject.yarn_version}:v2" // Alternative, open, mappings from Fabric
+    }
+
+    ext {
+        releaseChangelog = {
+            def dateFormat = new SimpleDateFormat("yyyy-MM-dd")
+            dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
+            def date = dateFormat.format(new Date())
+            def changelogFormatText = file("../docs/changelogs/format.md").text.trim()
+            def changelogText = file("../docs/changelogs/${rootProject.version}.md").text.trim()
+            def lastVersion = changelogText.split("\n")[0].split("=")[1].trim()
+            def changelog = changelogFormatText
+                    .replace("%date%", date)
+                    .replace("%changelog%", changelogText)
+                    .replace("%version%", rootProject.version)
+                    .replace("%mc_versions%", rootProject.supported_minecraft_versions)
+                    .replace("%last_version%", lastVersion)
+            StringBuilder changelogBuilder = new StringBuilder()
+            for (String line : changelog.split("\n")) {
+                if (!line.startsWith("!"))
+                    changelogBuilder.append(line).append("\n")
+            }
+            if (!rootProject.buildDir.exists()) rootProject.buildDir.mkdirs()
+            new File(rootProject.buildDir, "CHANGELOG.md").text = changelogBuilder.toString().trim()
+            return changelogBuilder.toString().trim()
+        }
     }
 }
 
@@ -37,7 +66,8 @@ allprojects {
     version = rootProject.mod_version // sets the version from gradle.properties
     group = rootProject.maven_group // sets the maven group from gradle.properties
     indra {
-        checkstyle("8.41.1")
+        mitLicense()
+        checkstyle("9.3")
         javaVersions {
             target(16)
             testWith(16)

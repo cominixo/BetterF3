@@ -18,9 +18,11 @@ import me.cominixo.betterf3.modules.SoundModule;
 import me.cominixo.betterf3.modules.SystemModule;
 import me.cominixo.betterf3.modules.TargetModule;
 import me.cominixo.betterf3.utils.PositionEnum;
+import me.cominixo.betterf3.utils.Utils;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,37 +32,43 @@ import org.apache.logging.log4j.Logger;
 @Environment(EnvType.CLIENT)
 public class BetterF3Fabric implements ClientModInitializer {
 
-    /**
-     * The Log4J logger.
-     */
-    public final Logger logger = LogManager.getLogger("betterf3");
+  /**
+   * The Log4J logger.
+   */
+  public final Logger logger = LogManager.getLogger("betterf3");
 
-    @Override
-    public void onInitializeClient() {
-        this.logger.info("[BetterF3] Loading...");
+  @Override
+  public void onInitializeClient() {
+    this.logger.info("[BetterF3] Loading...");
 
-        // Initializes all modules and add spaces (default order)
-        new MinecraftModule().init();
-        new FpsModule().init();
-        new GraphicsModule().init();
-        new ServerModule().init();
-        new CoordsModule().init();
-        new ChunksModule().init();
-        new LocationModule().init();
-        new EntityModule().init();
-        new SoundModule().init();
-        new HelpModule().init();
-        BaseModule.modules.add(EmptyModule.INSTANCE);
-        new MiscLeftModule().init();
+    Utils.modVersion(this.modVersion());
 
-        new SystemModule().init(PositionEnum.RIGHT);
-        new MiscRightModule().init(PositionEnum.RIGHT);
-        BaseModule.modulesRight.add(EmptyModule.INSTANCE);
-        new TargetModule().init(PositionEnum.RIGHT);
+    // Initializes all modules and add spaces (default order)
+    new MinecraftModule().init();
+    new FpsModule().init();
+    new GraphicsModule().init();
+    new ServerModule().init();
+    new CoordsModule().init();
+    new ChunksModule().init();
+    new LocationModule().init();
+    new EntityModule().init();
+    new SoundModule().init();
+    new HelpModule().init();
+    BaseModule.modules.add(new EmptyModule(false));
+    new MiscLeftModule().init();
 
-        // Setup config with JSON file type
-        ModConfigFile.load(ModConfigFile.FileType.JSON);
+    new SystemModule().init(PositionEnum.RIGHT);
+    new MiscRightModule().init(PositionEnum.RIGHT);
+    BaseModule.modulesRight.add(new EmptyModule(false));
+    new TargetModule().init(PositionEnum.RIGHT);
 
-        this.logger.info("[BetterF3] All done!");
-    }
+    // Setup config with JSON file type
+    ModConfigFile.load(ModConfigFile.FileType.JSON);
+
+    this.logger.info("[BetterF3] All done!");
+  }
+
+  private String modVersion() {
+    return FabricLoader.getInstance().getModContainer("betterf3").orElseThrow(NullPointerException::new).getMetadata().getVersion().getFriendlyString();
+  }
 }
