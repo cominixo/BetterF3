@@ -16,8 +16,12 @@ dependencies {
         exclude module: 'fabric-api'
     }
 
-    implementation 'com.electronwill.night-config:json:3.6.5'
-    shadowCommon "com.electronwill.night-config:json:3.6.5"
+    implementation 'com.electronwill.night-config:json:3.6.6'
+    shadowCommon 'com.electronwill.night-config:json:3.6.6'
+}
+
+processResources {
+    releaseChangelog()
 }
 
 loom {
@@ -28,15 +32,7 @@ loom {
 }
 
 architectury {
-    if (rootProject.forge_enabled.toBoolean()) {
-        common("fabric","forge")
-    } else {
-        common("fabric")
-    }
-}
-
-java {
-    withSourcesJar()
+    common(rootProject.platforms.split(","))
 }
 
 publishing {

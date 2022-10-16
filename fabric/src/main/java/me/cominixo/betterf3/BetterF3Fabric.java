@@ -18,9 +18,11 @@ import me.cominixo.betterf3.modules.SoundModule;
 import me.cominixo.betterf3.modules.SystemModule;
 import me.cominixo.betterf3.modules.TargetModule;
 import me.cominixo.betterf3.utils.PositionEnum;
+import me.cominixo.betterf3.utils.Utils;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -38,6 +40,8 @@ public class BetterF3Fabric implements ClientModInitializer {
   @Override
   public void onInitializeClient() {
     this.logger.info("[BetterF3] Loading...");
+
+    Utils.modVersion(this.modVersion());
 
     // Initializes all modules and add spaces (default order)
     new MinecraftModule().init();
@@ -62,5 +66,9 @@ public class BetterF3Fabric implements ClientModInitializer {
     ModConfigFile.load(ModConfigFile.FileType.JSON);
 
     this.logger.info("[BetterF3] All done!");
+  }
+
+  private String modVersion() {
+    return FabricLoader.getInstance().getModContainer("betterf3").orElseThrow(NullPointerException::new).getMetadata().getVersion().getFriendlyString();
   }
 }

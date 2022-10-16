@@ -81,6 +81,8 @@ public abstract class DebugMixin {
       }
       if (module instanceof MiscLeftModule) {
         ((MiscLeftModule) module).update(this.getLeftText());
+      } else if (module instanceof MiscRightModule) {
+        ((MiscRightModule) module).update(this.getRightText());
       } else {
         module.update(this.client);
       }
@@ -110,6 +112,8 @@ public abstract class DebugMixin {
       }
       if (module instanceof MiscRightModule) {
         ((MiscRightModule) module).update(this.getRightText());
+      } else if (module instanceof MiscLeftModule) {
+        ((MiscLeftModule) module).update(this.getLeftText());
       } else {
         module.update(this.client);
       }
@@ -185,6 +189,9 @@ public abstract class DebugMixin {
     for (int i = 0; i < list.size(); i++) {
       final int height = 9;
       final int width = this.textRenderer.getWidth(list.get(i).getString());
+      if (width == 0) {
+        continue;
+      }
       final int y = 2 + height * i;
 
       int x1;
@@ -208,8 +215,8 @@ public abstract class DebugMixin {
         if (GeneralOptions.enableAnimations) {
           windowWidth -= xPos;
         }
-        x1 = 1 + windowWidth;
-        x2 = width + 3 + windowWidth;
+        x1 = windowWidth - 1;
+        x2 = width + 1 + windowWidth;
       }
       y1 = y - 1;
       y2 = y + height - 1;
@@ -287,8 +294,11 @@ public abstract class DebugMixin {
    */
   @Inject(method = "render", at = @At(value = "HEAD"))
   public void renderBefore(final MatrixStack matrices, final CallbackInfo ci) {
+    if (GeneralOptions.disableMod) {
+      return;
+    }
     matrices.push();
-    if (this.client.options.debugTpsEnabled) {
+    if (this.client.options.debugTpsEnabled && this.client.world != null) {
       final int scaledWidth = this.client.getWindow().getScaledWidth();
       this.drawMetricsData(matrices, this.client.getMetricsData(), 0, scaledWidth / 2, true);
       final IntegratedServer integratedServer = this.client.getServer();
@@ -321,6 +331,9 @@ public abstract class DebugMixin {
   @Inject(method = "render", at = @At(value = "FIELD",
   target = "Lnet/minecraft/client/option/GameOptions;debugTpsEnabled:Z"), cancellable = true)
   public void renderFontScaleRightAfter(final MatrixStack matrices, final CallbackInfo ci) {
+    if (GeneralOptions.disableMod) {
+      return;
+    }
     matrices.pop();
     this.client.getProfiler().pop();
     ci.cancel();
@@ -335,6 +348,9 @@ public abstract class DebugMixin {
   @Inject(method = "render", at = @At("HEAD"))
   public void renderAnimation(final MatrixStack matrices, final CallbackInfo ci) {
 
+    if (GeneralOptions.disableMod) {
+      return;
+    }
     if (!GeneralOptions.enableAnimations) {
       return;
     } // Only displays the animation if set to true

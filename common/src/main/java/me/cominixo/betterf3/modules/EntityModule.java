@@ -23,7 +23,12 @@ public class EntityModule extends BaseModule {
   /**
    * Total color.
    */
-  public final TextColor totalColor = TextColor.fromFormatting(Formatting.GOLD);
+  public TextColor totalColor;
+
+  /**
+   * Default total color.
+   */
+  public final TextColor defaultTotalColor = TextColor.fromFormatting(Formatting.GOLD);
 
   /**
    * Instantiates a new Entity module.
@@ -34,6 +39,7 @@ public class EntityModule extends BaseModule {
 
     this.nameColor = defaultNameColor;
     this.valueColor = defaultValueColor;
+    this.totalColor = this.defaultTotalColor;
 
     lines.add(new DebugLine("particles"));
     lines.add(new DebugLine("entities", "format.betterf3.total", true));

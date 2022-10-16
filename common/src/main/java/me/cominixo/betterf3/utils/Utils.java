@@ -126,6 +126,9 @@ public final class Utils {
    */
   public static Text formattedFromString(final String string, final TextColor nameColor,
                                          final TextColor valueColor) {
+    if (string == null) {
+      return Text.of("");
+    }
     final String[] split = string.split(":");
 
     if (string.contains(":")) {
@@ -157,6 +160,26 @@ public final class Utils {
       newValue = Formatting.RED + newValue;
     }
     return key.getName() + ": " + newValue;
+  }
+
+  private static String modVersion;
+
+  /**
+   * Gets the mod version.
+   *
+   * @return the mod version
+   */
+  public static String modVersion() {
+    return modVersion;
+  }
+
+  /**
+   * Sets the mod name.
+   *
+   * @param version the mod version
+   */
+  public static void modVersion(final String version) {
+    modVersion = version;
   }
 
 }

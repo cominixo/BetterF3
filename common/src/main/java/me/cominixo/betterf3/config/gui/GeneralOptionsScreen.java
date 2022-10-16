@@ -41,6 +41,12 @@ public final class GeneralOptionsScreen {
     .setSaveConsumer(newValue -> GeneralOptions.disableMod = newValue)
     .build());
 
+    general.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.betterf3.auto_start"), GeneralOptions.autoF3)
+    .setDefaultValue(false)
+    .setTooltip(new TranslatableText("config.betterf3.auto_start.tooltip"))
+    .setSaveConsumer(newValue -> GeneralOptions.autoF3 = newValue)
+    .build());
+
     general.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.betterf3.space_modules"), GeneralOptions.spaceEveryModule)
     .setDefaultValue(false)
     .setTooltip(new TranslatableText("config.betterf3.space_modules.tooltip"))
@@ -80,10 +86,34 @@ public final class GeneralOptionsScreen {
     .setSaveConsumer(newValue -> GeneralOptions.backgroundColor = newValue)
     .build());
 
+    general.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.betterf3.debug_crosshair"), GeneralOptions.hideDebugCrosshair)
+    .setDefaultValue(false)
+    .setTooltip(new TranslatableText("config.betterf3.debug_crosshair.tooltip"))
+    .setSaveConsumer(newValue -> GeneralOptions.hideDebugCrosshair = newValue)
+    .build());
+
     general.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.betterf3.sidebar"), GeneralOptions.hideSidebar)
     .setDefaultValue(true)
     .setTooltip(new TranslatableText("config.betterf3.sidebar.tooltip"))
     .setSaveConsumer(newValue -> GeneralOptions.hideSidebar = newValue)
+    .build());
+
+    general.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.betterf3.bossbar"), GeneralOptions.hideBossbar)
+    .setDefaultValue(true)
+    .setTooltip(new TranslatableText("config.betterf3.bossbar.tooltip"))
+    .setSaveConsumer(newValue -> GeneralOptions.hideBossbar = newValue)
+    .build());
+
+    general.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.betterf3.always_enable_profiler"), GeneralOptions.alwaysEnableProfiler)
+    .setDefaultValue(false)
+    .setTooltip(new TranslatableText("config.betterf3.always_enable_profiler.tooltip"))
+    .setSaveConsumer(newValue -> GeneralOptions.alwaysEnableProfiler = newValue)
+    .build());
+
+    general.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("config.betterf3.always_enable_tps_graph"), GeneralOptions.alwaysEnableTPS)
+    .setDefaultValue(false)
+    .setTooltip(new TranslatableText("config.betterf3.always_enable_tps_graph.tooltip"))
+    .setSaveConsumer(newValue -> GeneralOptions.alwaysEnableTPS = newValue)
     .build());
 
     builder.transparentBackground();
