@@ -190,6 +190,7 @@
   "text.betterf3.line.time": "Current Time",
   "text.betterf3.line.java_version": "Java-Version",
   "text.betterf3.line.memory_usage": "Speicherverbrauch",
+  "text.betterf3.line.allocation_rate": "Allocation Rate",
   "text.betterf3.line.allocated_memory": "Zugewiesener Speicher",
   "text.betterf3.line.off_heap": "Off-Heap",
   "text.betterf3.line.cpu": "CPU",
