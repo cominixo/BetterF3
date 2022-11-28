@@ -102,9 +102,10 @@ unifiedPublishing {
         displayName = "BetterF3 Fabric v${project.version} (${project.supported_minecraft_versions})"
         version = project.version
         changelog = releaseChangelog()
-        releaseType = "release"
-        List<String> mcVersions = project.supported_minecraft_versions_list.split(",")
-        gameVersions = mcVersions
+        releaseType = "beta"
+//        TODO: Fix this when the mod is ready for release
+//        List<String> mcVersions = project.supported_minecraft_versions_list.split(",")
+//        gameVersions = mcVersions
         gameLoaders = ["fabric","quilt"]
 
         mainPublication tasks.remapJar
@@ -125,7 +126,8 @@ unifiedPublishing {
             curseforge {
                 token = CURSE_API_KEY
                 id = rootProject.curseforge_id
-                gameVersions.addAll ("Java 19","Java 18","Java 17")
+                // TODO: Remove 1.19.3 when the mod is ready for release
+                gameVersions.addAll("1.19-Snapshot", "1.19.3", "Java 19","Java 18","Java 17")
             }
         }
 
@@ -134,6 +136,8 @@ unifiedPublishing {
             modrinth {
                 token = MODRINTH_TOKEN
                 id = rootProject.modrinth_id
+                // TODO: Remove 1.19.3 when the mod is ready for release
+                gameVersions.addAll(project.minecraft_version.toString())
             }
         }
     }

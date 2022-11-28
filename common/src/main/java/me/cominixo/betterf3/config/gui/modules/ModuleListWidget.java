@@ -195,7 +195,7 @@ public class ModuleListWidget extends AlwaysSelectedEntryListWidget<ModuleListWi
       if (this.client.options.getTouchscreen().getValue() || hovered) {
         RenderSystem.setShaderTexture(0, new Identifier("textures/gui/server_selection.png"));
         DrawableHelper.fill(matrices, x, y, x + 32, y + 32, -1601138544);
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         final int v = mouseX - x;
         final int w = mouseY - y;

@@ -2,7 +2,7 @@ package me.cominixo.betterf3.modules;
 
 import me.cominixo.betterf3.utils.DebugLine;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gl.ShaderEffect;
+import net.minecraft.client.gl.PostEffectProcessor;
 import net.minecraft.client.option.CloudRenderMode;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.TextColor;
@@ -54,7 +54,7 @@ public class GraphicsModule extends BaseModule {
     lines.get(3).value(client.options.getBiomeBlendRadius().getValue());
 
     // Shader
-    final ShaderEffect shaderEffect = client.gameRenderer.getShader();
+    final PostEffectProcessor shaderEffect = client.gameRenderer.getPostProcessor();
     if (shaderEffect != null) {
       lines.get(4).value(shaderEffect.getName());
     } else {

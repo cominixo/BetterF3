@@ -28,16 +28,25 @@ public class ModConfigScreen extends Screen {
   public void init() {
     final MinecraftClient client = MinecraftClient.getInstance();
 
-    this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height / 4, 120, 20, Text.translatable(
-    "config.betterf3.order_left_button"), buttonWidget -> client.setScreen(new ModulesScreen(client.currentScreen, PositionEnum.LEFT))));
-    this.addDrawableChild(new ButtonWidget(this.width / 2 + 10, this.height / 4, 120, 20, Text.translatable(
-    "config.betterf3.order_right_button"), buttonWidget -> client.setScreen(new ModulesScreen(client.currentScreen, PositionEnum.RIGHT))));
-    this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height / 4 - 24, 260, 20,
-    Text.translatable("config.betterf3.general_settings"),
-    buttonWidget -> client.setScreen(GeneralOptionsScreen.configBuilder(client.currentScreen).build())));
-    this.addDrawableChild(new ButtonWidget(this.width / 2 - 130, this.height - 50, 260, 20,
-    Text.translatable("config.betterf3.modules.done_button"),
-    buttonWidget -> client.setScreen(this.parent)));
+    final ButtonWidget leftButton = ButtonWidget.builder(Text.translatable("config.betterf3.order_left_button"),
+        button -> client.setScreen(new ModulesScreen(client.currentScreen, PositionEnum.LEFT)))
+      .dimensions(this.width / 2 - 130, this.height / 4, 120, 20).build();
+    this.addDrawableChild(leftButton);
+
+    final ButtonWidget rightButton = ButtonWidget.builder(Text.translatable("config.betterf3.order_right_button"),
+        button -> client.setScreen(new ModulesScreen(client.currentScreen, PositionEnum.RIGHT)))
+      .dimensions(this.width / 2 + 10, this.height / 4, 120, 20).build();
+    this.addDrawableChild(rightButton);
+
+    final ButtonWidget configButton = ButtonWidget.builder(Text.translatable("config.betterf3.general_settings"),
+        button -> client.setScreen(GeneralOptionsScreen.configBuilder(client.currentScreen).build()))
+      .dimensions(this.width / 2 - 130, this.height / 4 - 24, 260, 20).build();
+    this.addDrawableChild(configButton);
+
+    final ButtonWidget doneButton = ButtonWidget.builder(Text.translatable("config.betterf3.modules.done_button"),
+        button -> client.setScreen(this.parent))
+      .dimensions(this.width / 2 - 130, this.height - 50, 260, 20).build();
+    this.addDrawableChild(doneButton);
   }
 
   @Override

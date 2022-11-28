@@ -24,7 +24,7 @@ import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.text.Text;
 import net.minecraft.util.MetricsData;
 import net.minecraft.util.Util;
-import net.minecraft.util.math.Matrix4f;
+import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -179,11 +179,11 @@ public abstract class DebugMixin {
     final float g = (float) (GeneralOptions.backgroundColor >> 16 & 255) / 255.0F;
     final float h = (float) (GeneralOptions.backgroundColor >> 8 & 255) / 255.0F;
     final float k = (float) (GeneralOptions.backgroundColor & 255) / 255.0F;
+    RenderSystem.setShader(GameRenderer::getPositionColorProgram);
     final BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
     RenderSystem.enableBlend();
     RenderSystem.disableTexture();
     RenderSystem.defaultBlendFunc();
-    RenderSystem.setShader(GameRenderer::getPositionColorShader);
     bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
 
     for (int i = 0; i < list.size(); i++) {
@@ -241,7 +241,7 @@ public abstract class DebugMixin {
       bufferBuilder.vertex(matrix, (float) x1, (float) y1, 0.0F).color(g, h, k, f).next();
 
     }
-    BufferRenderer.drawWithShader(bufferBuilder.end());
+    BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
     RenderSystem.enableTexture();
     RenderSystem.disableBlend();
 

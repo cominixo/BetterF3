@@ -9,12 +9,12 @@ import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.fluid.FluidState;
+import net.minecraft.registry.Registries;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -67,7 +67,7 @@ public class TargetModule extends BaseModule {
       final BlockState blockState = client.world.getBlockState(blockPos);
 
       lines.get(0).value(blockPos.getX() + ", " + blockPos.getY() + ", " + blockPos.getZ());
-      lines.get(1).value(String.valueOf(Registry.BLOCK.getId(blockState.getBlock())));
+      lines.get(1).value(String.valueOf(Registries.BLOCK.getId(blockState.getBlock())));
 
       final List<String> blockStates = new ArrayList<>();
 
@@ -91,7 +91,7 @@ public class TargetModule extends BaseModule {
       final FluidState fluidState = client.world.getFluidState(blockPos);
 
       lines.get(5).value(blockPos.getX() + ", " + blockPos.getY() + ", " + blockPos.getZ());
-      lines.get(6).value(Registry.FLUID.getId(fluidState.getFluid()));
+      lines.get(6).value(Registries.FLUID.getId(fluidState.getFluid()));
 
       final List<String> fluidStates = new ArrayList<>();
 
@@ -111,7 +111,7 @@ public class TargetModule extends BaseModule {
     }
     final Entity entity = client.targetedEntity;
     if (entity != null) {
-      lines.get(10).value(Registry.ENTITY_TYPE.getId(entity.getType()));
+      lines.get(10).value(Registries.ENTITY_TYPE.getId(entity.getType()));
     } else {
       lines.get(10).active = false;
     }

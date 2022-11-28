@@ -2,7 +2,7 @@ import java.text.SimpleDateFormat
 
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT" // Uses Architectury plugin https://github.com/architectury/architectury-plugin
-    id "dev.architectury.loom" version "0.12.0-SNAPSHOT" apply false // Uses Architectury Loom
+    id "dev.architectury.loom" version "1.0-SNAPSHOT" apply false // Uses Architectury Loom
     // (fork of Fabric Loom) https://github.com/architectury/architectury-loom - does not apply to root project
     id "net.kyori.indra" version "2.1.1" // Uses Indra plugin
     id "net.kyori.indra.git" version "2.1.1" // Uses Indra Git plugin

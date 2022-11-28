@@ -63,27 +63,36 @@ public class ModulesScreen extends Screen {
 
     this.addDrawableChild(this.modulesListWidget);
 
-    this.editButton = this.addDrawableChild(new ButtonWidget(this.width / 2 - 50, this.height - 50, 100, 20, Text.translatable("config.betterf3.modules.edit_button"), buttonWidget -> {
-      final Screen screen =
-      EditModulesScreen.configBuilder(Objects.requireNonNull(this.modulesListWidget.getSelectedOrNull()).module, this).build();
-      assert client != null;
-      client.setScreen(screen);
-    }));
+    final ButtonWidget editButton = ButtonWidget.builder(Text.translatable("config.betterf3.modules.edit_button"),
+        button -> {
+          final Screen screen = EditModulesScreen.configBuilder(Objects.requireNonNull(this.modulesListWidget.getSelectedOrNull()).module, this).build();
+          assert client != null;
+          client.setScreen(screen);
+        })
+      .dimensions(this.width / 2 - 50, this.height - 50, 100, 20).build();
+    this.editButton = this.addDrawableChild(editButton);
 
-    this.addDrawableChild(new ButtonWidget(this.width / 2 + 4 + 50, this.height - 50, 100, 20, Text.translatable("config.betterf3.modules.add_button"), buttonWidget -> {
-      assert client != null;
-      client.setScreen(AddModuleScreen.configBuilder(this).build());
-    }));
+    final ButtonWidget addButton = ButtonWidget.builder(Text.translatable("config.betterf3.modules.add_button"),
+        button -> {
+          assert client != null;
+          client.setScreen(AddModuleScreen.configBuilder(this).build());
+        })
+      .dimensions(this.width / 2 + 4 + 50, this.height - 50, 100, 20).build();
+    this.addDrawableChild(addButton);
 
-    this.deleteButton = this.addDrawableChild(new ButtonWidget(this.width / 2 - 154, this.height - 50, 100, 20,
-    Text.translatable("config.betterf3.modules.delete_button"), buttonWidget -> this.modulesListWidget.removeModule(this.modulesListWidget.moduleEntries.indexOf(Objects.requireNonNull(this.modulesListWidget.getSelectedOrNull())))));
+    final ButtonWidget deleteButton = ButtonWidget.builder(Text.translatable("config.betterf3.modules.delete_button"),
+        button -> this.modulesListWidget.removeModule(this.modulesListWidget.moduleEntries.indexOf(Objects.requireNonNull(this.modulesListWidget.getSelectedOrNull()))))
+      .dimensions(this.width / 2 - 154, this.height - 50, 100, 20).build();
+    this.deleteButton = this.addDrawableChild(deleteButton);
 
-    this.addDrawableChild(new ButtonWidget(this.width / 2 - 154, this.height - 30 + 4, 300 + 8, 20,
-    Text.translatable("config.betterf3.modules.done_button"), buttonWidget -> {
-      this.close();
-      assert client != null;
-      client.setScreen(this.parent);
-    }));
+    final ButtonWidget doneButton = ButtonWidget.builder(Text.translatable("config.betterf3.modules.done_button"),
+        button -> {
+          this.close();
+          assert client != null;
+          client.setScreen(this.parent);
+        })
+      .dimensions(this.width / 2 - 154, this.height - 30 + 4, 308, 20).build();
+    this.addDrawableChild(doneButton);
 
     this.updateButtons();
 

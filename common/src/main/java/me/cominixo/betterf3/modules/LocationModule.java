@@ -8,6 +8,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.DebugHud;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.Entity;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.TextColor;
@@ -18,7 +19,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.ChunkRandom;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.LightType;
 import net.minecraft.world.LocalDifficulty;
@@ -85,7 +85,7 @@ public class LocationModule extends BaseModule {
       final ChunkPos chunkPos = new ChunkPos(blockPos);
 
       // Biome
-      lines.get(7).value(client.world.getRegistryManager().get(Registry.BIOME_KEY).getId(client.world.getBiome(blockPos).value()));
+      lines.get(7).value(client.world.getRegistryManager().get(RegistryKeys.BIOME).getId(client.world.getBiome(blockPos).value()));
 
       serverWorld = integratedServer != null ? integratedServer.getWorld(client.world.getRegistryKey()) : client.world;
       final WorldChunk clientChunk = client.world.getChunk(chunkPos.x, chunkPos.z);
