@@ -127,7 +127,7 @@ unifiedPublishing {
                 token = CURSE_API_KEY
                 id = rootProject.curseforge_id
                 // TODO: Remove 1.19.3 when the mod is ready for release
-                gameVersions.addAll("1.19-Snapshot", "1.19.3", "Java 19","Java 18","Java 17")
+                gameVersions.addAll("1.19-Snapshot","1.19.3","Java 18","Java 17")
             }
         }
 
