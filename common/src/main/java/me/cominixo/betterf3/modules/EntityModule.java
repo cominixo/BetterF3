@@ -79,6 +79,9 @@ public class EntityModule extends BaseModule {
           // Entities (separated) (kinda bad)
           for (int i = 0; i < SpawnGroup.values().length; i++) {
             final SpawnGroup group = SpawnGroup.values()[i];
+            if (lines.size() == i) {
+              lines.add(new DebugLine(group.toString().toLowerCase()));
+            }
             lines.get(i + 2).value(spawnGroupCount.getInt(group));
           }
         }

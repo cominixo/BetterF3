@@ -190,7 +190,7 @@
   "text.betterf3.line.time": "Текущее время",
   "text.betterf3.line.java_version": "Версия Java",
   "text.betterf3.line.memory_usage": "Использование ОЗУ",
-  "text.betterf3.line.allocation_rate": "Allocation Rate",
+  "text.betterf3.line.allocation_rate": "Скорость распределения",
   "text.betterf3.line.allocated_memory": "Распределено памяти",
   "text.betterf3.line.off_heap": "Размер кучи",
   "text.betterf3.line.cpu": "ЦП",

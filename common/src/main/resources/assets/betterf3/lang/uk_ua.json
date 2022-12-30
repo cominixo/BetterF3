@@ -190,7 +190,7 @@
   "text.betterf3.line.time": "Поточний час",
   "text.betterf3.line.java_version": "Версія Java",
   "text.betterf3.line.memory_usage": "Використання оперативної пам'яті",
-  "text.betterf3.line.allocation_rate": "Allocation Rate",
+  "text.betterf3.line.allocation_rate": "Ставка розподілу",
   "text.betterf3.line.allocated_memory": "Виділено пам'яті",
   "text.betterf3.line.off_heap": "Пам'ять поза купою",
   "text.betterf3.line.cpu": "ЦП",
