@@ -19,7 +19,7 @@ public class ScoreboardMixin {
   @Shadow @Final private MinecraftClient client;
 
   /**
-   * Cancels sidebar rendering during F3 if the {@link GeneralOptions#hideSidebar} setting is true.
+   * Cancels sidebar rendering if the {@link GeneralOptions#hideSidebar} setting is true.
    *
    * @param info Callback info
    */

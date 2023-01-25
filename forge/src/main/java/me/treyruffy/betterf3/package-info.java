@@ -1,4 +1,4 @@
 /**
- * Forge related classes in order to start the Forge mod.
+ * Forge related classes to start the Forge mod.
  */
 package me.treyruffy.betterf3;

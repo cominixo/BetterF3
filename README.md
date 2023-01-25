@@ -9,7 +9,7 @@
 
 </div>
 
-<blockquote style="text-align: center;">BetterF3 is a mod that replaces Minecraft's original debug HUD 
+<blockquote style="text-align: center;">BetterF3 is a mod to replace Minecraft's original debug HUD 
 with a highly customizable, more 
 human-readable HUD.<br/>
 You can customize colors, position, add spacings, and more.
@@ -34,19 +34,19 @@ Just place this mod into your mods folder
   configuration menu, however you can use F3+M while in-game to open the menu.
 
 ***Forge***
-* It is recommended to download [Cloth Config API](https://www.curseforge.com/minecraft/mc-mods/cloth-config/) in
-  order to access the configuration menu in the Minecraft client.<br/>
-* You can also modify the configuration in config/betterf3.toml.
+* It is recommended to download [Cloth Config API](https://www.curseforge.com/minecraft/mc-mods/cloth-config/) to access the configuration menu in the Minecraft client.<br/>
+* You can also modify the configuration in `config/betterf3.toml`.
 
 ## Features
 Each line is part of a Module, you can:
 - Change the colors of each module
 - Change the position of each module
 - Add and delete modules, as well as add spacings between them
-- Disable individual lines of a module, or disable the whole module
+- Disable individual lines of a module
+- Disable an entire whole module
 - Add a shadow to the text rendered (Activated by default)
-- Change the color of the background behind all lines
-  Animations for opening/closing (with configurable speeds)
+- Change the background color behind all lines
+- Animations for opening/closing (with configurable speeds)
 
 ## Screenshots and Videos
 
@@ -85,12 +85,12 @@ The latest builds can be found [here](https://github.com/cominixo/BetterF3/actio
 
 ## Contributing
 
-Contributions, issues and feature requests are welcome!<br/>The best way to help would be to help Translate. Check
-[CONTRIBUTING.md](./CONTRIBUTING.md) for more information
+Contributions, issues, and feature requests are welcome!<br/>The best way to help would be to help Translate. Check
+[CONTRIBUTING.md](./CONTRIBUTING.md) for more information.
 
 Thank you, [@Nirewen](https://github.com/Nirewen/), for the icon!
 
 ## 📝 License
 
-Copyright © 2020 - 2022 [cominixo](https://github.com/cominixo/) / [TreyRuffy](https://github.com/TreyRuffy/). <br/>
+Copyright © 2020 - 2023 [cominixo](https://github.com/cominixo/) / [TreyRuffy](https://github.com/TreyRuffy/). <br/>
 BetterF3 is [MIT](https://choosealicense.com/licenses/mit/) licensed.

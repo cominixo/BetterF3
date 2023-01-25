@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Sets automatic debug in the options.
+ * Sets automatically opening the debug screen in the options.
  */
 @Mixin(GameOptions.class)
 public class DebugOptionMixin {

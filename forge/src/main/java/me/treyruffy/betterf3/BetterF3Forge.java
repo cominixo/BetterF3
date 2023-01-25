@@ -59,10 +59,10 @@ public class BetterF3Forge {
     private static void setup() {
       setupModules();
 
-      // Register ourselves for server and other game events we are interested in
+      // Register server and game events that we are interested in.
       MinecraftForge.EVENT_BUS.register(BetterF3Forge.class);
       // Make sure the mod being absent on the other network side does not cause the client to display the server
-      // as incompatible
+      // as incompatible.
       ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> NetworkConstants.IGNORESERVERONLY, (a, b) -> true));
 
       // Sets up Cloth Config if it is installed

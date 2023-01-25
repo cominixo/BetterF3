@@ -9,10 +9,10 @@ If you would like to improve BetterF3, there are several ways you can help.
 ## Developers
 
 ### Requirements
-In order to effectively contribute to our project, you need to follow these requirements:
+To help contribute to our project, you must follow these requirements:
 * You need `git` installed. You can download it from [here](https://gitforwindows.org/) on Windows.
 * You need Java 17 or later JDK. Check out [Adoptium](https://adoptium.net/) for most platforms.
-* You need to use either [IntelliJ IDEA](https://www.jetbrains.com/idea/) or [Visual Studio Code](https://code.visualstudio.com/). Other IDEs are unsupported and may or may not work.
+* You must use either [IntelliJ IDEA](https://www.jetbrains.com/idea/) or [Visual Studio Code](https://code.visualstudio.com/). Other IDEs are unsupported and may or may not work.
 
 ### Compiling
 You can compile the source code here:
@@ -27,9 +27,9 @@ You can compile the source code here:
    format `betterf3-{version}-{modloader}.jar` (subject to change).
 
 ### Pull Requests
-All pull requests need to comply with our CheckStyle requirements.
-* Run `./gradlew checkstyleMain` in order to check if you comply.
+All pull requests must comply with our CheckStyle requirements.
+* Run `./gradlew checkstyleMain` to check if you comply.
 * (Recommended) import the `.checkstyle/checkstyle.xml` file into your IDE.
 
 ### Creating Modules
-In order to create a new module, either in this mod or your own, follow the directions in [CreateModule.md](docs/developers/CreateModule.md)
+To create a new module, either in this mod or your own, follow the directions in [CreateModule.md](docs/developers/CreateModule.md).

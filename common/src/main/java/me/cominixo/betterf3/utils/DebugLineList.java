@@ -13,7 +13,7 @@ public class DebugLineList extends DebugLine {
   private List<String> values = new ArrayList<>();
 
   /**
-   * Instantiates a new Debug line list from id.
+   * Instantiates a new Debug line list from the id.
    *
    * @param id the id
    */

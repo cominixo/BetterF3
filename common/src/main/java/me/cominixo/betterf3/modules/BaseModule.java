@@ -151,7 +151,7 @@ public abstract class BaseModule implements Comparable<BaseModule> {
   }
 
   /**
-   * Gets line at id.
+   * Gets line at an id.
    *
    * @param id the id
    * @return the line
@@ -173,7 +173,7 @@ public abstract class BaseModule implements Comparable<BaseModule> {
   }
 
   /**
-   * Gets module by id.
+   * Gets module by the id.
    *
    * @param id the id
    * @return the module

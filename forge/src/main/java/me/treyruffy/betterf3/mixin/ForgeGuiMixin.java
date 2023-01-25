@@ -42,7 +42,7 @@ public abstract class ForgeGuiMixin {
 
     this.getMinecraft().getProfiler().pop();
 
-    // Cancels the rest of the code from running which replaces Forge's debug screen
+    // Cancels the rest of the code from running, which replaces Forge's debug screen.
     ci.cancel();
   }
 

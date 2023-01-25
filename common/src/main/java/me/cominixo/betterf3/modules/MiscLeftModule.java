@@ -72,7 +72,7 @@ public class MiscLeftModule extends BaseModule {
               }
             }
             if (s.contains("tx") && s.contains("rx")) {
-              // Have to do this to check if it's a vanilla server info line
+              // Have to do this to check if it is a vanilla server info line.
               lines.remove(s);
             }
           }

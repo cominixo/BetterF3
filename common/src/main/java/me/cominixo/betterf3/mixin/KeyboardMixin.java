@@ -94,7 +94,7 @@ public abstract class KeyboardMixin {
   }
 
   /**
-   * Plays the animation on f3 keypress.
+   * Plays the animation on f3 key-press.
    *
    * @param window window
    * @param key key

@@ -53,7 +53,7 @@ public class MiscRightModule extends BaseModule {
 
     lines.add(0, this.version);
 
-    // boolean that indicates if we're on the "targeted" section, we have no other way of knowing when it starts/ends
+    // boolean indicating if we're on the "targeted" section, we have no other way of knowing when it starts/ends.
     boolean inTargeted = false;
 
     // copy of list for .remove()
@@ -81,7 +81,7 @@ public class MiscRightModule extends BaseModule {
         if (s.startsWith(vanilla)) {
           lines.remove(s);
         } else if (index > 1) {
-          // pretty bad, this is to include GPU info in the vanilla list
+          // pretty bad, this is to include GPU info in the vanilla list.
           if (listCopy.get(index - 1).startsWith("Display:") || listCopy.get(index - 2).startsWith(
           "Display:")) {
             lines.remove(s);
