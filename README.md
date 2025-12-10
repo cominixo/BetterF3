@@ -90,6 +90,9 @@ Contributions, issues and feature requests are welcome!<br/>The best way to help
 
 Thank you, [@Nirewen](https://github.com/Nirewen/), for the icon!
 
+## Новые настройки
+Вечно открытые строки в F3 (при повторном нажатии на F3 эти строки закрываться не будут). Автоматически эта фишка будет на версии игры и версии загрузчика
+
 ## 📝 License
 
 Copyright © 2020 - 2022 [cominixo](https://github.com/cominixo/) / [TreyRuffy](https://github.com/TreyRuffy/). <br/>
