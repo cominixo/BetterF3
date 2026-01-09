@@ -1,3 +1,10 @@
+
+# ⚠️ REPOSITORY MOVED ⚠️
+## This repository has been moved to: https://github.com/TreyRuffy/BetterF3
+Please update your bookmarks and links. All development will happen in that repository.
+
+---
+
 <div style="text-align: center;"><h1 >BetterF3</h1>
 <br />
 
